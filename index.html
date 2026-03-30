@@ -3,212 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BL Creative | السلاح السري لصناع المونتاج</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>BL Creative | مستقبل معالجة الفيديو</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Tajawal', 'sans-serif'] },
-                    colors: { dark: '#0a0a0a', primary: '#8b5cf6', secondary: '#06b6d4' }
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* ستايل مخصص لشريط المقارنة */
-        .slider-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            height: 400px;
-            margin: auto;
-            border-radius: 1rem;
-            overflow: hidden;
-            border: 2px solid #333;
-            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2);
-        }
-        .img-background, .img-foreground {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-size: cover; background-position: center;
-        }
-        /* ضع هنا روابط صورك للتجربة */
-        .img-background {
-            background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop'); /* صورة الجودة العالية */
-        }
-        .img-foreground {
-            background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=10&w=2070&auto=format&fit=crop&blur=10'); /* الصورة المشوشة */
-            width: 50%;
-            border-right: 3px solid #fff;
-        }
-        .slider {
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0); outline: none; margin: 0;
-            transition: all 0.2s;
-            appearance: none; -webkit-appearance: none; z-index: 10;
-        }
-        .slider::-webkit-slider-thumb {
-            appearance: none; -webkit-appearance: none;
-            width: 40px; height: 40px;
-            background: #8b5cf6; border-radius: 50%; cursor: ew-resize;
-            border: 3px solid #fff; box-shadow: 0 0 15px rgba(0,0,0,0.5);
-        }
-        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; pointer-events: none; }
-        .badge { position: absolute; top: 10px; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 14px; z-index: 5; }
-        .badge-before { right: 10px; background: rgba(0,0,0,0.6); color: #fff; }
-        .badge-after { left: 10px; background: rgba(139, 92, 246, 0.8); color: #fff; }
+        body { font-family: 'Cairo', sans-serif; background-color: #050505; color: white; overflow-x: hidden; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .primary-gradient { background: linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%); }
+        .text-gradient { background: linear-gradient(135deg, #fff 30%, #a78bfa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* تحسين شريط المقارنة */
+        .comparison-slider { position: relative; width: 100%; max-width: 900px; margin: auto; aspect-ratio: 16/9; overflow: hidden; border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); border: 1px solid #1f2937; }
+        .img-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070'); background-size: cover; }
+        .img-foreground { position: absolute; top: 0; left: 0; width: 50%; height: 100%; background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070'); background-size: cover; filter: blur(8px) grayscale(50%); border-right: 3px solid #8b5cf6; }
+        .slider-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; background: #8b5cf6; border-radius: 50%; cursor: ew-resize; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(139, 92, 246, 0.6); z-index: 10; transition: scale 0.2s; }
+        .slider-handle:hover { scale: 1.1; }
+        input[type="range"] { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 20; }
     </style>
 </head>
-<body class="bg-dark text-white font-sans antialiased overflow-x-hidden">
+<body>
 
-    <nav class="flex justify-between items-center p-6 max-w-7xl mx-auto border-b border-gray-800">
-        <div class="text-2xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">BL Creative</div>
-        <div class="hidden md:flex gap-8 text-gray-300 font-bold">
-            <a href="#" class="hover:text-primary transition">المحركات</a>
-            <a href="#" class="hover:text-primary transition">الأسعار</a>
-            <a href="#" class="hover:text-primary transition">الأسئلة الشائعة</a>
+    <nav class="fixed w-full z-50 glass py-4 px-6 flex justify-between items-center">
+        <div class="text-2xl font-black tracking-tighter text-primary-gradient">BL Creative</div>
+        <div class="hidden md:flex gap-8 font-bold text-sm">
+            <a href="#about" class="hover:text-purple-400 transition">عن البرنامج</a>
+            <a href="#pricing" class="hover:text-purple-400 transition">الأسعار</a>
+            <a href="#faq" class="hover:text-purple-400 transition">الأسئلة الشائعة</a>
         </div>
-        <div class="flex gap-4 items-center">
-            <span class="text-sm cursor-pointer text-gray-400 hover:text-white">EN</span>
-            <button class="text-gray-300 hover:text-white font-bold">تسجيل الدخول</button>
-            <button class="bg-primary hover:bg-purple-600 px-6 py-2 rounded-full font-bold transition shadow-[0_0_15px_rgba(139,92,246,0.5)]">ابدأ مجاناً</button>
+        <div class="flex items-center gap-4">
+            <span class="text-xs text-gray-400">AR | EN</span>
+            <button class="primary-gradient px-6 py-2 rounded-full font-bold text-sm shadow-lg">ابدأ الآن</button>
         </div>
     </nav>
 
-    <header class="text-center py-20 px-4">
-        <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">تجاوز حدود الرندر<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">نقاء خام. حركة فائقة.</span></h1>
-        <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10">المحرك الأول عالمياً المصمم خصيصاً لمونتاج الأنمي والألعاب. تخلص من الضوضاء، ضاعف الإطارات إلى 120fps، واستخرج الشخصيات بضغطة زر وبدون تكبير وهمي للدقة.</p>
-        <button class="bg-white text-dark hover:bg-gray-200 px-10 py-4 rounded-full font-black text-lg transition">حمل النسخة التجريبية</button>
+    <header class="pt-40 pb-20 px-4 text-center">
+        <h1 class="text-6xl md:text-8xl font-black mb-6 text-gradient leading-tight">تجاوز حدود الرندر.<br>ذكاء اصطناعي فائق.</h1>
+        <p class="max-w-2xl mx-auto text-gray-400 text-lg mb-10 leading-relaxed">
+            مجموعة تحرير فيديو ثورية مصممة خصيصاً للمبدعين. تخلص من الضوضاء، ارفع الجودة لـ 4K، وضاعف الفريمات لـ 120fps بضغطة زر واحدة.
+        </p>
+        <button class="bg-white text-black px-10 py-4 rounded-full font-black text-lg hover:bg-purple-100 transition shadow-2xl">حمل النسخة التجريبية</button>
     </header>
 
     <section class="py-10 px-4">
-        <div class="text-center mb-10">
-            <h2 class="text-3xl font-bold mb-2">شاهد السحر بنفسك</h2>
-            <p class="text-gray-400">اسحب الشريط لترى قوة محرك التصفية الخاص بنا</p>
+        <div class="text-center mb-8">
+            <h2 class="text-2xl font-bold">شاهد السحر بنفسك</h2>
+            <p class="text-gray-500 text-sm">اسحب الشريط لترى قوة معالجة BL Creative</p>
         </div>
-        <div class="slider-container">
+        <div class="comparison-slider" id="slider-container">
             <div class="img-background"></div>
             <div class="img-foreground" id="foreground-img"></div>
-            <div class="badge badge-before">قبل المعالجة (مشوش)</div>
-            <div class="badge badge-after">بعد المعالجة (BL Creative)</div>
-            <input type="range" min="1" max="100" value="50" class="slider" id="slider">
+            <div class="slider-handle" id="handle">
+                <svg width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+            </div>
+            <input type="range" min="0" max="100" value="50" id="slider-input">
         </div>
     </section>
 
-    <section class="py-20 max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-gray-900 border border-gray-800 p-8 rounded-2xl hover:border-primary transition">
-            <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-6"><span class="text-primary text-2xl">⚡</span></div>
-            <h3 class="text-xl font-bold mb-3">النقاء الفائق بالدقة الأصلية</h3>
-            <p class="text-gray-400">لا داعي للرندر بدقة 4K الكاذبة. محركنا يزيل تشوهات الضغط ويعطي حواف حادة جداً مع الاحتفاظ بحجم الفيديو الأصلي 1080p.</p>
-        </div>
-        <div class="bg-gray-900 border border-gray-800 p-8 rounded-2xl hover:border-primary transition">
-            <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-6"><span class="text-primary text-2xl">🎯</span></div>
-            <h3 class="text-xl font-bold mb-3">حذف الواجهات السينمائي</h3>
-            <p class="text-gray-400">حدد عداد الصحة أو خريطة اللعبة، وسيقوم محرك Inpainting بمسحها تماماً وإعادة رسم الخلفية المفقودة باحترافية.</p>
-        </div>
-        <div class="bg-gray-900 border border-gray-800 p-8 rounded-2xl hover:border-primary transition">
-            <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-6"><span class="text-primary text-2xl">✂️</span></div>
-            <h3 class="text-xl font-bold mb-3">العزل فائق الدقة</h3>
-            <p class="text-gray-400">افصل شخصيات الأنمي أو الألعاب عن الخلفية بضغطة واحدة، مع الحفاظ على تفاصيل الشعر والحركة السريعة بدون حواف سوداء.</p>
-        </div>
-    </section>
-
-<section class="py-20 bg-gray-900/50">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <h2 class="text-4xl font-black mb-12">امتلك البرنامج للأبد <span class="text-primary">(دفع مرة واحدة)</span></h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto text-right">
-                
-                <div class="p-8 rounded-2xl border border-gray-800 bg-dark hover:border-gray-600 transition">
-                    <h3 class="text-2xl font-bold text-gray-300 mb-2">الأساسية</h3>
-                    <p class="text-4xl font-black mb-6">$19 <span class="text-sm text-gray-500 font-normal">/ مدى الحياة</span></p>
-                    <ul class="text-gray-400 space-y-3 mb-8">
-                        <li>✔️ تصفية الضوضاء المتقدمة</li>
-                        <li>✔️ تصدير بدقة 1080p</li>
-                        <li>✔️ دعم حتى 60fps إطار</li>
-                        <li class="text-gray-600">❌ محرك 120fps</li>
-                        <li class="text-gray-600">❌ دقة 4K والرندر الجماعي</li>
-                    </ul>
-                    <button class="w-full border border-gray-600 hover:bg-gray-800 py-3 rounded-lg font-bold transition">شراء الآن</button>
+    <section id="about" class="py-24 glass my-20">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h2 class="text-4xl font-black mb-8">لماذا BL Creative؟</h2>
+            <div class="grid md:grid-cols-3 gap-12 text-right">
+                <div class="space-y-4">
+                    <div class="text-3xl">🚀</div>
+                    <h3 class="text-xl font-bold">معالجة محلية (Local)</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">خصوصيتك خط أحمر. تتم جميع عمليات الرندر على جهازك الخاص باستخدام قوة كرت الشاشة لديك، دون رفع أي بيانات للسحاب.</p>
                 </div>
-
-                <div class="p-8 rounded-2xl border-2 border-primary bg-gray-900 relative transform md:-translate-y-4 shadow-[0_0_30px_rgba(139,92,246,0.15)]">
-                    <div class="absolute top-0 right-1/2 transform translate-x-1/2 -translate-y-1/2 bg-primary px-4 py-1 rounded-full text-sm font-bold">الأكثر مبيعاً</div>
-                    <h3 class="text-2xl font-bold text-primary mb-2">المونتير (Pro)</h3>
-                    <p class="text-4xl font-black mb-6">$25 <span class="text-sm text-gray-500 font-normal">/ مدى الحياة</span></p>
-                    <ul class="text-gray-300 space-y-3 mb-8">
-                        <li>✔️ كل ميزات الباقة الأساسية</li>
-                        <li>✔️ <span class="text-primary font-bold">محرك النعومة 120fps</span></li>
-                        <li>✔️ تصدير بدقة 2K</li>
-                        <li>✔️ عزل الشخصيات بالذكاء الاصطناعي</li>
-                        <li class="text-gray-600">❌ دقة 4K ورندر المجلدات</li>
-                    </ul>
-                    <button class="w-full bg-primary hover:bg-purple-600 py-3 rounded-lg font-bold transition shadow-lg text-white">شراء النسخة الاحترافية</button>
+                <div class="space-y-4">
+                    <div class="text-3xl">🎯</div>
+                    <h3 class="text-xl font-bold">دقة متناهية</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">خوارزمياتنا تفرق بين التفاصيل الأصلية والضوضاء الناتجة عن الضغط، لتعطيك صورة "خام" نقية جداً.</p>
                 </div>
-
-                <div class="p-8 rounded-2xl border border-secondary bg-dark relative hover:shadow-[0_0_20px_rgba(6,182,212,0.1)] transition">
-                    <h3 class="text-2xl font-bold text-secondary mb-2">الماستر (Ultimate)</h3>
-                    <p class="text-4xl font-black mb-6">$35 <span class="text-sm text-gray-500 font-normal">/ مدى الحياة</span></p>
-                    <ul class="text-gray-400 space-y-3 mb-8">
-                        <li>✔️ كل ميزات باقة المحترفين</li>
-                        <li>✔️ <span class="text-secondary font-bold">رفع الجودة إلى 4K خام</span></li>
-                        <li>✔️ <span class="text-secondary font-bold">رندر جماعي (مجلد كامل)</span></li>
-                        <li>✔️ أولوية التحديثات والدعم</li>
-                        <li>✔️ استخدام تجاري للوكالات</li>
-                    </ul>
-                    <button class="w-full border border-secondary text-secondary hover:bg-secondary hover:text-dark py-3 rounded-lg font-bold transition">الحصول على الماستر</button>
+                <div class="space-y-4">
+                    <div class="text-3xl">🌍</div>
+                    <h3 class="text-xl font-bold">دعم عالمي</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">واجهة البرنامج والموقع تدعم كافة اللغات الرئيسية لضمان تجربة مستخدم سلسة لكل مونتير حول العالم.</p>
                 </div>
-
             </div>
         </div>
     </section>
-<section class="py-20 max-w-4xl mx-auto px-4">
+
+    <section id="pricing" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-4xl font-black mb-4">خطط الاشتراك</h2>
+            <p class="text-gray-500 mb-12 italic">اختر الخطة المناسبة لإبداعك</p>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto text-right">
+                <div class="p-8 rounded-3xl border border-gray-800 bg-dark hover:scale-105 transition duration-300">
+                    <h3 class="text-xl font-bold text-gray-400 mb-2">الخطة الشهرية</h3>
+                    <p class="text-5xl font-black mb-6">$19 <span class="text-sm font-normal text-gray-500">/ شهر</span></p>
+                    <ul class="space-y-4 mb-10 text-gray-400 text-sm">
+                        <li>✔️ كافة ميزات المعالجة</li>
+                        <li>✔️ تحديثات فورية</li>
+                        <li>✔️ دعم فني قياسي</li>
+                    </ul>
+                    <button class="w-full py-4 border border-gray-700 rounded-xl font-bold hover:bg-white hover:text-black transition">اشترك الآن</button>
+                </div>
+
+                <div class="p-8 rounded-3xl border-2 border-purple-500 bg-purple-900/10 relative transform md:-translate-y-6 shadow-2xl">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-purple-500 px-4 py-1 rounded-full text-xs font-black">توفير 20%</div>
+                    <h3 class="text-xl font-bold text-purple-400 mb-2">الخطة السنوية</h3>
+                    <p class="text-5xl font-black mb-6">$149 <span class="text-sm font-normal text-gray-500">/ سنة</span></p>
+                    <ul class="space-y-4 mb-10 text-gray-200 text-sm">
+                        <li>✔️ كل ميزات الخطة الشهرية</li>
+                        <li>✔️ الرندر الجماعي (Batch)</li>
+                        <li>✔️ أولوية في دعم العملاء</li>
+                    </ul>
+                    <button class="w-full py-4 primary-gradient rounded-xl font-bold shadow-xl">ابدأ التوفير</button>
+                </div>
+
+                <div class="p-8 rounded-3xl border border-gray-800 bg-dark hover:scale-105 transition duration-300">
+                    <h3 class="text-xl font-bold text-gray-400 mb-2">الاستوديوهات</h3>
+                    <p class="text-5xl font-black mb-6">$49 <span class="text-sm font-normal text-gray-500">/ شهر</span></p>
+                    <ul class="space-y-4 mb-10 text-gray-400 text-sm">
+                        <li>✔️ تراخيص لأجهزة متعددة</li>
+                        <li>✔️ رخصة استخدام تجاري</li>
+                        <li>✔️ وصول للـ API</li>
+                    </ul>
+                    <button class="w-full py-4 border border-gray-700 rounded-xl font-bold hover:bg-white hover:text-black transition text-sm">تواصل معنا</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-4 max-w-4xl mx-auto overflow-x-auto">
+        <h3 class="text-2xl font-black mb-10 text-center">مقارنة الخطط</h3>
+        <table class="w-full text-right border-collapse glass rounded-2xl">
+            <thead>
+                <tr class="border-b border-gray-800 text-gray-400">
+                    <th class="p-4">الميزة</th>
+                    <th class="p-4">شهرية</th>
+                    <th class="p-4">سنوية</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm">
+                <tr class="border-b border-gray-800/50">
+                    <td class="p-4">دقة التصدير</td>
+                    <td class="p-4">4K</td>
+                    <td class="p-4">4K Raw</td>
+                </tr>
+                <tr class="border-b border-gray-800/50">
+                    <td class="p-4">دعم الـ 120fps</td>
+                    <td class="p-4 font-bold text-green-500">✔️</td>
+                    <td class="p-4 font-bold text-green-500">✔️</td>
+                </tr>
+                <tr class="border-b border-gray-800/50">
+                    <td class="p-4">الرندر الجماعي</td>
+                    <td class="p-4 text-red-500">❌</td>
+                    <td class="p-4 font-bold text-green-500">✔️</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="faq" class="py-20 max-w-3xl mx-auto px-4">
         <h2 class="text-4xl font-black text-center mb-12 text-white">الأسئلة الشائعة</h2>
         <div class="space-y-4 text-right">
-            <details class="group bg-gray-900 border border-gray-800 rounded-xl p-6 [&_summary::-webkit-details-marker]:hidden cursor-pointer hover:border-primary transition">
-                <summary class="flex items-center justify-between gap-1.5 text-white">
-                    <h3 class="text-lg font-bold">هل البرنامج يحتاج اشتراكاً شهرياً؟</h3>
-                    <span class="text-primary transition group-open:rotate-180">▼</span>
+            <details class="group bg-gray-900 border border-gray-800 rounded-2xl p-6 cursor-pointer hover:border-purple-500 transition">
+                <summary class="flex items-center justify-between text-white font-bold">
+                    <span>كيف يتم تفعيل اللغات في البرنامج؟</span>
+                    <span class="text-purple-500 transition group-open:rotate-180 text-xs">▼</span>
                 </summary>
-                <p class="mt-4 leading-relaxed text-gray-400">لا، نحن نؤمن بامتلاك الأدوات. تدفع مرة واحدة فقط وتمتلك النسخة مدى الحياة مع تحديثات مجانية للمحركات لمدة عام كامل.</p>
+                <p class="mt-4 text-gray-400 text-sm">البرنامج يكتشف لغة نظامك تلقائياً عند التشغيل الأول، ويمكنك تغييرها يدوياً من قائمة الإعدادات لدعم العربية، الإنجليزية، وغيرها.</p>
             </details>
-
-            <details class="group bg-gray-900 border border-gray-800 rounded-xl p-6 [&_summary::-webkit-details-marker]:hidden cursor-pointer hover:border-primary transition">
-                <summary class="flex items-center justify-between gap-1.5 text-white">
-                    <h3 class="text-lg font-bold">هل فيديوهاتي آمنة؟</h3>
-                    <span class="text-primary transition group-open:rotate-180">▼</span>
+            <details class="group bg-gray-900 border border-gray-800 rounded-2xl p-6 cursor-pointer hover:border-purple-500 transition">
+                <summary class="flex items-center justify-between text-white font-bold">
+                    <span>هل يمكنني إلغاء الاشتراك في أي وقت؟</span>
+                    <span class="text-purple-500 transition group-open:rotate-180 text-xs">▼</span>
                 </summary>
-                <p class="mt-4 leading-relaxed text-gray-400">بكل تأكيد. المعالجة في BL Creative تتم "محلياً" بالكامل على جهازك. نحن لا نطلع على فيديوهاتك ولا نرفعها على أي خادم سحابي. خصوصيتك هي الأولوية القصوى.</p>
-            </details>
-
-            <details class="group bg-gray-900 border border-gray-800 rounded-xl p-6 [&_summary::-webkit-details-marker]:hidden cursor-pointer hover:border-primary transition">
-                <summary class="flex items-center justify-between gap-1.5 text-white">
-                    <h3 class="text-lg font-bold">ما هي متطلبات التشغيل (Hardware)؟</h3>
-                    <span class="text-primary transition group-open:rotate-180">▼</span>
-                </summary>
-                <p class="mt-4 leading-relaxed text-gray-400">يفضل وجود كرت شاشة (GPU) من نوع NVIDIA (جيل 2060 فما فوق) أو AMD حديثة، وذلك لضمان سرعة معالجة الذكاء الاصطناعي والـ 120fps بسلاسة.</p>
+                <p class="mt-4 text-gray-400 text-sm">نعم، يمكنك إلغاء التجديد التلقائي بضغطة زر من لوحة تحكم حسابك دون أي تعقيدات.</p>
             </details>
         </div>
-    </section><footer class="text-center py-12 text-gray-500 border-t border-gray-800 bg-black/50">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="mb-6 flex justify-center gap-8 text-sm">
-                <a href="#" class="hover:text-white transition">شروط الخدمة</a>
-                <a href="#" class="hover:text-white transition">سياسة الخصوصية</a>
-                <a href="#" class="hover:text-white transition text-primary font-bold">الدعم الفني</a>
+    </section>
+
+    <footer class="pt-20 pb-10 border-t border-gray-900 bg-black">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12 text-right">
+            <div>
+                <div class="text-2xl font-black mb-4 text-purple-500">BL Creative</div>
+                <p class="text-gray-500 text-sm leading-relaxed mb-6">
+                    مجموعة أدوات احترافية لتحرير الفيديو، مدعومة بأحدث تقنيات الذكاء الاصطناعي لتلبية احتياجات المونتيرين وصناع المحتوى حول العالم.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-purple-600 transition">YT</a>
+                    <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-purple-600 transition">DC</a>
+                    <a href="#" class="w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-purple-600 transition">TT</a>
+                </div>
             </div>
-            <p class="text-sm font-bold tracking-widest text-gray-700 uppercase">MADE BY BL CREATIVE &copy; 2026</p>
-            <p class="text-[10px] mt-2 text-gray-800 uppercase">Registered in Norway • Org No. Pending</p>
+            <div>
+                <h4 class="font-bold mb-6">روابط هامة</h4>
+                <ul class="text-gray-500 space-y-3 text-sm">
+                    <li><a href="#" class="hover:text-white transition">سياسة الخصوصية</a></li>
+                    <li><a href="#" class="hover:text-white transition">شروط الخدمة</a></li>
+                    <li><a href="#" class="hover:text-white transition">طرق الدفع</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-6">اتصل بنا</h4>
+                <p class="text-gray-500 text-sm mb-2">للمشاكل التقنية أو الاستفسارات:</p>
+                <a href="mailto:support@bl-creative.com" class="text-purple-400 font-bold hover:underline">support@bl-creative.com</a>
+                <p class="text-[10px] mt-8 text-gray-700">OSLO, NORWAY • ALL RIGHTS RESERVED 2026</p>
+            </div>
         </div>
     </footer>
 
     <script>
-        const slider = document.getElementById('slider');
+        // كود شريط المقارنة المحسن
+        const sliderInput = document.getElementById('slider-input');
         const foregroundImg = document.getElementById('foreground-img');
-        slider.addEventListener('input', (e) => {
-            const sliderPos = e.target.value;
-            foregroundImg.style.width = `${sliderPos}%`;
+        const handle = document.getElementById('handle');
+
+        sliderInput.addEventListener('input', (e) => {
+            const value = e.target.value;
+            foregroundImg.style.width = `${value}%`;
+            handle.style.left = `${value}%`;
         });
     </script>
 </body>
