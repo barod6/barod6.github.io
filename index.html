@@ -1,48 +1,91 @@
-<section class="py-20 bg-gray-900/50">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BL Creative - خطط الأسعار</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        // ألوان مستوحاة من شعار BL Creative
+                        dark: '#0a1118',       // خلفية الموقع (أزرق غامق جداً)
+                        card: '#111827',       // خلفية البطاقات
+                        primary: '#06b6d4',    // اللون السماوي الساطع في الشعار
+                        secondary: '#3b82f6',  // اللون الأزرق في الشعار
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Cairo', sans-serif; background-color: #0a1118; color: #f8fafc; }
+    </style>
+</head>
+<body class="antialiased selection:bg-primary selection:text-white">
+
+    <section class="py-20 relative overflow-hidden">
+        
+        <div class="flex justify-center mb-12">
+            <img src="bl.png" alt="BL Creative Logo" class="h-32 object-contain drop-shadow-[0_0_20px_rgba(6,182,212,0.2)]">
+        </div>
+
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <h2 class="text-4xl font-black mb-12">امتلك البرنامج للأبد <span class="text-primary">(دفع مرة واحدة)</span></h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto text-right">
+            <h2 class="text-4xl md:text-5xl font-black mb-12 text-white">امتلك البرنامج للأبد <span class="text-primary">(دفع مرة واحدة)</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto text-right">
                 
-                <div class="p-8 rounded-2xl border border-gray-800 bg-dark hover:border-gray-600 transition">
+                <div class="p-8 rounded-2xl border border-gray-800 bg-card hover:border-gray-600 transition-all duration-300">
                     <h3 class="text-2xl font-bold text-gray-300 mb-2">الأساسية</h3>
-                    <p class="text-4xl font-black mb-6">$19 <span class="text-sm text-gray-500 font-normal">/ مدى الحياة</span></p>
-                    <ul class="text-gray-400 space-y-3 mb-8">
-                        <li>✔️ تصفية الضوضاء المتقدمة</li>
-                        <li>✔️ تصدير بدقة 1080p</li>
-                        <li>✔️ دعم حتى 60fps إطار</li>
-                        <li class="text-gray-600">❌ محرك 120fps</li>
-                        <li class="text-gray-600">❌ دقة 4K والرندر الجماعي</li>
+                    <p class="text-4xl font-black mb-6 text-white">$19 <span class="text-sm text-gray-500 font-normal">/ مدى الحياة</span></p>
+                    <ul class="text-gray-400 space-y-4 mb-8">
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> تصفية الضوضاء المتقدمة</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> تصدير بدقة 1080p</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> دعم حتى 60fps إطار</li>
+                        <li class="flex items-center gap-2 text-gray-600"><span class="opacity-50">❌</span> محرك 120fps</li>
+                        <li class="flex items-center gap-2 text-gray-600"><span class="opacity-50">❌</span> دقة 4K والرندر الجماعي</li>
                     </ul>
-                    <button class="w-full border border-gray-600 hover:bg-gray-800 py-3 rounded-lg font-bold transition">شراء الآن</button>
+                    <button class="w-full border border-gray-600 text-gray-300 hover:bg-gray-800 py-3 rounded-lg font-bold transition-all">شراء الآن</button>
                 </div>
 
-                <div class="p-8 rounded-2xl border-2 border-primary bg-gray-900 relative transform md:-translate-y-4 shadow-[0_0_30px_rgba(139,92,246,0.15)]">
-                    <div class="absolute top-0 right-1/2 transform translate-x-1/2 -translate-y-1/2 bg-primary px-4 py-1 rounded-full text-sm font-bold">الأكثر مبيعاً</div>
+                <div class="p-8 rounded-2xl border-2 border-primary bg-card relative transform md:-translate-y-4 shadow-[0_0_40px_rgba(6,182,212,0.15)] hover:shadow-[0_0_50px_rgba(6,182,212,0.3)] transition-all duration-300">
+                    <div class="absolute top-0 right-1/2 transform translate-x-1/2 -translate-y-1/2 bg-primary px-6 py-1.5 rounded-full text-sm font-bold text-dark whitespace-nowrap">الأكثر مبيعاً</div>
                     <h3 class="text-2xl font-bold text-primary mb-2">المونتير (Pro)</h3>
-                    <p class="text-4xl font-black mb-6">$25 <span class="text-sm text-gray-500 font-normal">/ مدى الحياة</span></p>
-                    <ul class="text-gray-300 space-y-3 mb-8">
-                        <li>✔️ كل ميزات الباقة الأساسية</li>
-                        <li>✔️ <span class="text-primary font-bold">محرك النعومة 120fps</span></li>
-                        <li>✔️ تصدير بدقة 2K</li>
-                        <li>✔️ عزل الشخصيات بالذكاء الاصطناعي</li>
-                        <li class="text-gray-600">❌ دقة 4K ورندر المجلدات</li>
+                    <p class="text-4xl font-black mb-6 text-white">$25 <span class="text-sm text-gray-500 font-normal">/ مدى الحياة</span></p>
+                    <ul class="text-gray-300 space-y-4 mb-8">
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> كل ميزات الباقة الأساسية</li>
+                        <li class="flex items-center gap-2 font-bold text-primary"><span class="text-green-500">✔️</span> محرك النعومة 120fps</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> تصدير بدقة 2K</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> عزل الشخصيات بالذكاء الاصطناعي</li>
+                        <li class="flex items-center gap-2 text-gray-600"><span class="opacity-50">❌</span> دقة 4K ورندر المجلدات</li>
                     </ul>
-                    <button class="w-full bg-primary hover:bg-purple-600 py-3 rounded-lg font-bold transition shadow-lg text-white">شراء النسخة الاحترافية</button>
+                    <button class="w-full bg-primary hover:bg-cyan-400 py-3 rounded-lg font-bold transition-all shadow-lg text-dark text-lg">شراء النسخة الاحترافية</button>
                 </div>
 
-                <div class="p-8 rounded-2xl border border-secondary bg-dark relative hover:shadow-[0_0_20px_rgba(6,182,212,0.1)] transition">
+                <div class="p-8 rounded-2xl border border-secondary bg-card relative hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-400 transition-all duration-300">
                     <h3 class="text-2xl font-bold text-secondary mb-2">الماستر (Ultimate)</h3>
-                    <p class="text-4xl font-black mb-6">$35 <span class="text-sm text-gray-500 font-normal">/ مدى الحياة</span></p>
-                    <ul class="text-gray-400 space-y-3 mb-8">
-                        <li>✔️ كل ميزات باقة المحترفين</li>
-                        <li>✔️ <span class="text-secondary font-bold">رفع الجودة إلى 4K خام</span></li>
-                        <li>✔️ <span class="text-secondary font-bold">رندر جماعي (مجلد كامل)</span></li>
-                        <li>✔️ أولوية التحديثات والدعم</li>
-                        <li>✔️ استخدام تجاري للوكالات</li>
+                    <p class="text-4xl font-black mb-6 text-white">$35 <span class="text-sm text-gray-500 font-normal">/ مدى الحياة</span></p>
+                    <ul class="text-gray-400 space-y-4 mb-8">
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> كل ميزات باقة المحترفين</li>
+                        <li class="flex items-center gap-2 font-bold text-secondary"><span class="text-green-500">✔️</span> رفع الجودة إلى 4K خام</li>
+                        <li class="flex items-center gap-2 font-bold text-secondary"><span class="text-green-500">✔️</span> رندر جماعي (مجلد كامل)</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> أولوية التحديثات والدعم</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> استخدام تجاري للوكالات</li>
                     </ul>
-                    <button class="w-full border border-secondary text-secondary hover:bg-secondary hover:text-dark py-3 rounded-lg font-bold transition">الحصول على الماستر</button>
+                    <button class="w-full border border-secondary text-secondary hover:bg-secondary hover:text-white py-3 rounded-lg font-bold transition-all">الحصول على الماستر</button>
                 </div>
 
             </div>
         </div>
     </section>
+
+</body>
+</html>
