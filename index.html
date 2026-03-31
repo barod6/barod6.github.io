@@ -15,7 +15,7 @@
       --bg-surface: #0a0a0a;
       --bg-card: #151515;
       --border-color: #2a2a2a;
-      --accent-color: #3b82f6; /* أزرق توباز */
+      --accent-color: #3b82f6; 
       --accent-hover: #2563eb;
       --text-primary: #ffffff;
       --text-secondary: #a1a1aa;
@@ -40,60 +40,39 @@
 
     /* --- Navbar --- */
     header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 100;
+      position: fixed; top: 0; width: 100%; z-index: 100;
       background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border-color);
     }
 
     .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      max-width: 1200px; margin: 0 auto; padding: 1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
     }
 
     .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      display: flex; align-items: center; gap: 12px;
       cursor: pointer;
     }
 
+    /* تنسيق شعارك الأصلي المرفق */
     .logo img {
-      height: 36px; /* حجم الشعار */
+      height: 40px;
       object-fit: contain;
     }
 
     .nav-links { display: flex; gap: 32px; }
-    .nav-links a {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      transition: var(--transition);
-      cursor: pointer;
-    }
+    .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--text-secondary); transition: var(--transition); cursor: pointer; }
     .nav-links a:hover { color: var(--text-primary); }
 
     .nav-actions { display: flex; align-items: center; gap: 16px; }
-    .lang-btn {
-      background: transparent; border: none;
-      color: var(--text-secondary); font-size: 0.9rem;
-      cursor: pointer; transition: var(--transition);
-    }
+    .lang-btn { background: transparent; border: none; color: var(--text-secondary); font-size: 0.9rem; cursor: pointer; transition: var(--transition); font-family: inherit;}
     .lang-btn:hover { color: var(--text-primary); }
 
     .btn {
-      padding: 0.6rem 1.2rem; border-radius: 6px;
-      font-size: 0.9rem; font-weight: 600;
-      cursor: pointer; transition: var(--transition);
-      border: 1px solid transparent; text-align: center;
+      padding: 0.6rem 1.2rem; border-radius: 6px; font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; transition: var(--transition); border: 1px solid transparent; text-align: center;
     }
     .btn-primary { background-color: #ffffff; color: #000000; }
     .btn-primary:hover { background-color: #e4e4e7; }
@@ -105,136 +84,89 @@
 
     /* --- Hero Section --- */
     .hero {
-      padding: 10rem 2rem 6rem;
-      text-align: center;
-      max-width: 1000px;
-      margin: 0 auto;
+      padding: 10rem 2rem 6rem; text-align: center; max-width: 1000px; margin: 0 auto;
       display: flex; flex-direction: column; align-items: center;
     }
     .hero h1 {
-      font-size: clamp(3rem, 6vw, 5.5rem);
-      font-weight: 800; line-height: 1.1; letter-spacing: -2px; margin-bottom: 1.5rem;
+      font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -2px; margin-bottom: 1.5rem;
       background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
     .hero p { font-size: 1.25rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 2.5rem; }
-    .hero-buttons { display: flex; gap: 16px; justify-content: center; }
-
-    /* --- Comparison Sliders (Multiple) --- */
+    
+    /* --- Comparison Sliders --- */
     .section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
     .section-header { text-align: center; margin-bottom: 4rem; }
     .section-header h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -1px; }
     .section-header p { color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
 
-    .comparison-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-    .comparison-row-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-    }
+    .comparison-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
+    .comparison-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
 
     .comparison-container {
-      position: relative; width: 100%;
-      border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);
-      background: #000; cursor: ew-resize;
-      height: 600px; /* للرئيسي */
+      position: relative; width: 100%; border-radius: 12px; overflow: hidden; 
+      border: 1px solid var(--border-color); background: #000; cursor: ew-resize; height: 600px;
+      user-select: none; 
     }
     .comp-small { height: 450px; }
 
-    .comparison-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-    .comparison-layer img, .comparison-layer video { width: 100%; height: 100%; object-fit: cover; }
+    .comparison-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+    .comparison-layer img { width: 100%; height: 100%; object-fit: cover; }
     .comparison-layer.after { z-index: 1; }
-    .comparison-layer.before { z-index: 2; clip-path: inset(0 50% 0 0); }
+    .comparison-layer.before { z-index: 2; }
 
     .slider-handle {
       position: absolute; top: 0; bottom: 0; left: 50%; width: 2px;
       background: #ffffff; z-index: 3; transform: translateX(-50%);
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      pointer-events: none;
+      box-shadow: 0 0 20px rgba(0,0,0,0.8);
     }
     .slider-button {
-      width: 36px; height: 36px; background: #ffffff; border-radius: 50%;
+      width: 40px; height: 40px; background: #ffffff; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      color: #000; font-weight: bold; font-size: 14px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      color: #000; font-weight: bold; font-size: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
     }
     .comparison-labels {
       position: absolute; bottom: 20px; left: 20px; right: 20px;
       display: flex; justify-content: space-between; z-index: 4; pointer-events: none;
     }
     .label-badge {
-      background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);
-      padding: 6px 14px; border-radius: 50px; font-size: 0.8rem;
-      font-weight: 600; border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px);
+      padding: 8px 16px; border-radius: 50px; font-size: 0.85rem;
+      font-weight: 600; border: 1px solid rgba(255,255,255,0.15);
     }
 
     /* --- GPU Tech Section --- */
     .gpu-section {
       background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-base) 100%);
-      border-top: 1px solid var(--border-color);
-      border-bottom: 1px solid var(--border-color);
-      padding: 8rem 2rem;
-      text-align: center;
+      border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);
+      padding: 8rem 2rem; text-align: center;
     }
     .gpu-content { max-width: 800px; margin: 0 auto; }
-    .gpu-image {
-      margin: 0 auto 3rem;
-      max-width: 500px;
-      position: relative;
-    }
-    .gpu-image img { width: 100%; filter: drop-shadow(0 20px 40px rgba(59, 130, 246, 0.2)); }
+    .gpu-image { margin: 0 auto 3rem; max-width: 500px; position: relative; }
+    .gpu-image img { width: 100%; filter: drop-shadow(0 20px 40px rgba(59, 130, 246, 0.2)); border-radius: 12px; }
     .gpu-content h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; }
     .gpu-content p { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2rem; }
 
-    /* --- Pricing (Topaz Style) --- */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      align-items: stretch;
-    }
-    .pricing-card {
-      background: var(--bg-card);
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-      overflow: hidden;
-      display: flex; flex-direction: column;
-    }
-    .pricing-banner {
-      height: 120px;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-    }
-    /* ألوان البانر تحاكي الأورورا */
+    /* --- Pricing --- */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
+    .pricing-card { background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border-color); overflow: hidden; display: flex; flex-direction: column; }
+    .pricing-banner { height: 120px; background-size: cover; background-position: center; }
     .banner-1 { background-image: url('https://images.unsplash.com/photo-1531366936337-7c912a4589a7?q=80&w=600&auto=format&fit=crop'); }
     .banner-2 { background-image: url('https://images.unsplash.com/photo-1579033461387-adb47823f66c?q=80&w=600&auto=format&fit=crop'); }
-    
     .pricing-content { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; }
     .pricing-header-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1rem; }
     .pricing-title { font-size: 1.25rem; font-weight: 700; }
     .pricing-price { text-align: right; }
     .pricing-price .amount { font-size: 1.5rem; font-weight: 800; display: block; }
     .pricing-price .billing { font-size: 0.75rem; color: var(--text-secondary); }
-    
     .pricing-desc { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.4; }
-    
     .pricing-features { margin-top: 2rem; flex-grow: 1; }
     .features-title { font-size: 0.75rem; color: var(--text-tertiary); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem; font-weight: 700; }
     .pricing-features ul { list-style: none; margin-bottom: 1.5rem; }
-    .pricing-features li {
-      font-size: 0.9rem; color: var(--text-primary); margin-bottom: 0.8rem;
-      display: flex; align-items: center; gap: 8px;
-    }
-    /* النقاط الفارغة للتعبئة لاحقاً */
-    .empty-feature {
-      width: 100%; height: 1px; background: repeating-linear-gradient(to right, var(--text-tertiary) 0, var(--text-tertiary) 4px, transparent 4px, transparent 8px);
-      margin-top: 10px; opacity: 0.3;
-    }
-
+    .pricing-features li { font-size: 0.9rem; color: var(--text-primary); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 8px; }
+    .empty-feature { width: 100%; height: 1px; background: repeating-linear-gradient(to right, var(--text-tertiary) 0, var(--text-tertiary) 4px, transparent 4px, transparent 8px); margin-top: 10px; opacity: 0.3; }
     .enterprise-card { background: #ffffff; color: #000000; }
     .enterprise-card .features-title { color: #666; }
     .enterprise-card .pricing-features li { color: #000; }
@@ -248,18 +180,13 @@
     .sys-req-list strong { color: var(--text-primary); min-width: 80px; }
 
     /* --- Footer --- */
-    footer {
-      border-top: 1px solid var(--border-color);
-      padding: 4rem 2rem; text-align: center;
-      background: var(--bg-surface);
-    }
+    footer { border-top: 1px solid var(--border-color); padding: 4rem 2rem; text-align: center; background: var(--bg-surface); }
     .social-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 2rem; }
     .social-links a { color: var(--text-secondary); transition: var(--transition); display: flex; align-items: center; justify-content: center; }
     .social-links a:hover { color: var(--text-primary); transform: translateY(-3px); }
     .social-links svg { width: 24px; height: 24px; fill: currentColor; }
     .footer-copy { color: var(--text-tertiary); font-size: 0.9rem; }
 
-    /* --- Responsive --- */
     @media (max-width: 992px) {
       .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
       .comparison-row-2 { grid-template-columns: 1fr; }
@@ -315,12 +242,12 @@
             <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2000&auto=format&fit=crop" alt="After" />
           </div>
           <div class="comparison-layer before">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2000&auto=format&fit=crop" alt="Before" style="filter: blur(3px) contrast(0.9) brightness(0.8);" />
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2000&auto=format&fit=crop" alt="Before" style="filter: blur(4px) contrast(0.9) brightness(0.8);" />
           </div>
           <div class="slider-handle"><div class="slider-button">↔</div></div>
           <div class="comparison-labels">
-            <div class="label-badge" data-i18n="comp.noisy">قبل (ضوضاء وانخفاض دقة)</div>
-            <div class="label-badge" data-i18n="comp.clean">بعد Ultra Purity</div>
+            <div class="label-badge label-before" data-i18n="comp.noisy">قبل (ضوضاء)</div>
+            <div class="label-badge label-after" data-i18n="comp.clean">بعد Ultra Purity</div>
           </div>
         </div>
 
@@ -330,12 +257,12 @@
               <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1000&auto=format&fit=crop" alt="After" />
             </div>
             <div class="comparison-layer before">
-              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1000&auto=format&fit=crop" alt="Before" style="filter: blur(2px) grayscale(30%);" />
+              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1000&auto=format&fit=crop" alt="Before" style="filter: blur(3px) grayscale(30%);" />
             </div>
             <div class="slider-handle"><div class="slider-button">↔</div></div>
             <div class="comparison-labels">
-              <div class="label-badge">Raw</div>
-              <div class="label-badge">Enhanced</div>
+              <div class="label-badge label-before">Raw</div>
+              <div class="label-badge label-after">Enhanced</div>
             </div>
           </div>
 
@@ -348,8 +275,8 @@
             </div>
             <div class="slider-handle"><div class="slider-button">↔</div></div>
             <div class="comparison-labels">
-              <div class="label-badge">Original</div>
-              <div class="label-badge">Ultra Purity</div>
+              <div class="label-badge label-before">Original</div>
+              <div class="label-badge label-after">Ultra Purity</div>
             </div>
           </div>
         </div>
@@ -359,40 +286,28 @@
     <section id="tech" class="gpu-section">
       <div class="gpu-content">
         <div class="gpu-image">
-          <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?q=80&w=800&auto=format&fit=crop" alt="GPU Technology" style="border-radius: 12px;" />
+          <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?q=80&w=800&auto=format&fit=crop" alt="GPU Technology" />
         </div>
         <h2 data-i18n="gpu.title">رندر محلي خاص. قوة لا محدودة.</h2>
-        <p data-i18n="gpu.desc">يستفيد Ultra Purity بشكل كامل من بنية كروت الشاشة الحديثة (NVIDIA, AMD, Apple Silicon) لتقديم أداء معالجة محلي بالكامل. بياناتك ومشاريعك لا تغادر جهازك أبداً، مما يضمن أعلى درجات الخصوصية وسرعة تصدير مذهلة للمشاريع الكبيرة.</p>
+        <p data-i18n="gpu.desc">يستفيد Ultra Purity بشكل كامل من بنية كروت الشاشة الحديثة لتقديم أداء معالجة محلي بالكامل. بياناتك لا تغادر جهازك أبداً، مما يضمن أعلى درجات الخصوصية وسرعة تصدير مذهلة.</p>
       </div>
     </section>
 
     <section id="pricing" class="section">
-      <div class="section-header">
-        <h2 data-i18n="pricing.title">خطط الأسعار</h2>
-      </div>
-
+      <div class="section-header"><h2 data-i18n="pricing.title">خطط الأسعار</h2></div>
       <div class="pricing-grid">
         <div class="pricing-card">
           <div class="pricing-banner banner-1"></div>
           <div class="pricing-content">
             <div class="pricing-header-row">
               <div class="pricing-title">Ultra Purity</div>
-              <div class="pricing-price">
-                <span class="amount">$33/mo</span>
-                <span class="billing">$399 billed annually</span>
-              </div>
+              <div class="pricing-price"><span class="amount">$33/mo</span><span class="billing">$399 billed annually</span></div>
             </div>
-            <div class="pricing-desc" data-i18n="pricing.refund">No refund if cancelled after 48 hours from purchase.</div>
+            <div class="pricing-desc" data-i18n="pricing.refund">No refund if cancelled after 48 hours.</div>
             <button class="btn btn-accent btn-block" data-i18n="pricing.btn">Subscribe</button>
-            
             <div class="pricing-features">
               <div class="features-title">FEATURES</div>
-              <ul>
-                <li><div class="empty-feature"></div></li>
-                <li><div class="empty-feature"></div></li>
-                <li><div class="empty-feature"></div></li>
-                <li><div class="empty-feature"></div></li>
-              </ul>
+              <ul><li><div class="empty-feature"></div></li><li><div class="empty-feature"></div></li><li><div class="empty-feature"></div></li><li><div class="empty-feature"></div></li></ul>
             </div>
           </div>
         </div>
@@ -402,23 +317,13 @@
           <div class="pricing-content">
             <div class="pricing-header-row">
               <div class="pricing-title">Ultra Purity Pro</div>
-              <div class="pricing-price">
-                <span class="amount">$67/mo</span>
-                <span class="billing">$799 billed annually</span>
-              </div>
+              <div class="pricing-price"><span class="amount">$67/mo</span><span class="billing">$799 billed annually</span></div>
             </div>
-            <div class="pricing-desc" data-i18n="pricing.refund">No refund if cancelled after 48 hours from purchase.</div>
+            <div class="pricing-desc" data-i18n="pricing.refund">No refund if cancelled after 48 hours.</div>
             <button class="btn btn-accent btn-block" data-i18n="pricing.btn">Subscribe</button>
-            
             <div class="pricing-features">
               <div class="features-title">STUDIO FEATURES, PLUS...</div>
-              <ul>
-                <li><div class="empty-feature"></div></li>
-                <li><div class="empty-feature"></div></li>
-                <li><div class="empty-feature"></div></li>
-                <li><div class="empty-feature"></div></li>
-                <li><div class="empty-feature"></div></li>
-              </ul>
+              <ul><li><div class="empty-feature"></div></li><li><div class="empty-feature"></div></li><li><div class="empty-feature"></div></li><li><div class="empty-feature"></div></li><li><div class="empty-feature"></div></li></ul>
             </div>
           </div>
         </div>
@@ -427,12 +332,9 @@
           <div class="pricing-content">
             <div class="pricing-header-row" style="margin-top: 2rem;">
               <div class="pricing-title">Enterprise</div>
-              <div class="pricing-price">
-                <span class="amount" style="font-size: 1.2rem; font-weight: 500;">Custom</span>
-              </div>
+              <div class="pricing-price"><span class="amount" style="font-size: 1.2rem; font-weight: 500;">Custom</span></div>
             </div>
             <button class="btn btn-outline btn-block" style="margin-top:1.5rem;" data-i18n="pricing.contactBtn">Contact us</button>
-            
             <div class="pricing-features">
               <div class="features-title">FEATURES</div>
               <ul>
@@ -450,16 +352,16 @@
     <div id="about" class="info-grid">
       <div class="info-block">
         <h3 data-i18n="about.title">من نحن (About Us)</h3>
-        <p data-i18n="about.p1">نحن في BL CREATIVE نؤمن بأن الجودة لا يجب أن تُساوم. فريقنا يتكون من مهندسي ذكاء اصطناعي ومونتيرز محترفين اجتمعوا لهدف واحد: بناء أدوات بصرية تعيد تعريف النقاء.</p>
-        <p data-i18n="about.p2">بدأنا رحلتنا من إحباطنا تجاه الأدوات المتاحة التي تدمر تفاصيل البشرة لتزيل الضوضاء. قمنا ببناء Ultra Purity ليكون الحل الذي نستخدمه بأنفسنا في مشاريعنا.</p>
+        <p data-i18n="about.p1">فريقنا يتكون من مهندسي ذكاء اصطناعي ومونتيرز محترفين اجتمعوا لبناء أدوات بصرية تعيد تعريف النقاء.</p>
+        <p data-i18n="about.p2">بدأنا رحلتنا من إحباطنا تجاه الأدوات المتاحة التي تدمر تفاصيل البشرة. قمنا ببناء Ultra Purity ليكون الحل الأمثل.</p>
       </div>
       <div class="info-block">
         <h3 data-i18n="sys.title">متطلبات النظام</h3>
         <ul class="sys-req-list">
           <li><strong data-i18n="sys.os">نظام التشغيل:</strong> <span data-i18n="sys.osVal">Windows 10/11 (64-bit)</span></li>
           <li><strong data-i18n="sys.cpu">المعالج:</strong> <span data-i18n="sys.cpuVal">Intel i7 / Ryzen 7 أو أحدث</span></li>
-          <li><strong data-i18n="sys.gpu">كرت الشاشة:</strong> <span data-i18n="sys.gpuVal">NVIDIA RTX 2060 أو أعلى (VRAM 8GB+)</span></li>
-          <li><strong data-i18n="sys.ram">الرام:</strong> <span data-i18n="sys.ramVal">16GB (ينصح بـ 32GB للفيديوهات 4K)</span></li>
+          <li><strong data-i18n="sys.gpu">كرت الشاشة:</strong> <span data-i18n="sys.gpuVal">NVIDIA RTX 2060 أو أعلى</span></li>
+          <li><strong data-i18n="sys.ram">الرام:</strong> <span data-i18n="sys.ramVal">16GB (ينصح بـ 32GB)</span></li>
         </ul>
       </div>
     </div>
@@ -467,113 +369,76 @@
 
   <footer>
     <div class="social-links">
-      <a href="#" aria-label="Discord">
-        <svg viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
-      </a>
-      <a href="#" aria-label="X (Twitter)">
-        <svg viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
-      </a>
-      <a href="#" aria-label="TikTok">
-        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
-      </a>
-      <a href="#" aria-label="YouTube">
-        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.016 3.016 0 0 0-2.122 2.136C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.376.55 9.376.55s7.505 0 9.377-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-      </a>
+      <a href="#"><svg viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></a>
+      <a href="#"><svg viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+      <a href="#"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a>
+      <a href="#"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.016 3.016 0 0 0-2.122 2.136C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.376.55 9.376.55s7.505 0 9.377-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
     </div>
     <div class="footer-copy" data-i18n="footer.text">© 2026 BL CREATIVE - Ultra Purity. جميع الحقوق محفوظة.</div>
   </footer>
 
   <script>
-    function scrollToSection(id) {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-    }
+    function scrollToSection(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
 
-    // --- نظام السلايدر المتعدد ---
+    // --- خوارزمية السلايدر (مستقرة للغتين) ---
     const containers = document.querySelectorAll('.comparison-container');
     
-    containers.forEach(container => {
+    function updateSlider(container, clientX) {
+      const rect = container.getBoundingClientRect();
+      let x = clientX - rect.left;
+      if (x < 0) x = 0;
+      if (x > rect.width) x = rect.width;
+      
+      const percent = (x / rect.width) * 100;
       const beforeLayer = container.querySelector('.comparison-layer.before');
       const handle = container.querySelector('.slider-handle');
-      let isSliding = false;
-
-      function moveSlider(clientX) {
-        const rect = container.getBoundingClientRect();
-        let x = clientX - rect.left;
-        if (x < 0) x = 0;
-        if (x > rect.width) x = rect.width;
-        
-        const percent = (x / rect.width) * 100;
-        const dir = document.documentElement.dir;
-        if(dir === 'rtl'){
-           beforeLayer.style.clipPath = `inset(0 0 0 ${100 - percent}%)`;
-        } else {
-           beforeLayer.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
-        }
-        handle.style.left = percent + '%';
+      
+      const dir = document.documentElement.dir;
+      
+      if(dir === 'rtl') {
+        beforeLayer.style.clipPath = `polygon(${percent}% 0, 100% 0, 100% 100%, ${percent}% 100%)`;
+      } else {
+        beforeLayer.style.clipPath = `polygon(0 0, ${percent}% 0, ${percent}% 100%, 0 100%)`;
       }
+      
+      handle.style.left = percent + '%';
+    }
 
-      container.addEventListener('mousedown', () => isSliding = true);
+    containers.forEach(container => {
+      let isSliding = false;
+      container.addEventListener('mousedown', (e) => { isSliding = true; updateSlider(container, e.clientX); });
       window.addEventListener('mouseup', () => isSliding = false);
-      window.addEventListener('mousemove', (e) => {
-        if (!isSliding) return;
-        moveSlider(e.clientX);
-      });
-
-      container.addEventListener('touchstart', (e) => isSliding = true);
+      window.addEventListener('mousemove', (e) => { if (isSliding) updateSlider(container, e.clientX); });
+      container.addEventListener('touchstart', (e) => { isSliding = true; updateSlider(container, e.touches[0].clientX); });
       window.addEventListener('touchend', () => isSliding = false);
-      window.addEventListener('touchmove', (e) => {
-        if (!isSliding) return;
-        moveSlider(e.touches[0].clientX);
-      });
-
-      // ضبط مبدئي للسلايدر في المنتصف
-      setTimeout(() => {
-          moveSlider(container.getBoundingClientRect().left + (container.getBoundingClientRect().width / 2));
-      }, 100);
+      window.addEventListener('touchmove', (e) => { if (isSliding) updateSlider(container, e.touches[0].clientX); });
+      setTimeout(() => { updateSlider(container, container.getBoundingClientRect().left + (container.getBoundingClientRect().width / 2)); }, 100);
     });
 
-    // --- الترجمة ---
+    // --- نظام اللغات ---
     const dict = {
       ar: {
         "nav.features": "المميزات", "nav.tech": "التقنية", "nav.pricing": "الأسعار", "nav.cta": "تحميل مجاني",
-        "hero.title": "نقاء سينمائي.<br>مدعوم بالذكاء الاصطناعي.",
-        "hero.subtitle": "برنامج احترافي لإزالة الضوضاء واستعادة التفاصيل الدقيقة للفيديوهات. صُمم للمونتيرز وصناع المحتوى الذين يبحثون عن الجودة المطلقة.",
-        "hero.btnPrimary": "تحميل Ultra Purity",
+        "hero.title": "نقاء سينمائي.<br>مدعوم بالذكاء الاصطناعي.", "hero.subtitle": "برنامج احترافي لإزالة الضوضاء واستعادة التفاصيل الدقيقة للفيديوهات. صُمم للمونتيرز وصناع المحتوى الذين يبحثون عن الجودة المطلقة.", "hero.btnPrimary": "تحميل Ultra Purity",
         "comp.title": "نتائج تتحدث عن نفسها", "comp.subtitle": "شاهد الفرق الحقيقي قبل وبعد المعالجة بفضل تقنياتنا المتقدمة في استعادة ملامح الوجه وإزالة الضوضاء.",
-        "comp.noisy": "قبل (ضوضاء وانخفاض دقة)", "comp.clean": "بعد Ultra Purity",
-        "gpu.title": "رندر محلي خاص. قوة لا محدودة.",
-        "gpu.desc": "يستفيد Ultra Purity بشكل كامل من بنية كروت الشاشة الحديثة لتقديم أداء معالجة محلي بالكامل. بياناتك لا تغادر جهازك أبداً، مما يضمن أعلى درجات الخصوصية وسرعة مذهلة.",
-        "pricing.title": "خطط الأسعار", "pricing.refund": "لا يوجد استرداد للأموال في حال الإلغاء بعد 48 ساعة من الشراء.",
-        "pricing.btn": "اشتراك", "pricing.contactBtn": "تواصل معنا",
-        "pricing.ent1": "شروط مخصصة وواجهات برمجية", "pricing.ent2": "خيارات مبنية للشركات",
-        "pricing.ent3": "مصادقة بدون إنترنت (Offline)", "pricing.ent4": "دعم فني مخصص",
-        "about.title": "من نحن (About Us)",
-        "about.p1": "نحن في BL CREATIVE نؤمن بأن الجودة لا يجب أن تُساوم. فريقنا يتكون من مهندسي ذكاء اصطناعي ومونتيرز محترفين اجتمعوا لهدف واحد: بناء أدوات بصرية تعيد تعريف النقاء.",
-        "about.p2": "بدأنا رحلتنا من إحباطنا تجاه الأدوات المتاحة التي تدمر تفاصيل البشرة لتزيل الضوضاء. قمنا ببناء Ultra Purity ليكون الحل الذي نستخدمه بأنفسنا في مشاريعنا.",
-        "sys.title": "متطلبات النظام", "sys.os": "نظام التشغيل:", "sys.osVal": "Windows 10/11 (64-bit)",
-        "sys.cpu": "المعالج:", "sys.cpuVal": "Intel i7 / Ryzen 7 أو أحدث", "sys.gpu": "كرت الشاشة:", "sys.gpuVal": "NVIDIA RTX 2060 أو أعلى (VRAM 8GB+)",
-        "sys.ram": "الرام:", "sys.ramVal": "16GB (ينصح بـ 32GB للفيديوهات 4K)",
+        "comp.noisy": "قبل (ضوضاء)", "comp.clean": "بعد Ultra Purity",
+        "gpu.title": "رندر محلي خاص. قوة لا محدودة.", "gpu.desc": "يستفيد Ultra Purity بشكل كامل من بنية كروت الشاشة الحديثة لتقديم أداء معالجة محلي بالكامل. بياناتك لا تغادر جهازك أبداً.",
+        "pricing.title": "خطط الأسعار", "pricing.refund": "لا يوجد استرداد للأموال في حال الإلغاء بعد 48 ساعة.", "pricing.btn": "اشتراك", "pricing.contactBtn": "تواصل معنا",
+        "pricing.ent1": "شروط مخصصة وواجهات برمجية", "pricing.ent2": "خيارات مبنية للشركات", "pricing.ent3": "مصادقة بدون إنترنت (Offline)", "pricing.ent4": "دعم فني مخصص",
+        "about.title": "من نحن (About Us)", "about.p1": "فريقنا يتكون من مهندسي ذكاء اصطناعي ومونتيرز محترفين اجتمعوا لبناء أدوات بصرية تعيد تعريف النقاء.", "about.p2": "بدأنا رحلتنا من إحباطنا تجاه الأدوات المتاحة التي تدمر تفاصيل البشرة. قمنا ببناء Ultra Purity ليكون الحل الأمثل.",
+        "sys.title": "متطلبات النظام", "sys.os": "نظام التشغيل:", "sys.osVal": "Windows 10/11 (64-bit)", "sys.cpu": "المعالج:", "sys.cpuVal": "Intel i7 / Ryzen 7 أو أحدث", "sys.gpu": "كرت الشاشة:", "sys.gpuVal": "NVIDIA RTX 2060 أو أعلى", "sys.ram": "الرام:", "sys.ramVal": "16GB (ينصح بـ 32GB)",
         "footer.text": "© 2026 BL CREATIVE - Ultra Purity. جميع الحقوق محفوظة."
       },
       en: {
         "nav.features": "Features", "nav.tech": "Tech", "nav.pricing": "Pricing", "nav.cta": "Free Download",
-        "hero.title": "Cinematic Purity.<br>Powered by AI.",
-        "hero.subtitle": "Professional video noise reduction and detail recovery software. Built for editors and creators who demand absolute quality.",
-        "hero.btnPrimary": "Download Ultra Purity",
+        "hero.title": "Cinematic Purity.<br>Powered by AI.", "hero.subtitle": "Professional video noise reduction and detail recovery software. Built for editors and creators who demand absolute quality.", "hero.btnPrimary": "Download Ultra Purity",
         "comp.title": "Results Speak for Themselves", "comp.subtitle": "See the real difference before and after processing with our advanced facial recovery and noise reduction tech.",
-        "comp.noisy": "Before (Noisy & Low Res)", "comp.clean": "After Ultra Purity",
-        "gpu.title": "Private Local Rendering. Unlimited Power.",
-        "gpu.desc": "Ultra Purity fully leverages modern GPU architecture for completely local processing. Your data never leaves your machine, ensuring maximum privacy and blazing speeds.",
-        "pricing.title": "Pricing Plans", "pricing.refund": "No refund if cancelled after 48 hours from purchase.",
-        "pricing.btn": "Subscribe", "pricing.contactBtn": "Contact us",
-        "pricing.ent1": "Custom terms & APIs", "pricing.ent2": "Enterprise-built options",
-        "pricing.ent3": "Offline authentication", "pricing.ent4": "Dedicated support",
-        "about.title": "About Us",
-        "about.p1": "At BL CREATIVE, we believe quality shouldn't be compromised. Our team of AI engineers and pro editors united to build tools that redefine visual purity.",
-        "about.p2": "We started from our own frustration with tools that destroy skin details to remove noise. We built Ultra Purity to be the solution we use in our own projects.",
-        "sys.title": "System Requirements", "sys.os": "OS:", "sys.osVal": "Windows 10/11 (64-bit)",
-        "sys.cpu": "CPU:", "sys.cpuVal": "Intel i7 / Ryzen 7 or newer", "sys.gpu": "GPU:", "sys.gpuVal": "NVIDIA RTX 2060 or higher (8GB+ VRAM)",
-        "sys.ram": "RAM:", "sys.ramVal": "16GB (32GB recommended for 4K)",
+        "comp.noisy": "Before (Noisy)", "comp.clean": "After Ultra Purity",
+        "gpu.title": "Private Local Rendering.", "gpu.desc": "Ultra Purity fully leverages modern GPU architecture for completely local processing. Your data never leaves your machine.",
+        "pricing.title": "Pricing Plans", "pricing.refund": "No refund if cancelled after 48 hours.", "pricing.btn": "Subscribe", "pricing.contactBtn": "Contact us",
+        "pricing.ent1": "Custom terms & APIs", "pricing.ent2": "Enterprise-built options", "pricing.ent3": "Offline authentication", "pricing.ent4": "Dedicated support",
+        "about.title": "About Us", "about.p1": "At BL CREATIVE, our team of AI engineers and pro editors united to build tools that redefine visual purity.", "about.p2": "We started from our own frustration with tools that destroy skin details. We built Ultra Purity to be the ultimate solution.",
+        "sys.title": "System Requirements", "sys.os": "OS:", "sys.osVal": "Windows 10/11 (64-bit)", "sys.cpu": "CPU:", "sys.cpuVal": "Intel i7 / Ryzen 7 or newer", "sys.gpu": "GPU:", "sys.gpuVal": "NVIDIA RTX 2060 or higher", "sys.ram": "RAM:", "sys.ramVal": "16GB (32GB recommended)",
         "footer.text": "© 2026 BL CREATIVE - Ultra Purity. All rights reserved."
       }
     };
@@ -589,22 +454,24 @@
       
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (dict[currentLang][key]) {
-          el.innerHTML = dict[currentLang][key];
-        }
+        if (dict[currentLang][key]) el.innerHTML = dict[currentLang][key];
       });
 
-      // إعادة ضبط السلايدر عند تغيير اللغة
       containers.forEach(container => {
-        const handle = container.querySelector('.slider-handle');
-        const beforeLayer = container.querySelector('.comparison-layer.before');
         const rect = container.getBoundingClientRect();
-        const percent = 50; // اعادة للمنتصف
-        handle.style.left = percent + '%';
-        if(currentLang === 'ar'){
-           beforeLayer.style.clipPath = `inset(0 0 0 ${100 - percent}%)`;
-        } else {
-           beforeLayer.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+        updateSlider(container, rect.left + (rect.width / 2));
+        
+        const lblBefore = container.querySelector('.label-before');
+        const lblAfter = container.querySelector('.label-after');
+        if(lblBefore && lblAfter) {
+          const parent = lblBefore.parentNode;
+          if(currentLang === 'ar') {
+            parent.appendChild(lblAfter);
+            parent.appendChild(lblBefore);
+          } else {
+            parent.appendChild(lblBefore);
+            parent.appendChild(lblAfter);
+          }
         }
       });
     });
