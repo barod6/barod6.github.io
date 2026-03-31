@@ -1,1 +1,637 @@
 
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title">TikTok Ultra | Pure Infinity Premium Cinematic Engine</title>
+    
+    <!-- Google Fonts for Ultra Premium Look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    
+    <!-- INLINED CSS FOR MAXIMUM RELIABILITY -->
+    <style>
+        /* =========================================
+           TOPAZ LABS STYLE - PREMIUM DARK THEME
+        ========================================= */
+        :root {
+            --bg-deep: #000000;
+            --bg-card: rgba(25, 25, 30, 0.6);
+            --bg-surface: #0a0a0f;
+            --primary: #581c87;
+            --primary-glow: #a855f7;
+            --secondary: #0891b2;
+            --secondary-glow: #22d3ee;
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --border-highlight: rgba(255, 255, 255, 0.25);
+            --font-sans: 'Inter', sans-serif;
+            --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Basic Resets */
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* RTL overrides */
+        html[dir="rtl"] { font-family: 'Cairo', var(--font-sans); }
+        html[dir="rtl"] body { text-align: right; }
+        html[dir="rtl"] .hero-buttons, html[dir="rtl"] .nav-links { flex-direction: row-reverse; }
+
+        /* Typography & Gradients */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--secondary-glow), var(--primary-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        h1, h2, h3, h4 { font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
+        p { color: var(--text-muted); font-size: 1.1rem; }
+
+        .container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        /* Navigation - Topaz Style Sticky */
+        .main-nav {
+            position: fixed;
+            top: 0; width: 100%; z-index: 9999;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 16px 0;
+            transition: var(--transition-smooth);
+        }
+        .nav-content {
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-logo {
+            display: flex; align-items: center; gap: 12px;
+            text-decoration: none; color: white;
+        }
+        .nav-logo img {
+            height: 35px; /* Adjust as needed for logo.png */
+            width: auto;
+            border-radius: 4px;
+        }
+        .nav-logo span {
+            font-size: 1.4rem; font-weight: 900; letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex; gap: 30px; align-items: center;
+        }
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition-smooth);
+        }
+        .nav-link:hover { color: var(--text-main); }
+        
+        .btn-buy {
+            background: white; color: black;
+            padding: 10px 24px; border-radius: 30px;
+            font-weight: 800; text-transform: uppercase;
+            letter-spacing: 0.05em; font-size: 0.85rem;
+            border: none; cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .btn-buy:hover { transform: scale(1.05); }
+
+        .btn-lang {
+            background: transparent; border: 1px solid var(--border-subtle);
+            color: white; padding: 6px 14px; border-radius: 20px;
+            cursor: pointer; font-family: inherit; font-weight: 600;
+            transition: var(--transition-smooth);
+        }
+        .btn-lang:hover { background: rgba(255,255,255,0.1); }
+
+        /* Hero Section */
+        .hero {
+            padding: 200px 0 100px 0;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at 50% 0%, rgba(88, 28, 135, 0.3) 0%, transparent 70%);
+        }
+        .hero-title {
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            margin-bottom: 24px;
+            max-width: 1000px;
+            margin-inline: auto;
+        }
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            max-width: 700px;
+            margin: 0 auto 50px auto;
+        }
+        .hero-buttons {
+            display: flex; gap: 20px; justify-content: center; margin-bottom: 80px;
+        }
+        .btn-primary-large {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white; padding: 18px 40px; border-radius: 40px;
+            font-size: 1.1rem; font-weight: 800; text-decoration: none;
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+            transition: var(--transition-smooth);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .btn-primary-large:hover {
+            transform: translateY(-3px); box-shadow: 0 15px 40px rgba(34, 211, 238, 0.5);
+        }
+        .btn-secondary-large {
+            background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);
+            color: white; padding: 18px 40px; border-radius: 40px;
+            font-size: 1.1rem; font-weight: 600; text-decoration: none;
+            border: 1px solid var(--border-subtle);
+            transition: var(--transition-smooth);
+        }
+        .btn-secondary-large:hover { background: rgba(255,255,255,0.1); }
+
+        /* Massive Interactive Slider Container */
+        .slider-section {
+            width: 100%;
+            background: var(--bg-surface);
+            padding: 100px 0;
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .slider-header { text-align: center; margin-bottom: 60px; }
+        .slider-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            cursor: ew-resize; /* Topaz style grabbing cursor */
+        }
+        .comparison-wrapper { position: relative; width: 100%; display: flex; }
+        .comparison-wrapper img { width: 100%; height: auto; display: block; object-fit: cover; }
+        
+        .img-after { z-index: 1; }
+        .img-before-clipper {
+            position: absolute; top: 0; left: 0; width: 50%; height: 100%;
+            overflow: hidden; z-index: 2;
+        }
+        
+        /* Handles RTL dragging implicitly since it clips from left regardless */
+        .img-before { position: absolute; top:0; left:0; width: 200%; max-width: none; }
+        
+        .slider-dragger {
+            position: absolute; top: 0; bottom: 0;
+            left: 50%; width: 2px;
+            background: var(--secondary-glow);
+            box-shadow: 0 0 10px var(--secondary-glow);
+            z-index: 3; pointer-events: none;
+            transform: translateX(-50%);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .dragger-knob {
+            width: 44px; height: 44px; background: #000;
+            border: 2px solid var(--secondary-glow);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: space-around;
+            padding: 0 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        .dragger-knob::before, .dragger-knob::after {
+            content: ''; width: 0; height: 0;
+            border-top: 5px solid transparent; border-bottom: 5px solid transparent;
+        }
+        .dragger-knob::before { border-right: 6px solid var(--secondary-glow); }
+        .dragger-knob::after { border-left: 6px solid var(--secondary-glow); }
+
+        .slider-label {
+            position: absolute; bottom: 30px; z-index: 4;
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(10px);
+            padding: 8px 20px; border-radius: 30px;
+            font-size: 0.9rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;
+            border: 1px solid var(--border-subtle);
+        }
+        .label-original { left: 40px; }
+        .label-enhanced { right: 40px; }
+        html[dir="rtl"] .label-original { left: auto; right: 40px; }
+        html[dir="rtl"] .label-enhanced { right: auto; left: 40px; }
+
+        /* Core Technology Matrix (Tech Stack) */
+        .tech-matrix { padding: 140px 0; background: var(--bg-deep); }
+        .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: auto; }
+        .tech-info { display: flex; flex-direction: column; justify-content: center; }
+        .tech-badge { color: var(--secondary-glow); font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+        .tech-title { font-size: 2.8rem; margin-bottom: 24px; }
+        
+        .tech-list { list-style: none; margin-top: 30px; }
+        .tech-list li { margin-bottom: 20px; display: flex; align-items: flex-start; gap: 16px; font-size: 1.1rem; }
+        .tech-list li::before { content: '✦'; color: var(--primary-glow); font-size: 1.4rem; }
+
+        .tech-visual {
+            background: var(--bg-card); border: 1px solid var(--border-subtle);
+            border-radius: 16px; padding: 20px;
+            position: relative; overflow: hidden;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
+        }
+        .tech-visual img { width: 100%; border-radius: 8px; }
+
+        /* Pricing Section */
+        .pricing { padding: 140px 0; background: var(--bg-surface); }
+        .pricing-header { text-align: center; margin-bottom: 80px; }
+        .pricing-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px; max-width: 1100px; margin: 0 auto;
+        }
+        .price-card {
+            background: var(--bg-deep);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px; padding: 50px 40px;
+            transition: var(--transition-smooth);
+            position: relative; overflow: hidden;
+        }
+        .price-card:hover { border-color: var(--primary-glow); transform: translateY(-10px); }
+        .price-card.pro { border-color: var(--primary-glow); box-shadow: 0 0 50px rgba(168, 85, 247, 0.15); }
+        .pro-badge { position: absolute; top: 0; right: 0; background: var(--primary-glow); color: #000; font-weight: 800; padding: 8px 20px; border-bottom-left-radius: 20px; font-size: 0.8rem; text-transform: uppercase; }
+        
+        .plan-name { font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; }
+        .plan-price { font-size: 3.5rem; font-weight: 900; margin-bottom: 30px; display: flex; align-items: baseline; gap: 5px; }
+        .plan-price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+        
+        .plan-features { list-style: none; margin-bottom: 40px; }
+        .plan-features li { padding: 12px 0; border-bottom: 1px solid var(--border-subtle); display: flex; gap: 10px; }
+        .plan-features li::before { content: '✓'; color: var(--secondary-glow); font-weight: 900; }
+
+        .btn-price {
+            width: 100%; background: transparent; color: white; border: 1px solid white;
+            padding: 16px; border-radius: 8px; font-weight: 800; cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        .btn-price:hover { background: white; color: black; }
+        .price-card.pro .btn-price { background: white; color: black; border: none; }
+        .price-card.pro .btn-price:hover { background: var(--primary-glow); color: white; }
+
+        /* About Us & Footer */
+        .about-section { text-align: center; padding: 140px 0; max-width: 800px; margin: 0 auto; }
+        .about-title { font-size: 3rem; margin-bottom: 30px; }
+        .about-text { font-size: 1.2rem; color: var(--text-muted); line-height: 1.8; }
+
+        .footer {
+            border-top: 1px solid var(--border-subtle); padding: 60px 0;
+            text-align: center; background: var(--bg-deep);
+        }
+        .footer-logo { font-size: 2rem; font-weight: 900; margin-bottom: 20px; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .tech-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 3rem; }
+            .nav-links { display: none; } /* Mobile nav hidden for brevity */
+        }
+
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(40px); transition: 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <!-- STICKY NAVBAR -->
+    <nav class="main-nav">
+        <div class="container nav-content">
+            <a href="#" class="nav-logo">
+                <!-- IMPORTANT: Put your logo in the assets folder next to index.html -->
+                <!-- The alt text shows if the image is missing. -->
+                <img src="assets/logo.png" alt="BL Creative" onerror="this.style.display='none'">
+                <span class="gradient-text">ULTRA BEAUTY</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features" class="nav-link" data-i18n="nav_features">Features</a>
+                <a href="#tech" class="nav-link" data-i18n="nav_tech">Technology</a>
+                <a href="#about" class="nav-link" data-i18n="nav_about">Our Mission</a>
+                <button class="btn-lang" onclick="toggleLanguage()" id="lang-btn">العربية</button>
+                <button class="btn-buy" data-i18n="nav_buy">Download</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero reveal active">
+        <div class="container">
+            <h1 class="hero-title" id="hero-title" data-i18n="hero_title">
+                World-Class Video Enhancement. <br> Powered by <span class="gradient-text">AI</span>.
+            </h1>
+            <p class="hero-subtitle" data-i18n="hero_subtitle">
+                Supercharge your TikToks and cinematic edits. Upscale, color-grade, and remove objects automatically using the Pure Infinity Neural Engine.
+            </p>
+            <div class="hero-buttons">
+                <a href="#pricing" class="btn-primary-large" data-i18n="btn_download">Get Ultra Beauty Now</a>
+                <a href="#features" class="btn-secondary-large" data-i18n="btn_demo">See How It Works</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MASSIVE BEFORE/AFTER SLIDER (Topaz Style) -->
+    <section class="slider-section" id="features">
+        <div class="container">
+            <div class="slider-header reveal">
+                <h2 style="font-size: 2.5rem; margin-bottom:15px;" data-i18n="slider_title">Maximize Cinematic Quality</h2>
+                <p data-i18n="slider_subtitle">Interact with the slider below. See the real difference the Ultra core makes to raw footage.</p>
+            </div>
+            
+            <div class="slider-container reveal" id="compare-container">
+                <div class="comparison-wrapper">
+                    <!-- AFTER IMAGE (Underneath) -->
+                    <img src="assets/enhanced.png" alt="Enhanced Video AI" class="img-after" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop';">
+                    
+                    <!-- BEFORE IMAGE (Overlay) -->
+                    <div class="img-before-clipper" id="before-clipper">
+                        <img src="assets/raw.png" alt="Original Video" class="img-before" onerror="this.src='https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2564&auto=format&fit=crop';">
+                    </div>
+                </div>
+
+                <div class="slider-dragger" id="slider-dragger">
+                    <div class="dragger-knob"></div>
+                </div>
+                
+                <div class="slider-label label-original" data-i18n="label_original">Original Footage</div>
+                <div class="slider-label label-enhanced" data-i18n="label_enhanced">Pure Infinity Engine</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECH STACK MATRIX -->
+    <section class="tech-matrix" id="tech">
+        <div class="container tech-grid">
+            <div class="tech-info reveal">
+                <div class="tech-badge" data-i18n="tech_badge">Architectural Marvel</div>
+                <h2 class="tech-title" data-i18n="tech_title">Powered by the most advanced neural networks</h2>
+                <p data-i18n="tech_desc">We built Ultra Beauty from the ground up utilizing state-of-the-art vision models to deliver flawless results.</p>
+                
+                <ul class="tech-list">
+                    <li data-i18n="tech_1"><strong>SAM2 Object Tracking:</strong> Flawless pixel-level masking and tracking for dynamic subjects.</li>
+                    <li data-i18n="tech_2"><strong>Ghost Wipe (ProPainter):</strong> Seamless video inpainting that eradicates unwanted elements perfectly.</li>
+                    <li data-i18n="tech_3"><strong>Cinematic Bloom Matrix:</strong> Hyper-realistic lighting injections that mimic Hollywood lens diffusion.</li>
+                </ul>
+            </div>
+            <div class="tech-visual reveal">
+                <img src="assets/preview.png" alt="App UI Engine" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2564&auto=format&fit=crop';">
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="pricing-header reveal">
+                <h2 style="font-size: 3rem; margin-bottom:15px;" data-i18n="price_title">Unlock Professional Power</h2>
+                <p data-i18n="price_subtitle">Choose the plan that fits your creative workflow. No hidden fees.</p>
+            </div>
+
+            <div class="pricing-grid">
+                <!-- Free Tier -->
+                <div class="price-card reveal">
+                    <h3 class="plan-name" data-i18n="plan1_name">Basic Edition</h3>
+                    <div class="plan-price">$0 <span>/ forever</span></div>
+                    <ul class="plan-features">
+                        <li data-i18n="plan1_f1">Access to core color grading</li>
+                        <li data-i18n="plan1_f2">720p maximum export</li>
+                        <li data-i18n="plan1_f3">Watermarked output</li>
+                    </ul>
+                    <button class="btn-price" data-i18n="btn_plan1">Download Free</button>
+                </div>
+
+                <!-- Pro Tier -->
+                <div class="price-card pro reveal">
+                    <div class="pro-badge" data-i18n="pro_badge">Most Popular</div>
+                    <h3 class="plan-name" data-i18n="plan2_name">Pro Studio</h3>
+                    <div class="plan-price">$29 <span>/ month</span></div>
+                    <ul class="plan-features">
+                        <li data-i18n="plan2_f1">Advanced Ghost Wipe & SAM2</li>
+                        <li data-i18n="plan2_f2">4K ProRes 422 Export</li>
+                        <li data-i18n="plan2_f3">Cinematic Bloom & Vibrance</li>
+                        <li data-i18n="plan2_f4">Priority GPU Processing</li>
+                    </ul>
+                    <button class="btn-price" data-i18n="btn_plan2">Start Pro Trial</button>
+                </div>
+
+                <!-- Lifetime Tier -->
+                <div class="price-card reveal">
+                    <h3 class="plan-name" data-i18n="plan3_name">Lifetime License</h3>
+                    <div class="plan-price">$299 <span>/ one-time</span></div>
+                    <ul class="plan-features">
+                        <li data-i18n="plan3_f1">Everything in Pro Studio</li>
+                        <li data-i18n="plan3_f2">Pay once, own forever</li>
+                        <li data-i18n="plan3_f3">Free major network upgrades</li>
+                    </ul>
+                    <button class="btn-price" data-i18n="btn_plan3">Buy Lifetime</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT US & MISSION -->
+    <section class="about-section" id="about">
+        <div class="container reveal">
+            <h2 class="about-title" data-i18n="about_title">Who We Are</h2>
+            <p class="about-text" data-i18n="about_text">
+                At BL Creative, we believe that high-end cinematic tools shouldn't be reserved for massive Hollywood studios. Our mission is to democratize elite video editing capabilities, putting the raw power of complex artificial intelligence into an intuitive interface designed for independent creators, TikTok artists, and visionaries worldwide.
+            </p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo gradient-text">BL CREATIVE</div>
+            <p data-i18n="footer_copy">© 2026 TikTok Ultra Software. Crafted with precision for the modern creator.</p>
+        </div>
+    </footer>
+
+    <!-- INLINED JAVASCRIPT FOR MAXIMUM RELIABILITY -->
+    <script>
+        /* =========================================
+           I18N LANGUAGE DICTIONARY - EN / AR 
+        ========================================= */
+        const dict = {
+            "en": {
+                "title": "TikTok Ultra | Premium Cinematic Engine",
+                "nav_features": "Features",
+                "nav_tech": "Technology",
+                "nav_about": "Our Mission",
+                "nav_buy": "Download",
+                "hero_title": "World-Class Video Enhancement. <br> Powered by <span class='gradient-text'>AI</span>.",
+                "hero_subtitle": "Supercharge your TikToks and cinematic edits. Upscale, color-grade, and remove objects automatically using the Pure Infinity Neural Engine.",
+                "btn_download": "Get Ultra Beauty Now",
+                "btn_demo": "See How It Works",
+                "slider_title": "Maximize Cinematic Quality",
+                "slider_subtitle": "Interact with the slider below. See the real difference the Ultra core makes to raw footage.",
+                "label_original": "Original Footage",
+                "label_enhanced": "Pure Infinity Engine",
+                "tech_badge": "Architectural Marvel",
+                "tech_title": "Powered by the most advanced neural networks",
+                "tech_desc": "We built Ultra Beauty from the ground up utilizing state-of-the-art vision models to deliver flawless results.",
+                "tech_1": "<strong>SAM2 Object Tracking:</strong> Flawless pixel-level masking and tracking for dynamic subjects.",
+                "tech_2": "<strong>Ghost Wipe (ProPainter):</strong> Seamless video inpainting that eradicates unwanted elements perfectly.",
+                "tech_3": "<strong>Cinematic Bloom Matrix:</strong> Hyper-realistic lighting injections that mimic Hollywood lens diffusion.",
+                "price_title": "Unlock Professional Power",
+                "price_subtitle": "Choose the plan that fits your creative workflow. No hidden fees.",
+                "plan1_name": "Basic Edition",
+                "plan1_f1": "Access to core color grading",
+                "plan1_f2": "720p maximum export",
+                "plan1_f3": "Watermarked output",
+                "btn_plan1": "Download Free",
+                "pro_badge": "Most Popular",
+                "plan2_name": "Pro Studio",
+                "plan2_f1": "Advanced Ghost Wipe & SAM2",
+                "plan2_f2": "4K ProRes 422 Export",
+                "plan2_f3": "Cinematic Bloom & Vibrance",
+                "plan2_f4": "Priority GPU Processing",
+                "btn_plan2": "Start Pro Trial",
+                "plan3_name": "Lifetime License",
+                "plan3_f1": "Everything in Pro Studio",
+                "plan3_f2": "Pay once, own forever",
+                "plan3_f3": "Free major network upgrades",
+                "btn_plan3": "Buy Lifetime",
+                "about_title": "Our Mission",
+                "about_text": "At BL Creative, we believe that high-end cinematic tools shouldn't be reserved for massive Hollywood studios. Our mission is to democratize elite video editing capabilities, putting the raw power of complex artificial intelligence into an intuitive interface designed for independent creators, TikTok artists, and visionaries worldwide.",
+                "footer_copy": "© 2026 TikTok Ultra Software. Crafted with precision for the modern creator by BL Creative."
+            },
+            "ar": {
+                "title": "تيك توك ألترا | المحرك السينمائي الخارق",
+                "nav_features": "المميزات",
+                "nav_tech": "التقنيات",
+                "nav_about": "رسالتنا",
+                "nav_buy": "حمل الآن",
+                "hero_title": "تحسين فيديو بمستوى عالمي. <br> مدعوم بالـ <span class='gradient-text'>ذكاء الاصطناعي</span>.",
+                "hero_subtitle": "ارتقِ بفيديوهات التيك توك والتعديلات السينمائية. قم برفع الدقة، تلوين احترافي، ومسح العناصر تلقائياً عبر محرك Pure Infinity.",
+                "btn_download": "احصل على البرنامج الآن",
+                "btn_demo": "شاهد قوة الأداء",
+                "slider_title": "اعلى جودة سينمائية ممكنة",
+                "slider_subtitle": "تفاعل مع الشريط بالأسفل. شاهد المعالجة الصارخة المباشرة التي يقوم بها محرك البرنامج.",
+                "label_original": "الفيديو الأصلي الخام",
+                "label_enhanced": "المعالجة الفائقة",
+                "tech_badge": "تحفة هندسية",
+                "tech_title": "مدعوم بأقوى الشبكات العصبية بالعالم",
+                "tech_desc": "قمنا ببناء Ultra Beauty من الصفر بالاعتماد على أحدث نماذج الذكاء الاصطناعي لضمان نتائج بلا أخطاء.",
+                "tech_1": "<strong>تتبع SAM2 الدقيق:</strong> عزل وتتبع الأهداف بدقة بيكسل حتى مع الحركة السريعة.",
+                "tech_2": "<strong>تقنية Ghost Wipe للمسح:</strong> معالجة ذكية تزيل أي كائن من الفيديو وكأنه لم يكن موجوداً.",
+                "tech_3": "<strong>مصفوفة الإضاءة السينمائية (Bloom):</strong> حقن إضاءة واقعية جداً تحاكي عدسات تصوير هوليوود.",
+                "price_title": "افتح بوابة الاحتراف",
+                "price_subtitle": "اختر الخطة التي تناسب عملك الإبداعي. بدون رسوم خفية.",
+                "plan1_name": "النسخة الأساسية",
+                "plan1_f1": "وصول لتعديل الألوان الأساسي",
+                "plan1_f2": "تصدير بدقة تصل لـ 720p",
+                "plan1_f3": "علامة مائية على الفيديو",
+                "btn_plan1": "حمل النسخة المجانية",
+                "pro_badge": "الأكثر طلباً",
+                "plan2_name": "ستوديو برو",
+                "plan2_f1": "جميع تقنيات Ghost Wipe و SAM2",
+                "plan2_f2": "تصدير 4K خام (ProRes)",
+                "plan2_f3": "فلاتر Bloom و Vibrance",
+                "plan2_f4": "أولوية معالجة في كرت الشاشة",
+                "btn_plan2": "ابدأ التجربة الاحترافية",
+                "plan3_name": "رخصة مدى الحياة",
+                "plan3_f1": "كل مميزات نسخة برو",
+                "plan3_f2": "ادفع مرة واحدة وامتلكه للأبد",
+                "plan3_f3": "تحديثات للشبكات العصبية مجاناً",
+                "btn_plan3": "شراء نسخة مدى الحياة",
+                "about_title": "من نحن وهدفنا",
+                "about_text": "في BL Creative، نؤمن بأن أدوات التعديل السينمائي الفائقة لا يجب أن تكون حكراً على استوديوهات هوليوود الضخمة. هدفنا الأساسي هو توظيف الذكاء الاصطناعي المعقد في واجهة سهلة وبديهية، ليتمكن صناع ومبدعي تيك توك والمحررين المستقلين حول العالم من صناعة تحف بصرية لا مثيل لها وبنقرة زر.",
+                "footer_copy": "© 2026 برنامج تيك توك ألترا. تصميم وتطوير BL Creative."
+            }
+        };
+
+        const langBtn = document.getElementById('lang-btn');
+        let curLang = 'en';
+
+        window.toggleLanguage = function() {
+            curLang = curLang === 'en' ? 'ar' : 'en';
+            document.documentElement.dir = curLang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = curLang;
+            langBtn.innerText = curLang === 'en' ? 'العربية' : 'English';
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if(dict[curLang][key]) el.innerHTML = dict[curLang][key];
+            });
+        };
+
+        /* =========================================
+           TOPAZ STYLE IMAGE SLIDER LOGIC 
+        ========================================= */
+        const container = document.getElementById('compare-container');
+        const clipper = document.getElementById('before-clipper');
+        const dragger = document.getElementById('slider-dragger');
+        const imgBefore = document.querySelector('.img-before');
+
+        let isDragging = false;
+
+        function updateSlider(clientX) {
+            const rect = container.getBoundingClientRect();
+            // Calculate percentage based on mouse position
+            let percentage = ((clientX - rect.left) / rect.width) * 100;
+            // Clamp between 0 and 100
+            if (percentage < 0) percentage = 0;
+            if (percentage > 100) percentage = 100;
+            
+            // Adjust styles
+            clipper.style.width = percentage + '%';
+            dragger.style.left = percentage + '%';
+            // Adjust image width logic for RTL/LTR safety
+            const containerWidth = rect.width;
+            imgBefore.style.width = containerWidth + 'px';
+        }
+
+        container.addEventListener('mousedown', (e) => { isDragging = true; updateSlider(e.clientX); });
+        window.addEventListener('mouseup', () => { isDragging = false; });
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            updateSlider(e.clientX);
+        });
+        
+        // Touch support for mobile
+        container.addEventListener('touchstart', (e) => { isDragging = true; updateSlider(e.touches[0].clientX); }, {passive: false});
+        window.addEventListener('touchend', () => { isDragging = false; });
+        window.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            updateSlider(e.touches[0].clientX);
+        }, {passive: true});
+
+        // Initialize sizing correctly on load and resize
+        function initSizing() {
+            const rect = container.getBoundingClientRect();
+            imgBefore.style.width = rect.width + 'px';
+        }
+        window.addEventListener('resize', initSizing);
+        setTimeout(initSizing, 100);
+
+        /* =========================================
+           SCROLL REVEAL ANIMATIONS 
+        ========================================= */
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        reveals.forEach(el => observer.observe(el));
+
+    </script>
+</body>
+</html>
