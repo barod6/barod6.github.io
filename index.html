@@ -5,278 +5,316 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>BL Creative</title>
 
-<!-- Fonts that support Arabic + European languages -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ===========================
-   GLOBAL RESET
-=========================== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:#050509;
+  color:#fff;
+  font-family:Inter,Cairo,sans-serif;
+  overflow-x:hidden;
 }
 
-html {
-  scroll-behavior: smooth;
+/* HEADER */
+header{
+  width:100%;
+  padding:16px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#000;
+  border-bottom:1px solid #222;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+header .logo-wrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+header img{
+  height:52px;
+  object-fit:contain;
+  display:block;
+}
+header .brand-text{
+  font-size:13px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#aaa;
+}
+nav{display:flex;gap:22px}
+nav a{
+  color:#ccc;
+  text-decoration:none;
+  font-size:14px;
+  transition:.2s;
+}
+nav a:hover{color:#fff}
+.lang-switcher{
+  background:#222;
+  color:#fff;
+  padding:6px 10px;
+  border-radius:6px;
+  border:1px solid #444;
+  cursor:pointer;
+  font-size:13px;
 }
 
-body {
-  background: #050509;
-  color: #fff;
-  font-family: Inter, Cairo, sans-serif;
-  overflow-x: hidden;
+/* HERO */
+.hero{
+  padding:80px 40px 60px;
+  max-width:1150px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);
+  gap:40px;
+  align-items:center;
+}
+.hero-main h1{
+  font-size:40px;
+  line-height:1.2;
+  margin-bottom:16px;
+}
+.hero-main h1 span{
+  background:linear-gradient(90deg,#6b5bff,#9b5bff);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+.hero-main p{
+  font-size:15px;
+  color:#b8b8c8;
+  margin-bottom:20px;
+}
+.hero-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-bottom:16px;
+}
+.btn-primary{
+  padding:10px 20px;
+  border-radius:999px;
+  border:none;
+  background:linear-gradient(135deg,#6b5bff,#9b5bff);
+  color:#fff;
+  font-size:14px;
+  cursor:pointer;
+}
+.btn-secondary{
+  padding:9px 18px;
+  border-radius:999px;
+  border:1px solid #333;
+  background:#111;
+  color:#ccc;
+  font-size:14px;
+  cursor:pointer;
+}
+.hero-meta{
+  font-size:12px;
+  color:#8f8fa0;
+}
+.hero-meta span{display:block;margin-bottom:4px}
+.hero-card{
+  background:radial-gradient(circle at top,#26264a 0,#0b0b12 55%);
+  border-radius:18px;
+  padding:18px 18px 16px;
+  border:1px solid rgba(107,91,255,.4);
+  box-shadow:0 0 40px rgba(0,0,0,.7);
+  font-size:13px;
+}
+.hero-card-label{
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#9a9ab5;
+  margin-bottom:8px;
+}
+.hero-card-main{
+  color:#e5e5ff;
+  margin-bottom:10px;
+}
+.hero-card-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(155,91,255,.5);
+  background:rgba(5,5,9,.85);
+  font-size:11px;
+  color:#b3b3d0;
 }
 
-/* ===========================
-   HEADER
-=========================== */
-header {
-  width: 100%;
-  padding: 20px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #000;
-  border-bottom: 1px solid #222;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+/* SECTIONS */
+section{
+  padding:40px 40px;
+  max-width:1200px;
+  margin:auto;
+}
+.section-title{
+  font-size:24px;
+  margin-bottom:8px;
+}
+.section-sub{
+  font-size:14px;
+  color:#a8a8b8;
+  margin-bottom:24px;
 }
 
-header img {
-  height: 60px;
-  object-fit: contain;
+/* SERVICES */
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+.card{
+  background:#0b0b12;
+  border-radius:14px;
+  padding:16px 16px 14px;
+  border:1px solid #222;
+  font-size:13px;
+}
+.card h3{
+  font-size:15px;
+  margin-bottom:6px;
+}
+.card p{
+  font-size:12px;
+  color:#b3b3c5;
 }
 
-nav {
-  display: flex;
-  gap: 24px;
+/* COMPARISONS */
+.comparisons-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
+.compare-card{
+  background:#0b0b12;
+  border-radius:14px;
+  padding:14px;
+  border:1px solid #222;
+  font-size:12px;
+}
+.compare-label{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  color:#9a9ab5;
+  margin-bottom:8px;
+}
+.compare-images{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+.compare-box{
+  background:#111;
+  border-radius:10px;
+  padding:6px;
+  text-align:center;
+  border:1px solid #222;
+}
+.compare-box span{
+  display:block;
+  font-size:11px;
+  color:#9a9ab5;
+  margin-bottom:4px;
+}
+.compare-box .img-placeholder{
+  width:100%;
+  height:120px;
+  border-radius:8px;
+  background:#1a1a24;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  color:#666;
 }
 
-nav a {
-  color: #ccc;
-  text-decoration: none;
-  font-size: 15px;
-  transition: 0.2s ease;
+/* CONTACT */
+.contact-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
+  gap:22px;
 }
-
-nav a:hover {
-  color: #fff;
+.contact-form{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  font-size:13px;
 }
-
-.lang-switcher {
-  background: #222;
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  border: 1px solid #444;
-}
-
-/* ===========================
-   HERO SECTION
-=========================== */
-.hero {
-  padding: 100px 40px;
-  max-width: 1100px;
-  margin: auto;
-  text-align: center;
-}
-
-.hero h1 {
-  font-size: 48px;
-  margin-bottom: 20px;
-  line-height: 1.3;
-}
-
-.hero p {
-  font-size: 18px;
-  color: #bbb;
-  margin-bottom: 30px;
-}
-
-.hero .btns {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-}
-
-.btn-primary {
-  padding: 12px 24px;
-  background: linear-gradient(135deg, #6b5bff, #9b5bff);
-  border: none;
-  border-radius: 8px;
-  color: #fff;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.btn-secondary {
-  padding: 12px 24px;
-  background: #111;
-  border: 1px solid #333;
-  border-radius: 8px;
-  color: #ccc;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-/* ===========================
-   SERVICES
-=========================== */
-section {
-  padding: 80px 40px;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.section-title {
-  font-size: 32px;
-  margin-bottom: 10px;
-}
-
-.section-sub {
-  font-size: 16px;
-  color: #aaa;
-  margin-bottom: 40px;
-}
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.service-card {
-  background: #0b0b12;
-  padding: 24px;
-  border-radius: 12px;
-  border: 1px solid #222;
-}
-
-.service-card h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.service-card p {
-  font-size: 14px;
-  color: #bbb;
-}
-
-/* ===========================
-   PORTFOLIO
-=========================== */
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.portfolio-card {
-  background: #0b0b12;
-  padding: 24px;
-  border-radius: 12px;
-  border: 1px solid #222;
-}
-
-.portfolio-card h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.portfolio-card p {
-  font-size: 14px;
-  color: #bbb;
-}
-
-/* ===========================
-   CONTACT
-=========================== */
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-}
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
 .contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #333;
-  background: #111;
-  color: #fff;
-  font-size: 14px;
+.contact-form textarea{
+  width:100%;
+  padding:9px 10px;
+  border-radius:8px;
+  border:1px solid #333;
+  background:#050509;
+  color:#fff;
+  font-size:13px;
+}
+.contact-form textarea{min-height:90px;resize:vertical}
+.contact-info{
+  font-size:13px;
+  color:#b3b3c5;
+  line-height:1.6;
 }
 
-.contact-form textarea {
-  min-height: 120px;
+/* FOOTER */
+footer{
+  padding:20px 40px 26px;
+  max-width:1200px;
+  margin:10px auto 0;
+  border-top:1px solid #222;
+  font-size:11px;
+  color:#8a8a9a;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
-.contact-info {
-  font-size: 15px;
-  color: #ccc;
-  line-height: 1.7;
-}
+/* RTL / LTR */
+.rtl{direction:rtl;text-align:right}
+.ltr{direction:ltr;text-align:left}
 
-/* ===========================
-   FOOTER
-=========================== */
-footer {
-  padding: 30px;
-  text-align: center;
-  color: #777;
-  border-top: 1px solid #222;
-  margin-top: 40px;
-}
-
-/* ===========================
-   RTL SUPPORT
-=========================== */
-.rtl {
-  direction: rtl;
-  text-align: right;
-}
-
-.ltr {
-  direction: ltr;
-  text-align: left;
-}
-
-/* ===========================
-   RESPONSIVE
-=========================== */
-@media (max-width: 900px) {
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero{
+    grid-template-columns:minmax(0,1fr);
+  }
+  .hero-card{order:-1}
+  nav{display:none}
   .services-grid,
-  .portfolio-grid {
-    grid-template-columns: 1fr;
+  .comparisons-grid{
+    grid-template-columns:minmax(0,1fr);
   }
-
-  .contact-grid {
-    grid-template-columns: 1fr;
+  .contact-grid{
+    grid-template-columns:minmax(0,1fr);
   }
-
-  nav {
-    display: none;
-  }
+}
+@media(max-width:700px){
+  .hero-main h1{font-size:32px}
+  section{padding:32px 20px}
+  header{padding:14px 20px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header>
-  <img src="images/bl-creative-logo.png" alt="BL Creative Logo">
+  <div class="logo-wrap">
+    <!-- غيّر المسار هنا لمسار شعارك الفعلي -->
+    <img src="images/bl-creative-logo.png" alt="BL Creative Logo">
+    <div class="brand-text">BL CREATIVE</div>
+  </div>
 
   <nav id="nav"></nav>
 
@@ -288,251 +326,293 @@ footer {
   </select>
 </header>
 
-<!-- HERO -->
 <section class="hero">
-  <h1 id="title"></h1>
-  <p id="subtitle"></p>
-
-  <div class="btns">
-    <button class="btn-primary" id="btn1"></button>
-    <button class="btn-secondary" id="btn2"></button>
+  <div class="hero-main">
+    <h1 id="title"></h1>
+    <p id="subtitle"></p>
+    <div class="hero-buttons">
+      <button class="btn-primary" id="btn1"></button>
+      <button class="btn-secondary" id="btn2"></button>
+    </div>
+    <div class="hero-meta">
+      <span id="meta1"></span>
+      <span id="meta2"></span>
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="hero-card-label" id="heroLabel"></div>
+    <div class="hero-card-main" id="heroMain"></div>
+    <div class="hero-card-pill" id="heroPill"></div>
   </div>
 </section>
 
-<!-- SERVICES -->
 <section id="services">
   <h2 class="section-title" id="servicesTitle"></h2>
   <p class="section-sub" id="servicesSub"></p>
-
   <div class="services-grid" id="servicesGrid"></div>
 </section>
 
-<!-- PORTFOLIO -->
-<section id="portfolio">
-  <h2 class="section-title" id="portfolioTitle"></h2>
-  <p class="section-sub" id="portfolioSub"></p>
-
-  <div class="portfolio-grid" id="portfolioGrid"></div>
+<section id="comparisons">
+  <h2 class="section-title" id="compareTitle"></h2>
+  <p class="section-sub" id="compareSub"></p>
+  <div class="comparisons-grid" id="compareGrid"></div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <h2 class="section-title" id="contactTitle"></h2>
   <p class="section-sub" id="contactSub"></p>
-
   <div class="contact-grid">
     <form class="contact-form">
       <input id="name" type="text" placeholder="">
       <input id="email" type="email" placeholder="">
       <textarea id="message" placeholder=""></textarea>
-      <button class="btn-primary" id="sendBtn"></button>
+      <button type="submit" class="btn-primary" id="sendBtn"></button>
     </form>
-
     <div class="contact-info" id="contactInfo"></div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer id="footer"></footer>
 
 <script>
-/* ===========================
-   MULTI-LANGUAGE CONTENT
-=========================== */
 const content = {
-  en: {
-    dir: "ltr",
-    nav: ["Home", "Services", "Portfolio", "Contact"],
-    title: "Digital visuals for brands that care.",
-    subtitle: "BL Creative builds clean, sharp, tech‑driven visuals for modern brands.",
-    btn1: "Start a project",
-    btn2: "View portfolio",
-    servicesTitle: "Services",
-    servicesSub: "A focused set of services built around clean visuals and practical delivery.",
-    services: [
-      { title: "Logo Design", text: "Sharp, minimal marks built for real‑world use." },
-      { title: "Video & Intros", text: "Clean transitions and motion tuned for platforms." },
-      { title: "Brand Systems", text: "Consistent identity across all formats." }
+  en:{
+    dir:"ltr",
+    nav:["Home","Services","Comparisons","Contact"],
+    title:"Software that makes your video look native, not artificial.",
+    subtitle:"BL Creative builds powerful tools for video enhancement: quality upscaling, object removal, frame boosting, and full diagnostics.",
+    btn1:"Download tools",
+    btn2:"See real results",
+    meta1:"• Quality upscaling, artifact cleanup, and smart sharpening",
+    meta2:"• Object removal, frame interpolation, and deep video diagnostics",
+    heroLabel:"BL CREATIVE · VIDEO SUITE",
+    heroMain:"From noisy, low‑detail footage to clean, sharp, platform‑ready video — in one controlled workflow.",
+    heroPill:"Smart enhancement · Object removal · Frame boost",
+    servicesTitle:"What our software does",
+    servicesSub:"Each module is built for real‑world footage — tested on noisy, compressed, and mixed‑source videos.",
+    services:[
+      {title:"Quality upscaling",text:"Upscale and restore detail while keeping the image natural and stable."},
+      {title:"Object & clutter removal",text:"Remove unwanted logos, people, or artifacts without destroying the scene."},
+      {title:"Frame interpolation",text:"Boost frame rate for smoother motion while avoiding ghosting and artifacts."},
+      {title:"Noise & compression cleanup",text:"Reduce noise, banding, and blockiness from heavily compressed sources."},
+      {title:"Video diagnostics",text:"Analyze sharpness, noise, exposure, and motion to choose the right settings."},
+      {title:"Export‑ready presets",text:"Presets tuned for YouTube, social, and client delivery — not just lab tests."}
     ],
-    portfolioTitle: "Selected Work",
-    portfolioSub: "A few highlights from recent projects.",
-    portfolio: [
-      { title: "Brand Identity", text: "Complete visual systems for modern brands." },
-      { title: "Motion Graphics", text: "Smooth, subtle, platform‑ready animations." },
-      { title: "Logo Cleanup", text: "Noise control, sharpening, and refinement." }
+    compareTitle:"Before / After comparisons",
+    compareSub:"Real examples of what the tools do — not just sliders, but visible, practical improvements.",
+    comparisons:[
+      {
+        label:"Upscaling & cleanup",
+        before:"Soft, noisy 720p source",
+        after:"Clean, detailed 1080p upscale"
+      },
+      {
+        label:"Object removal",
+        before:"Logo and unwanted text on screen",
+        after:"Clean frame with natural background"
+      }
     ],
-    contactTitle: "Contact",
-    contactSub: "Tell us what you need and we’ll shape it into something precise.",
-    placeholders: {
-      name: "Your name",
-      email: "Your email",
-      message: "Project details"
-    },
-    sendBtn: "Send message",
-    contactInfo: "BL Creative — focused on clean, controlled, digital‑first visuals.",
-    footer: "© 2026 BL Creative. All rights reserved."
+    contactTitle:"Tell us about your footage",
+    contactSub:"Share how you shoot, where you publish, and what bothers you most in your videos.",
+    placeholders:{name:"Your name",email:"Your email",message:"Describe your footage and goals"},
+    sendBtn:"Send message",
+    contactInfo:"BL Creative builds video tools for people who care about clean, controlled, native‑looking results.",
+    footer:"© 2026 BL Creative. All rights reserved."
   },
-
-  ar: {
-    dir: "rtl",
-    nav: ["الرئيسية", "الخدمات", "الأعمال", "تواصل"],
-    title: "تصاميم رقمية للعلامات التي تهتم بالجودة.",
-    subtitle: "نحن في BL Creative نصنع هويات بصرية نظيفة ودقيقة وعصرية.",
-    btn1: "ابدأ مشروعك",
-    btn2: "عرض الأعمال",
-    servicesTitle: "الخدمات",
-    servicesSub: "مجموعة خدمات مركّزة مبنية على الوضوح والدقة.",
-    services: [
-      { title: "تصميم الشعارات", text: "شعارات نظيفة وعملية للاستخدام الحقيقي." },
-      { title: "الموشن جرافيك", text: "حركات سلسة وانتقالات احترافية." },
-      { title: "أنظمة الهوية", text: "هوية متناسقة عبر جميع المنصات." }
+  ar:{
+    dir:"rtl",
+    nav:["الرئيسية","الخدمات","المقارنات","تواصل"],
+    title:"برامج ترفع جودة الفيديو بدون مظهر مصطنع.",
+    subtitle:"BL Creative تطوّر أدوات قوية لرفع الجودة، إزالة الكائنات، زيادة الفريمات، وتشخيص الفيديو بالكامل.",
+    btn1:"تحميل الأدوات",
+    btn2:"مشاهدة النتائج",
+    meta1:"• رفع الجودة، تنظيف التشويش، وضبط الحدة",
+    meta2:"• إزالة العناصر غير المرغوبة، زيادة الفريمات، وتشخيص ذكي للفيديو",
+    heroLabel:"BL CREATIVE · حزمة الفيديو",
+    heroMain:"من فيديو مشوش وضعيف إلى نتيجة نظيفة وحادة وجاهزة للنشر — ضمن مسار واحد مضبوط.",
+    heroPill:"رفع جودة · إزالة كائنات · زيادة فريمات",
+    servicesTitle:"ماذا تفعل برامجنا",
+    servicesSub:"كل أداة مبنية على لقطات حقيقية — فيديوهات مضغوطة، مشوشة، ومختلطة المصادر.",
+    services:[
+      {title:"رفع الجودة",text:"رفع الدقة واستعادة التفاصيل مع الحفاظ على مظهر طبيعي."},
+      {title:"إزالة الكائنات",text:"إزالة شعارات، أشخاص، أو عناصر مزعجة بدون تخريب المشهد."},
+      {title:"زيادة الفريمات",text:"رفع عدد الإطارات لحركة أكثر سلاسة بدون أشباح وتشوهات."},
+      {title:"تنظيف التشويش والضغط",text:"تقليل التشويش، الباندينغ، والبلوكات من الفيديو المضغوط."},
+      {title:"تشخيص الفيديو",text:"تحليل الحدة، التشويش، التعريض، والحركة لاختيار الإعدادات المناسبة."},
+      {title:"بروفايلات جاهزة للتصدير",text:"إعدادات جاهزة لليوتيوب، السوشال، وعروض العملاء."}
     ],
-    portfolioTitle: "الأعمال",
-    portfolioSub: "بعض من أبرز المشاريع المنجزة.",
-    portfolio: [
-      { title: "هويات بصرية", text: "أنظمة كاملة للعلامات التجارية." },
-      { title: "موشن جرافيك", text: "حركات سلسة وجاهزة للنشر." },
-      { title: "تنظيف الشعارات", text: "تحسين التفاصيل وتقليل التشويش." }
+    compareTitle:"مقارنات قبل / بعد",
+    compareSub:"أمثلة حقيقية لما تفعله الأدوات — نتائج تُرى بالعين، لا مجرد أرقام.",
+    comparisons:[
+      {
+        label:"رفع الجودة والتنظيف",
+        before:"مصدر 720p مشوش وضعيف",
+        after:"نتيجة 1080p أنظف وأكثر وضوحًا"
+      },
+      {
+        label:"إزالة الكائنات",
+        before:"شعار ونص مزعج على الشاشة",
+        after:"كادر نظيف بخلفية طبيعية"
+      }
     ],
-    contactTitle: "تواصل معنا",
-    contactSub: "أخبرنا بما تحتاجه وسنحوّله إلى نتيجة دقيقة.",
-    placeholders: {
-      name: "اسمك",
-      email: "بريدك الإلكتروني",
-      message: "تفاصيل المشروع"
-    },
-    sendBtn: "إرسال",
-    contactInfo: "BL Creative — متخصصون في التصاميم الرقمية النظيفة.",
-    footer: "© 2026 BL Creative. جميع الحقوق محفوظة."
+    contactTitle:"احكِ لنا عن لقطاتك",
+    contactSub:"أخبرنا كيف تصوّر، وأين تنشر، وما أكثر ما يزعجك في الفيديو.",
+    placeholders:{name:"اسمك",email:"بريدك الإلكتروني",message:"صف نوع الفيديو والمشكلة التي تريد حلها"},
+    sendBtn:"إرسال",
+    contactInfo:"BL Creative تطوّر أدوات فيديو لمن يهتمون بالنتيجة النظيفة والمتوازنة.",
+    footer:"© 2026 BL Creative. جميع الحقوق محفوظة."
   },
-
-  fr: {
-    dir: "ltr",
-    nav: ["Accueil", "Services", "Portfolio", "Contact"],
-    title: "Des visuels numériques pour des marques exigeantes.",
-    subtitle: "BL Creative crée des identités modernes et précises.",
-    btn1: "Commencer un projet",
-    btn2: "Voir le portfolio",
-    servicesTitle: "Services",
-    servicesSub: "Des services axés sur la clarté et la précision.",
-    services: [
-      { title: "Logo", text: "Identités visuelles propres et modernes." },
-      { title: "Motion", text: "Animations fluides et professionnelles." },
-      { title: "Systèmes de marque", text: "Identité cohérente sur toutes les plateformes." }
+  fr:{
+    dir:"ltr",
+    nav:["Accueil","Services","Comparaisons","Contact"],
+    title:"Des logiciels vidéo qui améliorent sans artifices.",
+    subtitle:"BL Creative développe des outils puissants : amélioration de qualité, suppression d’objets, augmentation de framerate et diagnostics complets.",
+    btn1:"Télécharger les outils",
+    btn2:"Voir les résultats",
+    meta1:"• Amélioration de la qualité, nettoyage du bruit, netteté contrôlée",
+    meta2:"• Suppression d’objets, interpolation d’images, analyse vidéo avancée",
+    heroLabel:"BL CREATIVE · SUITE VIDÉO",
+    heroMain:"D’une source bruitée à une image nette et prête à être publiée — dans un seul flux maîtrisé.",
+    heroPill:"Amélioration · Suppression d’objets · Framerate",
+    servicesTitle:"Ce que font nos outils",
+    servicesSub:"Chaque module est testé sur de vraies vidéos compressées et bruitées.",
+    services:[
+      {title:"Amélioration de qualité",text:"Upscaling et restauration tout en gardant un rendu naturel."},
+      {title:"Suppression d’objets",text:"Retirer logos, textes ou éléments gênants sans casser la scène."},
+      {title:"Interpolation d’images",text:"Augmenter le framerate pour un mouvement plus fluide."},
+      {title:"Nettoyage du bruit",text:"Réduire bruit, banding et artefacts de compression."},
+      {title:"Diagnostics vidéo",text:"Analyser netteté, bruit, exposition et mouvement."},
+      {title:"Presets d’export",text:"Profils prêts pour YouTube, réseaux sociaux et clients."}
     ],
-    portfolioTitle: "Travaux",
-    portfolioSub: "Quelques projets récents.",
-    portfolio: [
-      { title: "Identité visuelle", text: "Systèmes graphiques complets." },
-      { title: "Motion design", text: "Animations fluides et élégantes." },
-      { title: "Nettoyage de logo", text: "Amélioration et optimisation." }
+    compareTitle:"Comparaisons avant / après",
+    compareSub:"Des exemples concrets de ce que la suite peut faire.",
+    comparisons:[
+      {
+        label:"Upscaling & nettoyage",
+        before:"Source 720p bruitée",
+        after:"Upscale 1080p propre et détaillé"
+      },
+      {
+        label:"Suppression d’objets",
+        before:"Logo et texte incrustés",
+        after:"Image nettoyée avec fond naturel"
+      }
     ],
-    contactTitle: "Contact",
-    contactSub: "Décrivez votre besoin et nous le réalisons.",
-    placeholders: {
-      name: "Votre nom",
-      email: "Votre email",
-      message: "Détails du projet"
-    },
-    sendBtn: "Envoyer",
-    contactInfo: "BL Creative — visuels modernes et précis.",
-    footer: "© 2026 BL Creative. Tous droits réservés."
+    contactTitle:"Parlez‑nous de vos vidéos",
+    contactSub:"Expliquez votre flux, vos plateformes et vos problèmes récurrents.",
+    placeholders:{name:"Votre nom",email:"Votre email",message:"Décrivez vos vidéos et vos objectifs"},
+    sendBtn:"Envoyer",
+    contactInfo:"BL Creative crée des outils vidéo pour des résultats propres et maîtrisés.",
+    footer:"© 2026 BL Creative. Tous droits réservés."
   },
-
-  no: {
-    dir: "ltr",
-    nav: ["Hjem", "Tjenester", "Portefølje", "Kontakt"],
-    title: "Digitale visuelle løsninger for moderne merker.",
-    subtitle: "BL Creative leverer rene og tekniske design.",
-    btn1: "Start et prosjekt",
-    btn2: "Se portefølje",
-    servicesTitle: "Tjenester",
-    servicesSub: "Fokuserte tjenester med rene og presise visuelle løsninger.",
-    services: [
-      { title: "Logo design", text: "Rene og moderne merkeidentiteter." },
-      { title: "Motion design", text: "Myke og profesjonelle animasjoner." },
-      { title: "Brand systemer", text: "Konsistent identitet på alle plattformer." }
+  no:{
+    dir:"ltr",
+    nav:["Hjem","Tjenester","Sammenligning","Kontakt"],
+    title:"Programvare som får videoen til å se naturlig ut.",
+    subtitle:"BL Creative utvikler kraftige verktøy for kvalitetsheving, objektfjerning, høyere framerate og full videodiagnose.",
+    btn1:"Last ned verktøy",
+    btn2:"Se resultater",
+    meta1:"• Kvalitetsheving, støyfjerning og kontrollert skarphet",
+    meta2:"• Objektfjerning, bildeinterpolasjon og videodiagnostikk",
+    heroLabel:"BL CREATIVE · VIDEO SUITE",
+    heroMain:"Fra støyete opptak til rene, skarpe og publiseringsklare videoer — i én kontrollert arbeidsflyt.",
+    heroPill:"Kvalitet · Objektfjerning · Framerate",
+    servicesTitle:"Hva programvaren gjør",
+    servicesSub:"Bygget og testet på ekte, komprimerte og krevende opptak.",
+    services:[
+      {title:"Kvalitetsheving",text:"Oppskalering og detaljforbedring med naturlig uttrykk."},
+      {title:"Fjerning av objekter",text:"Fjern logoer, tekst og uønskede elementer."},
+      {title:"Framerate‑økning",text:"Mykere bevegelser uten kraftige artefakter."},
+      {title:"Støy og kompresjon",text:"Reduser støy, banding og blokk‑artefakter."},
+      {title:"Videodiagnose",text:"Analyser skarphet, støy og bevegelse."},
+      {title:"Eksport‑presets",text:"Profiler for YouTube, sosiale medier og kunder."}
     ],
-    portfolioTitle: "Arbeid",
-    portfolioSub: "Et utvalg av prosjekter.",
-    portfolio: [
-      { title: "Merkeidentitet", text: "Komplette visuelle systemer." },
-      { title: "Motion", text: "Plattformklare animasjoner." },
-      { title: "Logo forbedring", text: "Rydding og optimalisering." }
+    compareTitle:"Før / etter",
+    compareSub:"Reelle eksempler på hva verktøyene gjør.",
+    comparisons:[
+      {
+        label:"Kvalitetsheving",
+        before:"Støyete 720p‑kilde",
+        after:"Ren og skarp 1080p‑versjon"
+      },
+      {
+        label:"Objektfjerning",
+        before:"Logo og tekst i bildet",
+        after:"Rent bilde med naturlig bakgrunn"
+      }
     ],
-    contactTitle: "Kontakt",
-    contactSub: "Fortell oss hva du trenger.",
-    placeholders: {
-      name: "Navn",
-      email: "E‑post",
-      message: "Prosjektdetaljer"
-    },
-    sendBtn: "Send",
-    contactInfo: "BL Creative — rene og moderne visuelle løsninger.",
-    footer: "© 2026 BL Creative. Alle rettigheter forbeholdt."
+    contactTitle:"Fortell oss om opptakene dine",
+    contactSub:"Hvordan filmer du, hvor publiserer du, og hva irriterer deg mest?",
+    placeholders:{name:"Navn",email:"E‑post",message:"Beskriv opptakene og målene dine"},
+    sendBtn:"Send",
+    contactInfo:"BL Creative lager videoverktøy for rene, kontrollerte resultater.",
+    footer:"© 2026 BL Creative. Alle rettigheter forbeholdt."
   }
 };
 
-/* ===========================
-   LANGUAGE SWITCHER
-=========================== */
-const langSelect = document.getElementById("langSelect");
+const langSelect=document.getElementById("langSelect");
 
-function updateLanguage(lang) {
-  const data = content[lang];
+function updateLanguage(lang){
+  const d=content[lang];
+  document.documentElement.dir=d.dir;
+  document.documentElement.lang=lang;
 
-  document.documentElement.dir = data.dir;
-  document.documentElement.lang = lang;
+  document.getElementById("nav").innerHTML=
+    d.nav.map((t,i)=>{
+      const ids=["home","services","comparisons","contact"];
+      return `<a href="#${ids[i]}">${t}</a>`;
+    }).join("");
 
-  document.getElementById("nav").innerHTML =
-    data.nav.map(item => `<a href="#">${item}</a>`).join("");
+  document.getElementById("title").textContent=d.title;
+  document.getElementById("subtitle").textContent=d.subtitle;
+  document.getElementById("btn1").textContent=d.btn1;
+  document.getElementById("btn2").textContent=d.btn2;
+  document.getElementById("meta1").textContent=d.meta1;
+  document.getElementById("meta2").textContent=d.meta2;
+  document.getElementById("heroLabel").textContent=d.heroLabel;
+  document.getElementById("heroMain").textContent=d.heroMain;
+  document.getElementById("heroPill").textContent=d.heroPill;
 
-  document.getElementById("title").textContent = data.title;
-  document.getElementById("subtitle").textContent = data.subtitle;
-
-  document.getElementById("btn1").textContent = data.btn1;
-  document.getElementById("btn2").textContent = data.btn2;
-
-  document.getElementById("servicesTitle").textContent = data.servicesTitle;
-  document.getElementById("servicesSub").textContent = data.servicesSub;
-
-  document.getElementById("servicesGrid").innerHTML =
-    data.services.map(s => `
-      <div class="service-card">
+  document.getElementById("servicesTitle").textContent=d.servicesTitle;
+  document.getElementById("servicesSub").textContent=d.servicesSub;
+  document.getElementById("servicesGrid").innerHTML=
+    d.services.map(s=>`
+      <div class="card">
         <h3>${s.title}</h3>
         <p>${s.text}</p>
       </div>
     `).join("");
 
-  document.getElementById("portfolioTitle").textContent = data.portfolioTitle;
-  document.getElementById("portfolioSub").textContent = data.portfolioSub;
-
-  document.getElementById("portfolioGrid").innerHTML =
-    data.portfolio.map(p => `
-      <div class="portfolio-card">
-        <h3>${p.title}</h3>
-        <p>${p.text}</p>
+  document.getElementById("compareTitle").textContent=d.compareTitle;
+  document.getElementById("compareSub").textContent=d.compareSub;
+  document.getElementById("compareGrid").innerHTML=
+    d.comparisons.map(c=>`
+      <div class="compare-card">
+        <div class="compare-label">${c.label}</div>
+        <div class="compare-images">
+          <div class="compare-box">
+            <span>${d.dir==="rtl"?"قبل":"Before"}</span>
+            <div class="img-placeholder">before.jpg</div>
+          </div>
+          <div class="compare-box">
+            <span>${d.dir==="rtl"?"بعد":"After"}</span>
+            <div class="img-placeholder">after.jpg</div>
+          </div>
+        </div>
       </div>
     `).join("");
 
-  document.getElementById("contactTitle").textContent = data.contactTitle;
-  document.getElementById("contactSub").textContent = data.contactSub;
-
-  document.getElementById("name").placeholder = data.placeholders.name;
-  document.getElementById("email").placeholder = data.placeholders.email;
-  document.getElementById("message").placeholder = data.placeholders.message;
-
-  document.getElementById("sendBtn").textContent = data.sendBtn;
-
-  document.getElementById("contactInfo").textContent = data.contactInfo;
-
-  document.getElementById("footer").textContent = data.footer;
+  document.getElementById("contactTitle").textContent=d.contactTitle;
+  document.getElementById("contactSub").textContent=d.contactSub;
+  document.getElementById("name").placeholder=d.placeholders.name;
+  document.getElementById("email").placeholder=d.placeholders.email;
+  document.getElementById("message").placeholder=d.placeholders.message;
+  document.getElementById("sendBtn").textContent=d.sendBtn;
+  document.getElementById("contactInfo").textContent=d.contactInfo;
+  document.getElementById("footer").textContent=d.footer;
 }
 
-langSelect.addEventListener("change", () => {
-  updateLanguage(langSelect.value);
-});
-
+langSelect.addEventListener("change",()=>updateLanguage(langSelect.value));
 updateLanguage("en");
 </script>
 
