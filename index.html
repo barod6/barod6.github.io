@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BL Creative - Pricing Plans</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BL Creative – Lifetime Plans</title>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -16,10 +18,15 @@
                         sans: ['Cairo', 'sans-serif'],
                     },
                     colors: {
-                        dark: '#0a1118',
-                        card: '#111827',
+                        dark: '#050816',
+                        darker: '#020617',
+                        card: '#0b1220',
                         primary: '#06b6d4',
                         secondary: '#3b82f6',
+                        accent: '#22c55e',
+                    },
+                    boxShadow: {
+                        glow: '0 0 40px rgba(6,182,212,0.25)',
                     }
                 }
             }
@@ -27,91 +34,372 @@
     </script>
 
     <style>
-        body { 
-            font-family: 'Cairo', sans-serif; 
-            background-color: #0a1118; 
-            color: #f8fafc; 
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: radial-gradient(circle at top, #0b1120 0, #020617 45%, #000 100%);
+            color: #e5e7eb;
         }
     </style>
 </head>
+<body class="bg-darker text-slate-100 antialiased selection:bg-primary selection:text-white">
 
-<body class="antialiased selection:bg-primary selection:text-white">
+    <!-- Top Navigation -->
+    <header class="border-b border-slate-800/70 bg-darker/80 backdrop-blur">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <!-- Logo + Brand -->
+            <div class="flex items-center gap-3">
+                <img src="bl.png" alt="BL Creative Logo" class="h-10 w-auto object-contain drop-shadow-[0_0_18px_rgba(6,182,212,0.35)]" />
+                <div class="flex flex-col leading-tight">
+                    <span class="font-black text-white tracking-wide text-sm md:text-base">BL CREATIVE</span>
+                    <span class="text-xs text-slate-400">Video Quality & Enhancement Suite</span>
+                </div>
+            </div>
 
-    <section class="py-20 relative overflow-hidden">
+            <!-- Simple Nav -->
+            <nav class="hidden md:flex items-center gap-6 text-sm text-slate-300">
+                <a href="#features" class="hover:text-white transition-colors">Features</a>
+                <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
+                <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
+            </nav>
 
-        <!-- Logo Section -->
-        <div class="flex justify-center mb-12">
-            <img src="bl.png" alt="BL Creative Logo" 
-                 class="h-32 object-contain drop-shadow-[0_0_20px_rgba(6,182,212,0.25)]">
+            <div class="flex items-center gap-3">
+                <button class="hidden md:inline-flex text-sm px-4 py-2 rounded-lg border border-slate-700 text-slate-200 hover:bg-slate-800 transition">
+                    Sign in
+                </button>
+                <button class="text-sm px-4 py-2 rounded-lg bg-primary hover:bg-cyan-400 text-dark font-bold transition shadow-md">
+                    Download App
+                </button>
+            </div>
         </div>
+    </header>
 
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <h2 class="text-4xl md:text-5xl font-black mb-12 text-white">
-                Own the Software Forever <span class="text-primary">(One-Time Payment)</span>
-            </h2>
+    <!-- Hero Section -->
+    <section class="pt-14 pb-10 border-b border-slate-800/60">
+        <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/40 bg-primary/5 text-xs text-primary mb-4">
+                    <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                    Lifetime license – pay once, use forever
+                </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto text-left">
+                <h1 class="text-3xl md:text-5xl font-black text-white mb-4 leading-tight">
+                    Crystal-clear videos.<br />
+                    <span class="text-primary">Zero noise. Zero hassle.</span>
+                </h1>
 
-                <!-- Basic Plan -->
-                <div class="p-8 rounded-2xl border border-gray-800 bg-card hover:border-gray-600 transition-all duration-300">
-                    <h3 class="text-2xl font-bold text-gray-300 mb-2">Basic</h3>
-                    <p class="text-4xl font-black mb-6 text-white">
-                        $19 <span class="text-sm text-gray-500 font-normal">/ lifetime</span>
-                    </p>
-                    <ul class="text-gray-400 space-y-4 mb-8">
-                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> Advanced noise filtering</li>
-                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> Export in 1080p</li>
-                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> Support up to 60fps</li>
-                        <li class="flex items-center gap-2 text-gray-600"><span class="opacity-50">❌</span> 120fps engine</li>
-                        <li class="flex items-center gap-2 text-gray-600"><span class="opacity-50">❌</span> 4K & batch rendering</li>
-                    </ul>
-                    <button class="w-full border border-gray-600 text-gray-300 hover:bg-gray-800 py-3 rounded-lg font-bold transition-all">
-                        Buy Now
+                <p class="text-slate-300 text-sm md:text-base mb-6 max-w-xl">
+                    BL Creative is a dedicated video enhancement tool built for editors who care about clean, native-looking output.
+                    Advanced denoising, sharpening, upscaling, and smooth frame engines—without subscriptions or hidden limits.
+                </p>
+
+                <div class="flex flex-wrap items-center gap-3 mb-6">
+                    <button class="px-5 py-3 rounded-lg bg-primary hover:bg-cyan-400 text-dark font-bold text-sm shadow-glow transition">
+                        Get Lifetime License
+                    </button>
+                    <button class="px-5 py-3 rounded-lg border border-slate-700 text-slate-200 hover:bg-slate-800 text-sm transition">
+                        Watch Demo
                     </button>
                 </div>
 
-                <!-- Pro Plan -->
-                <div class="p-8 rounded-2xl border-2 border-primary bg-card relative transform md:-translate-y-4 shadow-[0_0_40px_rgba(6,182,212,0.15)] hover:shadow-[0_0_50px_rgba(6,182,212,0.3)] transition-all duration-300">
-                    <div class="absolute top-0 right-1/2 transform translate-x-1/2 -translate-y-1/2 bg-primary px-6 py-1.5 rounded-full text-sm font-bold text-dark whitespace-nowrap">
-                        Best Seller
+                <div class="flex flex-wrap items-center gap-4 text-xs text-slate-400">
+                    <div class="flex items-center gap-2">
+                        <span class="text-accent">✔</span> No subscriptions
                     </div>
-                    <h3 class="text-2xl font-bold text-primary mb-2">Editor (Pro)</h3>
-                    <p class="text-4xl font-black mb-6 text-white">
-                        $25 <span class="text-sm text-gray-500 font-normal">/ lifetime</span>
-                    </p>
-                    <ul class="text-gray-300 space-y-4 mb-8">
-                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> All Basic features</li>
-                        <li class="flex items-center gap-2 font-bold text-primary"><span class="text-green-500">✔️</span> Smoothness Engine 120fps</li>
-                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> Export in 2K</li>
-                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> AI character isolation</li>
-                        <li class="flex items-center gap-2 text-gray-600"><span class="opacity-50">❌</span> 4K & folder rendering</li>
-                    </ul>
-                    <button class="w-full bg-primary hover:bg-cyan-400 py-3 rounded-lg font-bold transition-all shadow-lg text-dark text-lg">
-                        Get Pro Version
-                    </button>
+                    <div class="flex items-center gap-2">
+                        <span class="text-accent">✔</span> Offline processing
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-accent">✔</span> Designed for editors
+                    </div>
                 </div>
+            </div>
 
-                <!-- Ultimate Plan -->
-                <div class="p-8 rounded-2xl border border-secondary bg-card hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-400 transition-all duration-300">
-                    <h3 class="text-2xl font-bold text-secondary mb-2">Master (Ultimate)</h3>
-                    <p class="text-4xl font-black mb-6 text-white">
-                        $35 <span class="text-sm text-gray-500 font-normal">/ lifetime</span>
-                    </p>
-                    <ul class="text-gray-400 space-y-4 mb-8">
-                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> All Pro features</li>
-                        <li class="flex items-center gap-2 font-bold text-secondary"><span class="text-green-500">✔️</span> 4K RAW upscaling</li>
-                        <li class="flex items-center gap-2 font-bold text-secondary"><span class="text-green-500">✔️</span> Batch rendering (full folder)</li>
-                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> Priority updates & support</li>
-                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> Commercial use license</li>
-                    </ul>
-                    <button class="w-full border border-secondary text-secondary hover:bg-secondary hover:text-white py-3 rounded-lg font-bold transition-all">
-                        Get Ultimate
-                    </button>
+            <!-- Right side: simple visual block -->
+            <div class="relative">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl"></div>
+
+                <div class="relative rounded-2xl border border-slate-800 bg-card/80 p-5 shadow-xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs uppercase tracking-wide text-slate-400">Preview</span>
+                        <span class="text-[10px] px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                            Real-time enhancement
+                        </span>
+                    </div>
+
+                    <div class="aspect-video rounded-xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border border-slate-700/70 flex items-center justify-center text-slate-400 text-xs">
+                        Video preview area
+                    </div>
+
+                    <div class="mt-4 grid grid-cols-3 gap-3 text-[11px]">
+                        <div class="p-2 rounded-lg bg-slate-900/70 border border-slate-800">
+                            <div class="text-slate-400 mb-1">Noise Level</div>
+                            <div class="h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                                <div class="h-full w-2/12 bg-primary"></div>
+                            </div>
+                        </div>
+                        <div class="p-2 rounded-lg bg-slate-900/70 border border-slate-800">
+                            <div class="text-slate-400 mb-1">Sharpness</div>
+                            <div class="h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                                <div class="h-full w-9/12 bg-secondary"></div>
+                            </div>
+                        </div>
+                        <div class="p-2 rounded-lg bg-slate-900/70 border border-slate-800">
+                            <div class="text-slate-400 mb-1">Smoothness</div>
+                            <div class="h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                                <div class="h-full w-10/12 bg-primary"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 flex items-center justify-between text-[11px] text-slate-400">
+                        <span>Export: 4K / 2K / 1080p</span>
+                        <span>Up to 120fps</span>
+                    </div>
                 </div>
-
             </div>
         </div>
     </section>
 
+    <!-- Features Section -->
+    <section id="features" class="py-14 border-b border-slate-800/60">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-black text-white mb-2">Built for real editors</h2>
+                    <p class="text-sm text-slate-400 max-w-xl">
+                        No gimmicks. Just practical tools that make your footage look clean, detailed, and natural.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 text-sm">
+                <div class="p-5 rounded-2xl bg-card border border-slate-800 hover:border-slate-600 transition">
+                    <div class="mb-3 text-primary text-xs font-semibold uppercase tracking-wide">Noise & Detail</div>
+                    <h3 class="font-bold mb-2 text-white">Advanced noise reduction</h3>
+                    <p class="text-slate-400">
+                        Remove harsh noise while preserving edges and fine details. Tuned for real-world footage, not just demos.
+                    </p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-card border border-slate-800 hover:border-slate-600 transition">
+                    <div class="mb-3 text-primary text-xs font-semibold uppercase tracking-wide">Smoothness Engine</div>
+                    <h3 class="font-bold mb-2 text-white">Up to 120fps</h3>
+                    <p class="text-slate-400">
+                        Smooth motion engine that respects the original look of your video—no soap-opera effect unless you want it.
+                    </p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-card border border-slate-800 hover:border-slate-600 transition">
+                    <div class="mb-3 text-primary text-xs font-semibold uppercase tracking-wide">Upscaling</div>
+                    <h3 class="font-bold mb-2 text-white">Clean 4K upscaling</h3>
+                    <p class="text-slate-400">
+                        Turn HD footage into crisp 4K masters ready for delivery, without plastic-looking artifacts.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-16">
+        <div class="max-w-6xl mx-auto px-4 text-center mb-10">
+            <h2 class="text-3xl md:text-4xl font-black text-white mb-3">
+                Lifetime plans for BL Creative
+            </h2>
+            <p class="text-sm md:text-base text-slate-400 max-w-2xl mx-auto">
+                Pay once, use forever. No subscriptions, no renewals. Choose the plan that matches your workflow and export needs.
+            </p>
+
+            <div class="mt-5 inline-flex items-center gap-2 text-xs text-slate-400 bg-slate-900/60 border border-slate-800 rounded-full px-3 py-1">
+                <span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/30 font-semibold">
+                    One-time payment
+                </span>
+                <span>All future updates included for Pro & Master.</span>
+            </div>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <!-- Basic -->
+            <div class="p-7 rounded-2xl border border-slate-800 bg-card hover:border-slate-600 transition-all duration-300 flex flex-col">
+                <h3 class="text-xl font-bold text-slate-200 mb-1">Basic</h3>
+                <p class="text-xs text-slate-400 mb-4">For casual editors and simple projects.</p>
+
+                <p class="text-4xl font-black mb-1 text-white">
+                    $19
+                    <span class="text-sm text-slate-500 font-normal">/ lifetime</span>
+                </p>
+                <p class="text-xs text-slate-500 mb-6">Single device license</p>
+
+                <ul class="text-slate-400 text-sm space-y-3 mb-8 flex-1">
+                    <li class="flex items-center gap-2">
+                        <span class="text-emerald-500">✔</span> Advanced noise filtering
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-emerald-500">✔</span> Export up to 1080p
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-emerald-500">✔</span> Up to 60fps support
+                    </li>
+                    <li class="flex items-center gap-2 text-slate-600">
+                        <span class="opacity-60">✖</span> 120fps smoothness engine
+                    </li>
+                    <li class="flex items-center gap-2 text-slate-600">
+                        <span class="opacity-60">✖</span> 4K & batch rendering
+                    </li>
+                </ul>
+
+                <button class="w-full border border-slate-600 text-slate-200 hover:bg-slate-800 py-3 rounded-lg font-bold text-sm transition-all">
+                    Buy Basic
+                </button>
+            </div>
+
+            <!-- Pro -->
+            <div class="p-8 rounded-2xl border-2 border-primary bg-card relative shadow-glow hover:shadow-[0_0_55px_rgba(6,182,212,0.35)] transition-all duration-300 flex flex-col">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary px-5 py-1.5 rounded-full text-[11px] font-bold text-dark shadow-md">
+                    Most Popular
+                </div>
+
+                <h3 class="text-xl font-bold text-primary mb-1">Editor (Pro)</h3>
+                <p class="text-xs text-slate-400 mb-4">For editors who work daily with client projects.</p>
+
+                <p class="text-4xl font-black mb-1 text-white">
+                    $25
+                    <span class="text-sm text-slate-500 font-normal">/ lifetime</span>
+                </p>
+                <p class="text-xs text-slate-500 mb-6">Up to 2 devices • All future updates</p>
+
+                <ul class="text-slate-200 text-sm space-y-3 mb-8 flex-1">
+                    <li class="flex items-center gap-2">
+                        <span class="text-emerald-500">✔</span> All Basic features
+                    </li>
+                    <li class="flex items-center gap-2 font-semibold text-primary">
+                        <span class="text-emerald-500">✔</span> 120fps smoothness engine
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-emerald-500">✔</span> Export up to 2K
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-emerald-500">✔</span> AI-powered subject isolation
+                    </li>
+                    <li class="flex items-center gap-2 text-slate-600">
+                        <span class="opacity-60">✖</span> 4K & full folder rendering
+                    </li>
+                </ul>
+
+                <button class="w-full bg-primary hover:bg-cyan-400 py-3 rounded-lg font-bold text-sm transition-all shadow-lg text-dark">
+                    Get Pro Lifetime
+                </button>
+            </div>
+
+            <!-- Master -->
+            <div class="p-7 rounded-2xl border border-secondary bg-card hover:border-blue-400 hover:shadow-[0_0_40px_rgba(59,130,246,0.25)] transition-all duration-300 flex flex-col">
+                <h3 class="text-xl font-bold text-secondary mb-1">Master (Ultimate)</h3>
+                <p class="text-xs text-slate-400 mb-4">For studios, agencies, and heavy workflows.</p>
+
+                <p class="text-4xl font-black mb-1 text-white">
+                    $35
+                    <span class="text-sm text-slate-500 font-normal">/ lifetime</span>
+                </p>
+                <p class="text-xs text-slate-500 mb-6">Up to 3 devices • Priority support</p>
+
+                <ul class="text-slate-300 text-sm space-y-3 mb-8 flex-1">
+                    <li class="flex items-center gap-2">
+                        <span class="text-emerald-500">✔</span> All Pro features
+                    </li>
+                    <li class="flex items-center gap-2 font-semibold text-secondary">
+                        <span class="text-emerald-500">✔</span> 4K RAW upscaling
+                    </li>
+                    <li class="flex items-center gap-2 font-semibold text-secondary">
+                        <span class="text-emerald-500">✔</span> Batch rendering (full folders)
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-emerald-500">✔</span> Priority updates & support
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-emerald-500">✔</span> Commercial license for agencies
+                    </li>
+                </ul>
+
+                <button class="w-full border border-secondary text-secondary hover:bg-secondary hover:text-white py-3 rounded-lg font-bold text-sm transition-all">
+                    Get Master Lifetime
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-14 border-t border-slate-800/60">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-black text-white mb-6 text-center">
+                Frequently asked questions
+            </h2>
+
+            <div class="space-y-4 text-sm">
+                <details class="group border border-slate-800 rounded-xl bg-card">
+                    <summary class="flex items-center justify-between cursor-pointer px-4 py-3">
+                        <span class="text-slate-200">Is this a subscription or a one-time payment?</span>
+                        <span class="text-slate-500 group-open:rotate-90 transition-transform">›</span>
+                    </summary>
+                    <div class="px-4 pb-4 text-slate-400">
+                        All BL Creative plans listed here are <strong class="text-slate-200 font-semibold">one-time payments</strong>.
+                        Once you purchase a license, you can use the software forever with no recurring fees.
+                    </div>
+                </details>
+
+                <details class="group border border-slate-800 rounded-xl bg-card">
+                    <summary class="flex items-center justify-between cursor-pointer px-4 py-3">
+                        <span class="text-slate-200">Can I upgrade from Basic to Pro or Master later?</span>
+                        <span class="text-slate-500 group-open:rotate-90 transition-transform">›</span>
+                    </summary>
+                    <div class="px-4 pb-4 text-slate-400">
+                        Yes. You can upgrade at any time by paying only the difference between your current plan and the new one.
+                    </div>
+                </details>
+
+                <details class="group border border-slate-800 rounded-xl bg-card">
+                    <summary class="flex items-center justify-between cursor-pointer px-4 py-3">
+                        <span class="text-slate-200">Does BL Creative work offline?</span>
+                        <span class="text-slate-500 group-open:rotate-90 transition-transform">›</span>
+                    </summary>
+                    <div class="px-4 pb-4 text-slate-400">
+                        Yes. Once installed and activated, BL Creative processes your videos locally on your machine—no cloud upload required.
+                    </div>
+                </details>
+
+                <details class="group border border-slate-800 rounded-xl bg-card">
+                    <summary class="flex items-center justify-between cursor-pointer px-4 py-3">
+                        <span class="text-slate-200">What are the recommended system requirements?</span>
+                        <span class="text-slate-500 group-open:rotate-90 transition-transform">›</span>
+                    </summary>
+                    <div class="px-4 pb-4 text-slate-400">
+                        We recommend a modern multi-core CPU, at least 16GB RAM, and a dedicated GPU for best performance.
+                        The app is optimized for real-world editing workflows.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/70 py-6">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+            <div class="flex items-center gap-2">
+                <img src="bl.png" alt="BL Creative Logo" class="h-6 w-auto object-contain opacity-80" />
+                <span>© <span id="year"></span> BL Creative. All rights reserved.</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="#" class="hover:text-slate-300">Terms</a>
+                <a href="#" class="hover:text-slate-300">Privacy</a>
+                <a href="#" class="hover:text-slate-300">Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
