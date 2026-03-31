@@ -4,26 +4,28 @@
   <meta charset="UTF-8" />
   <title>Ultra Purity | BL CREATIVE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- خط احترافي قريب من توباز -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-main: #050509;
-      --bg-elevated: #0d0d12;
-      --bg-card: #111119;
-      --bg-soft: #181824;
-      --accent: #0ea5e9;
-      --accent-soft: #38bdf8;
-      --accent-strong: #0284c7;
-      --text-main: #f9fafb;
-      --text-muted: #9ca3af;
-      --border-subtle: #1f2933;
-      --danger: #f97373;
-      --success: #22c55e;
-      --warning: #facc15;
+      --bg-main: #050507;
+      --bg-elevated: #0b0b0f;
+      --bg-card: #111118;
+      --bg-soft: #181820;
+      --border-subtle: #252532;
+      --accent: #00b3ff;      /* أزرق تقني هادئ */
+      --accent-soft: #4fd1ff;
+      --accent-dark: #0080c7;
+      --text-main: #f5f5f7;
+      --text-muted: #9b9ca5;
+      --text-soft: #6b6c75;
       --radius-lg: 18px;
       --radius-md: 12px;
       --radius-sm: 8px;
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.65);
-      --shadow-subtle: 0 10px 30px rgba(0, 0, 0, 0.45);
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.7);
+      --shadow-subtle: 0 10px 30px rgba(0, 0, 0, 0.5);
       --transition-fast: 0.18s ease-out;
       --transition-med: 0.25s ease-out;
     }
@@ -35,8 +37,8 @@
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111118 0, #050507 40%, #020205 100%);
       color: var(--text-main);
       line-height: 1.6;
       scroll-behavior: smooth;
@@ -47,12 +49,10 @@
       text-decoration: none;
     }
 
-    img {
+    img, video {
       max-width: 100%;
       display: block;
     }
-
-    /* Layout */
 
     .page {
       min-height: 100vh;
@@ -60,19 +60,21 @@
       flex-direction: column;
     }
 
+    /* HEADER */
+
     header {
       position: sticky;
       top: 0;
       z-index: 50;
       backdrop-filter: blur(18px);
-      background: linear-gradient(to bottom, rgba(3, 7, 18, 0.95), rgba(3, 7, 18, 0.75), transparent);
-      border-bottom: 1px solid rgba(15, 23, 42, 0.9);
+      background: linear-gradient(to bottom, rgba(5, 5, 10, 0.96), rgba(5, 5, 10, 0.8), transparent);
+      border-bottom: 1px solid #15151f;
     }
 
     .nav {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 14px 20px;
+      padding: 12px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -82,7 +84,7 @@
     .nav-left {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       cursor: pointer;
     }
 
@@ -91,17 +93,17 @@
       height: 40px;
       border-radius: 12px;
       overflow: hidden;
-      background: radial-gradient(circle at top left, #38bdf8, #4c1d95);
+      background: #000;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 18px rgba(56, 189, 248, 0.45);
+      box-shadow: 0 0 18px rgba(0, 179, 255, 0.35);
     }
 
     .nav-logo img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
     }
 
     .nav-title {
@@ -111,16 +113,16 @@
     }
 
     .nav-title-main {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #e5e7eb;
+      color: #f3f4f6;
     }
 
     .nav-title-sub {
       font-size: 11px;
-      color: var(--text-muted);
+      color: var(--text-soft);
     }
 
     .nav-links {
@@ -128,7 +130,7 @@
       align-items: center;
       gap: 18px;
       font-size: 13px;
-      color: var(--text-muted);
+      color: var(--text-soft);
     }
 
     .nav-link {
@@ -144,7 +146,7 @@
       bottom: 0;
       height: 2px;
       border-radius: 999px;
-      background: linear-gradient(to right, var(--accent), var(--accent-soft));
+      background: var(--accent);
       transform: scaleX(0);
       transform-origin: center;
       transition: transform var(--transition-fast);
@@ -178,28 +180,28 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
-      color: #0b1120;
+      background: var(--accent);
+      color: #020205;
       font-weight: 600;
-      box-shadow: 0 0 22px rgba(56, 189, 248, 0.45);
+      box-shadow: 0 0 22px rgba(0, 179, 255, 0.45);
     }
 
     .btn-primary:hover {
-      background: linear-gradient(135deg, var(--accent-soft), var(--accent-strong));
+      background: var(--accent-dark);
       transform: translateY(-1px);
-      box-shadow: 0 0 30px rgba(56, 189, 248, 0.6);
+      box-shadow: 0 0 30px rgba(0, 179, 255, 0.6);
     }
 
     .btn-ghost {
-      background: rgba(15, 23, 42, 0.7);
-      border-color: rgba(55, 65, 81, 0.9);
-      color: var(--text-muted);
+      background: #0a0a10;
+      border-color: #262636;
+      color: var(--text-soft);
     }
 
     .btn-ghost:hover {
-      border-color: var(--accent-soft);
+      border-color: var(--accent);
       color: #e5e7eb;
-      background: rgba(15, 23, 42, 0.95);
+      background: #101018;
     }
 
     main {
@@ -239,7 +241,7 @@
       color: var(--text-muted);
     }
 
-    /* Hero */
+    /* HERO */
 
     .hero {
       display: grid;
@@ -262,10 +264,10 @@
       gap: 8px;
       padding: 4px 10px;
       border-radius: 999px;
-      background: radial-gradient(circle at left, rgba(56, 189, 248, 0.25), transparent 60%);
-      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: #0b0b11;
+      border: 1px solid #262636;
       font-size: 11px;
-      color: var(--text-muted);
+      color: var(--text-soft);
       width: fit-content;
     }
 
@@ -273,8 +275,8 @@
       width: 8px;
       height: 8px;
       border-radius: 999px;
-      background: radial-gradient(circle, #22c55e, #15803d);
-      box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
     }
 
     .hero-title {
@@ -284,9 +286,7 @@
     }
 
     .hero-title span {
-      background: linear-gradient(to right, var(--accent-soft), #a855f7);
-      -webkit-background-clip: text;
-      color: transparent;
+      color: var(--accent-soft);
     }
 
     .hero-text {
@@ -308,7 +308,7 @@
       gap: 14px;
       margin-top: 10px;
       font-size: 11px;
-      color: var(--text-muted);
+      color: var(--text-soft);
     }
 
     .hero-meta-item {
@@ -321,24 +321,24 @@
       width: 6px;
       height: 6px;
       border-radius: 999px;
-      background: radial-gradient(circle, var(--accent-soft), transparent);
+      background: var(--accent);
     }
 
     .hero-right {
-      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.18), transparent 60%);
       padding: 1px;
-      border-radius: 24px;
+      border-radius: 20px;
+      background: radial-gradient(circle at top, rgba(0, 179, 255, 0.25), transparent 60%);
     }
 
     .hero-panel {
-      background: radial-gradient(circle at top left, #020617, #020617 40%, #020617 100%);
-      border-radius: 22px;
-      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: #08080d;
+      border-radius: 18px;
+      border: 1px solid #252532;
       box-shadow: var(--shadow-soft);
-      padding: 16px;
+      padding: 14px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 10px;
     }
 
     .hero-panel-header {
@@ -346,7 +346,7 @@
       justify-content: space-between;
       align-items: center;
       font-size: 11px;
-      color: var(--text-muted);
+      color: var(--text-soft);
     }
 
     .hero-panel-title {
@@ -358,59 +358,43 @@
     .hero-panel-tag {
       padding: 2px 8px;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: #0b0b11;
+      border: 1px solid #262636;
       font-size: 10px;
+      color: var(--text-muted);
     }
 
     .hero-panel-body {
-      background: radial-gradient(circle at top, #020617, #020617 60%, #020617 100%);
-      border-radius: 16px;
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      padding: 12px;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 10px;
-    }
-
-    .hero-panel-col {
+      background: #050509;
+      border-radius: 14px;
+      border: 1px solid #252532;
+      padding: 10px;
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
 
-    .hero-panel-label {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .hero-panel-box {
-      background: #020617;
-      border-radius: 12px;
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      padding: 8px;
-      font-size: 11px;
-      color: #e5e7eb;
+    .hero-panel-row {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 120px;
-      position: relative;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .hero-panel-bar {
+      height: 6px;
+      border-radius: 999px;
+      background: #111118;
       overflow: hidden;
+      margin-top: 4px;
     }
 
-    .hero-panel-box::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.08), transparent 60%);
-      opacity: 0.7;
-      pointer-events: none;
-    }
-
-    .hero-panel-box span {
-      position: relative;
-      z-index: 1;
+    .hero-panel-bar span {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(to left, var(--accent-soft), var(--accent-dark));
+      width: 78%;
     }
 
     .hero-panel-footer {
@@ -418,14 +402,14 @@
       justify-content: space-between;
       align-items: center;
       font-size: 11px;
-      color: var(--text-muted);
+      color: var(--text-soft);
     }
 
     .hero-panel-footer strong {
       color: #e5e7eb;
     }
 
-    /* Features */
+    /* FEATURES */
 
     .features-grid {
       display: grid;
@@ -443,19 +427,6 @@
       flex-direction: column;
       gap: 8px;
       font-size: 12px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .feature-icon {
-      width: 26px;
-      height: 26px;
-      border-radius: 999px;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.18), transparent 70%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
     }
 
     .feature-title {
@@ -468,7 +439,7 @@
       color: var(--accent-soft);
     }
 
-    /* Comparison */
+    /* COMPARISON */
 
     .comparison {
       display: grid;
@@ -491,58 +462,33 @@
       align-items: center;
       margin-bottom: 10px;
       font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .comparison-toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 3px;
-      border-radius: 999px;
-      background: #020617;
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      font-size: 10px;
-    }
-
-    .comparison-toggle span {
-      padding: 3px 8px;
-      border-radius: 999px;
-    }
-
-    .comparison-toggle span.active {
-      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
-      color: #020617;
-      font-weight: 600;
+      color: var(--text-soft);
     }
 
     .comparison-slider {
       position: relative;
       border-radius: 14px;
       overflow: hidden;
-      background: #020617;
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      height: 220px;
+      background: #050509;
+      border: 1px solid #252532;
+      height: 260px;
+      cursor: ew-resize;
     }
 
     .comparison-layer {
       position: absolute;
       inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      color: #e5e7eb;
-      padding: 10px;
+    }
+
+    .comparison-layer img,
+    .comparison-layer video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .comparison-layer.before {
-      background: radial-gradient(circle at top left, rgba(248, 113, 113, 0.18), #020617);
       clip-path: inset(0 50% 0 0);
-    }
-
-    .comparison-layer.after {
-      background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.18), #020617);
     }
 
     .comparison-handle {
@@ -550,7 +496,7 @@
       inset-block: 0;
       inset-inline-start: 50%;
       width: 2px;
-      background: rgba(148, 163, 184, 0.9);
+      background: #3f3f4a;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -560,14 +506,24 @@
       width: 26px;
       height: 26px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.9);
-      background: radial-gradient(circle, #020617, #020617);
+      border: 1px solid #4b4b57;
+      background: #050509;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #e5e7eb;
       font-size: 12px;
-      box-shadow: 0 0 14px rgba(15, 23, 42, 0.9);
+      box-shadow: 0 0 14px rgba(0, 0, 0, 0.9);
+    }
+
+    .comparison-labels {
+      position: absolute;
+      inset: 10px 10px auto 10px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #f9fafb;
+      text-shadow: 0 0 8px rgba(0, 0, 0, 0.9);
     }
 
     .comparison-meta {
@@ -575,10 +531,10 @@
       display: flex;
       justify-content: space-between;
       font-size: 11px;
-      color: var(--text-muted);
+      color: var(--text-soft);
     }
 
-    /* Pricing */
+    /* PRICING */
 
     .pricing-grid {
       display: grid;
@@ -605,8 +561,8 @@
       left: 12px;
       padding: 2px 8px;
       border-radius: 999px;
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.6);
+      background: rgba(0, 179, 255, 0.1);
+      border: 1px solid rgba(0, 179, 255, 0.7);
       font-size: 10px;
       color: var(--accent-soft);
     }
@@ -648,10 +604,10 @@
       width: 6px;
       height: 6px;
       border-radius: 999px;
-      background: radial-gradient(circle, var(--accent-soft), transparent);
+      background: var(--accent);
     }
 
-    /* System Requirements */
+    /* SYSTEM */
 
     .sys-grid {
       display: grid;
@@ -688,12 +644,12 @@
       color: #e5e7eb;
     }
 
-    /* Download */
+    /* DOWNLOAD */
 
     .download-card {
-      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.18), #020617);
-      border-radius: 20px;
-      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: #0b0b11;
+      border-radius: 18px;
+      border: 1px solid #252532;
       padding: 18px;
       box-shadow: var(--shadow-soft);
       display: flex;
@@ -712,16 +668,16 @@
 
     .download-sub {
       font-size: 12px;
-      color: #e5e7eb;
+      color: var(--text-muted);
     }
 
     .download-meta {
       font-size: 11px;
-      color: var(--text-muted);
+      color: var(--text-soft);
       margin-top: 6px;
     }
 
-    /* Coming Soon */
+    /* COMING SOON */
 
     .coming-grid {
       display: grid;
@@ -732,7 +688,7 @@
     .coming-card {
       background: var(--bg-card);
       border-radius: var(--radius-md);
-      border: 1px dashed rgba(55, 65, 81, 0.9);
+      border: 1px dashed #30303c;
       padding: 12px;
       font-size: 12px;
       color: var(--text-muted);
@@ -745,23 +701,23 @@
       color: #e5e7eb;
     }
 
-    /* Footer */
+    /* FOOTER */
 
     footer {
-      border-top: 1px solid rgba(15, 23, 42, 0.9);
-      background: #020617;
+      border-top: 1px solid #15151f;
+      background: #050507;
     }
 
     .footer-inner {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 18px 20px;
+      padding: 16px 20px;
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       justify-content: space-between;
       font-size: 11px;
-      color: var(--text-muted);
+      color: var(--text-soft);
     }
 
     .footer-links {
@@ -778,7 +734,7 @@
       color: #e5e7eb;
     }
 
-    /* Responsive */
+    /* RESPONSIVE */
 
     @media (max-width: 900px) {
       .hero {
@@ -819,7 +775,7 @@
 </head>
 <body>
   <div class="page">
-    <!-- Header -->
+    <!-- HEADER -->
     <header>
       <div class="nav">
         <div class="nav-left" onclick="scrollToSection('hero')">
@@ -829,15 +785,15 @@
           </div>
           <div class="nav-title">
             <div class="nav-title-main">BL CREATIVE</div>
-            <div class="nav-title-sub">Ultra Purity • Video Intelligence Suite</div>
+            <div class="nav-title-sub">Ultra Purity • Video AI Engine</div>
           </div>
         </div>
         <div class="nav-links">
           <div class="nav-link" onclick="scrollToSection('features')">المميزات</div>
-          <div class="nav-link" onclick="scrollToSection('comparison')">المقارنات</div>
+          <div class="nav-link" onclick="scrollToSection('comparison')">المقارنة</div>
           <div class="nav-link" onclick="scrollToSection('pricing')">الخطط والأسعار</div>
           <div class="nav-link" onclick="scrollToSection('system')">متطلبات النظام</div>
-          <div class="nav-link" onclick="scrollToSection('download')">تحميل Ultra Purity</div>
+          <div class="nav-link" onclick="scrollToSection('download')">تحميل البرنامج</div>
         </div>
         <div class="nav-cta">
           <button class="btn btn-ghost" onclick="scrollToSection('pricing')">الاشتراك</button>
@@ -849,22 +805,21 @@
     </header>
 
     <main>
-      <!-- Hero -->
+      <!-- HERO -->
       <section id="hero" class="section">
         <div class="hero">
           <div class="hero-left">
             <div class="hero-badge">
               <div class="hero-badge-dot"></div>
-              <span>جيل جديد من معالجة الفيديو الذكية</span>
+              <span>محرك احترافي لتنقية الفيديو بالذكاء الاصطناعي</span>
             </div>
             <h1 class="hero-title">
               Ultra Purity<br />
-              <span>قوة احترافية لتنقية الفيديو… بثقة كاملة.</span>
+              <span>قوة برنامج فيديو حقيقي… وليست مجرد أداة بسيطة.</span>
             </h1>
             <p class="hero-text">
-              Ultra Purity هو محرك معالجة فيديو متقدم من BL CREATIVE، مصمم لإزالة الضوضاء،
-              تعزيز التفاصيل، وتحسين جودة الفيديو بشكل ذكي، مع الحفاظ على المظهر الطبيعي
-              والعمق الأصلي للمشهد.
+              Ultra Purity هو برنامج مستقل من BL CREATIVE، مصمم لتنقية الفيديو، إزالة الضوضاء،
+              وتحسين التفاصيل، مع واجهة داكنة احترافية تشبه برامج مثل Topaz Video AI.
             </p>
             <div class="hero-actions">
               <button class="btn btn-primary" onclick="scrollToSection('download')">
@@ -877,11 +832,11 @@
             <div class="hero-meta">
               <div class="hero-meta-item">
                 <div class="hero-meta-dot"></div>
-                <span>مصمم لصناع المحتوى، المونتيرز، واستوديوهات ما بعد الإنتاج.</span>
+                <span>مصمم لصناع المحتوى، المونتيرز، والاستوديوهات.</span>
               </div>
               <div class="hero-meta-item">
                 <div class="hero-meta-dot"></div>
-                <span>يدعم الفيديوهات عالية الدقة حتى 4K (وما بعدها مستقبلاً).</span>
+                <span>يدعم مشاريع طويلة، مع ثبات في الأداء.</span>
               </div>
             </div>
           </div>
@@ -889,50 +844,56 @@
             <div class="hero-panel">
               <div class="hero-panel-header">
                 <div>
-                  <div class="hero-panel-title">Ultra Purity • Live Preview</div>
-                  <div style="font-size: 10px; color: var(--text-muted);">
-                    نموذج توضيحي لمقارنة قبل / بعد داخل واجهة البرنامج.
+                  <div class="hero-panel-title">Ultra Purity • جلسة معالجة</div>
+                  <div style="font-size: 10px; color: var(--text-soft);">
+                    مثال لإعدادات جلسة معالجة داخل البرنامج.
                   </div>
                 </div>
-                <div class="hero-panel-tag">Real‑Time AI Engine</div>
+                <div class="hero-panel-tag">Session Preview</div>
               </div>
               <div class="hero-panel-body">
-                <div class="hero-panel-col">
-                  <div class="hero-panel-label">قبل المعالجة</div>
-                  <div class="hero-panel-box">
-                    <span>ضوضاء عالية، تفاصيل مفقودة، تشويش في الظلال.</span>
-                  </div>
+                <div class="hero-panel-row">
+                  <span>وضع المعالجة:</span>
+                  <span>Precision Clean • v1.0</span>
                 </div>
-                <div class="hero-panel-col">
-                  <div class="hero-panel-label">بعد Ultra Purity</div>
-                  <div class="hero-panel-box">
-                    <span>صورة أنظف، تفاصيل أوضح، حواف ناعمة، وعمق طبيعي.</span>
-                  </div>
+                <div class="hero-panel-row">
+                  <span>الضوضاء المستهدفة:</span>
+                  <span>High ISO • Grainy Footage</span>
+                </div>
+                <div class="hero-panel-row">
+                  <span>حفظ التفاصيل الدقيقة:</span>
+                  <span>مفعّل</span>
+                </div>
+                <div class="hero-panel-row">
+                  <span>تقدير زمن المعالجة:</span>
+                  <span>1.3x زمن الفيديو الأصلي</span>
+                </div>
+                <div class="hero-panel-bar">
+                  <span></span>
                 </div>
               </div>
               <div class="hero-panel-footer">
-                <span>تمت المعالجة باستخدام إعداد: <strong>Precision Clean • v1.0</strong></span>
-                <span>زمن المعالجة: ~<strong>1.3x</strong> زمن الفيديو الأصلي*</span>
+                <span>مصمم ليعمل جنبًا إلى جنب مع برامج المونتاج.</span>
+                <span><strong>Ultra Purity</strong> هو قلب منظومة BL CREATIVE.</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Features -->
+      <!-- FEATURES -->
       <section id="features" class="section section-narrow">
         <div class="section-header">
           <div class="section-eyebrow">المميزات الأساسية</div>
-          <h2 class="section-title">قوة برنامج احترافي… بواجهة واضحة ومباشرة.</h2>
+          <h2 class="section-title">برنامج حقيقي… بواجهة داكنة، واضحة، وتقنية.</h2>
           <p class="section-subtitle">
-            Ultra Purity مصمم ليكون أداة موثوقة في خط عملك اليومي، سواء كنت تعمل على مشاريع
-            تجارية، محتوى يوتيوب، أو أعمال سينمائية مستقلة.
+            Ultra Purity ليس مجرد موقع ويب، بل برنامج مستقل يمكن دمجه في خط عملك اليومي،
+            مع واجهة تشبه برامج الفيديو الاحترافية.
           </p>
         </div>
         <div class="features-grid">
           <div class="feature-card">
-            <div class="feature-icon">🎛️</div>
-            <div class="feature-title">تنقية ذكية للضوضاء</div>
+            <div class="feature-title">تنقية ضوضاء متقدمة</div>
             <div class="feature-tag">AI Noise Reduction</div>
             <p>
               إزالة الضوضاء من الفيديو مع الحفاظ على التفاصيل الدقيقة، بدون مظهر بلاستيكي أو
@@ -940,26 +901,23 @@
             </p>
           </div>
           <div class="feature-card">
-            <div class="feature-icon">🧠</div>
-            <div class="feature-title">محرك ذكاء اصطناعي متوازن</div>
+            <div class="feature-title">حفظ التفاصيل الطبيعية</div>
             <div class="feature-tag">Detail‑Aware Engine</div>
             <p>
               خوارزميات مدروسة توازن بين النعومة والحدة، لتقديم نتيجة نظيفة، طبيعية، وقابلة
-              للاستخدام في مشاريع حقيقية.
+              للاستخدام في مشاريع تجارية حقيقية.
             </p>
           </div>
           <div class="feature-card">
-            <div class="feature-icon">🎬</div>
             <div class="feature-title">واجهة تشبه برامج المونتاج</div>
             <div class="feature-tag">Editor‑Friendly UI</div>
             <p>
-              تصميم واجهة مستوحى من برامج مثل Premiere وDaVinci، لتشعر أن Ultra Purity جزء
+              تصميم واجهة داكنة، رمادية، واضحة، تشبه Topaz وDaVinci، لتشعر أن Ultra Purity جزء
               طبيعي من بيئة عملك.
             </p>
           </div>
           <div class="feature-card">
-            <div class="feature-icon">⚡</div>
-            <div class="feature-title">أداء محسّن للـ GPU</div>
+            <div class="feature-title">دعم كرت الشاشة</div>
             <div class="feature-tag">GPU Acceleration</div>
             <p>
               الاستفادة من قدرات كرت الشاشة لتسريع المعالجة، مع الحفاظ على استقرار النظام
@@ -967,7 +925,6 @@
             </p>
           </div>
           <div class="feature-card">
-            <div class="feature-icon">📁</div>
             <div class="feature-title">دعم صيغ متعددة</div>
             <div class="feature-tag">Format Flexibility</div>
             <p>
@@ -976,8 +933,7 @@
             </p>
           </div>
           <div class="feature-card">
-            <div class="feature-icon">🔒</div>
-            <div class="feature-title">ثبات وموثوقية</div>
+            <div class="feature-title">جاهز للاستخدام الإنتاجي</div>
             <div class="feature-tag">Production‑Ready</div>
             <p>
               مصمم ليعمل لساعات طويلة على مشاريع كبيرة، مع الحفاظ على استقرار الأداء وتقليل
@@ -987,79 +943,92 @@
         </div>
       </section>
 
-      <!-- Comparison -->
+      <!-- COMPARISON -->
       <section id="comparison" class="section section-narrow">
         <div class="section-header">
           <div class="section-eyebrow">مقارنة قبل / بعد</div>
-          <h2 class="section-title">شاهد الفرق… كما لو أنك تستخدم Topaz، لكن بطابع Ultra Purity.</h2>
+          <h2 class="section-title">هكذا يرى العميل الفرق… بوضوح، وبشكل بصري حقيقي.</h2>
           <p class="section-subtitle">
-            واجهة مقارنة تتيح للمستخدم رؤية الفرق بوضوح بين الفيديو الخام والفيديو بعد المعالجة،
-            لتأكيد قوة البرنامج وإقناع المستخدم بالنتيجة.
+            استخدم صور أو فيديوهات حقيقية من مشاريعك، وضعها هنا، ليشاهد المستخدم الفرق
+            الحقيقي بين الفيديو الخام والفيديو بعد Ultra Purity.
           </p>
         </div>
         <div class="comparison">
           <div class="comparison-panel">
             <div class="comparison-header">
-              <span>معاينة تفاعلية</span>
-              <div class="comparison-toggle">
-                <span class="active">قبل / بعد</span>
-                <span>تفاصيل المعالجة</span>
-              </div>
+              <span>معاينة تفاعلية (صورة أو فيديو)</span>
+              <span style="font-size: 11px; color: var(--text-soft);">
+                اسحب الخط لرؤية الفرق.
+              </span>
             </div>
             <div class="comparison-slider" id="comparisonSlider">
-              <div class="comparison-layer before">
-                <span>قبل: ضوضاء واضحة، Grain مزعج، تفاصيل مفقودة في الظلال.</span>
-              </div>
+              <!-- استبدل الصور أو الفيديوهات بما يناسبك -->
               <div class="comparison-layer after">
-                <span>بعد Ultra Purity: ضوضاء أقل، تفاصيل محسّنة، صورة أنظف وأكثر احترافية.</span>
+                <!-- مثال صورة بعد المعالجة -->
+                <img src="media/after.jpg" alt="بعد المعالجة" />
+                <!-- أو:
+                <video src="media/after.mp4" autoplay loop muted></video>
+                -->
+              </div>
+              <div class="comparison-layer before">
+                <!-- مثال صورة قبل المعالجة -->
+                <img src="media/before.jpg" alt="قبل المعالجة" />
+                <!-- أو:
+                <video src="media/before.mp4" autoplay loop muted></video>
+                -->
+              </div>
+              <div class="comparison-labels">
+                <span>قبل Ultra Purity</span>
+                <span>بعد Ultra Purity</span>
               </div>
               <div class="comparison-handle">
                 <div class="comparison-handle-knob">⇆</div>
               </div>
             </div>
             <div class="comparison-meta">
-              <span>مثال توضيحي — يمكن استبداله لاحقًا بفيديو حقيقي من مشاريعك.</span>
-              <span>يدعم عرض قبل / بعد في واجهة البرنامج مباشرة.</span>
+              <span>يمكنك لاحقًا استبدال هذه الأمثلة بمشاريع حقيقية من عملائك.</span>
+              <span>نفس فكرة المقارنة البصرية الموجودة في برامج مثل Topaz.</span>
             </div>
           </div>
           <div class="comparison-panel">
             <div class="comparison-header">
-              <span>لماذا المقارنة مهمة؟</span>
+              <span>لماذا المقارنة البصرية مهمة؟</span>
             </div>
             <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">
-              المستخدم يحتاج أن يرى الفرق بعينه، خصوصًا في برامج معالجة الفيديو. واجهة
-              المقارنة تعطيه ثقة أن البرنامج فعلاً يضيف قيمة حقيقية، وليس مجرد “فلتر” بسيط.
+              المستخدم لا يقتنع بالكلام فقط. يحتاج أن يرى الفرق بعينه، خصوصًا في برامج معالجة
+              الفيديو. هذه المنطقة هي المكان الذي يقرر فيه المستخدم: “نعم، هذا البرنامج يستحق
+              التجربة والاشتراك”.
             </p>
             <ul class="pricing-list">
               <li>
                 <span class="pricing-dot"></span>
-                <span>إقناع المستخدم بسرعة أن Ultra Purity يستحق التجربة والشراء.</span>
+                <span>إظهار الفرق في الضوضاء، الحدة، والعمق البصري بشكل مباشر.</span>
               </li>
               <li>
                 <span class="pricing-dot"></span>
-                <span>إظهار التفاصيل الدقيقة التي يتم استعادتها بعد المعالجة.</span>
+                <span>إقناع المستخدم أن Ultra Purity ليس مجرد فلتر بسيط.</span>
               </li>
               <li>
                 <span class="pricing-dot"></span>
-                <span>إبراز الفرق في الضوضاء، الحدة، والعمق البصري.</span>
+                <span>إمكانية استخدام أمثلة من مشاريع حقيقية لزيادة الثقة.</span>
               </li>
               <li>
                 <span class="pricing-dot"></span>
-                <span>إمكانية استخدام أمثلة حقيقية من مشاريع عملائك لاحقًا.</span>
+                <span>تجربة تشبه ما يراه في مواقع وبرامج احترافية مثل Topaz.</span>
               </li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- Pricing -->
+      <!-- PRICING -->
       <section id="pricing" class="section section-narrow">
         <div class="section-header">
           <div class="section-eyebrow">الخطط والأسعار</div>
-          <h2 class="section-title">اختر الخطة التي تناسب طريقة عملك.</h2>
+          <h2 class="section-title">خطط واضحة… تناسب مستخدم فردي، محترف، أو استوديو.</h2>
           <p class="section-subtitle">
-            يمكنك البدء بخطة أساسية، ثم الترقية لاحقًا مع إضافة مزايا جديدة وأدوات إضافية
-            داخل منظومة Ultra Purity.
+            يمكنك تعديل الأسعار لاحقًا، لكن الهيكل جاهز: خطة مجانية للتجربة، خطة محترفين،
+            وخطة استوديوهات.
           </p>
         </div>
         <div class="pricing-grid">
@@ -1089,7 +1058,7 @@
             </button>
           </div>
 
-          <div class="pricing-card" style="border-color: var(--accent-soft); box-shadow: 0 0 30px rgba(56, 189, 248, 0.25);">
+          <div class="pricing-card" style="border-color: var(--accent); box-shadow: 0 0 30px rgba(0, 179, 255, 0.25);">
             <div class="pricing-badge">الأكثر شعبية</div>
             <div class="pricing-name">خطة المحترفين</div>
             <div class="pricing-price">
@@ -1148,14 +1117,14 @@
         </div>
       </section>
 
-      <!-- System Requirements -->
+      <!-- SYSTEM -->
       <section id="system" class="section section-narrow">
         <div class="section-header">
           <div class="section-eyebrow">متطلبات النظام</div>
           <h2 class="section-title">مصمم ليعمل بثبات على أجهزة العمل الحقيقية.</h2>
           <p class="section-subtitle">
-            متطلبات النظام قابلة للتعديل لاحقًا حسب تطور Ultra Purity، لكن هذه نقطة بداية
-            منطقية لمستخدمين جادين في مجال الفيديو.
+            يمكنك تعديل هذه الأرقام لاحقًا حسب أداء Ultra Purity الفعلي، لكن هذا هيكل منطقي
+            كبداية.
           </p>
         </div>
         <div class="sys-grid">
@@ -1212,18 +1181,17 @@
         </div>
       </section>
 
-      <!-- Download -->
+      <!-- DOWNLOAD -->
       <section id="download" class="section section-narrow">
         <div class="download-card">
           <div>
             <div class="download-title">تحميل Ultra Purity</div>
             <div class="download-sub">
               النسخة الرئيسية من برنامج Ultra Purity، جاهزة للعمل على بيئة الويندوز، مع واجهة
-              داكنة احترافية تشبه Topaz Video.
+              داكنة احترافية تشبه برامج الفيديو المتقدمة.
             </div>
             <div class="download-meta">
-              يمكنك لاحقًا إضافة روابط تحميل مباشرة، أو ربطها بصفحة شراء، أو نظام تفعيل
-              تراخيص.
+              يمكنك لاحقًا ربط هذا الزر برابط تحميل مباشر، صفحة شراء، أو نظام تفعيل تراخيص.
             </div>
           </div>
           <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
@@ -1237,14 +1205,14 @@
         </div>
       </section>
 
-      <!-- Coming Soon -->
+      <!-- COMING SOON -->
       <section class="section section-narrow">
         <div class="section-header">
           <div class="section-eyebrow">قريبًا ضمن منظومة Ultra Purity</div>
-          <h2 class="section-title">منصة كاملة لمعالجة الفيديو… ليست أداة واحدة فقط.</h2>
+          <h2 class="section-title">ليس برنامجًا واحدًا فقط… بل منصة كاملة للفيديو.</h2>
           <p class="section-subtitle">
-            Ultra Purity هو البرنامج الرئيسي الآن، لكن يمكن إضافة أدوات أخرى مستقبلًا، مثل
-            تحسين الحركة، تثبيت الفيديو، إزالة العناصر غير المرغوبة، والمزيد.
+            Ultra Purity هو البرنامج الرئيسي الآن، لكن يمكنك إضافة أدوات أخرى مستقبلًا، مثل
+            تثبيت الفيديو، رفع الدقة، إزالة العناصر غير المرغوبة، وغيرها.
           </p>
         </div>
         <div class="coming-grid">
@@ -1264,7 +1232,7 @@
       </section>
     </main>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer>
       <div class="footer-inner">
         <div>© <span id="year"></span> BL CREATIVE • Ultra Purity</div>
@@ -1284,10 +1252,9 @@
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
-    // سنة الفوتر
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // سلايدر المقارنة (تحريك يدوي بسيط بالماوس)
+    // سلايدر المقارنة (حركة نظيفة تشبه مواقع الاحتراف)
     (function () {
       const slider = document.getElementById("comparisonSlider");
       if (!slider) return;
