@@ -20,9 +20,9 @@
       --text-primary: #ffffff;
       --text-secondary: #a1a1aa;
       --text-tertiary: #52525b;
-      --transition: 0.3s ease;
     }
 
+    /* أزلنا الأنيميشن العام الذي كان يسبب الترميش */
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -38,6 +38,11 @@
     ul { list-style: none; }
     img, video { max-width: 100%; display: block; }
 
+    /* أضفنا الأنيميشن فقط للعناصر التي تحتاجه كالأزرار */
+    .btn, a, .lang-btn, .social-links a {
+      transition: 0.3s ease;
+    }
+
     /* --- Navbar --- */
     header {
       position: fixed; top: 0; width: 100%; z-index: 100;
@@ -51,22 +56,20 @@
       display: flex; align-items: center; justify-content: space-between;
     }
 
-    .logo {
-      display: flex; align-items: center; gap: 12px; cursor: pointer;
-    }
+    .logo { display: flex; align-items: center; gap: 12px; cursor: pointer; }
     .logo img { height: 40px; object-fit: contain; }
 
     .nav-links { display: flex; gap: 32px; }
-    .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--text-secondary); transition: var(--transition); cursor: pointer; }
+    .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--text-secondary); cursor: pointer; }
     .nav-links a:hover { color: var(--text-primary); }
 
     .nav-actions { display: flex; align-items: center; gap: 16px; }
-    .lang-btn { background: transparent; border: none; color: var(--text-secondary); font-size: 0.9rem; cursor: pointer; transition: var(--transition); font-family: inherit; font-weight: 600;}
+    .lang-btn { background: transparent; border: none; color: var(--text-secondary); font-size: 0.9rem; cursor: pointer; font-family: inherit; font-weight: 600;}
     .lang-btn:hover { color: var(--text-primary); }
 
     .btn {
       padding: 0.6rem 1.2rem; border-radius: 6px; font-size: 0.9rem; font-weight: 600;
-      cursor: pointer; transition: var(--transition); border: 1px solid transparent; text-align: center;
+      cursor: pointer; border: 1px solid transparent; text-align: center;
     }
     .btn-primary { background-color: #ffffff; color: #000000; }
     .btn-primary:hover { background-color: #e4e4e7; }
@@ -100,12 +103,14 @@
     .comparison-container {
       position: relative; width: 100%; border-radius: 12px; overflow: hidden; 
       border: 1px solid var(--border-color); background: #000; cursor: ew-resize; height: 600px;
-      user-select: none; 
+      user-select: none; /* يمنع تظليل النصوص بالغلط أثناء السحب */
     }
     .comp-small { height: 450px; }
 
+    /* إزالة الـ transition من هنا نهائياً ليتحرك السلايدر فورا مع الماوس */
     .comparison-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
     .comparison-layer img, .comparison-layer video { width: 100%; height: 100%; object-fit: cover; }
+    
     .comparison-layer.after { z-index: 1; }
     .comparison-layer.before { z-index: 2; }
 
@@ -149,17 +154,21 @@
     .banner-1 { background-image: url('https://images.unsplash.com/photo-1531366936337-7c912a4589a7?q=80&w=600&auto=format&fit=crop'); }
     .banner-2 { background-image: url('https://images.unsplash.com/photo-1579033461387-adb47823f66c?q=80&w=600&auto=format&fit=crop'); }
     .pricing-content { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; }
-    .pricing-header-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1rem; }
-    .pricing-title { font-size: 1.25rem; font-weight: 700; }
-    .pricing-price { text-align: right; }
-    .pricing-price .amount { font-size: 1.5rem; font-weight: 800; display: block; }
-    .pricing-price .billing { font-size: 0.75rem; color: var(--text-secondary); }
+    
+    /* تعديل اتجاه النصوص في الأسعار لتدعم اللغتين بوضوح */
+    .pricing-header-row { display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 1rem; gap: 8px; }
+    .pricing-title { font-size: 1.5rem; font-weight: 700; }
+    .pricing-price { text-align: start; }
+    .pricing-price .amount { font-size: 1.8rem; font-weight: 800; display: block; }
+    .pricing-price .billing { font-size: 0.85rem; color: var(--text-secondary); }
+    
     .pricing-desc { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.4; }
-    .pricing-features { margin-top: 2rem; flex-grow: 1; }
+    .pricing-features { margin-top: 2rem; flex-grow: 1; text-align: start; }
     .features-title { font-size: 0.75rem; color: var(--text-tertiary); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem; font-weight: 700; }
     .pricing-features ul { list-style: none; margin-bottom: 1.5rem; }
     .pricing-features li { font-size: 0.9rem; color: var(--text-primary); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 8px; }
     .empty-feature { width: 100%; height: 1px; background: repeating-linear-gradient(to right, var(--text-tertiary) 0, var(--text-tertiary) 4px, transparent 4px, transparent 8px); margin-top: 10px; opacity: 0.3; }
+    
     .enterprise-card { background: #ffffff; color: #000000; }
     .enterprise-card .features-title { color: #666; }
     .enterprise-card .pricing-features li { color: #000; }
@@ -175,7 +184,7 @@
     /* --- Footer --- */
     footer { border-top: 1px solid var(--border-color); padding: 4rem 2rem; text-align: center; background: var(--bg-surface); }
     .social-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 2rem; }
-    .social-links a { color: var(--text-secondary); transition: var(--transition); display: flex; align-items: center; justify-content: center; }
+    .social-links a { color: var(--text-secondary); display: flex; align-items: center; justify-content: center; }
     .social-links a:hover { color: var(--text-primary); transform: translateY(-3px); }
     .social-links svg { width: 24px; height: 24px; fill: currentColor; }
     .footer-copy { color: var(--text-tertiary); font-size: 0.9rem; }
@@ -232,15 +241,16 @@
       <div class="comparison-grid">
         <div class="comparison-container">
           <div class="comparison-layer after">
-            <video src="media/after.mp4" autoplay loop muted playsinline></video>
+            <video src="media/after.mp4" poster="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2000&auto=format&fit=crop" autoplay loop muted playsinline></video>
           </div>
           <div class="comparison-layer before">
-            <video src="media/before.mp4" autoplay loop muted playsinline style="filter: blur(4px) contrast(0.9) brightness(0.8);"></video>
+            <video src="media/before.mp4" poster="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2000&auto=format&fit=crop" autoplay loop muted playsinline style="filter: saturate(0.4) contrast(0.7) brightness(0.9);"></video>
           </div>
           <div class="slider-handle"><div class="slider-button">↔</div></div>
+          
           <div class="comparison-labels">
-            <div class="label-badge" data-i18n="comp.noisy">قبل (ضوضاء)</div>
-            <div class="label-badge" data-i18n="comp.clean">بعد Ultra Purity</div>
+            <div class="label-badge label-before" data-i18n="comp.noisy">قبل (خام / Raw)</div>
+            <div class="label-badge label-after" data-i18n="comp.clean">بعد (Ultra Purity)</div>
           </div>
         </div>
 
@@ -250,12 +260,12 @@
               <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1000&auto=format&fit=crop" alt="After" />
             </div>
             <div class="comparison-layer before">
-              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1000&auto=format&fit=crop" alt="Before" style="filter: blur(3px) grayscale(30%);" />
+              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1000&auto=format&fit=crop" alt="Before" style="filter: contrast(0.6) brightness(0.7) saturate(0.5);" />
             </div>
             <div class="slider-handle"><div class="slider-button">↔</div></div>
             <div class="comparison-labels">
-              <div class="label-badge" data-i18n="comp.raw">الأصل (Raw)</div>
-              <div class="label-badge" data-i18n="comp.enhanced">مُعالج (Enhanced)</div>
+              <div class="label-badge label-before" data-i18n="comp.raw">الأصل (Low Light)</div>
+              <div class="label-badge label-after" data-i18n="comp.enhanced">مُعالج ومُحسن</div>
             </div>
           </div>
 
@@ -264,12 +274,12 @@
               <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1000&auto=format&fit=crop" alt="After" />
             </div>
             <div class="comparison-layer before">
-              <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1000&auto=format&fit=crop" alt="Before" style="filter: blur(4px);" />
+              <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1000&auto=format&fit=crop" alt="Before" style="filter: grayscale(20%) contrast(0.7);" />
             </div>
             <div class="slider-handle"><div class="slider-button">↔</div></div>
             <div class="comparison-labels">
-              <div class="label-badge" data-i18n="comp.original">الفيديو الأصلي</div>
-              <div class="label-badge" data-i18n="comp.ultra">Ultra Purity</div>
+              <div class="label-badge label-before" data-i18n="comp.original">الفيديو الأصلي</div>
+              <div class="label-badge label-after" data-i18n="comp.ultra">استعادة الألوان والحدة</div>
             </div>
           </div>
         </div>
@@ -282,7 +292,7 @@
           <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?q=80&w=800&auto=format&fit=crop" alt="GPU Technology" />
         </div>
         <h2 data-i18n="gpu.title">رندر محلي خاص. قوة لا محدودة.</h2>
-        <p data-i18n="gpu.desc">يستفيد Ultra Purity بشكل كامل من بنية كروت الشاشة الحديثة لتقديم أداء معالجة محلي بالكامل. بياناتك لا تغادر جهازك أبداً، مما يضمن أعلى درجات الخصوصية وسرعة تصدير مذهلة.</p>
+        <p data-i18n="gpu.desc">يستفيد Ultra Purity بشكل كامل من بنية كروت الشاشة الحديثة لتقديم أداء معالجة محلي بالكامل. بياناتك لا تغادر جهازك أبداً، مما يضمن أعلى درجات الخصوصية وسرعة تصدير مذهلة للفريمات العالية (وحتى تحويل 60 إلى 120 إطاراً بفضل تقنياتنا).</p>
       </div>
     </section>
 
@@ -296,7 +306,7 @@
               <div class="pricing-title" data-i18n="pr1.name">Ultra Purity</div>
               <div class="pricing-price"><span class="amount" data-i18n="pr1.price">$33/mo</span><span class="billing" data-i18n="pr1.bill">$399 billed annually</span></div>
             </div>
-            <div class="pricing-desc" data-i18n="pricing.refund">No refund if cancelled after 48 hours.</div>
+            <div class="pricing-desc" data-i18n="pricing.refund">لا يوجد استرداد للأموال بعد 48 ساعة.</div>
             <button class="btn btn-accent btn-block" data-i18n="pricing.btn">Subscribe</button>
             <div class="pricing-features">
               <div class="features-title" data-i18n="pr.featTitle">FEATURES</div>
@@ -312,7 +322,7 @@
               <div class="pricing-title" data-i18n="pr2.name">Ultra Purity Pro</div>
               <div class="pricing-price"><span class="amount" data-i18n="pr2.price">$67/mo</span><span class="billing" data-i18n="pr2.bill">$799 billed annually</span></div>
             </div>
-            <div class="pricing-desc" data-i18n="pricing.refund">No refund if cancelled after 48 hours.</div>
+            <div class="pricing-desc" data-i18n="pricing.refund">لا يوجد استرداد للأموال بعد 48 ساعة.</div>
             <button class="btn btn-accent btn-block" data-i18n="pricing.btn">Subscribe</button>
             <div class="pricing-features">
               <div class="features-title" data-i18n="pr.featTitlePro">STUDIO FEATURES, PLUS...</div>
@@ -325,7 +335,7 @@
           <div class="pricing-content">
             <div class="pricing-header-row" style="margin-top: 2rem;">
               <div class="pricing-title" data-i18n="pr3.name">Enterprise</div>
-              <div class="pricing-price"><span class="amount" style="font-size: 1.2rem; font-weight: 500;" data-i18n="pr3.price">Custom</span></div>
+              <div class="pricing-price"><span class="amount" style="font-size: 1.5rem; font-weight: 800;" data-i18n="pr3.price">Custom</span></div>
             </div>
             <button class="btn btn-outline btn-block" style="margin-top:1.5rem;" data-i18n="pricing.contactBtn">Contact us</button>
             <div class="pricing-features">
@@ -346,7 +356,7 @@
       <div class="info-block">
         <h3 data-i18n="about.title">من نحن (About Us)</h3>
         <p data-i18n="about.p1">فريقنا يتكون من مهندسي ذكاء اصطناعي ومونتيرز محترفين اجتمعوا لبناء أدوات بصرية تعيد تعريف النقاء.</p>
-        <p data-i18n="about.p2">بدأنا رحلتنا من إحباطنا تجاه الأدوات المتاحة التي تدمر تفاصيل البشرة. قمنا ببناء Ultra Purity ليكون الحل الأمثل.</p>
+        <p data-i18n="about.p2">بدأنا رحلتنا من إحباطنا تجاه الأدوات المتاحة التي تدمر تفاصيل البشرة. قمنا ببناء Ultra Purity ليكون الحل الأمثل للمحتوى المرئي عالي الدقة.</p>
       </div>
       <div class="info-block">
         <h3 data-i18n="sys.title">متطلبات النظام</h3>
@@ -373,7 +383,7 @@
   <script>
     function scrollToSection(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
 
-    // --- خوارزمية السلايدر بدون أي DOM Manipulation تسبب رمش ---
+    // --- خوارزمية السلايدر نقية تماماً وبدون أي ترميش ---
     const containers = document.querySelectorAll('.comparison-container');
     
     function updateSlider(container, clientX) {
@@ -385,7 +395,6 @@
       const percent = (x / rect.width) * 100;
       const beforeLayer = container.querySelector('.comparison-layer.before');
       const handle = container.querySelector('.slider-handle');
-      
       const dir = document.documentElement.dir;
       
       if(dir === 'rtl') {
@@ -408,21 +417,21 @@
       setTimeout(() => { updateSlider(container, container.getBoundingClientRect().left + (container.getBoundingClientRect().width / 2)); }, 100);
     });
 
-    // --- القاموس الشامل 100% للغتين ---
+    // --- نظام اللغات يدعم كل عنصر في الصفحة 100% ---
     const dict = {
       ar: {
         "nav.features": "المميزات", "nav.tech": "التقنية", "nav.pricing": "الأسعار", "nav.cta": "تحميل مجاني",
         "hero.title": "نقاء سينمائي.<br>مدعوم بالذكاء الاصطناعي.", "hero.subtitle": "برنامج احترافي لإزالة الضوضاء واستعادة التفاصيل الدقيقة للفيديوهات. صُمم للمونتيرز وصناع المحتوى الذين يبحثون عن الجودة المطلقة.", "hero.btnPrimary": "تحميل Ultra Purity",
         "comp.title": "نتائج تتحدث عن نفسها", "comp.subtitle": "شاهد الفرق الحقيقي قبل وبعد المعالجة بفضل تقنياتنا المتقدمة في استعادة ملامح الوجه وإزالة الضوضاء.",
-        "comp.noisy": "قبل (ضوضاء)", "comp.clean": "بعد Ultra Purity", "comp.raw": "الأصل (Raw)", "comp.enhanced": "مُعالج (Enhanced)", "comp.original": "الفيديو الأصلي", "comp.ultra": "Ultra Purity",
-        "gpu.title": "رندر محلي خاص. قوة لا محدودة.", "gpu.desc": "يستفيد Ultra Purity بشكل كامل من بنية كروت الشاشة الحديثة لتقديم أداء معالجة محلي بالكامل. بياناتك لا تغادر جهازك أبداً.",
-        "pricing.title": "خطط الأسعار", "pricing.refund": "لا يوجد استرداد للأموال في حال الإلغاء بعد 48 ساعة من الشراء.", "pricing.btn": "اشتراك", "pricing.contactBtn": "تواصل معنا",
+        "comp.noisy": "قبل (خام / Raw)", "comp.clean": "بعد (Ultra Purity)", "comp.raw": "الأصل (Low Light)", "comp.enhanced": "مُعالج ومُحسن", "comp.original": "الفيديو الأصلي", "comp.ultra": "استعادة الألوان والحدة",
+        "gpu.title": "رندر محلي خاص. قوة لا محدودة.", "gpu.desc": "يستفيد Ultra Purity بشكل كامل من بنية كروت الشاشة الحديثة لتقديم أداء معالجة محلي بالكامل. بياناتك لا تغادر جهازك أبداً، مما يضمن أعلى درجات الخصوصية وسرعة تصدير مذهلة للفريمات العالية (وحتى تحويل 60 إلى 120 إطاراً بفضل تقنياتنا).",
+        "pricing.title": "خطط الأسعار", "pricing.refund": "لا يوجد استرداد للأموال بعد 48 ساعة.", "pricing.btn": "اشتراك", "pricing.contactBtn": "تواصل معنا",
         "pr1.name": "Ultra Purity", "pr1.price": "$33/mo", "pr1.bill": "$399 الدفع سنوياً",
         "pr2.name": "Ultra Purity Pro", "pr2.price": "$67/mo", "pr2.bill": "$799 الدفع سنوياً",
         "pr3.name": "Enterprise", "pr3.price": "مخصص",
         "pr.featTitle": "المميزات", "pr.featTitlePro": "مميزات الاستوديو، بالإضافة إلى...",
         "pricing.ent1": "شروط مخصصة وواجهات برمجية", "pricing.ent2": "خيارات مبنية للشركات", "pricing.ent3": "مصادقة بدون إنترنت (Offline)", "pricing.ent4": "دعم فني مخصص",
-        "about.title": "من نحن (About Us)", "about.p1": "فريقنا يتكون من مهندسي ذكاء اصطناعي ومونتيرز محترفين اجتمعوا لبناء أدوات بصرية تعيد تعريف النقاء.", "about.p2": "بدأنا رحلتنا من إحباطنا تجاه الأدوات المتاحة التي تدمر تفاصيل البشرة. قمنا ببناء Ultra Purity ليكون الحل الأمثل.",
+        "about.title": "من نحن (About Us)", "about.p1": "فريقنا يتكون من مهندسي ذكاء اصطناعي ومونتيرز محترفين اجتمعوا لبناء أدوات بصرية تعيد تعريف النقاء.", "about.p2": "بدأنا رحلتنا من إحباطنا تجاه الأدوات المتاحة التي تدمر تفاصيل البشرة. قمنا ببناء Ultra Purity ليكون الحل الأمثل للمحتوى المرئي عالي الدقة.",
         "sys.title": "متطلبات النظام", "sys.os": "نظام التشغيل:", "sys.osVal": "Windows 10/11 (64-bit)", "sys.cpu": "المعالج:", "sys.cpuVal": "Intel i7 / Ryzen 7 أو أحدث", "sys.gpu": "كرت الشاشة:", "sys.gpuVal": "NVIDIA RTX 2060 أو أعلى", "sys.ram": "الرام:", "sys.ramVal": "16GB (ينصح بـ 32GB)",
         "footer.text": "© 2026 BL CREATIVE - Ultra Purity. جميع الحقوق محفوظة."
       },
@@ -430,15 +439,15 @@
         "nav.features": "Features", "nav.tech": "Tech", "nav.pricing": "Pricing", "nav.cta": "Free Download",
         "hero.title": "Cinematic Purity.<br>Powered by AI.", "hero.subtitle": "Professional video noise reduction and detail recovery software. Built for editors and creators who demand absolute quality.", "hero.btnPrimary": "Download Ultra Purity",
         "comp.title": "Results Speak for Themselves", "comp.subtitle": "See the real difference before and after processing with our advanced facial recovery and noise reduction tech.",
-        "comp.noisy": "Before (Noisy)", "comp.clean": "After Ultra Purity", "comp.raw": "Raw", "comp.enhanced": "Enhanced", "comp.original": "Original", "comp.ultra": "Ultra Purity",
-        "gpu.title": "Private Local Rendering.", "gpu.desc": "Ultra Purity fully leverages modern GPU architecture for completely local processing. Your data never leaves your machine.",
-        "pricing.title": "Pricing Plans", "pricing.refund": "No refund if cancelled after 48 hours from purchase.", "pricing.btn": "Subscribe", "pricing.contactBtn": "Contact us",
+        "comp.noisy": "Before (Raw/Log)", "comp.clean": "After (Ultra Purity)", "comp.raw": "Original (Low Light)", "comp.enhanced": "Enhanced & Graded", "comp.original": "Original Video", "comp.ultra": "Color & Detail Recovery",
+        "gpu.title": "Private Local Rendering.", "gpu.desc": "Ultra Purity fully leverages modern GPU architecture for completely local processing. Your data never leaves your machine, ensuring maximum privacy and blazing speeds, even when converting 60 to 120 fps.",
+        "pricing.title": "Pricing Plans", "pricing.refund": "No refund if cancelled after 48 hours.", "pricing.btn": "Subscribe", "pricing.contactBtn": "Contact us",
         "pr1.name": "Ultra Purity", "pr1.price": "$33/mo", "pr1.bill": "$399 billed annually",
         "pr2.name": "Ultra Purity Pro", "pr2.price": "$67/mo", "pr2.bill": "$799 billed annually",
         "pr3.name": "Enterprise", "pr3.price": "Custom",
         "pr.featTitle": "FEATURES", "pr.featTitlePro": "STUDIO FEATURES, PLUS...",
         "pricing.ent1": "Custom terms & APIs", "pricing.ent2": "Enterprise-built options", "pricing.ent3": "Offline authentication", "pricing.ent4": "Dedicated support",
-        "about.title": "About Us", "about.p1": "At BL CREATIVE, our team of AI engineers and pro editors united to build tools that redefine visual purity.", "about.p2": "We started from our own frustration with tools that destroy skin details. We built Ultra Purity to be the ultimate solution.",
+        "about.title": "About Us", "about.p1": "At BL CREATIVE, our team of AI engineers and pro editors united to build tools that redefine visual purity.", "about.p2": "We started from our own frustration with tools that destroy skin details. We built Ultra Purity to be the ultimate solution for high-res visual content.",
         "sys.title": "System Requirements", "sys.os": "OS:", "sys.osVal": "Windows 10/11 (64-bit)", "sys.cpu": "CPU:", "sys.cpuVal": "Intel i7 / Ryzen 7 or newer", "sys.gpu": "GPU:", "sys.gpuVal": "NVIDIA RTX 2060 or higher", "sys.ram": "RAM:", "sys.ramVal": "16GB (32GB recommended)",
         "footer.text": "© 2026 BL CREATIVE - Ultra Purity. All rights reserved."
       }
@@ -458,8 +467,21 @@
         if (dict[currentLang][key]) el.innerHTML = dict[currentLang][key];
       });
 
-      // إعادة ضبط مقاسات السلايدر عند تبديل اللغة ليتم قص الصورة بالاتجاه الصحيح
+      // عكس أماكن التسميات (Labels) برمجياً عند تغيير اللغة لكي تبقى "قبل" و "بعد" في الجهة الصحيحة
       containers.forEach(container => {
+        const lblBefore = container.querySelector('.label-before');
+        const lblAfter = container.querySelector('.label-after');
+        if(lblBefore && lblAfter) {
+          const parent = lblBefore.parentNode;
+          if(currentLang === 'ar') {
+            parent.appendChild(lblAfter);
+            parent.appendChild(lblBefore);
+          } else {
+            parent.appendChild(lblBefore);
+            parent.appendChild(lblAfter);
+          }
+        }
+        // ضبط خط السلايدر ليتوافق مع اللغة الجديدة
         const rect = container.getBoundingClientRect();
         updateSlider(container, rect.left + (rect.width / 2));
       });
