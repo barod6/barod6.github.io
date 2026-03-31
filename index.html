@@ -1,53 +1,117 @@
-<section class="py-20 bg-gray-900/50">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BL Creative - Pricing Plans</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: '#0a1118',
+                        card: '#111827',
+                        primary: '#06b6d4',
+                        secondary: '#3b82f6',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            background-color: #0a1118; 
+            color: #f8fafc; 
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-primary selection:text-white">
+
+    <section class="py-20 relative overflow-hidden">
+
+        <!-- Logo Section -->
+        <div class="flex justify-center mb-12">
+            <img src="bl.png" alt="BL Creative Logo" 
+                 class="h-32 object-contain drop-shadow-[0_0_20px_rgba(6,182,212,0.25)]">
+        </div>
+
         <div class="max-w-7xl mx-auto px-4 text-center">
-            
-            <div class="flex justify-center mb-8">
-                <img src="bl.png" alt="BL Creative Logo" class="h-32 object-contain">
-            </div>
+            <h2 class="text-4xl md:text-5xl font-black mb-12 text-white">
+                Own the Software Forever <span class="text-primary">(One-Time Payment)</span>
+            </h2>
 
-            <h2 class="text-4xl font-black mb-12">امتلك البرنامج للأبد <span class="text-primary">(دفع مرة واحدة)</span></h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto text-right">
-                
-                <div class="p-8 rounded-2xl border border-gray-800 bg-dark hover:border-gray-600 transition">
-                    <h3 class="text-2xl font-bold text-gray-300 mb-2">الأساسية</h3>
-                    <p class="text-4xl font-black mb-6">$19 <span class="text-sm text-gray-500 font-normal">/ مدى الحياة</span></p>
-                    <ul class="text-gray-400 space-y-3 mb-8">
-                        <li>✔️ تصفية الضوضاء المتقدمة</li>
-                        <li>✔️ تصدير بدقة 1080p</li>
-                        <li>✔️ دعم حتى 60fps إطار</li>
-                        <li class="text-gray-600">❌ محرك 120fps</li>
-                        <li class="text-gray-600">❌ دقة 4K والرندر الجماعي</li>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto text-left">
+
+                <!-- Basic Plan -->
+                <div class="p-8 rounded-2xl border border-gray-800 bg-card hover:border-gray-600 transition-all duration-300">
+                    <h3 class="text-2xl font-bold text-gray-300 mb-2">Basic</h3>
+                    <p class="text-4xl font-black mb-6 text-white">
+                        $19 <span class="text-sm text-gray-500 font-normal">/ lifetime</span>
+                    </p>
+                    <ul class="text-gray-400 space-y-4 mb-8">
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> Advanced noise filtering</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> Export in 1080p</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> Support up to 60fps</li>
+                        <li class="flex items-center gap-2 text-gray-600"><span class="opacity-50">❌</span> 120fps engine</li>
+                        <li class="flex items-center gap-2 text-gray-600"><span class="opacity-50">❌</span> 4K & batch rendering</li>
                     </ul>
-                    <button class="w-full border border-gray-600 hover:bg-gray-800 py-3 rounded-lg font-bold transition">شراء الآن</button>
+                    <button class="w-full border border-gray-600 text-gray-300 hover:bg-gray-800 py-3 rounded-lg font-bold transition-all">
+                        Buy Now
+                    </button>
                 </div>
 
-                <div class="p-8 rounded-2xl border-2 border-primary bg-gray-900 relative transform md:-translate-y-4 shadow-[0_0_30px_rgba(139,92,246,0.15)]">
-                    <div class="absolute top-0 right-1/2 transform translate-x-1/2 -translate-y-1/2 bg-primary px-4 py-1 rounded-full text-sm font-bold">الأكثر مبيعاً</div>
-                    <h3 class="text-2xl font-bold text-primary mb-2">المونتير (Pro)</h3>
-                    <p class="text-4xl font-black mb-6">$25 <span class="text-sm text-gray-500 font-normal">/ مدى الحياة</span></p>
-                    <ul class="text-gray-300 space-y-3 mb-8">
-                        <li>✔️ كل ميزات الباقة الأساسية</li>
-                        <li>✔️ <span class="text-primary font-bold">محرك النعومة 120fps</span></li>
-                        <li>✔️ تصدير بدقة 2K</li>
-                        <li>✔️ عزل الشخصيات بالذكاء الاصطناعي</li>
-                        <li class="text-gray-600">❌ دقة 4K ورندر المجلدات</li>
+                <!-- Pro Plan -->
+                <div class="p-8 rounded-2xl border-2 border-primary bg-card relative transform md:-translate-y-4 shadow-[0_0_40px_rgba(6,182,212,0.15)] hover:shadow-[0_0_50px_rgba(6,182,212,0.3)] transition-all duration-300">
+                    <div class="absolute top-0 right-1/2 transform translate-x-1/2 -translate-y-1/2 bg-primary px-6 py-1.5 rounded-full text-sm font-bold text-dark whitespace-nowrap">
+                        Best Seller
+                    </div>
+                    <h3 class="text-2xl font-bold text-primary mb-2">Editor (Pro)</h3>
+                    <p class="text-4xl font-black mb-6 text-white">
+                        $25 <span class="text-sm text-gray-500 font-normal">/ lifetime</span>
+                    </p>
+                    <ul class="text-gray-300 space-y-4 mb-8">
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> All Basic features</li>
+                        <li class="flex items-center gap-2 font-bold text-primary"><span class="text-green-500">✔️</span> Smoothness Engine 120fps</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> Export in 2K</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> AI character isolation</li>
+                        <li class="flex items-center gap-2 text-gray-600"><span class="opacity-50">❌</span> 4K & folder rendering</li>
                     </ul>
-                    <button class="w-full bg-primary hover:bg-purple-600 py-3 rounded-lg font-bold transition shadow-lg text-white">شراء النسخة الاحترافية</button>
+                    <button class="w-full bg-primary hover:bg-cyan-400 py-3 rounded-lg font-bold transition-all shadow-lg text-dark text-lg">
+                        Get Pro Version
+                    </button>
                 </div>
 
-                <div class="p-8 rounded-2xl border border-secondary bg-dark relative hover:shadow-[0_0_20px_rgba(6,182,212,0.1)] transition">
-                    <h3 class="text-2xl font-bold text-secondary mb-2">الماستر (Ultimate)</h3>
-                    <p class="text-4xl font-black mb-6">$35 <span class="text-sm text-gray-500 font-normal">/ مدى الحياة</span></p>
-                    <ul class="text-gray-400 space-y-3 mb-8">
-                        <li>✔️ كل ميزات باقة المحترفين</li>
-                        <li>✔️ <span class="text-secondary font-bold">رفع الجودة إلى 4K خام</span></li>
-                        <li>✔️ <span class="text-secondary font-bold">رندر جماعي (مجلد كامل)</span></li>
-                        <li>✔️ أولوية التحديثات والدعم</li>
-                        <li>✔️ استخدام تجاري للوكالات</li>
+                <!-- Ultimate Plan -->
+                <div class="p-8 rounded-2xl border border-secondary bg-card hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-400 transition-all duration-300">
+                    <h3 class="text-2xl font-bold text-secondary mb-2">Master (Ultimate)</h3>
+                    <p class="text-4xl font-black mb-6 text-white">
+                        $35 <span class="text-sm text-gray-500 font-normal">/ lifetime</span>
+                    </p>
+                    <ul class="text-gray-400 space-y-4 mb-8">
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> All Pro features</li>
+                        <li class="flex items-center gap-2 font-bold text-secondary"><span class="text-green-500">✔️</span> 4K RAW upscaling</li>
+                        <li class="flex items-center gap-2 font-bold text-secondary"><span class="text-green-500">✔️</span> Batch rendering (full folder)</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> Priority updates & support</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✔️</span> Commercial use license</li>
                     </ul>
-                    <button class="w-full border border-secondary text-secondary hover:bg-secondary hover:text-dark py-3 rounded-lg font-bold transition">الحصول على الماستر</button>
+                    <button class="w-full border border-secondary text-secondary hover:bg-secondary hover:text-white py-3 rounded-lg font-bold transition-all">
+                        Get Ultimate
+                    </button>
                 </div>
 
             </div>
         </div>
     </section>
+
+</body>
+</html>
