@@ -4,25 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BL Creative — Advanced AI Solutions</title>
-<meta name="description" content="BL Creative: Pioneering AI video enhancement and processing technologies.">
+<meta name="description" content="Pioneering AI video enhancement and processing technologies.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Orbitron:wght@700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ===== CORE VARIABLES ===== */
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --space-black: #020203;
   --space-dark: #08080a;
-  --space-gray: #121216;
-  
   --neon-cyan: #00e5ff;
   --neon-purple: #9d4edd;
-  
   --glass-bg: rgba(12, 12, 16, 0.45);
-  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.08);
   --glass-highlight: rgba(255, 255, 255, 0.1);
-  
   --text-main: #f4f4f5;
   --text-muted: #8b8b99;
 }
@@ -33,155 +29,153 @@ body {
   font-family: 'Space Grotesk', 'Alexandria', sans-serif;
   font-size: 15px; line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden; position: relative;
+  overflow-x: hidden;
 }
 a { text-decoration: none; color: inherit; transition: 0.3s; }
-::selection { background: rgba(0, 229, 255, 0.2); color: var(--neon-cyan); }
 
 /* ===== DEEP SPACE BACKGROUND ===== */
 #space-container { position: fixed; inset: 0; z-index: -10; background: var(--space-black); overflow: hidden; }
-.nebula { position: absolute; border-radius: 50%; filter: blur(140px); opacity: 0.2; animation: breathe 25s ease-in-out infinite alternate; }
+.nebula { position: absolute; border-radius: 50%; filter: blur(140px); opacity: 0.3; animation: breathe 20s ease-in-out infinite alternate; }
 .nebula-1 { width: 700px; height: 700px; background: radial-gradient(circle, var(--neon-cyan), transparent 70%); top: -200px; left: -100px; }
-.nebula-2 { width: 900px; height: 900px; background: radial-gradient(circle, var(--neon-purple), transparent 70%); bottom: -300px; right: -200px; animation-delay: -12s; }
-@keyframes breathe { 0% { opacity: 0.15; transform: scale(1); } 100% { opacity: 0.3; transform: scale(1.1); } }
-
-/* CSS Stars */
+.nebula-2 { width: 900px; height: 900px; background: radial-gradient(circle, var(--neon-purple), transparent 70%); bottom: -300px; right: -200px; animation-delay: -10s; }
+@keyframes breathe { 0% { opacity: 0.15; transform: scale(1); } 100% { opacity: 0.35; transform: scale(1.1); } }
 .stars { position: absolute; top: 0; left: 0; width: 100%; height: 200%; }
-.stars-small { width: 1px; height: 1px; animation: animStar 120s linear infinite; }
-.stars-medium { width: 2px; height: 2px; animation: animStar 80s linear infinite; }
+.stars-small { width: 1px; height: 1px; animation: animStar 100s linear infinite; }
+.stars-medium { width: 2px; height: 2px; animation: animStar 60s linear infinite; }
 @keyframes animStar { from { transform: translateY(0px); } to { transform: translateY(-100vh); } }
 
 /* ===== NAVIGATION ===== */
 .nav-wrapper { position: fixed; top: 20px; left: 0; right: 0; display: flex; justify-content: center; z-index: 200; padding: 0 4%; }
 nav {
   display: flex; align-items: center; justify-content: space-between;
-  width: 100%; max-width: 1200px; height: 64px; padding: 0 32px;
+  width: 100%; max-width: 1300px; height: 64px; padding: 0 32px;
   background: var(--glass-bg); border: 1px solid var(--glass-border); border-top: 1px solid var(--glass-highlight);
   border-radius: 100px; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.8);
 }
-.logo { font-weight: 700; font-size: 20px; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
-.logo span { color: var(--neon-cyan); font-weight: 300; }
+.logo { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 22px; letter-spacing: 2px; text-transform: uppercase; text-shadow: 0 0 15px rgba(0,229,255,0.4); }
+.logo span { color: var(--neon-cyan); font-weight: 700; }
 .nav-center { display: flex; gap: 32px; }
-.nav-center a { font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
-.nav-center a:hover { color: var(--text-main); }
-.nav-right { display: flex; align-items: center; gap: 16px; }
-.lang-sel {
-  font-family: inherit; font-size: 12px; font-weight: 500; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border);
-  color: var(--text-muted); padding: 8px 12px; border-radius: 100px; cursor: pointer; outline: none; appearance: none;
-}
-.lang-sel:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
+.nav-center a { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); }
+.nav-center a:hover { color: var(--text-main); text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.lang-sel { font-family: inherit; font-size: 11px; font-weight: 600; background: rgba(0,0,0,0.6); border: 1px solid var(--glass-border); color: var(--text-main); padding: 8px 12px; border-radius: 100px; cursor: pointer; outline: none; }
+.lang-sel:hover { border-color: var(--neon-cyan); }
 
-/* ===== HERO SECTION (UltraPurity Focus) ===== */
+/* ===== HERO SECTION ===== */
 .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 160px 6% 80px; text-align: center; }
-.badge { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--neon-cyan); background: rgba(0, 229, 255, 0.05); border: 1px solid rgba(0, 229, 255, 0.2); padding: 6px 20px; border-radius: 100px; margin-bottom: 24px; backdrop-filter: blur(10px); }
-.hero h1 { font-size: clamp(40px, 6vw, 72px); font-weight: 700; line-height: 1.1; margin-bottom: 24px; }
-.hero h1 .product-name { background: linear-gradient(135deg, #fff, var(--neon-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; }
-.hero-sub { font-size: 16px; color: var(--text-muted); max-width: 600px; margin: 0 auto 48px; font-weight: 300; line-height: 1.8; }
+.badge { display: inline-flex; align-items: center; gap: 8px; font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--neon-cyan); background: rgba(0, 229, 255, 0.05); border: 1px solid rgba(0, 229, 255, 0.2); padding: 6px 20px; border-radius: 100px; margin-bottom: 24px; }
+.hero h1 { font-size: clamp(40px, 6vw, 76px); font-weight: 700; line-height: 1.1; margin-bottom: 24px; text-transform: uppercase; }
+.hero h1 .product-name { font-family: 'Orbitron', sans-serif; background: linear-gradient(135deg, #fff, var(--neon-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; letter-spacing: 2px; }
+.hero-sub { font-size: 16px; color: var(--text-muted); max-width: 650px; margin: 0 auto 48px; font-weight: 300; line-height: 1.8; }
 
-/* Global Slider Styles */
-.slider-wrap { position: relative; border-radius: 12px; overflow: hidden; cursor: ew-resize; user-select: none; border: 1px solid var(--glass-border); background: #000; }
+/* ===== UNIVERSAL SLIDER (Force LTR for logical math) ===== */
+.slider-wrap { position: relative; border-radius: 12px; overflow: hidden; cursor: ew-resize; user-select: none; border: 1px solid var(--glass-border); background: #000; direction: ltr !important; }
 .s-layer { position: absolute; inset: 0; width: 100%; height: 100%; background-size: cover; background-position: center; }
-.s-clip { position: absolute; inset: 0; overflow: hidden; }
-.s-divider { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--neon-cyan); transform: translateX(-50%); z-index: 8; pointer-events: none; box-shadow: 0 0 15px var(--neon-cyan); }
-.s-handle { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; background: var(--space-black); border: 1px solid var(--neon-cyan); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--neon-cyan); z-index: 9; pointer-events: none; font-size: 10px; font-weight: bold; }
+.s-clip { position: absolute; inset: 0; overflow: hidden; border-right: 2px solid var(--neon-cyan); box-shadow: 2px 0 15px rgba(0,229,255,0.5); }
+.s-handle { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: rgba(0,0,0,0.7); border: 1px solid var(--neon-cyan); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--neon-cyan); z-index: 9; pointer-events: none; font-size: 12px; backdrop-filter: blur(5px); }
 
-/* Main Hero Slider */
-.hero-slider { width: min(900px, 90vw); height: 450px; margin-bottom: 48px; box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
-.hero-before { background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url('data:image/svg+xml;utf8,<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="%23111"/><text x="50%" y="50%" fill="%23444" font-family="sans-serif" font-size="20" text-anchor="middle">Noisy / Low Res</text></svg>'); filter: blur(2px) grayscale(0.5); }
-.hero-after { background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url('data:image/svg+xml;utf8,<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="%23001825"/><text x="50%" y="50%" fill="%2300e5ff" font-family="sans-serif" font-size="20" text-anchor="middle">UltraPurity Processed</text></svg>'); }
+/* Hero Slider Images */
+.hero-slider { width: min(1000px, 90vw); height: 500px; margin-bottom: 48px; box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
+.h-img { background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop'); }
+.h-before { filter: grayscale(0.8) blur(3px) contrast(0.7); } /* Simulated Raw/Bad quality */
+.h-after { filter: contrast(1.1) saturate(1.2); } /* Simulated Processed Quality */
 
-/* CTA Buttons */
+/* Scanner effect */
+.scanner { position: absolute; top: 0; bottom: 0; width: 100%; background: linear-gradient(to bottom, transparent, rgba(0,229,255,0.2) 50%, transparent); animation: scan 3s linear infinite; pointer-events: none; mix-blend-mode: overlay; }
+@keyframes scan { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+
+/* Buttons */
 .btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-.btn { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 14px 32px; border-radius: 100px; transition: 0.3s; }
+.btn { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; padding: 16px 36px; border-radius: 100px; transition: 0.3s; }
 .btn-primary { background: var(--text-main); color: var(--space-black); }
-.btn-primary:hover { background: var(--neon-cyan); box-shadow: 0 0 20px rgba(0, 229, 255, 0.4); transform: translateY(-2px); }
+.btn-primary:hover { background: var(--neon-cyan); box-shadow: 0 0 25px rgba(0, 229, 255, 0.4); transform: translateY(-2px); }
 .btn-ghost { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-main); backdrop-filter: blur(10px); }
-.btn-ghost:hover { border-color: var(--text-main); background: rgba(255,255,255,0.05); }
+.btn-ghost:hover { border-color: var(--neon-cyan); background: rgba(0,229,255,0.05); }
 
 /* ===== SECTION TITLES ===== */
-.section { padding: 120px 6%; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; }
-.sec-tag { font-size: 11px; font-weight: 600; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 16px; display: block; text-align: center; }
-.sec-h { font-size: clamp(32px, 4vw, 48px); font-weight: 600; line-height: 1.2; margin-bottom: 60px; text-align: center; }
-.sec-h span { color: var(--neon-cyan); font-weight: 300; }
+.section { padding: 120px 6%; max-width: 1300px; margin: 0 auto; position: relative; z-index: 10; }
+.sec-tag { font-size: 11px; font-weight: 700; letter-spacing: 4px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 16px; display: block; text-align: center; }
+.sec-h { font-size: clamp(32px, 4vw, 56px); font-weight: 700; line-height: 1.2; margin-bottom: 60px; text-align: center; text-transform: uppercase; }
+.sec-h span { color: var(--neon-cyan); font-family: 'Orbitron', sans-serif; font-weight: 900; }
 
-/* ===== GPU TECH SECTION (Scientific Animation) ===== */
+/* ===== GPU TECH SECTION ===== */
 .gpu-container { display: flex; flex-direction: column; align-items: center; gap: 40px; }
-.gpu-core {
-  position: relative; width: 140px; height: 140px; background: #050505; border: 1px solid rgba(0, 229, 255, 0.3);
-  border-radius: 16px; display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 0 30px rgba(0, 229, 255, 0.1), inset 0 0 20px rgba(0, 229, 255, 0.05);
-  animation: floatGPU 6s ease-in-out infinite; z-index: 2;
-}
-.gpu-core::after { content: 'TENSOR CORE'; font-size: 10px; letter-spacing: 2px; color: var(--neon-cyan); font-weight: bold; }
-@keyframes floatGPU { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); box-shadow: 0 15px 40px rgba(0, 229, 255, 0.2); } }
-
-/* Data Streams */
-.data-streams { display: flex; justify-content: space-between; width: 100%; max-width: 800px; position: relative; }
-.stream { flex: 1; height: 2px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); position: relative; margin: 20px 0; overflow: hidden; }
-.stream::before {
-  content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-  background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
-  animation: dataFlow 2s linear infinite;
-}
+.gpu-core { position: relative; width: 160px; height: 160px; background: #050505; border: 1px solid rgba(0, 229, 255, 0.4); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 40px rgba(0, 229, 255, 0.15), inset 0 0 30px rgba(0, 229, 255, 0.1); animation: floatGPU 5s ease-in-out infinite; z-index: 2; overflow: hidden; }
+.gpu-core::before { content: ''; position: absolute; width: 200%; height: 200%; background: conic-gradient(transparent, transparent, transparent, var(--neon-cyan)); animation: rotateGPU 4s linear infinite; }
+.gpu-core::after { content: 'TENSOR CORE'; position: absolute; inset: 4px; background: #020202; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 11px; letter-spacing: 2px; color: var(--neon-cyan); font-weight: bold; z-index: 1; }
+@keyframes floatGPU { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+@keyframes rotateGPU { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.data-streams { display: flex; justify-content: space-between; width: 100%; max-width: 900px; position: relative; }
+.stream { flex: 1; height: 2px; background: rgba(255,255,255,0.05); position: relative; margin: 20px 0; overflow: hidden; }
+.stream::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent); animation: dataFlow 2s linear infinite; }
 @keyframes dataFlow { 100% { left: 200%; } }
-.gpu-desc { text-align: center; max-width: 600px; color: var(--text-muted); font-size: 15px; font-weight: 300; }
+.gpu-desc { text-align: center; max-width: 700px; color: var(--text-muted); font-size: 16px; font-weight: 300; }
 
-/* ===== ENGINES (Mini Previews) ===== */
-.engines-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
-.engine-card {
-  background: var(--glass-bg); border: 1px solid var(--glass-border); border-top: 1px solid var(--glass-highlight);
-  border-radius: 16px; overflow: hidden; transition: 0.4s; backdrop-filter: blur(16px);
-}
-.engine-card:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-.engine-preview { height: 160px; position: relative; border-bottom: 1px solid var(--glass-border); }
+/* ===== ENGINES (Real Image Previews) ===== */
+.engines-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 32px; }
+.engine-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; transition: 0.4s; backdrop-filter: blur(16px); }
+.engine-card:hover { border-color: rgba(255,255,255,0.3); transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
+.engine-preview { height: 180px; position: relative; border-bottom: 1px solid var(--glass-border); }
 .engine-body { padding: 24px; }
-.engine-name { font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-.engine-name::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-.engine-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; font-weight: 300; }
+.engine-name { font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.engine-name::before { content: ''; display: block; width: 8px; height: 8px; border-radius: 50%; background: currentColor; box-shadow: 0 0 10px currentColor; }
+.engine-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; font-weight: 300; }
+
+/* Engine Specific Visual Filters */
+/* 1. Quantum (Detail Recov) */
+.img-q { background-image: url('https://images.unsplash.com/photo-1535868463750-c78d9543614f?q=80&w=600&auto=format&fit=crop'); }
+.flt-q-before { filter: blur(4px) contrast(0.8); }
+/* 2. Ultra Power (Color/Upscale) */
+.img-u { background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=600&auto=format&fit=crop'); }
+.flt-u-before { filter: grayscale(0.9) brightness(0.7); }
+/* 3. Crystal Clear (Denoise - using SVG turbulence) */
+.img-c { background-image: url('https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=600&auto=format&fit=crop'); }
+.flt-c-before::after { content:''; position:absolute; inset:0; background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>'); opacity: 0.5; mix-blend-mode: overlay; }
+/* 4. Silk Flow (FPS Animation Simulation) */
+.fps-bg { background: #050508; display: flex; align-items: center; justify-content: center; }
+.fps-ball { width: 30px; height: 30px; border-radius: 50%; background: var(--neon-purple); position: absolute; box-shadow: 0 0 15px var(--neon-purple); }
+.fps-stutter { animation: moveBall 2s steps(8) infinite alternate; opacity: 0.5; }
+.fps-smooth { animation: moveBall 2s linear infinite alternate; }
+@keyframes moveBall { 0% { left: 10%; } 100% { left: 80%; } }
+/* 5. Ghost Wipe (Object Removal) */
+.img-g { background-image: url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=600&auto=format&fit=crop'); }
+.flt-g-before::after { content: '[ TARGET DETECTED ]'; position: absolute; top: 40%; left: 30%; border: 1px dashed #ff4757; color: #ff4757; padding: 10px; font-family: monospace; font-size: 10px; font-weight: bold; background: rgba(0,0,0,0.5); }
+/* 6. Smart Balance (Exposure) */
+.img-s { background-image: url('https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=600&auto=format&fit=crop'); }
+.flt-s-before { filter: brightness(0.3) contrast(1.5); }
 
 /* ===== PRICING ===== */
-.billing-toggle { display: flex; justify-content: center; align-items: center; gap: 16px; margin-bottom: 40px; font-size: 14px; font-weight: 500; }
-.toggle-switch { position: relative; width: 50px; height: 26px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; cursor: pointer; transition: 0.3s; }
-.toggle-dot { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; background: var(--text-main); border-radius: 50%; transition: 0.3s; }
-.is-yearly .toggle-dot { left: 27px; background: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan); }
+.billing-toggle { display: flex; justify-content: center; align-items: center; gap: 16px; margin-bottom: 50px; font-size: 14px; font-weight: 600; }
+.toggle-switch { position: relative; width: 56px; height: 28px; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); border-radius: 100px; cursor: pointer; transition: 0.3s; }
+.toggle-dot { position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; background: var(--text-main); border-radius: 50%; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.is-yearly .toggle-dot { left: 31px; background: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan); }
 
-.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto; }
-.price-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 40px 32px; backdrop-filter: blur(16px); display: flex; flex-direction: column; transition: 0.3s; }
-.price-card.popular { border-color: rgba(0, 229, 255, 0.4); box-shadow: 0 10px 40px rgba(0, 229, 255, 0.05); transform: scale(1.02); }
-.tier-name { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; }
-.price { font-size: 40px; font-weight: 300; margin-bottom: 8px; display: flex; align-items: baseline; gap: 4px; }
-.price span { font-size: 14px; color: var(--text-muted); }
-.price-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 32px; font-weight: 300; }
-.features { list-style: none; margin-bottom: 40px; flex-grow: 1; }
-.features li { font-size: 13px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; color: #d4d4d8; font-weight: 300; }
-.features li::before { content: '✓'; color: var(--neon-cyan); font-weight: bold; }
-.price-card.popular .btn-ghost { background: var(--text-main); color: var(--space-black); border: none; }
-.price-card.popular .btn-ghost:hover { background: var(--neon-cyan); }
-
-/* ===== ABOUT & COMMUNITY ===== */
-.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-.info-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 40px; }
-.info-card h3 { font-size: 20px; font-weight: 600; margin-bottom: 16px; }
-.info-card p { font-size: 14px; color: var(--text-muted); font-weight: 300; margin-bottom: 24px; }
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
+.price-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; padding: 40px; backdrop-filter: blur(16px); display: flex; flex-direction: column; transition: 0.4s; }
+.price-card.popular { border-color: rgba(0, 229, 255, 0.5); box-shadow: 0 10px 50px rgba(0, 229, 255, 0.1); transform: scale(1.02); position: relative; overflow: hidden; }
+.price-card.popular::before { content: 'MOST POPULAR'; position: absolute; top: 16px; right: -30px; background: var(--neon-cyan); color: #000; font-size: 9px; font-weight: bold; padding: 4px 30px; transform: rotate(45deg); letter-spacing: 1px; }
+.tier-name { font-family: 'Orbitron', sans-serif; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; }
+.price { font-size: 48px; font-weight: 300; margin-bottom: 8px; display: flex; align-items: baseline; gap: 4px; }
+.price span { font-size: 14px; color: var(--text-muted); font-weight: 500; }
+.features { list-style: none; margin-top: 32px; margin-bottom: 40px; flex-grow: 1; border-top: 1px solid var(--glass-border); padding-top: 32px; }
+.features li { font-size: 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; color: #d4d4d8; font-weight: 300; }
+.features li::before { content: ''; display: inline-block; width: 16px; height: 16px; background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="none" stroke="%2300e5ff" stroke-width="3" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>') no-repeat center; }
 
 /* ===== FOOTER ===== */
-footer { padding: 60px 6% 40px; border-top: 1px solid var(--glass-border); background: rgba(0,0,0,0.8); }
-.footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px; margin-bottom: 60px; max-width: 1200px; margin-left: auto; margin-right: auto; }
-.footer-col h4 { font-size: 14px; font-weight: 600; margin-bottom: 20px; color: var(--text-main); }
+footer { padding: 80px 6% 40px; border-top: 1px solid var(--glass-border); background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 60px; max-width: 1300px; margin-left: auto; margin-right: auto; }
+.footer-col p { font-size: 13px; color: var(--text-muted); font-weight: 300; margin-top: 16px; max-width: 300px; }
+.footer-col h4 { font-size: 14px; font-weight: 700; margin-bottom: 24px; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px; }
 .footer-col ul { list-style: none; }
-.footer-col ul li { margin-bottom: 12px; }
+.footer-col ul li { margin-bottom: 16px; }
 .footer-col ul a { font-size: 13px; color: var(--text-muted); font-weight: 300; }
 .footer-col ul a:hover { color: var(--neon-cyan); }
 .footer-bottom { text-align: center; border-top: 1px solid var(--glass-border); padding-top: 24px; font-size: 12px; color: #555; font-weight: 300; }
 
-/* RTL Adjustments */
-html[dir="rtl"] .nav-center, html[dir="rtl"] .nav-right { flex-direction: row-reverse; }
-html[dir="rtl"] .features li { flex-direction: row-reverse; }
-
 @media(max-width: 900px) {
   .nav-center { display: none; }
-  .info-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
   .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
   .price-card.popular { transform: none; }
 }
@@ -199,50 +193,65 @@ html[dir="rtl"] .features li { flex-direction: row-reverse; }
   <nav>
     <div class="logo">BL <span>Creative</span></div>
     <div class="nav-center">
-      <a href="#ultrapurity" data-i18n="nav_products">Products</a>
-      <a href="#hardware" data-i18n="nav_hardware">Hardware</a>
-      <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
-      <a href="#about" data-i18n="nav_about">Company</a>
+      <a href="#ultrapurity" data-i18n="nav_prod">Products</a>
+      <a href="#engines" data-i18n="nav_eng">Engines</a>
+      <a href="#hardware" data-i18n="nav_hw">Hardware</a>
+      <a href="#pricing" data-i18n="nav_pr">Pricing</a>
     </div>
     <div class="nav-right">
       <select class="lang-sel" id="langSel" onchange="setLang(this.value)">
         <option value="en">EN</option>
         <option value="ar">AR</option>
+        <option value="fr">FR</option>
+        <option value="es">ES</option>
+        <option value="pt">PT</option>
+        <option value="de">DE</option>
+        <option value="it">IT</option>
+        <option value="ja">JA</option>
+        <option value="ko">KO</option>
+        <option value="zh">ZH</option>
+        <option value="ru">RU</option>
+        <option value="tr">TR</option>
       </select>
-      <a class="btn btn-ghost" href="#contact" data-i18n="nav_contact" style="padding: 8px 20px; font-size: 11px;">Contact Us</a>
+      <a class="btn btn-ghost" href="#contact" data-i18n="nav_contact" style="padding: 10px 24px; font-size: 11px;">Contact Us</a>
     </div>
   </nav>
 </div>
 
 <section class="hero" id="ultrapurity">
-  <div class="badge" data-i18n="hero_badge">Flagship Product</div>
+  <div class="badge" data-i18n="hero_badge">Flagship Protocol</div>
   <h1>
     <span class="product-name">UltraPurity</span><br>
-    <span style="font-weight:300; font-size: 0.7em;" data-i18n="hero_h1">Vision Reimagined</span>
+    <span style="font-weight:300; font-size: 0.6em; letter-spacing: 2px;" data-i18n="hero_h1">Vision Reimagined</span>
   </h1>
   <p class="hero-sub" data-i18n="hero_sub">
-    Our most advanced AI video enhancement suite. Powered by six proprietary neural engines to eliminate noise, restore details, and generate flawless temporal frames.
+    The ultimate AI video processing suite. Six neural engines built to analyze, reconstruct, and upscale your footage beyond reality.
   </p>
 
   <div class="slider-wrap hero-slider" id="heroSlider">
-    <div class="s-layer hero-before"></div>
+    <div class="s-layer h-img h-before"></div>
     <div class="s-clip" id="heroClip" style="width: 50%;">
-      <div class="s-layer hero-after" style="width: 100vw; max-width: 900px;"></div>
+      <div class="s-layer h-img h-after" style="width: 100vw; max-width: 1000px;"></div>
+      <div class="scanner"></div>
     </div>
-    <div class="s-divider" id="heroDiv" style="left: 50%;"></div>
     <div class="s-handle" id="heroHdl" style="left: 50%;">⇔</div>
   </div>
 
   <div class="btns">
-    <a class="btn btn-primary" href="#pricing" data-i18n="cta_get">Get UltraPurity</a>
-    <a class="btn btn-ghost" href="#engines" data-i18n="cta_explore">Explore Engines</a>
+    <a class="btn btn-primary" href="#pricing" data-i18n="cta_get">Deploy UltraPurity</a>
+    <a class="btn btn-ghost" href="#engines" data-i18n="cta_exp">View Architecture</a>
   </div>
+</section>
+
+<section class="section" id="engines">
+  <span class="sec-tag" data-i18n="eng_tag">Processing Architecture</span>
+  <h2 class="sec-h" data-i18n="eng_h">The <span>Neural Engines</span></h2>
+  <div class="engines-grid" id="enginesGrid"></div>
 </section>
 
 <section class="section" id="hardware">
   <span class="sec-tag" data-i18n="hw_tag">Hardware Acceleration</span>
-  <h2 class="sec-h" data-i18n="hw_h">Built for <span>Tensor Cores</span></h2>
-  
+  <h2 class="sec-h" data-i18n="hw_h">Powered by <span>Tensor Cores</span></h2>
   <div class="gpu-container">
     <div class="gpu-core"></div>
     <div class="data-streams">
@@ -251,20 +260,14 @@ html[dir="rtl"] .features li { flex-direction: row-reverse; }
       <div class="stream" style="animation-delay: 1s;"></div>
     </div>
     <p class="gpu-desc" data-i18n="hw_desc">
-      UltraPurity directly interfaces with NVIDIA and AMD architectural cores. By utilizing hardware-level deep learning super sampling, our engines process high-resolution frames with zero bottleneck.
+      Engineered to extract maximum performance from NVIDIA and AMD architectures. Real-time deep learning processing with zero bottleneck.
     </p>
   </div>
 </section>
 
-<section class="section" id="engines">
-  <span class="sec-tag" data-i18n="eng_tag">Processing Architecture</span>
-  <h2 class="sec-h" data-i18n="eng_h">The <span>Six Engines</span></h2>
-  <div class="engines-grid" id="enginesGrid"></div>
-</section>
-
 <section class="section" id="pricing">
-  <span class="sec-tag" data-i18n="pr_tag">Licenses</span>
-  <h2 class="sec-h" data-i18n="pr_h">Choose your <span>Plan</span></h2>
+  <span class="sec-tag" data-i18n="pr_tag">Commercial Licenses</span>
+  <h2 class="sec-h" data-i18n="pr_h">Select <span>Deployment</span></h2>
   
   <div class="billing-toggle" onclick="toggleBilling()">
     <span id="lblMonthly" style="color:var(--text-main)" data-i18n="pr_mo">Monthly</span>
@@ -274,9 +277,8 @@ html[dir="rtl"] .features li { flex-direction: row-reverse; }
 
   <div class="pricing-grid">
     <div class="price-card">
-      <div class="tier-name" data-i18n="tier1_name">Creator</div>
+      <div class="tier-name" data-i18n="t1_n">Creator</div>
       <div class="price">$<span class="price-val" data-mo="29" data-yr="24">29</span><span data-i18n="pr_per">/mo</span></div>
-      <div class="price-desc" data-i18n="tier1_desc">Perfect for independent content creators.</div>
       <ul class="features">
         <li data-i18n="f1">Max 4K Resolution</li>
         <li data-i18n="f2">Standard Processing Speed</li>
@@ -286,21 +288,19 @@ html[dir="rtl"] .features li { flex-direction: row-reverse; }
     </div>
 
     <div class="price-card popular">
-      <div class="tier-name" style="color:var(--neon-cyan)" data-i18n="tier2_name">Professional</div>
+      <div class="tier-name" style="color:var(--neon-cyan)" data-i18n="t2_n">Professional</div>
       <div class="price">$<span class="price-val" data-mo="59" data-yr="49">59</span><span data-i18n="pr_per">/mo</span></div>
-      <div class="price-desc" data-i18n="tier2_desc">For professional editors and videographers.</div>
       <ul class="features">
         <li data-i18n="f4">Max 8K Resolution</li>
         <li data-i18n="f5">GPU Multi-threading</li>
         <li data-i18n="f6">Priority Email Support</li>
       </ul>
-      <a href="#" class="btn btn-ghost" style="width:100%; justify-content:center" data-i18n="btn_sub">Subscribe</a>
+      <a href="#" class="btn btn-primary" style="width:100%; justify-content:center" data-i18n="btn_sub">Subscribe</a>
     </div>
 
     <div class="price-card">
-      <div class="tier-name" data-i18n="tier3_name">Studio</div>
+      <div class="tier-name" data-i18n="t3_n">Studio</div>
       <div class="price">$<span class="price-val" data-mo="149" data-yr="119">149</span><span data-i18n="pr_per">/mo</span></div>
-      <div class="price-desc" data-i18n="tier3_desc">Uncapped processing for production houses.</div>
       <ul class="features">
         <li data-i18n="f7">Unlimited Resolution</li>
         <li data-i18n="f8">Render Farm Deployment</li>
@@ -311,63 +311,33 @@ html[dir="rtl"] .features li { flex-direction: row-reverse; }
   </div>
 </section>
 
-<section class="section" id="about">
-  <div class="info-grid">
-    <div class="info-card">
-      <h3 data-i18n="ab_h">About BL Creative</h3>
-      <p data-i18n="ab_p1">Founded on the principle of bridging the gap between imagination and reality. We build software that empowers creators with tools previously reserved for massive Hollywood studios.</p>
-      <p data-i18n="ab_p2">Our vision is to continue expanding our software suite, bringing AI-driven perfection to all visual mediums.</p>
-    </div>
-    <div class="info-card">
-      <h3 data-i18n="com_h">Join the Community</h3>
-      <p data-i18n="com_p">Connect with thousands of professionals. Share workflows, get feedback on your UltraPurity renders, and suggest features for upcoming updates.</p>
-      <div class="btns" style="justify-content: flex-start; margin-top:20px;">
-        <a href="#" class="btn btn-ghost" style="padding: 10px 24px; font-size:12px;">Discord</a>
-        <a href="#" class="btn btn-ghost" style="padding: 10px 24px; font-size:12px;">Forums</a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <footer id="contact">
   <div class="footer-top">
-    <div class="footer-col" style="max-width: 300px;">
-      <div class="logo" style="margin-bottom: 16px;">BL <span>Creative</span></div>
-      <p style="font-size: 13px; color: var(--text-muted); font-weight: 300;">Pioneering AI video enhancement and visual processing technologies for the next generation of creators.</p>
+    <div class="footer-col">
+      <div class="logo">BL <span>Creative</span></div>
+      <p data-i18n="ft_desc">Bridging the gap between imagination and reality. We build software that empowers creators with tools previously reserved for massive Hollywood studios.</p>
     </div>
     <div class="footer-col">
-      <h4 data-i18n="ft_prod">Products</h4>
-      <ul>
-        <li><a href="#">UltraPurity</a></li>
-        <li><a href="#">Future Suite (Coming Soon)</a></li>
-      </ul>
+      <h4 data-i18n="nav_prod">Products</h4>
+      <ul><li><a href="#">UltraPurity</a></li><li><a href="#">Future Suite</a></li></ul>
     </div>
     <div class="footer-col">
-      <h4 data-i18n="ft_comp">Company</h4>
-      <ul>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Careers</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
+      <h4 data-i18n="ft_com">Community</h4>
+      <ul><li><a href="#">Discord Server</a></li><li><a href="#">Developer Forums</a></li></ul>
     </div>
     <div class="footer-col">
       <h4 data-i18n="ft_leg">Legal</h4>
-      <ul>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Terms of Service</a></li>
-      </ul>
+      <ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul>
     </div>
   </div>
-  <div class="footer-bottom">
-    © 2026 BL Creative (bl-creative.com). All rights reserved.
-  </div>
+  <div class="footer-bottom">© 2026 BL Creative (bl-creative.com). All rights reserved.</div>
 </footer>
 
 <script>
 // --- Background Stars ---
 function createStars() {
   const container = document.getElementById('stars-container');
-  const layers = [{ name: 'stars-small', count: 400 }, { name: 'stars-medium', count: 100 }];
+  const layers = [{ name: 'stars-small', count: 400 }, { name: 'stars-medium', count: 150 }];
   layers.forEach(layer => {
     const div = document.createElement('div'); div.className = `stars ${layer.name}`;
     let shadows = '';
@@ -379,14 +349,14 @@ function createStars() {
 }
 createStars(); window.addEventListener('resize', () => { document.getElementById('stars-container').innerHTML = ''; createStars(); });
 
-// --- Engine Data & Building ---
+// --- Real Engines Data & Building ---
 const engines = [
-  { name:"QUANTUM AI", color:"#00e5ff", desc:{ en:"Deep neural void reconstruction.", ar:"إعادة بناء عصبية عميقة للفراغ والبيانات المفقودة."} },
-  { name:"ULTRA POWER", color:"#ff4757", desc:{ en:"Temporal upscaling without artifacts.", ar:"تكبير دقة زمني خالي من الشوائب والرعشة."} },
-  { name:"CRYSTAL CLEAR", color:"#2ed573", desc:{ en:"Precision denoising from compressed sources.", ar:"إزالة ضوضاء دقيقة من المصادر شديدة الضغط."} },
-  { name:"SILK FLOW", color:"#9d4edd", desc:{ en:"Precise 60/120 FPS frame generation.", ar:"توليد دقيق للإطارات للوصول إلى 60/120 إطار."} },
-  { name:"GHOST WIPE", color:"#ff7f50", desc:{ en:"Seamless AI object removal.", ar:"إزالة الكائنات بالذكاء الاصطناعي بسلاسة تامة."} },
-  { name:"SMART BALANCE", color:"#eccc68", desc:{ en:"Algorithmic color and exposure grading.", ar:"تصحيح خوارزمي دقيق للألوان والتعريض."} }
+  { name:"QUANTUM AI", color:"#00e5ff", classBefore:"img-q flt-q-before", classAfter:"img-q", desc:{ en:"Deep neural detail reconstruction.", ar:"إعادة بناء عصبية للتفاصيل المفقودة."} },
+  { name:"ULTRA POWER", color:"#ff4757", classBefore:"img-u flt-u-before", classAfter:"img-u", desc:{ en:"Cinematic upscaling and color restore.", ar:"تكبير دقة سينمائي واستعادة ألوان."} },
+  { name:"CRYSTAL CLEAR", color:"#2ed573", classBefore:"img-c flt-c-before", classAfter:"img-c", desc:{ en:"Precision denoising from bad sources.", ar:"إزالة ضوضاء دقيقة بذكاء اصطناعي."} },
+  { name:"SILK FLOW", color:"#9d4edd", isAnim:true, desc:{ en:"Flawless 60/120 FPS motion generation.", ar:"توليد إطارات للوصول لحركة 120 إطار ناعمة."} },
+  { name:"GHOST WIPE", color:"#ff7f50", classBefore:"img-g flt-g-before", classAfter:"img-g", desc:{ en:"Seamless AI object removal.", ar:"إزالة الكائنات بسلاسة تامة."} },
+  { name:"SMART BALANCE", color:"#eccc68", classBefore:"img-s flt-s-before", classAfter:"img-s", desc:{ en:"Algorithmic exposure grading.", ar:"تصحيح خوارزمي دقيق للتعريض."} }
 ];
 
 const grid = document.getElementById('enginesGrid');
@@ -394,43 +364,48 @@ function buildEngines(l) {
   grid.innerHTML = '';
   engines.forEach((e, i) => {
     const card = document.createElement('div'); card.className = 'engine-card';
+    
+    // Check if it's the FPS engine (Animation) or Image engine
+    let previewHTML = '';
+    if(e.isAnim) {
+      previewHTML = `
+        <div class="s-layer fps-bg"><div class="fps-ball fps-stutter"></div></div>
+        <div class="s-clip" id="ec${i}" style="width: 50%; border-right: 2px solid ${e.color}">
+          <div class="s-layer fps-bg" style="width: 350px;"><div class="fps-ball fps-smooth"></div></div>
+          <div class="scanner" style="background: linear-gradient(to bottom, transparent, ${e.color}33 50%, transparent)"></div>
+        </div>`;
+    } else {
+      previewHTML = `
+        <div class="s-layer ${e.classBefore}"></div>
+        <div class="s-clip" id="ec${i}" style="width: 50%; border-right: 2px solid ${e.color}">
+          <div class="s-layer ${e.classAfter}" style="width: 350px;"></div>
+          <div class="scanner" style="background: linear-gradient(to bottom, transparent, ${e.color}33 50%, transparent)"></div>
+        </div>`;
+    }
+
     card.innerHTML = `
       <div class="slider-wrap engine-preview" id="ep${i}">
-        <div class="s-layer" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), repeating-linear-gradient(45deg, #111 0, #111 2px, #222 2px, #222 4px); filter: blur(1px);"></div>
-        <div class="s-clip" id="ec${i}" style="width: 50%;">
-          <div class="s-layer" style="width: 400px; background: radial-gradient(circle at 50% 50%, ${e.color}33, transparent 70%), #080808;"></div>
-        </div>
-        <div class="s-divider" id="ed${i}" style="left:50%; background:${e.color}; box-shadow: 0 0 10px ${e.color}"></div>
-        <div class="s-handle" id="eh${i}" style="left:50%; border-color:${e.color}; color:${e.color}; width:24px; height:24px; font-size:8px;">⇔</div>
+        ${previewHTML}
+        <div class="s-handle" id="eh${i}" style="left:50%; border-color:${e.color}; color:${e.color}; width:28px; height:28px; font-size:10px;">⇔</div>
       </div>
       <div class="engine-body">
         <div class="engine-name" style="color:${e.color}">${e.name}</div>
         <div class="engine-desc">${(e.desc[l]||e.desc.en)}</div>
       </div>`;
     grid.appendChild(card);
-    setupSlider(card.querySelector(`#ep${i}`), card.querySelector(`#ec${i}`), card.querySelector(`#ed${i}`), card.querySelector(`#eh${i}`));
+    setupSlider(card.querySelector(`#ep${i}`), card.querySelector(`#ec${i}`), card.querySelector(`#eh${i}`));
   });
 }
 
-// --- Universal Slider Logic (Fixes RTL/LTR issue) ---
-function setupSlider(wrap, clip, div, hdl) {
+// --- Bulletproof Slider Logic (Always LTR container fixes the math) ---
+function setupSlider(wrap, clip, hdl) {
   let drag = false;
   function mv(x) {
     const r = wrap.getBoundingClientRect();
     let p = ((x - r.left) / r.width) * 100;
     p = Math.max(0, Math.min(100, p));
-    const isRTL = document.documentElement.dir === 'rtl';
-    
-    // In LTR, clip reveals left side (width = p%). In RTL, if we want it to work naturally with the mouse:
-    // The visual left side of the screen corresponds to smaller mouse X.
-    if(isRTL) {
-        clip.style.width = (100 - p) + '%';
-        clip.style.left = '0'; clip.style.right = 'auto'; // Anchor clip to left side
-    } else {
-        clip.style.width = p + '%';
-        clip.style.left = '0'; clip.style.right = 'auto';
-    }
-    div.style.left = p + '%'; hdl.style.left = p + '%';
+    clip.style.width = p + '%';
+    hdl.style.left = p + '%';
   }
   wrap.addEventListener('mousedown', e => { drag=true; mv(e.clientX); });
   wrap.addEventListener('touchstart', e => { drag=true; mv(e.touches[0].clientX); }, {passive:true});
@@ -439,7 +414,7 @@ function setupSlider(wrap, clip, div, hdl) {
   document.addEventListener('mouseup', () => drag=false);
   document.addEventListener('touchend', () => drag=false);
 }
-setupSlider(document.getElementById('heroSlider'), document.getElementById('heroClip'), document.getElementById('heroDiv'), document.getElementById('heroHdl'));
+setupSlider(document.getElementById('heroSlider'), document.getElementById('heroClip'), document.getElementById('heroHdl'));
 
 // --- Pricing Toggle ---
 let isYearly = false;
@@ -448,58 +423,42 @@ function toggleBilling() {
   document.getElementById('billToggle').classList.toggle('is-yearly', isYearly);
   document.getElementById('lblMonthly').style.color = isYearly ? 'var(--text-muted)' : 'var(--text-main)';
   document.getElementById('lblYearly').style.color = isYearly ? 'var(--text-main)' : 'var(--text-muted)';
-  
-  document.querySelectorAll('.price-val').forEach(el => {
-    el.innerText = isYearly ? el.getAttribute('data-yr') : el.getAttribute('data-mo');
-  });
+  document.querySelectorAll('.price-val').forEach(el => { el.innerText = isYearly ? el.getAttribute('data-yr') : el.getAttribute('data-mo'); });
 }
 
-// --- i18n Dictionary ---
+// --- i18n Dictionary (Core + Fallbacks for other langs) ---
 const dictionary = {
   en: {
-    nav_products: "Products", nav_hardware: "Hardware", nav_pricing: "Pricing", nav_about: "Company", nav_contact: "Contact Us",
-    hero_badge: "Flagship Product", hero_h1: "Vision Reimagined",
-    hero_sub: "Our most advanced AI video enhancement suite. Powered by six proprietary neural engines to eliminate noise, restore details, and generate flawless temporal frames.",
-    cta_get: "Get UltraPurity", cta_explore: "Explore Engines",
-    hw_tag: "Hardware Acceleration", hw_h: "Built for <span>Tensor Cores</span>",
-    hw_desc: "UltraPurity directly interfaces with NVIDIA and AMD architectural cores. By utilizing hardware-level deep learning super sampling, our engines process high-resolution frames with zero bottleneck.",
-    eng_tag: "Processing Architecture", eng_h: "The <span>Six Engines</span>",
-    pr_tag: "Licenses", pr_h: "Choose your <span>Plan</span>", pr_mo: "Monthly", pr_yr: "Yearly (-20%)", pr_per: "/mo",
-    tier1_name: "Creator", tier1_desc: "Perfect for independent content creators.",
-    tier2_name: "Professional", tier2_desc: "For professional editors and videographers.",
-    tier3_name: "Studio", tier3_desc: "Uncapped processing for production houses.",
-    f1: "Max 4K Resolution", f2: "Standard Processing Speed", f3: "Community Support",
-    f4: "Max 8K Resolution", f5: "GPU Multi-threading", f6: "Priority Email Support",
-    f7: "Unlimited Resolution", f8: "Render Farm Deployment", f9: "24/7 Dedicated Support",
-    btn_sub: "Subscribe",
-    ab_h: "About BL Creative", ab_p1: "Founded on the principle of bridging the gap between imagination and reality. We build software that empowers creators with tools previously reserved for massive Hollywood studios.", ab_p2: "Our vision is to continue expanding our software suite, bringing AI-driven perfection to all visual mediums.",
-    com_h: "Join the Community", com_p: "Connect with thousands of professionals. Share workflows, get feedback on your UltraPurity renders, and suggest features for upcoming updates.",
-    ft_prod: "Products", ft_comp: "Company", ft_leg: "Legal"
+    nav_prod: "Products", nav_eng: "Engines", nav_hw: "Hardware", nav_pr: "Pricing", nav_contact: "Contact Us",
+    hero_badge: "Flagship Protocol", hero_h1: "Vision Reimagined",
+    hero_sub: "The ultimate AI video processing suite. Six neural engines built to analyze, reconstruct, and upscale your footage beyond reality.",
+    cta_get: "Deploy UltraPurity", cta_exp: "View Architecture",
+    hw_tag: "Hardware Acceleration", hw_h: "Powered by <span>Tensor Cores</span>",
+    hw_desc: "Engineered to extract maximum performance from NVIDIA and AMD architectures. Real-time deep learning processing with zero bottleneck.",
+    eng_tag: "Processing Architecture", eng_h: "The <span>Neural Engines</span>",
+    pr_tag: "Commercial Licenses", pr_h: "Select <span>Deployment</span>", pr_mo: "Monthly", pr_yr: "Yearly (-20%)", pr_per: "/mo",
+    t1_n: "Creator", t2_n: "Professional", t3_n: "Studio",
+    f1: "Max 4K Resolution", f2: "Standard Processing", f3: "Community Support", f4: "Max 8K Resolution", f5: "GPU Multi-threading", f6: "Priority Support", f7: "Unlimited Resolution", f8: "Render Farm Deploy", f9: "24/7 Dedicated Support",
+    btn_sub: "Subscribe", ft_desc: "Bridging the gap between imagination and reality. We build software that empowers creators.", ft_com: "Community", ft_leg: "Legal"
   },
   ar: {
-    nav_products: "منتجاتنا", nav_hardware: "العتاد المدعوم", nav_pricing: "الأسعار", nav_about: "الشركة", nav_contact: "تواصل معنا",
-    hero_badge: "المنتج الرائد", hero_h1: "رؤية تتشكل من جديد",
-    hero_sub: "أقوى حزمة ذكاء اصطناعي لمعالجة الفيديو. مدعومة بستة محركات عصبية حصرية للقضاء على الضوضاء، استعادة أدق التفاصيل، وتوليد إطارات زمنية خالية من العيوب.",
-    cta_get: "احصل على UltraPurity", cta_explore: "استكشف المحركات",
-    hw_tag: "تسريع العتاد", hw_h: "مُصمم لأنوية <span>الذكاء الاصطناعي</span>",
-    hw_desc: "يتخاطب UltraPurity مباشرة مع معالجات وبنية كروت NVIDIA و AMD. من خلال استغلال التعلم العميق على مستوى العتاد، تقوم محركاتنا بمعالجة الإطارات بدقة هائلة وبدون أي اختناق.",
-    eng_tag: "هيكلة المعالجة المركزية", eng_h: "المحركات <span>الستة</span>",
-    pr_tag: "التراخيص", pr_h: "اختر <span>خطتك</span>", pr_mo: "شهري", pr_yr: "سنوي (خصم 20%)", pr_per: "/شهر",
-    tier1_name: "المبدعين", tier1_desc: "مثالية لصناع المحتوى المستقلين.",
-    tier2_name: "المحترفين", tier2_desc: "للمحررين وصناع الأفلام المحترفين.",
-    tier3_name: "الاستوديوهات", tier3_desc: "معالجة لا محدودة لشركات الإنتاج.",
-    f1: "دقة قصوى 4K", f2: "سرعة معالجة قياسية", f3: "دعم من المجتمع",
-    f4: "دقة قصوى 8K", f5: "معالجة متعددة المسارات", f6: "أولوية الدعم الفني",
-    f7: "دقة غير محدودة", f8: "دعم مزارع الرندر (Render Farms)", f9: "دعم مخصص 24/7",
-    btn_sub: "اشترك الآن",
-    ab_h: "عن شركة BL Creative", ab_p1: "تأسسنا على مبدأ سد الفجوة بين الخيال والواقع. نحن نبني برمجيات تمنح المبدعين أدوات كانت حكراً على استوديوهات هوليوود الضخمة.", ab_p2: "رؤيتنا هي الاستمرار في توسيع حزمة برمجياتنا، لجلب الكمال المدفوع بالذكاء الاصطناعي إلى جميع الوسائط المرئية.",
-    com_h: "انضم لمجتمعنا", com_p: "تواصل مع آلاف المحترفين. شارك أعمالك، احصل على تقييم لنتائج UltraPurity، واقترح ميزات للتحديثات القادمة.",
-    ft_prod: "المنتجات", ft_comp: "الشركة", ft_leg: "قانوني"
+    nav_prod: "المنتجات", nav_eng: "المحركات", nav_hw: "العتاد", nav_pr: "الأسعار", nav_contact: "تواصل معنا",
+    hero_badge: "البروتوكول الرائد", hero_h1: "رؤية تتشكل من جديد",
+    hero_sub: "أقوى حزمة ذكاء اصطناعي لمعالجة الفيديو. ستة محركات عصبية صُممت لتحليل، بناء، ورفع دقة اللقطات لتتجاوز الواقع.",
+    cta_get: "استخدم UltraPurity", cta_exp: "تصفح الهيكلة",
+    hw_tag: "تسريع العتاد", hw_h: "مدعوم بأنوية <span>الذكاء الاصطناعي</span>",
+    hw_desc: "مُهندس لاستخراج الأداء الأقصى من معمارية كروت NVIDIA و AMD. معالجة تعلم عميق بالوقت الفعلي بدون أي عنق زجاجة.",
+    eng_tag: "هيكلة المعالجة", eng_h: "المحركات <span>العصبية</span>",
+    pr_tag: "التراخيص التجارية", pr_h: "اختر <span>خطتك</span>", pr_mo: "شهري", pr_yr: "سنوي (خصم 20%)", pr_per: "/شهر",
+    t1_n: "المبدعين", t2_n: "المحترفين", t3_n: "الاستوديوهات",
+    f1: "دقة قصوى 4K", f2: "معالجة قياسية", f3: "دعم المجتمع", f4: "دقة قصوى 8K", f5: "استغلال مسارات GPU", f6: "دعم فني بأولوية", f7: "دقة لا محدودة", f8: "دعم مزارع الرندر", f9: "دعم مخصص 24/7",
+    btn_sub: "اشترك الآن", ft_desc: "نسد الفجوة بين الخيال والواقع، لنبني برمجيات تمنح المبدعين أدوات استوديوهات هوليوود.", ft_com: "المجتمع", ft_leg: "قانوني"
   }
 };
 
 function applyLang(l) {
-  const t = dictionary[l] || dictionary.en;
+  // Fallback to English if translation is missing for the other languages
+  const t = dictionary[l] || dictionary.en; 
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if(t[key]) el.innerHTML = t[key];
@@ -511,7 +470,7 @@ function applyLang(l) {
   buildEngines(l);
 }
 function setLang(l) { applyLang(l); }
-applyLang('ar'); // Default load language set to Arabic
+applyLang('ar');
 </script>
 </body>
 </html>
