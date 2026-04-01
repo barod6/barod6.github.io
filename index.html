@@ -3,278 +3,187 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ultra Purity — AI Video Enhancement</title>
-<meta name="description" content="Six AI-powered engines that fix noise, sharpen detail, remove artifacts, and remaster your videos frame by frame.">
+<title>BL Creative — Advanced AI Solutions</title>
+<meta name="description" content="BL Creative: Pioneering AI video enhancement and processing technologies.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Outfit:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ===== RESET & CORE VARIABLES ===== */
+/* ===== CORE VARIABLES ===== */
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --space-black: #000000;
-  --space-dark: #050508;
-  --space-gray: #0b0b10;
+  --space-black: #020203;
+  --space-dark: #08080a;
+  --space-gray: #121216;
   
   --neon-cyan: #00e5ff;
   --neon-purple: #9d4edd;
   
-  --glass-bg: rgba(10, 10, 15, 0.4);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-highlight: rgba(255, 255, 255, 0.15);
+  --glass-bg: rgba(12, 12, 16, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-highlight: rgba(255, 255, 255, 0.1);
   
-  --text-main: #ffffff;
+  --text-main: #f4f4f5;
   --text-muted: #8b8b99;
-  --radius-lg: 16px;
-  --radius-sm: 8px;
 }
 
 html { scroll-behavior: smooth; background-color: var(--space-black); }
 body {
   color: var(--text-main);
-  font-family: 'Outfit', 'Cairo', sans-serif;
-  font-size: 15px;
-  line-height: 1.6;
+  font-family: 'Space Grotesk', 'Alexandria', sans-serif;
+  font-size: 15px; line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-  position: relative;
+  overflow-x: hidden; position: relative;
 }
-a { text-decoration: none; color: inherit; }
+a { text-decoration: none; color: inherit; transition: 0.3s; }
 ::selection { background: rgba(0, 229, 255, 0.2); color: var(--neon-cyan); }
 
-/* ===== DEEP SPACE ANIMATION (PARALLAX STARS & NEBULA) ===== */
-#space-container {
-  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-  z-index: -10; background: var(--space-black); overflow: hidden;
-}
-/* Nebula Glows */
-.nebula {
-  position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.3;
-  animation: breathe 20s ease-in-out infinite alternate;
-}
-.nebula-1 { width: 600px; height: 600px; background: radial-gradient(circle, var(--neon-cyan), transparent 70%); top: -200px; left: -100px; }
-.nebula-2 { width: 800px; height: 800px; background: radial-gradient(circle, var(--neon-purple), transparent 70%); bottom: -300px; right: -200px; animation-delay: -10s; }
+/* ===== DEEP SPACE BACKGROUND ===== */
+#space-container { position: fixed; inset: 0; z-index: -10; background: var(--space-black); overflow: hidden; }
+.nebula { position: absolute; border-radius: 50%; filter: blur(140px); opacity: 0.2; animation: breathe 25s ease-in-out infinite alternate; }
+.nebula-1 { width: 700px; height: 700px; background: radial-gradient(circle, var(--neon-cyan), transparent 70%); top: -200px; left: -100px; }
+.nebula-2 { width: 900px; height: 900px; background: radial-gradient(circle, var(--neon-purple), transparent 70%); bottom: -300px; right: -200px; animation-delay: -12s; }
+@keyframes breathe { 0% { opacity: 0.15; transform: scale(1); } 100% { opacity: 0.3; transform: scale(1.1); } }
 
-@keyframes breathe { 0% { opacity: 0.2; transform: scale(1); } 100% { opacity: 0.4; transform: scale(1.1); } }
-
-/* Star Layers */
+/* CSS Stars */
 .stars { position: absolute; top: 0; left: 0; width: 100%; height: 200%; }
-.stars-small { width: 1px; height: 1px; background: transparent; animation: animStar 150s linear infinite; }
-.stars-medium { width: 2px; height: 2px; background: transparent; animation: animStar 100s linear infinite; }
-.stars-large { width: 3px; height: 3px; background: transparent; animation: animStar 50s linear infinite; }
-
+.stars-small { width: 1px; height: 1px; animation: animStar 120s linear infinite; }
+.stars-medium { width: 2px; height: 2px; animation: animStar 80s linear infinite; }
 @keyframes animStar { from { transform: translateY(0px); } to { transform: translateY(-100vh); } }
 
-/* ===== SPACESHIP HUD NAVIGATION ===== */
-.nav-wrapper {
-  position: fixed; top: 20px; left: 0; right: 0;
-  display: flex; justify-content: center; z-index: 200; padding: 0 4%;
-}
+/* ===== NAVIGATION ===== */
+.nav-wrapper { position: fixed; top: 20px; left: 0; right: 0; display: flex; justify-content: center; z-index: 200; padding: 0 4%; }
 nav {
   display: flex; align-items: center; justify-content: space-between;
-  width: 100%; max-width: 1200px; height: 68px; padding: 0 32px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-top: 1px solid var(--glass-highlight);
-  border-radius: 100px;
-  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.8);
-  transition: all 0.4s ease;
+  width: 100%; max-width: 1200px; height: 64px; padding: 0 32px;
+  background: var(--glass-bg); border: 1px solid var(--glass-border); border-top: 1px solid var(--glass-highlight);
+  border-radius: 100px; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
 }
-nav:hover { border-color: rgba(0, 229, 255, 0.3); box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 30px rgba(0, 229, 255, 0.1); }
-
-.logo { font-weight: 800; font-size: 22px; letter-spacing: 2px; text-transform: uppercase; }
+.logo { font-weight: 700; font-size: 20px; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
 .logo span { color: var(--neon-cyan); font-weight: 300; }
-
-.nav-center { display: flex; gap: 40px; }
-.nav-center a {
-  font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;
-  color: var(--text-muted); position: relative; padding: 8px 0; transition: color 0.3s;
-}
+.nav-center { display: flex; gap: 32px; }
+.nav-center a { font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
 .nav-center a:hover { color: var(--text-main); }
-.nav-center a::after {
-  content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 1px;
-  background: var(--neon-cyan); transition: width 0.3s ease;
-}
-.nav-center a:hover::after { width: 100%; box-shadow: 0 0 10px var(--neon-cyan); }
-
-.nav-right { display: flex; align-items: center; gap: 20px; }
+.nav-right { display: flex; align-items: center; gap: 16px; }
 .lang-sel {
-  font-family: inherit; font-size: 11px; font-weight: 700; letter-spacing: 1px;
-  background: rgba(0,0,0,0.6); border: 1px solid var(--glass-border);
-  color: var(--text-muted); padding: 8px 16px; border-radius: 100px;
-  cursor: pointer; outline: none; transition: 0.3s; appearance: none;
+  font-family: inherit; font-size: 12px; font-weight: 500; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border);
+  color: var(--text-muted); padding: 8px 12px; border-radius: 100px; cursor: pointer; outline: none; appearance: none;
 }
 .lang-sel:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
 
-.btn-nav {
-  position: relative; background: transparent; color: var(--text-main);
-  font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
-  padding: 10px 28px; border-radius: 100px;
-  border: 1px solid rgba(255,255,255,0.2); transition: 0.3s;
-  overflow: hidden;
-}
-.btn-nav::before {
-  content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-  transition: 0.5s;
-}
-.btn-nav:hover { background: var(--text-main); color: var(--space-black); border-color: var(--text-main); }
-.btn-nav:hover::before { left: 100%; }
+/* ===== HERO SECTION (UltraPurity Focus) ===== */
+.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 160px 6% 80px; text-align: center; }
+.badge { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--neon-cyan); background: rgba(0, 229, 255, 0.05); border: 1px solid rgba(0, 229, 255, 0.2); padding: 6px 20px; border-radius: 100px; margin-bottom: 24px; backdrop-filter: blur(10px); }
+.hero h1 { font-size: clamp(40px, 6vw, 72px); font-weight: 700; line-height: 1.1; margin-bottom: 24px; }
+.hero h1 .product-name { background: linear-gradient(135deg, #fff, var(--neon-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; }
+.hero-sub { font-size: 16px; color: var(--text-muted); max-width: 600px; margin: 0 auto 48px; font-weight: 300; line-height: 1.8; }
 
-/* ===== HERO SECTION ===== */
-.hero {
-  min-height: 100vh; display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 160px 6% 80px; text-align: center; position: relative; z-index: 10;
-}
-.badge {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 10px; font-weight: 800; letter-spacing: 4px; text-transform: uppercase;
-  color: var(--text-main); border: 1px solid rgba(255,255,255,0.1);
-  background: var(--glass-bg); padding: 8px 24px; border-radius: 100px;
-  margin-bottom: 36px; backdrop-filter: blur(10px);
-}
-.badge .dot { width: 6px; height: 6px; background: var(--neon-cyan); border-radius: 50%; box-shadow: 0 0 10px var(--neon-cyan); }
+/* Global Slider Styles */
+.slider-wrap { position: relative; border-radius: 12px; overflow: hidden; cursor: ew-resize; user-select: none; border: 1px solid var(--glass-border); background: #000; }
+.s-layer { position: absolute; inset: 0; width: 100%; height: 100%; background-size: cover; background-position: center; }
+.s-clip { position: absolute; inset: 0; overflow: hidden; }
+.s-divider { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--neon-cyan); transform: translateX(-50%); z-index: 8; pointer-events: none; box-shadow: 0 0 15px var(--neon-cyan); }
+.s-handle { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; background: var(--space-black); border: 1px solid var(--neon-cyan); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--neon-cyan); z-index: 9; pointer-events: none; font-size: 10px; font-weight: bold; }
 
-.hero h1 {
-  font-size: clamp(48px, 8vw, 96px); font-weight: 800; line-height: 1;
-  letter-spacing: -2px; margin-bottom: 24px; text-transform: uppercase;
-}
-.hero h1 .sky { color: transparent; -webkit-text-stroke: 1px var(--text-main); background: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="white"/></svg>') repeat; -webkit-background-clip: text; background-clip: text; }
+/* Main Hero Slider */
+.hero-slider { width: min(900px, 90vw); height: 450px; margin-bottom: 48px; box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
+.hero-before { background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url('data:image/svg+xml;utf8,<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="%23111"/><text x="50%" y="50%" fill="%23444" font-family="sans-serif" font-size="20" text-anchor="middle">Noisy / Low Res</text></svg>'); filter: blur(2px) grayscale(0.5); }
+.hero-after { background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url('data:image/svg+xml;utf8,<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="%23001825"/><text x="50%" y="50%" fill="%2300e5ff" font-family="sans-serif" font-size="20" text-anchor="middle">UltraPurity Processed</text></svg>'); }
 
-.hero-sub {
-  font-size: 18px; color: var(--text-muted); max-width: 650px; margin: 0 auto 60px;
-  font-weight: 300; line-height: 1.8; letter-spacing: 0.5px;
-}
-
-/* Compare Slider — Holographic Feel */
-.compare-wrap {
-  position: relative; width: min(960px, 90vw); height: 450px;
-  border-radius: var(--radius-lg); overflow: hidden; cursor: ew-resize;
-  border: 1px solid rgba(255,255,255,0.1); margin-bottom: 60px; user-select: none;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.05) inset;
-  background: var(--space-dark);
-}
-.c-layer { position: absolute; inset: 0; width: 100%; height: 100%; }
-.c-clip { position: absolute; inset: 0; overflow: hidden; border-right: 1px solid var(--neon-cyan); }
-.c-label {
-  position: absolute; top: 24px; padding: 6px 20px;
-  background: rgba(0,0,0,0.6); font-size: 10px; font-weight: 800; letter-spacing: 3px;
-  border-radius: 100px; text-transform: uppercase; pointer-events: none; z-index: 10;
-  backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05);
-}
-.c-label-left { left: 24px; color: #888; }
-.c-label-right { right: 24px; color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 229, 255, 0.2); }
-
-.c-divider {
-  position: absolute; top: 0; bottom: 0; width: 1px; background: var(--neon-cyan);
-  transform: translateX(-50%); z-index: 8; pointer-events: none;
-  box-shadow: 0 0 20px var(--neon-cyan);
-}
-.c-handle {
-  position: absolute; top: 50%; transform: translate(-50%, -50%);
-  width: 48px; height: 48px; background: rgba(0,0,0,0.5); border: 1px solid var(--neon-cyan);
-  border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  font-size: 12px; color: var(--neon-cyan); z-index: 9; pointer-events: none;
-  backdrop-filter: blur(10px); box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
-}
-
-.hero-before { background: linear-gradient(180deg, rgba(10,10,15,0.6), rgba(0,0,0,0.9)), url("assets/sample-before.jpg") center/cover; filter: grayscale(0.8) blur(2px); }
-.hero-after { background: linear-gradient(180deg, rgba(0, 229, 255, 0.05), rgba(0,0,0,0.5)), url("assets/sample-after.jpg") center/cover; }
-
-/* Call to Action */
-.hero-btns { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
-.btn-primary {
-  display: inline-flex; align-items: center; gap: 12px;
-  background: var(--text-main); color: var(--space-black);
-  font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;
-  padding: 18px 40px; border-radius: 100px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,255,255,0.4); }
-.btn-ghost {
-  display: inline-flex; align-items: center; gap: 12px;
-  background: var(--glass-bg); border: 1px solid rgba(255,255,255,0.1); color: var(--text-main);
-  font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
-  padding: 18px 40px; border-radius: 100px; backdrop-filter: blur(10px);
-  transition: all 0.3s;
-}
+/* CTA Buttons */
+.btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 14px 32px; border-radius: 100px; transition: 0.3s; }
+.btn-primary { background: var(--text-main); color: var(--space-black); }
+.btn-primary:hover { background: var(--neon-cyan); box-shadow: 0 0 20px rgba(0, 229, 255, 0.4); transform: translateY(-2px); }
+.btn-ghost { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-main); backdrop-filter: blur(10px); }
 .btn-ghost:hover { border-color: var(--text-main); background: rgba(255,255,255,0.05); }
 
-/* ===== STATS STRIP (Data Telemetry) ===== */
-.stats-strip {
-  border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);
-  display: grid; grid-template-columns: repeat(4, 1fr); background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(20px); position: relative; z-index: 10;
+/* ===== SECTION TITLES ===== */
+.section { padding: 120px 6%; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; }
+.sec-tag { font-size: 11px; font-weight: 600; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 16px; display: block; text-align: center; }
+.sec-h { font-size: clamp(32px, 4vw, 48px); font-weight: 600; line-height: 1.2; margin-bottom: 60px; text-align: center; }
+.sec-h span { color: var(--neon-cyan); font-weight: 300; }
+
+/* ===== GPU TECH SECTION (Scientific Animation) ===== */
+.gpu-container { display: flex; flex-direction: column; align-items: center; gap: 40px; }
+.gpu-core {
+  position: relative; width: 140px; height: 140px; background: #050505; border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 16px; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.1), inset 0 0 20px rgba(0, 229, 255, 0.05);
+  animation: floatGPU 6s ease-in-out infinite; z-index: 2;
 }
-.stat { text-align: center; padding: 48px 20px; border-right: 1px solid rgba(255,255,255,0.05); }
-.stat:last-child { border-right: none; }
-.stat-num { font-size: 56px; font-weight: 200; color: var(--text-main); line-height: 1; margin-bottom: 12px; font-family: 'Outfit', sans-serif; }
-.stat-label { font-size: 10px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 4px; }
+.gpu-core::after { content: 'TENSOR CORE'; font-size: 10px; letter-spacing: 2px; color: var(--neon-cyan); font-weight: bold; }
+@keyframes floatGPU { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); box-shadow: 0 15px 40px rgba(0, 229, 255, 0.2); } }
 
-/* ===== ENGINES (Modules) ===== */
-.section { padding: 140px 6%; max-width: 1400px; margin: 0 auto; position: relative; z-index: 10; }
-.section-tag { font-size: 10px; font-weight: 800; letter-spacing: 5px; color: var(--neon-cyan); text-transform: uppercase; margin-bottom: 20px; display: block; }
-.section-h { font-size: clamp(36px, 5vw, 64px); font-weight: 800; line-height: 1.1; margin-bottom: 80px; text-transform: uppercase; letter-spacing: -2px; }
+/* Data Streams */
+.data-streams { display: flex; justify-content: space-between; width: 100%; max-width: 800px; position: relative; }
+.stream { flex: 1; height: 2px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); position: relative; margin: 20px 0; overflow: hidden; }
+.stream::before {
+  content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+  animation: dataFlow 2s linear infinite;
+}
+@keyframes dataFlow { 100% { left: 200%; } }
+.gpu-desc { text-align: center; max-width: 600px; color: var(--text-muted); font-size: 15px; font-weight: 300; }
 
-.engines-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 32px; }
+/* ===== ENGINES (Mini Previews) ===== */
+.engines-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
 .engine-card {
-  background: var(--glass-bg); border: 1px solid var(--glass-border);
-  border-top: 1px solid var(--glass-highlight); border-radius: var(--radius-lg);
-  overflow: hidden; position: relative; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(24px); box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  background: var(--glass-bg); border: 1px solid var(--glass-border); border-top: 1px solid var(--glass-highlight);
+  border-radius: 16px; overflow: hidden; transition: 0.4s; backdrop-filter: blur(16px);
 }
-.engine-card:hover { border-color: rgba(255,255,255,0.3); transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 20px rgba(255,255,255,0.05); }
+.engine-card:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+.engine-preview { height: 160px; position: relative; border-bottom: 1px solid var(--glass-border); }
+.engine-body { padding: 24px; }
+.engine-name { font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.engine-name::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.engine-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; font-weight: 300; }
 
-.engine-compare { height: 220px; position: relative; cursor: ew-resize; overflow: hidden; user-select: none; background: #000; border-bottom: 1px solid rgba(255,255,255,0.05); }
-.ec-divider { position: absolute; top: 0; bottom: 0; width: 1px; transform: translateX(-50%); z-index: 5; pointer-events: none; }
-.ec-handle { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 32px; height: 32px; background: rgba(0,0,0,0.8); border: 1px solid; border-radius: 50%; z-index: 6; pointer-events: none; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; }
+/* ===== PRICING ===== */
+.billing-toggle { display: flex; justify-content: center; align-items: center; gap: 16px; margin-bottom: 40px; font-size: 14px; font-weight: 500; }
+.toggle-switch { position: relative; width: 50px; height: 26px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 100px; cursor: pointer; transition: 0.3s; }
+.toggle-dot { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; background: var(--text-main); border-radius: 50%; transition: 0.3s; }
+.is-yearly .toggle-dot { left: 27px; background: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan); }
 
-.engine-body { padding: 32px; }
-.engine-tag { font-size: 12px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-.engine-tag::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: currentColor; box-shadow: 0 0 10px currentColor; }
-.engine-desc { font-size: 14px; color: var(--text-muted); line-height: 1.8; font-weight: 400; }
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto; }
+.price-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 40px 32px; backdrop-filter: blur(16px); display: flex; flex-direction: column; transition: 0.3s; }
+.price-card.popular { border-color: rgba(0, 229, 255, 0.4); box-shadow: 0 10px 40px rgba(0, 229, 255, 0.05); transform: scale(1.02); }
+.tier-name { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; }
+.price { font-size: 40px; font-weight: 300; margin-bottom: 8px; display: flex; align-items: baseline; gap: 4px; }
+.price span { font-size: 14px; color: var(--text-muted); }
+.price-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 32px; font-weight: 300; }
+.features { list-style: none; margin-bottom: 40px; flex-grow: 1; }
+.features li { font-size: 13px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; color: #d4d4d8; font-weight: 300; }
+.features li::before { content: '✓'; color: var(--neon-cyan); font-weight: bold; }
+.price-card.popular .btn-ghost { background: var(--text-main); color: var(--space-black); border: none; }
+.price-card.popular .btn-ghost:hover { background: var(--neon-cyan); }
 
-/* ===== DOWNLOAD (Terminal) ===== */
-.dl-section {
-  text-align: center; padding: 140px 6%;
-  background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.9));
-  border-top: 1px solid rgba(255,255,255,0.05); position: relative; z-index: 10;
-}
-.dl-section h2 { font-size: clamp(36px, 5vw, 72px); font-weight: 800; text-transform: uppercase; margin-bottom: 24px; letter-spacing: -2px; }
-.dl-section p { font-size: 16px; color: var(--text-muted); margin-bottom: 48px; font-weight: 300; letter-spacing: 1px; }
-.dl-note { font-size: 11px; color: #666; margin-top: 32px; font-family: monospace; letter-spacing: 2px; text-transform: uppercase; }
+/* ===== ABOUT & COMMUNITY ===== */
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.info-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 40px; }
+.info-card h3 { font-size: 20px; font-weight: 600; margin-bottom: 16px; }
+.info-card p { font-size: 14px; color: var(--text-muted); font-weight: 300; margin-bottom: 24px; }
 
 /* ===== FOOTER ===== */
-footer {
-  padding: 48px 6%; border-top: 1px solid rgba(255,255,255,0.05);
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 24px; background: #000; position: relative; z-index: 10;
-}
-.footer-note { font-size: 11px; color: var(--text-muted); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
-.footer-note a { color: var(--text-main); transition: 0.3s; }
-.footer-note a:hover { color: var(--neon-cyan); }
+footer { padding: 60px 6% 40px; border-top: 1px solid var(--glass-border); background: rgba(0,0,0,0.8); }
+.footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px; margin-bottom: 60px; max-width: 1200px; margin-left: auto; margin-right: auto; }
+.footer-col h4 { font-size: 14px; font-weight: 600; margin-bottom: 20px; color: var(--text-main); }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 12px; }
+.footer-col ul a { font-size: 13px; color: var(--text-muted); font-weight: 300; }
+.footer-col ul a:hover { color: var(--neon-cyan); }
+.footer-bottom { text-align: center; border-top: 1px solid var(--glass-border); padding-top: 24px; font-size: 12px; color: #555; font-weight: 300; }
 
-/* ===== RTL SUPPORT ===== */
-html[dir="rtl"] nav { flex-direction: row-reverse; }
+/* RTL Adjustments */
 html[dir="rtl"] .nav-center, html[dir="rtl"] .nav-right { flex-direction: row-reverse; }
-html[dir="rtl"] .hero h1 { letter-spacing: 0; }
+html[dir="rtl"] .features li { flex-direction: row-reverse; }
 
-/* ===== RESPONSIVE ===== */
-@media(max-width: 1024px) {
+@media(max-width: 900px) {
   .nav-center { display: none; }
-  .stats-strip { grid-template-columns: repeat(2, 1fr); }
-  .stat:nth-child(2) { border-right: none; }
-  .stat:nth-child(3), .stat:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.05); }
-}
-@media(max-width: 600px) {
-  .nav-wrapper { padding: 0 16px; top: 16px; }
-  nav { padding: 0 20px; height: 60px; }
-  .logo { font-size: 18px; }
-  .stats-strip { grid-template-columns: 1fr; }
-  .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 36px 20px; }
-  .hero { padding-top: 140px; }
+  .info-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+  .price-card.popular { transform: none; }
 }
 </style>
 </head>
@@ -288,194 +197,240 @@ html[dir="rtl"] .hero h1 { letter-spacing: 0; }
 
 <div class="nav-wrapper">
   <nav>
-    <div class="logo">Ultra<span>Purity</span></div>
+    <div class="logo">BL <span>Creative</span></div>
     <div class="nav-center">
-      <a href="#engines" data-i18n="nav_engines">Modules</a>
-      <a href="#download" data-i18n="nav_download">Deploy</a>
-      <a href="https://github.com/bl-creative" target="_blank">Core Data</a>
+      <a href="#ultrapurity" data-i18n="nav_products">Products</a>
+      <a href="#hardware" data-i18n="nav_hardware">Hardware</a>
+      <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
+      <a href="#about" data-i18n="nav_about">Company</a>
     </div>
     <div class="nav-right">
       <select class="lang-sel" id="langSel" onchange="setLang(this.value)">
         <option value="en">EN</option>
         <option value="ar">AR</option>
-        <option value="fr">FR</option>
       </select>
-      <a class="btn-nav" href="#download" data-i18n="nav_cta">System Init</a>
+      <a class="btn btn-ghost" href="#contact" data-i18n="nav_contact" style="padding: 8px 20px; font-size: 11px;">Contact Us</a>
     </div>
   </nav>
 </div>
 
-<section class="hero">
-  <div class="badge">
-    <div class="dot"></div>
-    <span data-i18n="hero_badge">System Online . 2027 Vision</span>
-  </div>
+<section class="hero" id="ultrapurity">
+  <div class="badge" data-i18n="hero_badge">Flagship Product</div>
   <h1>
-    <span data-i18n="hero_h1a">Reality,</span><br>
-    <span class="sky" data-i18n="hero_h1b">Reconstructed</span>
+    <span class="product-name">UltraPurity</span><br>
+    <span style="font-weight:300; font-size: 0.7em;" data-i18n="hero_h1">Vision Reimagined</span>
   </h1>
   <p class="hero-sub" data-i18n="hero_sub">
-    Deploying advanced neural networks to eliminate void noise, restore microscopic details, and generate flawless temporal frames.
+    Our most advanced AI video enhancement suite. Powered by six proprietary neural engines to eliminate noise, restore details, and generate flawless temporal frames.
   </p>
 
-  <div class="compare-wrap" id="heroSlider">
-    <div class="c-layer hero-before" id="heroLayerB"></div>
-    <div class="c-clip" id="heroClip" style="right:50%">
-      <div class="c-layer hero-after" style="position:absolute;inset:0;width:100vw;max-width:960px;"></div>
+  <div class="slider-wrap hero-slider" id="heroSlider">
+    <div class="s-layer hero-before"></div>
+    <div class="s-clip" id="heroClip" style="width: 50%;">
+      <div class="s-layer hero-after" style="width: 100vw; max-width: 900px;"></div>
     </div>
-    <div class="c-label c-label-left" data-i18n="lbl_before">Raw Input</div>
-    <div class="c-label c-label-right" data-i18n="lbl_after">Processed</div>
-    <div class="c-divider" id="heroDiv" style="left:50%"></div>
-    <div class="c-handle" id="heroHdl" style="left:50%">&#10094;&#10095;</div>
+    <div class="s-divider" id="heroDiv" style="left: 50%;"></div>
+    <div class="s-handle" id="heroHdl" style="left: 50%;">⇔</div>
   </div>
 
-  <div class="hero-btns">
-    <a class="btn-primary" href="#download">
-      <span data-i18n="cta_download">Deploy for Windows</span>
-    </a>
-    <a class="btn-ghost" href="https://github.com/bl-creative" target="_blank">
-      <span data-i18n="cta_github">Access Source Code</span>
-    </a>
+  <div class="btns">
+    <a class="btn btn-primary" href="#pricing" data-i18n="cta_get">Get UltraPurity</a>
+    <a class="btn btn-ghost" href="#engines" data-i18n="cta_explore">Explore Engines</a>
   </div>
 </section>
 
-<div class="stats-strip">
-  <div class="stat"><div class="stat-num">06</div><div class="stat-label" data-i18n="stat1">Neural Cores</div></div>
-  <div class="stat"><div class="stat-num">120</div><div class="stat-label" data-i18n="stat2">FPS Render</div></div>
-  <div class="stat"><div class="stat-num">8K</div><div class="stat-label" data-i18n="stat3">Max Output</div></div>
-  <div class="stat"><div class="stat-num">00</div><div class="stat-label" data-i18n="stat4">Latency</div></div>
-</div>
+<section class="section" id="hardware">
+  <span class="sec-tag" data-i18n="hw_tag">Hardware Acceleration</span>
+  <h2 class="sec-h" data-i18n="hw_h">Built for <span>Tensor Cores</span></h2>
+  
+  <div class="gpu-container">
+    <div class="gpu-core"></div>
+    <div class="data-streams">
+      <div class="stream"></div>
+      <div class="stream" style="animation-delay: 0.5s;"></div>
+      <div class="stream" style="animation-delay: 1s;"></div>
+    </div>
+    <p class="gpu-desc" data-i18n="hw_desc">
+      UltraPurity directly interfaces with NVIDIA and AMD architectural cores. By utilizing hardware-level deep learning super sampling, our engines process high-resolution frames with zero bottleneck.
+    </p>
+  </div>
+</section>
 
-<section id="engines" class="section">
-  <span class="section-tag" data-i18n="engines_tag">Processing Modules</span>
-  <h2 class="section-h" data-i18n="engines_h">Absolute<br>Control.</h2>
+<section class="section" id="engines">
+  <span class="sec-tag" data-i18n="eng_tag">Processing Architecture</span>
+  <h2 class="sec-h" data-i18n="eng_h">The <span>Six Engines</span></h2>
   <div class="engines-grid" id="enginesGrid"></div>
 </section>
 
-<section id="download" class="dl-section">
-  <h2 data-i18n="dl_h">Initialize Sequence</h2>
-  <p data-i18n="dl_sub">Open source protocol. Windows 10/11 · GPU Hardware required.</p>
-  <a class="btn-primary" href="https://github.com/bl-creative" target="_blank">
-    <span data-i18n="dl_btn">Download Terminal</span>
-  </a>
-  <div class="dl-note" data-i18n="dl_note">SYS_REQ: V 7.0 // NVIDIA-AMD Tensor Core // 4GB+ VRAM</div>
+<section class="section" id="pricing">
+  <span class="sec-tag" data-i18n="pr_tag">Licenses</span>
+  <h2 class="sec-h" data-i18n="pr_h">Choose your <span>Plan</span></h2>
+  
+  <div class="billing-toggle" onclick="toggleBilling()">
+    <span id="lblMonthly" style="color:var(--text-main)" data-i18n="pr_mo">Monthly</span>
+    <div class="toggle-switch" id="billToggle"><div class="toggle-dot"></div></div>
+    <span id="lblYearly" style="color:var(--text-muted)" data-i18n="pr_yr">Yearly (-20%)</span>
+  </div>
+
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="tier-name" data-i18n="tier1_name">Creator</div>
+      <div class="price">$<span class="price-val" data-mo="29" data-yr="24">29</span><span data-i18n="pr_per">/mo</span></div>
+      <div class="price-desc" data-i18n="tier1_desc">Perfect for independent content creators.</div>
+      <ul class="features">
+        <li data-i18n="f1">Max 4K Resolution</li>
+        <li data-i18n="f2">Standard Processing Speed</li>
+        <li data-i18n="f3">Community Support</li>
+      </ul>
+      <a href="#" class="btn btn-ghost" style="width:100%; justify-content:center" data-i18n="btn_sub">Subscribe</a>
+    </div>
+
+    <div class="price-card popular">
+      <div class="tier-name" style="color:var(--neon-cyan)" data-i18n="tier2_name">Professional</div>
+      <div class="price">$<span class="price-val" data-mo="59" data-yr="49">59</span><span data-i18n="pr_per">/mo</span></div>
+      <div class="price-desc" data-i18n="tier2_desc">For professional editors and videographers.</div>
+      <ul class="features">
+        <li data-i18n="f4">Max 8K Resolution</li>
+        <li data-i18n="f5">GPU Multi-threading</li>
+        <li data-i18n="f6">Priority Email Support</li>
+      </ul>
+      <a href="#" class="btn btn-ghost" style="width:100%; justify-content:center" data-i18n="btn_sub">Subscribe</a>
+    </div>
+
+    <div class="price-card">
+      <div class="tier-name" data-i18n="tier3_name">Studio</div>
+      <div class="price">$<span class="price-val" data-mo="149" data-yr="119">149</span><span data-i18n="pr_per">/mo</span></div>
+      <div class="price-desc" data-i18n="tier3_desc">Uncapped processing for production houses.</div>
+      <ul class="features">
+        <li data-i18n="f7">Unlimited Resolution</li>
+        <li data-i18n="f8">Render Farm Deployment</li>
+        <li data-i18n="f9">24/7 Dedicated Support</li>
+      </ul>
+      <a href="#" class="btn btn-ghost" style="width:100%; justify-content:center" data-i18n="btn_sub">Subscribe</a>
+    </div>
+  </div>
 </section>
 
-<footer>
-  <div class="logo">Ultra<span>Purity</span></div>
-  <div class="footer-note">© 2026-2027 <a href="https://bl-creative.com">BL-CREATIVE.COM</a> — Secure Connection</div>
+<section class="section" id="about">
+  <div class="info-grid">
+    <div class="info-card">
+      <h3 data-i18n="ab_h">About BL Creative</h3>
+      <p data-i18n="ab_p1">Founded on the principle of bridging the gap between imagination and reality. We build software that empowers creators with tools previously reserved for massive Hollywood studios.</p>
+      <p data-i18n="ab_p2">Our vision is to continue expanding our software suite, bringing AI-driven perfection to all visual mediums.</p>
+    </div>
+    <div class="info-card">
+      <h3 data-i18n="com_h">Join the Community</h3>
+      <p data-i18n="com_p">Connect with thousands of professionals. Share workflows, get feedback on your UltraPurity renders, and suggest features for upcoming updates.</p>
+      <div class="btns" style="justify-content: flex-start; margin-top:20px;">
+        <a href="#" class="btn btn-ghost" style="padding: 10px 24px; font-size:12px;">Discord</a>
+        <a href="#" class="btn btn-ghost" style="padding: 10px 24px; font-size:12px;">Forums</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="footer-top">
+    <div class="footer-col" style="max-width: 300px;">
+      <div class="logo" style="margin-bottom: 16px;">BL <span>Creative</span></div>
+      <p style="font-size: 13px; color: var(--text-muted); font-weight: 300;">Pioneering AI video enhancement and visual processing technologies for the next generation of creators.</p>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="ft_prod">Products</h4>
+      <ul>
+        <li><a href="#">UltraPurity</a></li>
+        <li><a href="#">Future Suite (Coming Soon)</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="ft_comp">Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="ft_leg">Legal</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 BL Creative (bl-creative.com). All rights reserved.
+  </div>
 </footer>
 
 <script>
-// --- Starfield Generator ---
+// --- Background Stars ---
 function createStars() {
   const container = document.getElementById('stars-container');
-  const layers = [
-    { name: 'stars-small', count: 700 },
-    { name: 'stars-medium', count: 200 },
-    { name: 'stars-large', count: 50 }
-  ];
-  
+  const layers = [{ name: 'stars-small', count: 400 }, { name: 'stars-medium', count: 100 }];
   layers.forEach(layer => {
-    const div = document.createElement('div');
-    div.className = `stars ${layer.name}`;
+    const div = document.createElement('div'); div.className = `stars ${layer.name}`;
     let shadows = '';
     for(let i=0; i<layer.count; i++) {
-      const x = Math.floor(Math.random() * window.innerWidth);
-      const y = Math.floor(Math.random() * window.innerHeight * 2);
-      const alpha = Math.random() * 0.8 + 0.2;
-      shadows += `${x}px ${y}px rgba(255,255,255,${alpha}), `;
+      shadows += `${Math.floor(Math.random() * window.innerWidth)}px ${Math.floor(Math.random() * window.innerHeight * 2)}px rgba(255,255,255,${Math.random() * 0.5 + 0.1}), `;
     }
-    div.style.boxShadow = shadows.slice(0, -2);
-    container.appendChild(div);
+    div.style.boxShadow = shadows.slice(0, -2); container.appendChild(div);
   });
 }
-createStars();
-window.addEventListener('resize', () => {
-  document.getElementById('stars-container').innerHTML = '';
-  createStars();
-});
+createStars(); window.addEventListener('resize', () => { document.getElementById('stars-container').innerHTML = ''; createStars(); });
 
-// --- i18n & Content ---
-const i18n = {
-  en:{
-    nav_engines:"Modules",nav_download:"Deploy",nav_cta:"System Init",
-    hero_badge:"System Online . 2027 Vision",
-    hero_h1a:"Reality,",hero_h1b:"Reconstructed",
-    hero_sub:"Deploying advanced neural networks to eliminate void noise, restore microscopic details, and generate flawless temporal frames.",
-    lbl_before:"Raw Input",lbl_after:"Processed",
-    cta_download:"Deploy for Windows",cta_github:"Access Source Code",
-    stat1:"Neural Cores",stat2:"FPS Render",stat3:"Max Output",stat4:"Latency",
-    engines_tag:"Processing Modules",engines_h:"Absolute<br>Control.",
-    dl_h:"Initialize Sequence",
-    dl_sub:"Open source protocol. Windows 10/11 · GPU Hardware required.",
-    dl_btn:"Download Terminal",
-    dl_note:"SYS_REQ: V 7.0 // NVIDIA-AMD Tensor Core // 4GB+ VRAM",
-  },
-  ar:{
-    nav_engines:"الوحدات",nav_download:"تنصيب",nav_cta:"تشغيل النظام",
-    hero_badge:"النظام متصل . رؤية 2027",
-    hero_h1a:"إعادة بناء,",hero_h1b:"الـواقـع",
-    hero_sub:"نشر شبكات عصبية متطورة للقضاء على ضوضاء الفراغ، استعادة أدق التفاصيل، وتوليد إطارات زمنية خالية من العيوب.",
-    lbl_before:"بيانات خام",lbl_after:"تمت المعالجة",
-    cta_download:"نشر لنظام Windows",cta_github:"الوصول للكود المصدري",
-    stat1:"أنوية عصبية",stat2:"رندر الإطارات",stat3:"أقصى دقة",stat4:"معدل التأخير",
-    engines_tag:"وحدات المعالجة المركزية",engines_h:"سـيـطـرة<br>مـطـلـقـة.",
-    dl_h:"بدء تسلسل التشغيل",
-    dl_sub:"بروتوكول مفتوح المصدر. Windows 10/11 · يتطلب عتاد GPU.",
-    dl_btn:"تحميل وحدة التحكم",
-    dl_note:"متطلبات النظام: إصدار 7.0 // أنوية ذكاء اصطناعي NVIDIA-AMD // +4GB VRAM",
-  }
-};
-
+// --- Engine Data & Building ---
 const engines = [
-  { name:"QUANTUM AI", color:"#00e5ff", desc:{ en:"Deep neural void reconstruction.", ar:"إعادة بناء عصبية عميقة للفراغ."} },
-  { name:"ULTRA POWER", color:"#ff4757", desc:{ en:"Temporal upscaling without artifacts.", ar:"تكبير دقة زمني خالي من الشوائب."} },
-  { name:"CRYSTAL CLEAR", color:"#2ed573", desc:{ en:"Precision denoising from compressed sources.", ar:"إزالة ضوضاء دقيقة من المصادر المضغوطة."} },
-  { name:"SILK FLOW", color:"#9d4edd", desc:{ en:"Precise 60/120 FPS conversion.", ar:"تحويل دقيق إلى 60/120 إطار في الثانية."} },
-  { name:"GHOST WIPE", color:"#ff7f50", desc:{ en:"AI object removal and inpainting.", ar:"إزالة وترقيع الكائنات بالذكاء الاصطناعي."} },
-  { name:"SMART BALANCE", color:"#eccc68", desc:{ en:"Algorithmic color and exposure grading.", ar:"تصحيح خوارزمي للألوان والتعريض."} }
+  { name:"QUANTUM AI", color:"#00e5ff", desc:{ en:"Deep neural void reconstruction.", ar:"إعادة بناء عصبية عميقة للفراغ والبيانات المفقودة."} },
+  { name:"ULTRA POWER", color:"#ff4757", desc:{ en:"Temporal upscaling without artifacts.", ar:"تكبير دقة زمني خالي من الشوائب والرعشة."} },
+  { name:"CRYSTAL CLEAR", color:"#2ed573", desc:{ en:"Precision denoising from compressed sources.", ar:"إزالة ضوضاء دقيقة من المصادر شديدة الضغط."} },
+  { name:"SILK FLOW", color:"#9d4edd", desc:{ en:"Precise 60/120 FPS frame generation.", ar:"توليد دقيق للإطارات للوصول إلى 60/120 إطار."} },
+  { name:"GHOST WIPE", color:"#ff7f50", desc:{ en:"Seamless AI object removal.", ar:"إزالة الكائنات بالذكاء الاصطناعي بسلاسة تامة."} },
+  { name:"SMART BALANCE", color:"#eccc68", desc:{ en:"Algorithmic color and exposure grading.", ar:"تصحيح خوارزمي دقيق للألوان والتعريض."} }
 ];
 
 const grid = document.getElementById('enginesGrid');
-
 function buildEngines(l) {
   grid.innerHTML = '';
   engines.forEach((e, i) => {
-    const card = document.createElement('div');
-    card.className = 'engine-card';
+    const card = document.createElement('div'); card.className = 'engine-card';
     card.innerHTML = `
-      <div class="engine-compare" id="ec${i}" data-idx="${i}">
-        <div style="position:absolute;inset:0;background:rgba(255,255,255,0.02)"></div>
-        <div style="position:absolute;inset:0;overflow:hidden;right:50%;border-right:1px solid ${e.color}" id="em${i}">
-          <div style="position:absolute;inset:0;width:100%;background:radial-gradient(circle at 50% 50%, ${e.color}22, transparent 60%)"></div>
+      <div class="slider-wrap engine-preview" id="ep${i}">
+        <div class="s-layer" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), repeating-linear-gradient(45deg, #111 0, #111 2px, #222 2px, #222 4px); filter: blur(1px);"></div>
+        <div class="s-clip" id="ec${i}" style="width: 50%;">
+          <div class="s-layer" style="width: 400px; background: radial-gradient(circle at 50% 50%, ${e.color}33, transparent 70%), #080808;"></div>
         </div>
-        <div class="ec-divider" id="ed${i}" style="left:50%; background:${e.color}; box-shadow: 0 0 15px ${e.color}"></div>
-        <div class="ec-handle" id="eh${i}" style="left:50%; border-color:${e.color}; color:${e.color}; box-shadow: 0 0 10px ${e.color}">&#10094;&#10095;</div>
+        <div class="s-divider" id="ed${i}" style="left:50%; background:${e.color}; box-shadow: 0 0 10px ${e.color}"></div>
+        <div class="s-handle" id="eh${i}" style="left:50%; border-color:${e.color}; color:${e.color}; width:24px; height:24px; font-size:8px;">⇔</div>
       </div>
       <div class="engine-body">
-        <div class="engine-tag" style="color:${e.color}">${e.name}</div>
+        <div class="engine-name" style="color:${e.color}">${e.name}</div>
         <div class="engine-desc">${(e.desc[l]||e.desc.en)}</div>
       </div>`;
     grid.appendChild(card);
-    makeSlider(card.querySelector('.engine-compare'), card.querySelector(`#em${i}`), card.querySelector(`#ed${i}`), card.querySelector(`#eh${i}`));
+    setupSlider(card.querySelector(`#ep${i}`), card.querySelector(`#ec${i}`), card.querySelector(`#ed${i}`), card.querySelector(`#eh${i}`));
   });
 }
 
-function makeSlider(wrap, mask, div, hdl) {
+// --- Universal Slider Logic (Fixes RTL/LTR issue) ---
+function setupSlider(wrap, clip, div, hdl) {
   let drag = false;
   function mv(x) {
     const r = wrap.getBoundingClientRect();
-    const p = Math.max(0, Math.min(1, (x - r.left) / r.width));
-    const pct = (p * 100).toFixed(1);
+    let p = ((x - r.left) / r.width) * 100;
+    p = Math.max(0, Math.min(100, p));
     const isRTL = document.documentElement.dir === 'rtl';
+    
+    // In LTR, clip reveals left side (width = p%). In RTL, if we want it to work naturally with the mouse:
+    // The visual left side of the screen corresponds to smaller mouse X.
     if(isRTL) {
-      mask.style.left = (100 - p * 100).toFixed(1) + '%'; mask.style.right = 'auto';
-      mask.style.borderLeft = mask.style.borderRight; mask.style.borderRight = 'none';
+        clip.style.width = (100 - p) + '%';
+        clip.style.left = '0'; clip.style.right = 'auto'; // Anchor clip to left side
     } else {
-      mask.style.right = (100 - p * 100).toFixed(1) + '%'; mask.style.left = 'auto';
+        clip.style.width = p + '%';
+        clip.style.left = '0'; clip.style.right = 'auto';
     }
-    div.style.left = pct + '%'; hdl.style.left = pct + '%';
+    div.style.left = p + '%'; hdl.style.left = p + '%';
   }
   wrap.addEventListener('mousedown', e => { drag=true; mv(e.clientX); });
   wrap.addEventListener('touchstart', e => { drag=true; mv(e.touches[0].clientX); }, {passive:true});
@@ -484,33 +439,67 @@ function makeSlider(wrap, mask, div, hdl) {
   document.addEventListener('mouseup', () => drag=false);
   document.addEventListener('touchend', () => drag=false);
 }
+setupSlider(document.getElementById('heroSlider'), document.getElementById('heroClip'), document.getElementById('heroDiv'), document.getElementById('heroHdl'));
 
-// Hero Slider specific
-(function(){
-  const wrap = document.getElementById('heroSlider');
-  const clip = document.getElementById('heroClip');
-  const divEl = document.getElementById('heroDiv');
-  const hdl   = document.getElementById('heroHdl');
-  let drag = false;
-  function mv(x) {
-    const r = wrap.getBoundingClientRect();
-    const p = Math.max(0, Math.min(1, (x - r.left) / r.width));
-    const pct = (p * 100).toFixed(1);
-    const isRTL = document.documentElement.dir === 'rtl';
-    if(isRTL){ clip.style.left = (100 - p * 100).toFixed(1) + '%'; clip.style.right='auto'; clip.style.borderLeft='1px solid var(--neon-cyan)'; clip.style.borderRight='none';}
-    else { clip.style.right = (100 - p * 100).toFixed(1) + '%'; clip.style.left='auto'; clip.style.borderRight='1px solid var(--neon-cyan)'; clip.style.borderLeft='none';}
-    divEl.style.left = pct + '%'; hdl.style.left   = pct + '%';
+// --- Pricing Toggle ---
+let isYearly = false;
+function toggleBilling() {
+  isYearly = !isYearly;
+  document.getElementById('billToggle').classList.toggle('is-yearly', isYearly);
+  document.getElementById('lblMonthly').style.color = isYearly ? 'var(--text-muted)' : 'var(--text-main)';
+  document.getElementById('lblYearly').style.color = isYearly ? 'var(--text-main)' : 'var(--text-muted)';
+  
+  document.querySelectorAll('.price-val').forEach(el => {
+    el.innerText = isYearly ? el.getAttribute('data-yr') : el.getAttribute('data-mo');
+  });
+}
+
+// --- i18n Dictionary ---
+const dictionary = {
+  en: {
+    nav_products: "Products", nav_hardware: "Hardware", nav_pricing: "Pricing", nav_about: "Company", nav_contact: "Contact Us",
+    hero_badge: "Flagship Product", hero_h1: "Vision Reimagined",
+    hero_sub: "Our most advanced AI video enhancement suite. Powered by six proprietary neural engines to eliminate noise, restore details, and generate flawless temporal frames.",
+    cta_get: "Get UltraPurity", cta_explore: "Explore Engines",
+    hw_tag: "Hardware Acceleration", hw_h: "Built for <span>Tensor Cores</span>",
+    hw_desc: "UltraPurity directly interfaces with NVIDIA and AMD architectural cores. By utilizing hardware-level deep learning super sampling, our engines process high-resolution frames with zero bottleneck.",
+    eng_tag: "Processing Architecture", eng_h: "The <span>Six Engines</span>",
+    pr_tag: "Licenses", pr_h: "Choose your <span>Plan</span>", pr_mo: "Monthly", pr_yr: "Yearly (-20%)", pr_per: "/mo",
+    tier1_name: "Creator", tier1_desc: "Perfect for independent content creators.",
+    tier2_name: "Professional", tier2_desc: "For professional editors and videographers.",
+    tier3_name: "Studio", tier3_desc: "Uncapped processing for production houses.",
+    f1: "Max 4K Resolution", f2: "Standard Processing Speed", f3: "Community Support",
+    f4: "Max 8K Resolution", f5: "GPU Multi-threading", f6: "Priority Email Support",
+    f7: "Unlimited Resolution", f8: "Render Farm Deployment", f9: "24/7 Dedicated Support",
+    btn_sub: "Subscribe",
+    ab_h: "About BL Creative", ab_p1: "Founded on the principle of bridging the gap between imagination and reality. We build software that empowers creators with tools previously reserved for massive Hollywood studios.", ab_p2: "Our vision is to continue expanding our software suite, bringing AI-driven perfection to all visual mediums.",
+    com_h: "Join the Community", com_p: "Connect with thousands of professionals. Share workflows, get feedback on your UltraPurity renders, and suggest features for upcoming updates.",
+    ft_prod: "Products", ft_comp: "Company", ft_leg: "Legal"
+  },
+  ar: {
+    nav_products: "منتجاتنا", nav_hardware: "العتاد المدعوم", nav_pricing: "الأسعار", nav_about: "الشركة", nav_contact: "تواصل معنا",
+    hero_badge: "المنتج الرائد", hero_h1: "رؤية تتشكل من جديد",
+    hero_sub: "أقوى حزمة ذكاء اصطناعي لمعالجة الفيديو. مدعومة بستة محركات عصبية حصرية للقضاء على الضوضاء، استعادة أدق التفاصيل، وتوليد إطارات زمنية خالية من العيوب.",
+    cta_get: "احصل على UltraPurity", cta_explore: "استكشف المحركات",
+    hw_tag: "تسريع العتاد", hw_h: "مُصمم لأنوية <span>الذكاء الاصطناعي</span>",
+    hw_desc: "يتخاطب UltraPurity مباشرة مع معالجات وبنية كروت NVIDIA و AMD. من خلال استغلال التعلم العميق على مستوى العتاد، تقوم محركاتنا بمعالجة الإطارات بدقة هائلة وبدون أي اختناق.",
+    eng_tag: "هيكلة المعالجة المركزية", eng_h: "المحركات <span>الستة</span>",
+    pr_tag: "التراخيص", pr_h: "اختر <span>خطتك</span>", pr_mo: "شهري", pr_yr: "سنوي (خصم 20%)", pr_per: "/شهر",
+    tier1_name: "المبدعين", tier1_desc: "مثالية لصناع المحتوى المستقلين.",
+    tier2_name: "المحترفين", tier2_desc: "للمحررين وصناع الأفلام المحترفين.",
+    tier3_name: "الاستوديوهات", tier3_desc: "معالجة لا محدودة لشركات الإنتاج.",
+    f1: "دقة قصوى 4K", f2: "سرعة معالجة قياسية", f3: "دعم من المجتمع",
+    f4: "دقة قصوى 8K", f5: "معالجة متعددة المسارات", f6: "أولوية الدعم الفني",
+    f7: "دقة غير محدودة", f8: "دعم مزارع الرندر (Render Farms)", f9: "دعم مخصص 24/7",
+    btn_sub: "اشترك الآن",
+    ab_h: "عن شركة BL Creative", ab_p1: "تأسسنا على مبدأ سد الفجوة بين الخيال والواقع. نحن نبني برمجيات تمنح المبدعين أدوات كانت حكراً على استوديوهات هوليوود الضخمة.", ab_p2: "رؤيتنا هي الاستمرار في توسيع حزمة برمجياتنا، لجلب الكمال المدفوع بالذكاء الاصطناعي إلى جميع الوسائط المرئية.",
+    com_h: "انضم لمجتمعنا", com_p: "تواصل مع آلاف المحترفين. شارك أعمالك، احصل على تقييم لنتائج UltraPurity، واقترح ميزات للتحديثات القادمة.",
+    ft_prod: "المنتجات", ft_comp: "الشركة", ft_leg: "قانوني"
   }
-  wrap.addEventListener('mousedown', e => { drag=true; mv(e.clientX); });
-  wrap.addEventListener('touchstart', e => { drag=true; mv(e.touches[0].clientX); }, {passive:true});
-  document.addEventListener('mousemove', e => { if(drag) mv(e.clientX); });
-  document.addEventListener('touchmove', e => { if(drag) mv(e.touches[0].clientX); }, {passive:true});
-  document.addEventListener('mouseup', () => drag=false);
-  document.addEventListener('touchend', () => drag=false);
-})();
+};
 
 function applyLang(l) {
-  const t = i18n[l] || i18n.en;
+  const t = dictionary[l] || dictionary.en;
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if(t[key]) el.innerHTML = t[key];
@@ -518,12 +507,11 @@ function applyLang(l) {
   document.documentElement.lang = l;
   const isRTL = l === 'ar';
   document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
-  if(isRTL) { document.body.style.fontFamily = "'Cairo', sans-serif"; } 
-  else { document.body.style.fontFamily = "'Outfit', sans-serif"; }
+  document.body.style.fontFamily = isRTL ? "'Alexandria', sans-serif" : "'Space Grotesk', sans-serif";
   buildEngines(l);
 }
 function setLang(l) { applyLang(l); }
-applyLang('ar');
+applyLang('ar'); // Default load language set to Arabic
 </script>
 </body>
 </html>
