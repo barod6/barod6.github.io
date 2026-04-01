@@ -7,359 +7,333 @@
 <meta name="description" content="Six AI-powered engines that fix noise, sharpen detail, remove artifacts, and remaster your videos frame by frame.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Outfit:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
 <style>
-/* ===== RESET & VARIABLES ===== */
+/* ===== RESET & CORE VARIABLES ===== */
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --neon-cyan: #00f0ff;
-  --neon-blue: #0047ff;
-  --glow-cyan: rgba(0, 240, 255, 0.2);
-  --glow-blue: rgba(0, 71, 255, 0.4);
+  --space-black: #000000;
+  --space-dark: #050508;
+  --space-gray: #0b0b10;
   
-  --bg-deep: #030303;
-  --surface-1: rgba(15, 15, 15, 0.7);
-  --surface-2: rgba(25, 25, 25, 0.8);
-  --border-light: rgba(255, 255, 255, 0.08);
-  --border-neon: rgba(0, 240, 255, 0.3);
+  --neon-cyan: #00e5ff;
+  --neon-purple: #9d4edd;
+  
+  --glass-bg: rgba(10, 10, 15, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.15);
   
   --text-main: #ffffff;
-  --text-muted: #8c8c94;
+  --text-muted: #8b8b99;
   --radius-lg: 16px;
   --radius-sm: 8px;
 }
 
-/* ===== GLOBAL TYPOGRAPHY & BODY ===== */
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; background-color: var(--space-black); }
 body {
-  background-color: var(--bg-deep);
   color: var(--text-main);
   font-family: 'Outfit', 'Cairo', sans-serif;
   font-size: 15px;
-  line-height: 1.65;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   position: relative;
 }
 a { text-decoration: none; color: inherit; }
-::selection { background: var(--glow-cyan); color: var(--neon-cyan); }
+::selection { background: rgba(0, 229, 255, 0.2); color: var(--neon-cyan); }
 
-/* ===== ANIMATED FUTURISTIC BACKGROUND ===== */
-.bg-animation {
+/* ===== DEEP SPACE ANIMATION (PARALLAX STARS & NEBULA) ===== */
+#space-container {
   position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-  z-index: -10; pointer-events: none; overflow: hidden;
-  background: radial-gradient(circle at 50% 0%, #0a0a1a 0%, var(--bg-deep) 70%);
+  z-index: -10; background: var(--space-black); overflow: hidden;
 }
-/* Moving Grid */
-.bg-animation::before {
-  content: ''; position: absolute; bottom: -50%; left: -50%; width: 200%; height: 200%;
-  background-image: 
-    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
-  transform: perspective(500px) rotateX(60deg);
-  animation: gridMove 20s linear infinite;
+/* Nebula Glows */
+.nebula {
+  position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.3;
+  animation: breathe 20s ease-in-out infinite alternate;
 }
-/* Glowing Orbs */
-.orb {
-  position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.5;
-  animation: floatOrb 15s ease-in-out infinite alternate;
-}
-.orb-1 { width: 400px; height: 400px; background: var(--neon-blue); top: -100px; left: 10%; }
-.orb-2 { width: 300px; height: 300px; background: rgba(139, 92, 246, 0.3); bottom: 10%; right: 5%; animation-delay: -5s; }
+.nebula-1 { width: 600px; height: 600px; background: radial-gradient(circle, var(--neon-cyan), transparent 70%); top: -200px; left: -100px; }
+.nebula-2 { width: 800px; height: 800px; background: radial-gradient(circle, var(--neon-purple), transparent 70%); bottom: -300px; right: -200px; animation-delay: -10s; }
 
-@keyframes gridMove { 0% { transform: perspective(500px) rotateX(60deg) translateY(0); } 100% { transform: perspective(500px) rotateX(60deg) translateY(40px); } }
-@keyframes floatOrb { 0% { transform: translate(0, 0); } 100% { transform: translate(30px, 50px); } }
+@keyframes breathe { 0% { opacity: 0.2; transform: scale(1); } 100% { opacity: 0.4; transform: scale(1.1); } }
 
-/* ===== HUD NAVIGATION (2027 Vision) ===== */
+/* Star Layers */
+.stars { position: absolute; top: 0; left: 0; width: 100%; height: 200%; }
+.stars-small { width: 1px; height: 1px; background: transparent; animation: animStar 150s linear infinite; }
+.stars-medium { width: 2px; height: 2px; background: transparent; animation: animStar 100s linear infinite; }
+.stars-large { width: 3px; height: 3px; background: transparent; animation: animStar 50s linear infinite; }
+
+@keyframes animStar { from { transform: translateY(0px); } to { transform: translateY(-100vh); } }
+
+/* ===== SPACESHIP HUD NAVIGATION ===== */
 .nav-wrapper {
-  position: fixed; top: 24px; left: 0; right: 0;
-  display: flex; justify-content: center; z-index: 200;
-  padding: 0 4%;
+  position: fixed; top: 20px; left: 0; right: 0;
+  display: flex; justify-content: center; z-index: 200; padding: 0 4%;
 }
 nav {
   display: flex; align-items: center; justify-content: space-between;
-  width: 100%; max-width: 1100px; height: 64px;
-  padding: 0 24px;
-  background: rgba(10, 10, 10, 0.65);
-  border: 1px solid var(--border-light);
-  border-radius: 100px; /* Pill shape */
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.02);
-  transition: border-color 0.3s ease;
+  width: 100%; max-width: 1200px; height: 68px; padding: 0 32px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-top: 1px solid var(--glass-highlight);
+  border-radius: 100px;
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+  transition: all 0.4s ease;
 }
-nav:hover { border-color: var(--border-neon); }
-.logo { font-weight: 800; font-size: 20px; letter-spacing: 1px; text-transform: uppercase; }
-.logo span { color: var(--neon-cyan); text-shadow: 0 0 10px var(--glow-cyan); }
+nav:hover { border-color: rgba(0, 229, 255, 0.3); box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 30px rgba(0, 229, 255, 0.1); }
 
-.nav-center { display: flex; gap: 32px; }
+.logo { font-weight: 800; font-size: 22px; letter-spacing: 2px; text-transform: uppercase; }
+.logo span { color: var(--neon-cyan); font-weight: 300; }
+
+.nav-center { display: flex; gap: 40px; }
 .nav-center a {
-  font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px;
-  color: var(--text-muted); position: relative; transition: color 0.3s;
+  font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;
+  color: var(--text-muted); position: relative; padding: 8px 0; transition: color 0.3s;
 }
-.nav-center a:hover { color: var(--neon-cyan); }
+.nav-center a:hover { color: var(--text-main); }
 .nav-center a::after {
-  content: ''; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
-  width: 0; height: 2px; background: var(--neon-cyan);
-  transition: width 0.3s ease; box-shadow: 0 0 8px var(--neon-cyan);
+  content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 1px;
+  background: var(--neon-cyan); transition: width 0.3s ease;
 }
-.nav-center a:hover::after { width: 100%; }
+.nav-center a:hover::after { width: 100%; box-shadow: 0 0 10px var(--neon-cyan); }
 
-.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-right { display: flex; align-items: center; gap: 20px; }
 .lang-sel {
-  font-family: inherit; font-size: 12px; font-weight: 600;
-  background: rgba(0,0,0,0.5); border: 1px solid var(--border-light);
-  color: var(--text-muted); padding: 8px 12px; border-radius: 20px;
-  cursor: pointer; outline: none; transition: 0.3s;
+  font-family: inherit; font-size: 11px; font-weight: 700; letter-spacing: 1px;
+  background: rgba(0,0,0,0.6); border: 1px solid var(--glass-border);
+  color: var(--text-muted); padding: 8px 16px; border-radius: 100px;
+  cursor: pointer; outline: none; transition: 0.3s; appearance: none;
 }
-.lang-sel:hover { color: #fff; border-color: var(--text-muted); }
+.lang-sel:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
 
 .btn-nav {
-  position: relative; overflow: hidden;
-  background: transparent; color: var(--neon-cyan);
-  font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-  padding: 10px 24px; border-radius: 100px;
-  border: 1px solid var(--neon-cyan);
-  transition: 0.3s;
+  position: relative; background: transparent; color: var(--text-main);
+  font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+  padding: 10px 28px; border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.2); transition: 0.3s;
+  overflow: hidden;
 }
-.btn-nav:hover {
-  background: var(--neon-cyan); color: #000;
-  box-shadow: 0 0 15px var(--neon-cyan);
+.btn-nav::before {
+  content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: 0.5s;
 }
+.btn-nav:hover { background: var(--text-main); color: var(--space-black); border-color: var(--text-main); }
+.btn-nav:hover::before { left: 100%; }
 
 /* ===== HERO SECTION ===== */
 .hero {
   min-height: 100vh; display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  padding: 140px 6% 60px; text-align: center; position: relative;
+  padding: 160px 6% 80px; text-align: center; position: relative; z-index: 10;
 }
 .badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--neon-cyan);
-  border: 1px solid var(--border-neon);
-  background: rgba(0, 240, 255, 0.05);
-  padding: 6px 20px; border-radius: 100px; margin-bottom: 32px;
-  box-shadow: 0 0 20px var(--glow-cyan);
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 10px; font-weight: 800; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--text-main); border: 1px solid rgba(255,255,255,0.1);
+  background: var(--glass-bg); padding: 8px 24px; border-radius: 100px;
+  margin-bottom: 36px; backdrop-filter: blur(10px);
 }
-.badge::before { content:''; width:6px; height:6px; background:var(--neon-cyan); border-radius:50%; animation: pulse 2s infinite; }
-@keyframes pulse { 0% {box-shadow: 0 0 0 0 var(--glow-cyan);} 70% {box-shadow: 0 0 0 10px transparent;} 100% {box-shadow: 0 0 0 0 transparent;} }
+.badge .dot { width: 6px; height: 6px; background: var(--neon-cyan); border-radius: 50%; box-shadow: 0 0 10px var(--neon-cyan); }
 
 .hero h1 {
-  font-size: clamp(42px, 7vw, 84px); font-weight: 800; line-height: 1.05;
-  letter-spacing: -1.5px; margin-bottom: 24px; text-transform: uppercase;
+  font-size: clamp(48px, 8vw, 96px); font-weight: 800; line-height: 1;
+  letter-spacing: -2px; margin-bottom: 24px; text-transform: uppercase;
 }
-.hero h1 .sky { 
-  background: linear-gradient(to right, #fff, var(--neon-cyan)); 
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 20px var(--glow-cyan));
-}
+.hero h1 .sky { color: transparent; -webkit-text-stroke: 1px var(--text-main); background: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="white"/></svg>') repeat; -webkit-background-clip: text; background-clip: text; }
+
 .hero-sub {
-  font-size: 18px; color: var(--text-muted); max-width: 600px; margin: 0 auto 50px;
-  font-weight: 400; line-height: 1.8;
+  font-size: 18px; color: var(--text-muted); max-width: 650px; margin: 0 auto 60px;
+  font-weight: 300; line-height: 1.8; letter-spacing: 0.5px;
 }
 
-/* Compare Slider — Hero */
+/* Compare Slider — Holographic Feel */
 .compare-wrap {
-  position: relative; width: min(900px, 90vw); height: 400px;
+  position: relative; width: min(960px, 90vw); height: 450px;
   border-radius: var(--radius-lg); overflow: hidden; cursor: ew-resize;
-  border: 1px solid var(--border-light); margin-bottom: 50px; user-select: none;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1); margin-bottom: 60px; user-select: none;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.05) inset;
+  background: var(--space-dark);
 }
 .c-layer { position: absolute; inset: 0; width: 100%; height: 100%; }
 .c-clip { position: absolute; inset: 0; overflow: hidden; border-right: 1px solid var(--neon-cyan); }
 .c-label {
-  position: absolute; top: 20px; padding: 6px 16px;
-  background: rgba(0,0,0,0.8); font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  position: absolute; top: 24px; padding: 6px 20px;
+  background: rgba(0,0,0,0.6); font-size: 10px; font-weight: 800; letter-spacing: 3px;
   border-radius: 100px; text-transform: uppercase; pointer-events: none; z-index: 10;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05);
 }
-.c-label-left { left: 20px; color: #aaa; border: 1px solid rgba(255,255,255,0.1); }
-.c-label-right { right: 20px; color: var(--neon-cyan); border: 1px solid var(--border-neon); box-shadow: 0 0 10px var(--glow-cyan); }
+.c-label-left { left: 24px; color: #888; }
+.c-label-right { right: 24px; color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 229, 255, 0.2); }
 
-/* Futuristic Divider */
 .c-divider {
-  position: absolute; top: 0; bottom: 0; width: 2px; background: var(--neon-cyan);
+  position: absolute; top: 0; bottom: 0; width: 1px; background: var(--neon-cyan);
   transform: translateX(-50%); z-index: 8; pointer-events: none;
-  box-shadow: 0 0 15px var(--neon-cyan);
+  box-shadow: 0 0 20px var(--neon-cyan);
 }
 .c-handle {
   position: absolute; top: 50%; transform: translate(-50%, -50%);
-  width: 44px; height: 44px; background: #000; border: 2px solid var(--neon-cyan);
+  width: 48px; height: 48px; background: rgba(0,0,0,0.5); border: 1px solid var(--neon-cyan);
   border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  font-size: 14px; color: var(--neon-cyan); font-weight: 800; z-index: 9; pointer-events: none;
-  box-shadow: 0 0 20px var(--glow-cyan);
+  font-size: 12px; color: var(--neon-cyan); z-index: 9; pointer-events: none;
+  backdrop-filter: blur(10px); box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
 }
 
-.hero-before { background: linear-gradient(180deg, rgba(20,20,20,0.4) 0%, rgba(12,12,12,0.8) 100%), url("assets/sample-before.jpg") center/cover no-repeat; filter: grayscale(0.5) blur(1px) brightness(0.6); }
-.hero-after { background: linear-gradient(180deg, rgba(6,18,36,0.3) 0%, rgba(4,12,24,0.7) 100%), url("assets/sample-after.jpg") center/cover no-repeat; }
+.hero-before { background: linear-gradient(180deg, rgba(10,10,15,0.6), rgba(0,0,0,0.9)), url("assets/sample-before.jpg") center/cover; filter: grayscale(0.8) blur(2px); }
+.hero-after { background: linear-gradient(180deg, rgba(0, 229, 255, 0.05), rgba(0,0,0,0.5)), url("assets/sample-after.jpg") center/cover; }
 
-/* CTA Buttons */
-.hero-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+/* Call to Action */
+.hero-btns { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
 .btn-primary {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: var(--text-main); color: #000;
-  font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-  padding: 16px 36px; border-radius: 100px;
-  transition: 0.3s; box-shadow: 0 0 20px rgba(255,255,255,0.2);
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--text-main); color: var(--space-black);
+  font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;
+  padding: 18px 40px; border-radius: 100px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.btn-primary:hover { background: var(--neon-cyan); box-shadow: 0 0 30px var(--neon-cyan); transform: translateY(-2px); }
+.btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,255,255,0.4); }
 .btn-ghost {
-  display: inline-flex; align-items: center; gap: 10px;
-  border: 1px solid var(--border-light); color: var(--text-main);
-  font-size: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
-  padding: 16px 36px; border-radius: 100px; background: rgba(255,255,255,0.03);
-  transition: 0.3s;
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--glass-bg); border: 1px solid rgba(255,255,255,0.1); color: var(--text-main);
+  font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+  padding: 18px 40px; border-radius: 100px; backdrop-filter: blur(10px);
+  transition: all 0.3s;
 }
-.btn-ghost:hover { border-color: var(--text-main); background: rgba(255,255,255,0.1); }
+.btn-ghost:hover { border-color: var(--text-main); background: rgba(255,255,255,0.05); }
 
-/* ===== STATS STRIP (Data Nodes) ===== */
+/* ===== STATS STRIP (Data Telemetry) ===== */
 .stats-strip {
-  border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);
-  display: grid; grid-template-columns: repeat(4, 1fr); background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(10px); position: relative; z-index: 5;
+  border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: grid; grid-template-columns: repeat(4, 1fr); background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(20px); position: relative; z-index: 10;
 }
-.stat { text-align: center; padding: 40px 20px; border-right: 1px solid var(--border-light); position: relative; overflow: hidden; }
+.stat { text-align: center; padding: 48px 20px; border-right: 1px solid rgba(255,255,255,0.05); }
 .stat:last-child { border-right: none; }
-.stat:hover::before {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(circle at center, var(--glow-cyan), transparent 70%); z-index: -1;
-}
-.stat-num { font-size: 48px; font-weight: 800; color: var(--text-main); line-height: 1; margin-bottom: 8px; text-shadow: 0 0 15px rgba(255,255,255,0.2); }
-.stat-label { font-size: 12px; font-weight: 700; color: var(--neon-cyan); text-transform: uppercase; letter-spacing: 2px; }
+.stat-num { font-size: 56px; font-weight: 200; color: var(--text-main); line-height: 1; margin-bottom: 12px; font-family: 'Outfit', sans-serif; }
+.stat-label { font-size: 10px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 4px; }
 
-/* ===== ENGINES (Server Nodes) ===== */
-.section { padding: 120px 6%; max-width: 1300px; margin: 0 auto; position: relative; z-index: 5; }
-.section-tag { font-size: 12px; font-weight: 800; letter-spacing: 3px; color: var(--neon-cyan); text-transform: uppercase; margin-bottom: 16px; display: block; }
-.section-h { font-size: clamp(32px, 4vw, 56px); font-weight: 800; line-height: 1.1; margin-bottom: 60px; text-transform: uppercase; letter-spacing: -1px; }
+/* ===== ENGINES (Modules) ===== */
+.section { padding: 140px 6%; max-width: 1400px; margin: 0 auto; position: relative; z-index: 10; }
+.section-tag { font-size: 10px; font-weight: 800; letter-spacing: 5px; color: var(--neon-cyan); text-transform: uppercase; margin-bottom: 20px; display: block; }
+.section-h { font-size: clamp(36px, 5vw, 64px); font-weight: 800; line-height: 1.1; margin-bottom: 80px; text-transform: uppercase; letter-spacing: -2px; }
 
-.engines-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px; }
+.engines-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 32px; }
 .engine-card {
-  background: var(--surface-1); border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg); overflow: hidden; position: relative;
-  transition: 0.4s; backdrop-filter: blur(10px);
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  border-top: 1px solid var(--glass-highlight); border-radius: var(--radius-lg);
+  overflow: hidden; position: relative; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(24px); box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
-.engine-card::before {
-  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-  background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent); opacity: 0; transition: 0.4s;
-}
-.engine-card:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.8); }
-.engine-card:hover::before { opacity: 1; }
+.engine-card:hover { border-color: rgba(255,255,255,0.3); transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 20px rgba(255,255,255,0.05); }
 
-.engine-compare { height: 200px; position: relative; cursor: ew-resize; overflow: hidden; user-select: none; border-bottom: 1px solid var(--border-light); background: #000; }
-.ec-divider { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--neon-cyan); transform: translateX(-50%); z-index: 5; pointer-events: none; box-shadow: 0 0 10px var(--neon-cyan); }
-.ec-handle { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 28px; height: 28px; background: #000; border: 2px solid var(--neon-cyan); border-radius: 50%; z-index: 6; pointer-events: none; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--neon-cyan); font-weight: 800; }
+.engine-compare { height: 220px; position: relative; cursor: ew-resize; overflow: hidden; user-select: none; background: #000; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.ec-divider { position: absolute; top: 0; bottom: 0; width: 1px; transform: translateX(-50%); z-index: 5; pointer-events: none; }
+.ec-handle { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 32px; height: 32px; background: rgba(0,0,0,0.8); border: 1px solid; border-radius: 50%; z-index: 6; pointer-events: none; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; }
 
-.engine-body { padding: 24px; }
-.engine-tag { font-size: 13px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-.engine-tag::before { content: ''; display: block; width: 8px; height: 8px; border-radius: 50%; background: currentColor; box-shadow: 0 0 8px currentColor; }
-.engine-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; font-weight: 400; }
+.engine-body { padding: 32px; }
+.engine-tag { font-size: 12px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.engine-tag::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: currentColor; box-shadow: 0 0 10px currentColor; }
+.engine-desc { font-size: 14px; color: var(--text-muted); line-height: 1.8; font-weight: 400; }
 
-/* ===== DOWNLOAD SECTION ===== */
+/* ===== DOWNLOAD (Terminal) ===== */
 .dl-section {
-  text-align: center; padding: 120px 6%; background: linear-gradient(to bottom, var(--bg-deep), #080808);
-  border-top: 1px solid var(--border-light); position: relative; z-index: 5;
+  text-align: center; padding: 140px 6%;
+  background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.9));
+  border-top: 1px solid rgba(255,255,255,0.05); position: relative; z-index: 10;
 }
-.dl-section h2 { font-size: clamp(32px, 4.5vw, 64px); font-weight: 800; text-transform: uppercase; margin-bottom: 24px; }
-.dl-section p { font-size: 18px; color: var(--text-muted); margin-bottom: 40px; }
-.dl-note { font-size: 13px; color: #555; margin-top: 24px; font-family: monospace; letter-spacing: 1px; }
+.dl-section h2 { font-size: clamp(36px, 5vw, 72px); font-weight: 800; text-transform: uppercase; margin-bottom: 24px; letter-spacing: -2px; }
+.dl-section p { font-size: 16px; color: var(--text-muted); margin-bottom: 48px; font-weight: 300; letter-spacing: 1px; }
+.dl-note { font-size: 11px; color: #666; margin-top: 32px; font-family: monospace; letter-spacing: 2px; text-transform: uppercase; }
 
 /* ===== FOOTER ===== */
 footer {
-  padding: 40px 6%; border-top: 1px solid var(--border-light);
+  padding: 48px 6%; border-top: 1px solid rgba(255,255,255,0.05);
   display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 20px; background: #000; position: relative; z-index: 5;
+  flex-wrap: wrap; gap: 24px; background: #000; position: relative; z-index: 10;
 }
-.footer-note { font-size: 13px; color: var(--text-muted); font-weight: 500; }
-.footer-note a { color: var(--text-main); font-weight: 700; transition: 0.3s; }
-.footer-note a:hover { color: var(--neon-cyan); text-shadow: 0 0 10px var(--glow-cyan); }
+.footer-note { font-size: 11px; color: var(--text-muted); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+.footer-note a { color: var(--text-main); transition: 0.3s; }
+.footer-note a:hover { color: var(--neon-cyan); }
 
-/* ===== RTL SUPPORT (Arabic) ===== */
+/* ===== RTL SUPPORT ===== */
 html[dir="rtl"] nav { flex-direction: row-reverse; }
 html[dir="rtl"] .nav-center, html[dir="rtl"] .nav-right { flex-direction: row-reverse; }
 html[dir="rtl"] .hero h1 { letter-spacing: 0; }
-html[dir="rtl"] .stat-label { letter-spacing: 0; }
 
 /* ===== RESPONSIVE ===== */
-@media(max-width: 900px) {
+@media(max-width: 1024px) {
   .nav-center { display: none; }
   .stats-strip { grid-template-columns: repeat(2, 1fr); }
   .stat:nth-child(2) { border-right: none; }
-  .stat:nth-child(3), .stat:nth-child(4) { border-top: 1px solid var(--border-light); }
-  .hero { padding-top: 120px; }
+  .stat:nth-child(3), .stat:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.05); }
 }
 @media(max-width: 600px) {
-  .nav-wrapper { padding: 0 10px; top: 10px; }
-  nav { padding: 0 16px; height: 56px; }
-  .logo { font-size: 16px; }
+  .nav-wrapper { padding: 0 16px; top: 16px; }
+  nav { padding: 0 20px; height: 60px; }
+  .logo { font-size: 18px; }
   .stats-strip { grid-template-columns: 1fr; }
-  .stat { border-right: none; border-bottom: 1px solid var(--border-light); padding: 30px; }
+  .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 36px 20px; }
+  .hero { padding-top: 140px; }
 }
 </style>
 </head>
 <body>
 
-<div class="bg-animation">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
+<div id="space-container">
+  <div class="nebula nebula-1"></div>
+  <div class="nebula nebula-2"></div>
+  <div id="stars-container"></div>
 </div>
 
 <div class="nav-wrapper">
   <nav>
     <div class="logo">Ultra<span>Purity</span></div>
     <div class="nav-center">
-      <a href="#engines" data-i18n="nav_engines">Engines</a>
-      <a href="#download" data-i18n="nav_download">Download</a>
-      <a href="https://github.com/bl-creative" target="_blank">System Core</a>
+      <a href="#engines" data-i18n="nav_engines">Modules</a>
+      <a href="#download" data-i18n="nav_download">Deploy</a>
+      <a href="https://github.com/bl-creative" target="_blank">Core Data</a>
     </div>
     <div class="nav-right">
       <select class="lang-sel" id="langSel" onchange="setLang(this.value)">
         <option value="en">EN</option>
         <option value="ar">AR</option>
         <option value="fr">FR</option>
-        <option value="es">ES</option>
-        <option value="pt">PT</option>
-        <option value="de">DE</option>
-        <option value="it">IT</option>
-        <option value="ja">JA</option>
-        <option value="ko">KO</option>
-        <option value="zh">ZH</option>
-        <option value="ru">RU</option>
-        <option value="tr">TR</option>
       </select>
-      <a class="btn-nav" href="#download" data-i18n="nav_cta">Init System</a>
+      <a class="btn-nav" href="#download" data-i18n="nav_cta">System Init</a>
     </div>
   </nav>
 </div>
 
 <section class="hero">
-  <div class="badge" data-i18n="hero_badge">AI Enhancement Protocol</div>
+  <div class="badge">
+    <div class="dot"></div>
+    <span data-i18n="hero_badge">System Online . 2027 Vision</span>
+  </div>
   <h1>
-    <span data-i18n="hero_h1a">Your footage,</span><br>
-    <span class="sky" data-i18n="hero_h1b">reborn in ultra</span>
+    <span data-i18n="hero_h1a">Reality,</span><br>
+    <span class="sky" data-i18n="hero_h1b">Reconstructed</span>
   </h1>
   <p class="hero-sub" data-i18n="hero_sub">
-    Six neural engines deployed to eliminate noise, restore detail,<br>and reconstruct reality frame by precise frame.
+    Deploying advanced neural networks to eliminate void noise, restore microscopic details, and generate flawless temporal frames.
   </p>
 
   <div class="compare-wrap" id="heroSlider">
     <div class="c-layer hero-before" id="heroLayerB"></div>
     <div class="c-clip" id="heroClip" style="right:50%">
-      <div class="c-layer hero-after" style="position:absolute;inset:0;width:100vw;max-width:900px;"></div>
+      <div class="c-layer hero-after" style="position:absolute;inset:0;width:100vw;max-width:960px;"></div>
     </div>
-    <div class="c-label c-label-left" data-i18n="lbl_before">Raw Data</div>
-    <div class="c-label c-label-right" data-i18n="lbl_after">Ultra Purity</div>
+    <div class="c-label c-label-left" data-i18n="lbl_before">Raw Input</div>
+    <div class="c-label c-label-right" data-i18n="lbl_after">Processed</div>
     <div class="c-divider" id="heroDiv" style="left:50%"></div>
     <div class="c-handle" id="heroHdl" style="left:50%">&#10094;&#10095;</div>
   </div>
 
   <div class="hero-btns">
     <a class="btn-primary" href="#download">
-      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 15V3m0 12-4-4m4 4 4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17"/></svg>
       <span data-i18n="cta_download">Deploy for Windows</span>
     </a>
     <a class="btn-ghost" href="https://github.com/bl-creative" target="_blank">
-      <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"/></svg>
       <span data-i18n="cta_github">Access Source Code</span>
     </a>
   </div>
@@ -368,21 +342,20 @@ html[dir="rtl"] .stat-label { letter-spacing: 0; }
 <div class="stats-strip">
   <div class="stat"><div class="stat-num">06</div><div class="stat-label" data-i18n="stat1">Neural Cores</div></div>
   <div class="stat"><div class="stat-num">120</div><div class="stat-label" data-i18n="stat2">FPS Render</div></div>
-  <div class="stat"><div class="stat-num">8K</div><div class="stat-label" data-i18n="stat3">Max Resolution</div></div>
-  <div class="stat"><div class="stat-num">12</div><div class="stat-label" data-i18n="stat4">System Langs</div></div>
+  <div class="stat"><div class="stat-num">8K</div><div class="stat-label" data-i18n="stat3">Max Output</div></div>
+  <div class="stat"><div class="stat-num">00</div><div class="stat-label" data-i18n="stat4">Latency</div></div>
 </div>
 
 <section id="engines" class="section">
-  <span class="section-tag" data-i18n="engines_tag">Processing Architecture</span>
-  <h2 class="section-h" data-i18n="engines_h">Six engines.<br>Absolute control.</h2>
+  <span class="section-tag" data-i18n="engines_tag">Processing Modules</span>
+  <h2 class="section-h" data-i18n="engines_h">Absolute<br>Control.</h2>
   <div class="engines-grid" id="enginesGrid"></div>
 </section>
 
 <section id="download" class="dl-section">
-  <h2 data-i18n="dl_h">Initialize Your Upgrade</h2>
+  <h2 data-i18n="dl_h">Initialize Sequence</h2>
   <p data-i18n="dl_sub">Open source protocol. Windows 10/11 · GPU Hardware required.</p>
-  <a class="btn-primary" href="https://github.com/bl-creative/ultra-purity/releases" style="display:inline-flex" target="_blank">
-    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 15V3m0 12-4-4m4 4 4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17"/></svg>
+  <a class="btn-primary" href="https://github.com/bl-creative" target="_blank">
     <span data-i18n="dl_btn">Download Terminal</span>
   </a>
   <div class="dl-note" data-i18n="dl_note">SYS_REQ: V 7.0 // NVIDIA-AMD Tensor Core // 4GB+ VRAM</div>
@@ -394,31 +367,61 @@ html[dir="rtl"] .stat-label { letter-spacing: 0; }
 </footer>
 
 <script>
+// --- Starfield Generator ---
+function createStars() {
+  const container = document.getElementById('stars-container');
+  const layers = [
+    { name: 'stars-small', count: 700 },
+    { name: 'stars-medium', count: 200 },
+    { name: 'stars-large', count: 50 }
+  ];
+  
+  layers.forEach(layer => {
+    const div = document.createElement('div');
+    div.className = `stars ${layer.name}`;
+    let shadows = '';
+    for(let i=0; i<layer.count; i++) {
+      const x = Math.floor(Math.random() * window.innerWidth);
+      const y = Math.floor(Math.random() * window.innerHeight * 2);
+      const alpha = Math.random() * 0.8 + 0.2;
+      shadows += `${x}px ${y}px rgba(255,255,255,${alpha}), `;
+    }
+    div.style.boxShadow = shadows.slice(0, -2);
+    container.appendChild(div);
+  });
+}
+createStars();
+window.addEventListener('resize', () => {
+  document.getElementById('stars-container').innerHTML = '';
+  createStars();
+});
+
+// --- i18n & Content ---
 const i18n = {
   en:{
-    nav_engines:"Architecture",nav_download:"Deploy",nav_cta:"Init System",
-    hero_badge:"AI Enhancement Protocol",
-    hero_h1a:"Your footage,",hero_h1b:"reborn in ultra",
-    hero_sub:"Six neural engines deployed to eliminate noise, restore detail,<br>and reconstruct reality frame by precise frame.",
-    lbl_before:"Raw Data",lbl_after:"Ultra Purity",
+    nav_engines:"Modules",nav_download:"Deploy",nav_cta:"System Init",
+    hero_badge:"System Online . 2027 Vision",
+    hero_h1a:"Reality,",hero_h1b:"Reconstructed",
+    hero_sub:"Deploying advanced neural networks to eliminate void noise, restore microscopic details, and generate flawless temporal frames.",
+    lbl_before:"Raw Input",lbl_after:"Processed",
     cta_download:"Deploy for Windows",cta_github:"Access Source Code",
-    stat1:"Neural Cores",stat2:"FPS Render",stat3:"Max Resolution",stat4:"System Langs",
-    engines_tag:"Processing Architecture",engines_h:"Six engines.<br>Absolute control.",
-    dl_h:"Initialize Your Upgrade",
+    stat1:"Neural Cores",stat2:"FPS Render",stat3:"Max Output",stat4:"Latency",
+    engines_tag:"Processing Modules",engines_h:"Absolute<br>Control.",
+    dl_h:"Initialize Sequence",
     dl_sub:"Open source protocol. Windows 10/11 · GPU Hardware required.",
     dl_btn:"Download Terminal",
     dl_note:"SYS_REQ: V 7.0 // NVIDIA-AMD Tensor Core // 4GB+ VRAM",
   },
   ar:{
-    nav_engines:"البنية الهندسية",nav_download:"تنصيب",nav_cta:"بدء النظام",
-    hero_badge:"بروتوكول تحسين الذكاء الاصطناعي",
-    hero_h1a:"بياناتك المرئية،",hero_h1b:"تُبنى من جديد",
-    hero_sub:"ستة محركات عصبية تم نشرها للقضاء على الضوضاء، استعادة التفاصيل،<br>وإعادة بناء الواقع إطاراً بعد إطار بدقة متناهية.",
-    lbl_before:"البيانات الخام",lbl_after:"النقاء الفائق",
+    nav_engines:"الوحدات",nav_download:"تنصيب",nav_cta:"تشغيل النظام",
+    hero_badge:"النظام متصل . رؤية 2027",
+    hero_h1a:"إعادة بناء,",hero_h1b:"الـواقـع",
+    hero_sub:"نشر شبكات عصبية متطورة للقضاء على ضوضاء الفراغ، استعادة أدق التفاصيل، وتوليد إطارات زمنية خالية من العيوب.",
+    lbl_before:"بيانات خام",lbl_after:"تمت المعالجة",
     cta_download:"نشر لنظام Windows",cta_github:"الوصول للكود المصدري",
-    stat1:"أنوية عصبية",stat2:"رندر الإطارات",stat3:"أقصى دقة",stat4:"لغات النظام",
-    engines_tag:"هيكلة المعالجة المركزية",engines_h:"ستة محركات.<br>سيطرة مطلقة.",
-    dl_h:"تهيئة ترقية النظام",
+    stat1:"أنوية عصبية",stat2:"رندر الإطارات",stat3:"أقصى دقة",stat4:"معدل التأخير",
+    engines_tag:"وحدات المعالجة المركزية",engines_h:"سـيـطـرة<br>مـطـلـقـة.",
+    dl_h:"بدء تسلسل التشغيل",
     dl_sub:"بروتوكول مفتوح المصدر. Windows 10/11 · يتطلب عتاد GPU.",
     dl_btn:"تحميل وحدة التحكم",
     dl_note:"متطلبات النظام: إصدار 7.0 // أنوية ذكاء اصطناعي NVIDIA-AMD // +4GB VRAM",
@@ -426,60 +429,12 @@ const i18n = {
 };
 
 const engines = [
-  {
-    name:"QUANTUM AI", color:"#00f0ff",
-    desc:{
-      en:"Deep neural reconstruction — recovers lost detail from compressed, low-quality footage using predictive AI algorithms.",
-      ar:"إعادة بناء عصبية عميقة — يستعيد التفاصيل المفقودة من اللقطات المضغوطة ومنخفضة الجودة باستخدام خوارزميات التنبؤ الذكية."
-    },
-    svgB: `<svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="200" fill="#050505"/><rect x="20" y="60" width="20" height="110" fill="#111"/><rect x="50" y="40" width="25" height="130" fill="#151515"/><rect x="85" y="70" width="18" height="100" fill="#0a0a0a"/><rect x="113" y="45" width="28" height="125" fill="#111"/><rect x="151" y="80" width="15" height="90" fill="#151515"/><rect x="176" y="30" width="32" height="140" fill="#0a0a0a"/><rect x="220" y="70" width="20" height="100" fill="#111"/><rect x="250" y="50" width="24" height="120" fill="#151515"/><rect x="0" y="170" width="400" height="30" fill="#080808"/></svg>`,
-    svgA: `<svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="200" fill="#000810"/><rect x="20" y="60" width="20" height="110" fill="#001830"/><rect x="50" y="40" width="25" height="130" fill="#002040"/><rect x="85" y="70" width="18" height="100" fill="#001020"/><rect x="113" y="45" width="28" height="125" fill="#001830"/><rect x="151" y="80" width="15" height="90" fill="#002040"/><rect x="176" y="30" width="32" height="140" fill="#001020"/><rect x="220" y="70" width="20" height="100" fill="#001830"/><rect x="250" y="50" width="24" height="120" fill="#002040"/><rect x="0" y="170" width="400" height="30" fill="#000408"/><line x1="0" y1="60" x2="400" y2="60" stroke="#00f0ff" stroke-width="1" opacity="0.3"/><line x1="0" y1="100" x2="400" y2="100" stroke="#00f0ff" stroke-width="1" opacity="0.2"/></svg>`
-  },
-  {
-    name:"ULTRA POWER", color:"#f97316",
-    desc:{
-      en:"Maximum enhancement with temporal upscaling and color restoration for cinematic output without artifacts.",
-      ar:"تحسين أقصى مع تكبير الدقة الزمني وترميم الألوان لإنتاج جودة سينمائية خالية من التشوهات."
-    },
-    svgB: `<svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="200" fill="#050505"/><circle cx="120" cy="100" r="40" fill="#111"/><circle cx="240" cy="100" r="55" fill="#151515"/></svg>`,
-    svgA: `<svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="200" fill="#0a0300"/><circle cx="120" cy="100" r="40" fill="#200a00" stroke="#f97316" stroke-width="1" opacity="0.8"/><circle cx="240" cy="100" r="55" fill="#150500" stroke="#f97316" stroke-width="1" opacity="0.5"/></svg>`
-  },
-  {
-    name:"CRYSTAL CLEAR", color:"#06b6d4",
-    desc:{
-      en:"Precision denoising and sharpening. Ideal for restoring clean data from heavily compressed sources.",
-      ar:"إزالة ضوضاء دقيقة وشحذ متطور. مثالي لاستعادة البيانات النظيفة من المصادر شديدة الضغط."
-    },
-    svgB: `<svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="200" fill="#050505"/><filter id="nb"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="200" filter="url(#nb)" opacity="0.2"/></svg>`,
-    svgA: `<svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="200" fill="#000a0c"/><rect x="60" y="60" width="80" height="50" rx="4" fill="#001820" stroke="#06b6d4" stroke-width="1" opacity="0.6"/><rect x="180" y="50" width="100" height="70" rx="4" fill="#001015" stroke="#06b6d4" stroke-width="1" opacity="0.4"/></svg>`
-  },
-  {
-    name:"SILK FLOW", color:"#8b5cf6",
-    desc:{
-      en:"Temporal smoothing and frame generation for precise 60/120 FPS conversion with natural motion curves.",
-      ar:"تنعيم زمني وتوليد إطارات للتحويل الدقيق إلى 60/120 إطار في الثانية مع منحنيات حركة طبيعية."
-    },
-    svgB: `<svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="200" fill="#050505"/><path d="M0 140 C80 100 160 160 280 120 S400 90 450 110 L450 200 L0 200Z" fill="#111"/></svg>`,
-    svgA: `<svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="200" fill="#05020a"/><path d="M0 140 C80 100 160 160 280 120 S400 90 450 110 L450 200 L0 200Z" fill="#0a0414" stroke="#8b5cf6" stroke-width="1.5" opacity="0.7"/><circle cx="200" cy="125" r="30" fill="none" stroke="#8b5cf6" stroke-width="1" opacity="0.4" stroke-dasharray="4 4"/></svg>`
-  },
-  {
-    name:"GHOST WIPE", color:"#ec4899",
-    desc:{
-      en:"AI object removal and inpainting. Erase unwanted elements seamlessly without disrupting the temporal flow.",
-      ar:"إزالة الكائنات وترقيعها بالذكاء الاصطناعي. امحِ العناصر غير المرغوبة بسلاسة دون الإخلال بالتدفق الزمني."
-    },
-    svgB: `<svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="200" fill="#050505"/><rect x="80" y="60" width="120" height="80" rx="4" fill="#151515" stroke="#333" stroke-width="1.5" stroke-dasharray="6 3"/><text x="140" y="105" font-family="monospace" font-size="10" font-weight="bold" fill="#555" text-anchor="middle">TARGET</text></svg>`,
-    svgA: `<svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="200" fill="#0a0206"/><rect x="80" y="60" width="120" height="80" rx="4" fill="#0a0206" stroke="#ec4899" stroke-width="1" opacity="0.4"/><text x="140" y="105" font-family="monospace" font-size="10" font-weight="bold" fill="#ec4899" text-anchor="middle" opacity="0.6">CLEARED</text></svg>`
-  },
-  {
-    name:"SMART BALANCE", color:"#22c55e",
-    desc:{
-      en:"Algorithmic color grading, dynamic range expansion, and exposure correction in a single analytical pass.",
-      ar:"تصحيح ألوان خوارزمي، توسيع النطاق الديناميكي، وتعديل التعريض في مسار تحليلي واحد."
-    },
-    svgB: `<svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="200" fill="#050505"/><rect x="0" y="0" width="130" height="200" fill="#0a0a0a"/><rect x="130" y="0" width="140" height="200" fill="#151515"/></svg>`,
-    svgA: `<svg width="100%" height="200" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="200" fill="#020804"/><rect x="0" y="0" width="130" height="200" fill="#020a05"/><rect x="130" y="0" width="140" height="200" fill="#041008"/><line x1="0" y1="100" x2="400" y2="100" stroke="#22c55e" stroke-width="1" opacity="0.3"/><circle cx="130" cy="100" r="3" fill="#22c55e" opacity="0.8"/></svg>`
-  }
+  { name:"QUANTUM AI", color:"#00e5ff", desc:{ en:"Deep neural void reconstruction.", ar:"إعادة بناء عصبية عميقة للفراغ."} },
+  { name:"ULTRA POWER", color:"#ff4757", desc:{ en:"Temporal upscaling without artifacts.", ar:"تكبير دقة زمني خالي من الشوائب."} },
+  { name:"CRYSTAL CLEAR", color:"#2ed573", desc:{ en:"Precision denoising from compressed sources.", ar:"إزالة ضوضاء دقيقة من المصادر المضغوطة."} },
+  { name:"SILK FLOW", color:"#9d4edd", desc:{ en:"Precise 60/120 FPS conversion.", ar:"تحويل دقيق إلى 60/120 إطار في الثانية."} },
+  { name:"GHOST WIPE", color:"#ff7f50", desc:{ en:"AI object removal and inpainting.", ar:"إزالة وترقيع الكائنات بالذكاء الاصطناعي."} },
+  { name:"SMART BALANCE", color:"#eccc68", desc:{ en:"Algorithmic color and exposure grading.", ar:"تصحيح خوارزمي للألوان والتعريض."} }
 ];
 
 const grid = document.getElementById('enginesGrid');
@@ -491,22 +446,19 @@ function buildEngines(l) {
     card.className = 'engine-card';
     card.innerHTML = `
       <div class="engine-compare" id="ec${i}" data-idx="${i}">
-        <div style="position:absolute;inset:0">${e.svgB}</div>
+        <div style="position:absolute;inset:0;background:rgba(255,255,255,0.02)"></div>
         <div style="position:absolute;inset:0;overflow:hidden;right:50%;border-right:1px solid ${e.color}" id="em${i}">
-          <div style="position:absolute;inset:0;width:100%">${e.svgA}</div>
+          <div style="position:absolute;inset:0;width:100%;background:radial-gradient(circle at 50% 50%, ${e.color}22, transparent 60%)"></div>
         </div>
-        <div class="ec-divider" id="ed${i}" style="left:50%; background:${e.color}; box-shadow: 0 0 10px ${e.color}"></div>
-        <div class="ec-handle" id="eh${i}" style="left:50%; border-color:${e.color}; color:${e.color}">&#10094;&#10095;</div>
+        <div class="ec-divider" id="ed${i}" style="left:50%; background:${e.color}; box-shadow: 0 0 15px ${e.color}"></div>
+        <div class="ec-handle" id="eh${i}" style="left:50%; border-color:${e.color}; color:${e.color}; box-shadow: 0 0 10px ${e.color}">&#10094;&#10095;</div>
       </div>
       <div class="engine-body">
         <div class="engine-tag" style="color:${e.color}">${e.name}</div>
         <div class="engine-desc">${(e.desc[l]||e.desc.en)}</div>
       </div>`;
     grid.appendChild(card);
-    makeSlider(card.querySelector('.engine-compare'),
-               card.querySelector(`#em${i}`),
-               card.querySelector(`#ed${i}`),
-               card.querySelector(`#eh${i}`));
+    makeSlider(card.querySelector('.engine-compare'), card.querySelector(`#em${i}`), card.querySelector(`#ed${i}`), card.querySelector(`#eh${i}`));
   });
 }
 
@@ -533,7 +485,7 @@ function makeSlider(wrap, mask, div, hdl) {
   document.addEventListener('touchend', () => drag=false);
 }
 
-// Hero Slider
+// Hero Slider specific
 (function(){
   const wrap = document.getElementById('heroSlider');
   const clip = document.getElementById('heroClip');
@@ -566,17 +518,12 @@ function applyLang(l) {
   document.documentElement.lang = l;
   const isRTL = l === 'ar';
   document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
-  // Adjust typography weight slightly for Arabic vs English if needed
-  if(isRTL) {
-    document.body.style.fontFamily = "'Cairo', sans-serif";
-  } else {
-    document.body.style.fontFamily = "'Outfit', sans-serif";
-  }
+  if(isRTL) { document.body.style.fontFamily = "'Cairo', sans-serif"; } 
+  else { document.body.style.fontFamily = "'Outfit', sans-serif"; }
   buildEngines(l);
 }
-
 function setLang(l) { applyLang(l); }
-applyLang('ar'); // Default load language set to Arabic
+applyLang('ar');
 </script>
 </body>
 </html>
