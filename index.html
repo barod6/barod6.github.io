@@ -3,216 +3,271 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BL Creative | AI Video Processing</title>
+<title>BL Creative | UltraPurity AI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* ===== RESET & ULTRA-PREMIUM VARIABLES ===== */
+/* ===== VARIABLES & RESET ===== */
 *{margin:0;padding:0;box-sizing:border-box}
 :root {
-  --bg-dark: #000000;
-  --bg-surface: #0a0a0c;
-  --cyan: #00f0ff;
+  --bg-base: #020202;
+  --bg-surface: rgba(15, 15, 18, 0.6);
+  --bg-card: rgba(20, 20, 25, 0.8);
+  --accent: #00e5ff;
+  --accent-glow: rgba(0, 229, 255, 0.3);
+  --border: rgba(255,255,255,0.08);
   --text-main: #ffffff;
-  --text-muted: #666670;
-  --border-light: rgba(255,255,255,0.06);
+  --text-dim: #94a3b8;
+  --font-en: 'Montserrat', sans-serif;
+  --font-ar: 'Cairo', sans-serif;
 }
 
-html { scroll-behavior: smooth; background-color: var(--bg-dark); }
+html { scroll-behavior: smooth; background-color: var(--bg-base); }
 body {
-  color: var(--text-main);
-  font-family: 'Outfit', 'Tajawal', sans-serif;
-  font-size: 15px; line-height: 1.6;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
+  color: var(--text-main); font-family: var(--font-en);
+  font-size: 15px; line-height: 1.6; overflow-x: hidden;
 }
-a { text-decoration: none; color: inherit; transition: 0.3s; }
+a { text-decoration: none; color: inherit; transition: 0.3s ease; }
 
-/* ===== INTERACTIVE MOUSE GLOW (MotionSites Vibe) ===== */
-#mouse-glow {
-  position: fixed; top: 0; left: 0; width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(0, 240, 255, 0.08) 0%, transparent 70%);
-  border-radius: 50%; pointer-events: none; z-index: -1;
-  transform: translate(-50%, -50%); transition: transform 0.1s ease-out;
-}
+/* ===== SPACE / SPEED ANIMATION BACKGROUND ===== */
+#space-bg { position: fixed; inset: 0; z-index: -10; background: var(--bg-base); overflow: hidden; }
+.starfield { position: absolute; inset: -50%; width: 200%; height: 200%; background-image: radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)), radial-gradient(1px 1px at 40px 70px, #ffffff, rgba(0,0,0,0)), radial-gradient(1px 1px at 50px 160px, #ffffff, rgba(0,0,0,0)), radial-gradient(1px 1px at 90px 40px, #ffffff, rgba(0,0,0,0)); background-repeat: repeat; background-size: 200px 200px; animation: spaceDrift 100s linear infinite; opacity: 0.3; }
+.starfield:nth-child(2) { background-size: 300px 300px; animation: spaceDrift 60s linear infinite; opacity: 0.5; transform: rotate(45deg); }
+.warp-lines { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px); background-size: 100% 4px; animation: scanlines 10s linear infinite; }
+@keyframes spaceDrift { 0% { transform: translateY(0); } 100% { transform: translateY(-1000px); } }
+@keyframes scanlines { 0% { background-position: 0 0; } 100% { background-position: 0 100vh; } }
+.ambient-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, var(--accent-glow), transparent 70%); filter: blur(60px); top: -200px; left: 50%; transform: translateX(-50%); opacity: 0.5; animation: pulseGlow 5s alternate infinite; }
+@keyframes pulseGlow { 0% { opacity: 0.3; transform: translateX(-50%) scale(0.9); } 100% { opacity: 0.6; transform: translateX(-50%) scale(1.1); } }
 
-/* ===== MINIMALIST NAV ===== */
-nav {
-  position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 0 5%; height: 80px;
-  background: rgba(0,0,0,0.5); backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border-light);
-}
-.logo { font-size: 22px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
-.logo span { color: var(--cyan); }
+/* ===== ELEGANT NAV ===== */
+nav { position: fixed; top: 0; width: 100%; height: 72px; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; background: rgba(2,2,2,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); z-index: 100; transition: 0.3s; }
+.logo { font-size: 22px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+.logo span { color: var(--accent); }
 .nav-links { display: flex; gap: 40px; }
-.nav-links a { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); }
+.nav-links a { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); transition: 0.3s; position: relative; }
 .nav-links a:hover { color: var(--text-main); }
-.nav-actions { display: flex; gap: 20px; align-items: center; }
-.lang-sel { background: transparent; border: none; color: var(--text-muted); font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer; outline: none; text-transform: uppercase; }
-.lang-sel:hover { color: var(--cyan); }
-.btn-nav { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 12px 24px; border-radius: 100px; background: #fff; color: #000; transition: 0.3s; }
-.btn-nav:hover { background: var(--cyan); box-shadow: 0 0 20px rgba(0,240,255,0.4); }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent); transition: 0.3s; }
+.nav-links a:hover::after { width: 100%; box-shadow: 0 0 10px var(--accent); }
+.nav-actions { display: flex; gap: 16px; align-items: center; }
+.lang-btn { background: var(--bg-surface); border: 1px solid var(--border); color: var(--text-dim); padding: 8px 16px; border-radius: 6px; font-family: inherit; font-size: 12px; font-weight: 700; cursor: pointer; outline: none; transition: 0.3s; text-transform: uppercase; }
+.lang-btn:hover { border-color: var(--accent); color: #fff; }
+.btn { display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 12px 28px; border-radius: 6px; cursor: pointer; transition: 0.3s; border: none; }
+.btn-primary { background: var(--accent); color: #000; box-shadow: 0 0 15px rgba(0,229,255,0.2); }
+.btn-primary:hover { background: #fff; box-shadow: 0 0 25px rgba(255,255,255,0.4); transform: translateY(-2px); }
+.btn-ghost { background: transparent; border: 1px solid var(--border); color: #fff; }
+.btn-ghost:hover { border-color: var(--accent); background: rgba(0,229,255,0.05); }
 
-/* ===== HERO (Cinematic Typography) ===== */
-.hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 5% 60px; }
-.badge { font-size: 10px; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 24px; border: 1px solid var(--border-light); padding: 8px 24px; border-radius: 100px; }
-.hero h1 { font-size: clamp(48px, 8vw, 100px); font-weight: 300; line-height: 1; letter-spacing: -2px; margin-bottom: 30px; }
-.hero h1 strong { font-weight: 800; background: linear-gradient(to right, #fff, var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.hero p { font-size: 18px; color: var(--text-muted); max-width: 600px; margin-bottom: 40px; font-weight: 300; }
+/* ===== HERO (Fade In Animation) ===== */
+.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 5% 60px; animation: fadeInUp 1s ease-out; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+.badge { font-size: 11px; font-weight: 700; letter-spacing: 3px; color: var(--accent); background: rgba(0,229,255,0.05); border: 1px solid rgba(0,229,255,0.2); padding: 6px 16px; border-radius: 100px; margin-bottom: 24px; text-transform: uppercase; }
+.hero h1 { font-size: clamp(40px, 6vw, 80px); font-weight: 800; line-height: 1.1; letter-spacing: -1px; margin-bottom: 24px; text-transform: uppercase; }
+.hero h1 span { color: var(--accent); text-shadow: 0 0 30px var(--accent-glow); }
+.hero-sub { font-size: 17px; color: var(--text-dim); max-width: 600px; margin: 0 auto 40px; font-weight: 400; }
 
-/* ===== THE MASTER SHOWCASE (Edge-to-Edge) ===== */
-.showcase-sec { padding: 0; width: 100%; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); }
-.engine-menu { display: flex; justify-content: center; gap: 2px; background: var(--bg-surface); padding: 20px 5%; overflow-x: auto; }
-.tab-btn { background: transparent; border: none; color: var(--text-muted); font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 12px 24px; cursor: pointer; transition: 0.3s; white-space: nowrap; }
-.tab-btn:hover { color: #fff; }
-.tab-btn.active { color: var(--cyan); border-bottom: 2px solid var(--cyan); }
+/* ===== PROFESSIONAL WORKSPACE SHOWCASE ===== */
+.section { max-width: 1400px; margin: 0 auto 100px; padding: 0 5%; }
+.sec-header { text-align: center; margin-bottom: 60px; animation: fadeInUp 1s ease-out; }
+.sec-title { font-size: clamp(28px, 4vw, 48px); font-weight: 800; text-transform: uppercase; margin-bottom: 16px; letter-spacing: -1px; }
+.sec-title span { color: var(--accent); }
+.sec-desc { color: var(--text-dim); max-width: 600px; margin: 0 auto; font-size: 15px; }
 
-.slider-container { position: relative; width: 100%; height: 80vh; min-height: 600px; background: #000; cursor: ew-resize; overflow: hidden; direction: ltr !important; }
-.sl-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+/* The Workspace Layout */
+.workspace { display: grid; grid-template-columns: 350px 1fr; gap: 24px; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; backdrop-filter: blur(20px); box-shadow: 0 40px 80px rgba(0,0,0,0.6); }
+
+/* Left Panel: Engine Details & Selector */
+.ws-sidebar { display: flex; flex-direction: column; gap: 24px; }
+.engine-list { display: flex; flex-direction: column; gap: 8px; }
+.eng-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-dim); padding: 16px 20px; border-radius: 12px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-align: left; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: space-between; }
+.eng-btn:hover { border-color: rgba(255,255,255,0.2); color: #fff; }
+.eng-btn.active { background: rgba(0,229,255,0.05); border-color: var(--accent); color: var(--accent); box-shadow: inset 4px 0 0 var(--accent); }
+
+/* Clarification Panel */
+.eng-details { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; flex-grow: 1; transition: opacity 0.3s; }
+.ed-title { font-size: 18px; font-weight: 800; color: var(--accent); margin-bottom: 12px; text-transform: uppercase; }
+.ed-desc { font-size: 13px; color: var(--text-main); margin-bottom: 20px; line-height: 1.6; }
+.ed-meta { border-top: 1px solid var(--border); padding-top: 16px; }
+.ed-meta-item { margin-bottom: 12px; }
+.ed-meta-lbl { font-size: 11px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; display: block; }
+.ed-meta-val { font-size: 13px; color: #fff; font-weight: 500; }
+
+/* Right Panel: The Slider */
+.ws-preview { position: relative; width: 100%; height: 600px; background: #000; border-radius: 12px; overflow: hidden; cursor: ew-resize; border: 1px solid var(--border); direction: ltr !important; }
+.sl-layer { position: absolute; inset: 0; width: 100%; height: 100%; background-size: cover; background-position: center; transition: opacity 0.4s ease; }
 .sl-clip { position: absolute; inset: 0; width: 100%; height: 100%; clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); z-index: 2; }
-.sl-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: var(--cyan); transform: translateX(-50%); z-index: 8; pointer-events: none; }
-.sl-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 48px; height: 48px; background: rgba(0,0,0,0.5); border: 1px solid var(--cyan); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 9; pointer-events: none; backdrop-filter: blur(10px); }
-.sl-handle::before, .sl-handle::after { content: ''; width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
-.sl-handle::before { border-right: 5px solid var(--cyan); margin-right: 4px; }
-.sl-handle::after { border-left: 5px solid var(--cyan); margin-left: 4px; }
+.sl-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: var(--accent); transform: translateX(-50%); z-index: 8; pointer-events: none; box-shadow: 0 0 10px var(--accent); }
+.sl-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; background: var(--bg-base); border: 2px solid var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 9; pointer-events: none; color: var(--accent); font-size: 12px; }
+.sl-label { position: absolute; top: 20px; padding: 6px 16px; background: rgba(0,0,0,0.8); font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; border-radius: 6px; z-index: 10; pointer-events: none; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(4px); }
+.lbl-before { left: 20px; color: #aaa; }
+.lbl-after { right: 20px; color: var(--accent); border-color: rgba(0,229,255,0.3); }
 
-.sl-label { position: absolute; bottom: 40px; padding: 10px 24px; background: rgba(0,0,0,0.6); font-size: 10px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; border-radius: 100px; z-index: 10; pointer-events: none; backdrop-filter: blur(10px); }
-.lbl-before { left: 5%; color: #888; border: 1px solid rgba(255,255,255,0.1); }
-.lbl-after { right: 5%; color: var(--cyan); border: 1px solid var(--cyan); }
+/* Animation Engine (Silk Flow) */
+.anim-canvas { position: absolute; inset: 0; background: #050508; display: flex; align-items: center; justify-content: center; }
+.anim-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 40px 40px; }
+.anim-pulse { position: absolute; width: 60px; height: 4px; border-radius: 4px; top: 50%; margin-top: -2px; }
+.stutter { background: #ff3366; box-shadow: 0 0 20px #ff3366; animation: moveStutter 2s steps(6, end) infinite; }
+.smooth { background: var(--accent); box-shadow: 0 0 20px var(--accent); animation: moveSmooth 2s linear infinite; }
+@keyframes moveStutter { 0% { left: 10%; opacity: 0.2; } 50% { opacity: 1; } 100% { left: 80%; opacity: 0.2; } }
+@keyframes moveSmooth { 0% { left: 10%; width: 20px; } 50% { width: 150px; } 100% { left: 80%; width: 20px; } }
 
-.engine-info { position: absolute; top: 40px; left: 5%; z-index: 10; pointer-events: none; max-width: 400px; }
-.e-title { font-size: 32px; font-weight: 800; text-transform: uppercase; letter-spacing: -1px; margin-bottom: 8px; text-shadow: 0 2px 20px rgba(0,0,0,0.8); }
-.e-desc { font-size: 15px; color: #ddd; font-weight: 300; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-
-/* SVG Filters for strictly RAW/Degraded looks (NO BLUR) */
-.flt-noise { filter: url(#heavyNoise) grayscale(0.2) contrast(1.1) brightness(0.8); }
+/* SVG Filters (NO BLUR - Only Noise & Pixels) */
+.flt-noise { filter: url(#heavyNoise) grayscale(0.5) contrast(1.2); }
 .flt-pixel { filter: url(#pixelate) contrast(1.1); }
-.flt-color { filter: brightness(0.4) contrast(1.8) sepia(0.6) hue-rotate(-20deg); }
+.hide { display: none !important; }
 
-/* ===== SECTIONS (Clean & Minimal) ===== */
-.section { padding: 140px 5%; max-width: 1400px; margin: 0 auto; }
-.sec-header { margin-bottom: 80px; }
-.sec-tag { font-size: 11px; font-weight: 700; letter-spacing: 3px; color: var(--cyan); text-transform: uppercase; margin-bottom: 16px; display: block; }
-.sec-title { font-size: clamp(32px, 4vw, 48px); font-weight: 300; line-height: 1.2; letter-spacing: -1px; }
-.sec-title strong { font-weight: 800; }
+/* ===== GPU & HARDWARE ===== */
+.gpu-section { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 16px; padding: 60px; margin-bottom: 100px; backdrop-filter: blur(20px); }
+.gpu-text h2 { font-size: 32px; font-weight: 800; margin-bottom: 16px; text-transform: uppercase; }
+.gpu-text p { color: var(--text-dim); font-size: 15px; margin-bottom: 24px; }
+.gpu-visual { position: relative; height: 200px; display: flex; align-items: center; justify-content: center; }
+.chip { width: 120px; height: 120px; background: #050505; border: 2px solid var(--accent); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--accent); letter-spacing: 2px; box-shadow: 0 0 30px rgba(0,229,255,0.2), inset 0 0 20px rgba(0,229,255,0.1); position: relative; z-index: 2; animation: floatChip 4s ease-in-out infinite; }
+@keyframes floatChip { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+.data-line { position: absolute; width: 100%; height: 2px; background: rgba(255,255,255,0.05); }
+.data-line::after { content: ''; position: absolute; top: 0; left: 0; width: 50px; height: 100%; background: var(--accent); box-shadow: 0 0 10px var(--accent); animation: dataStream 2s linear infinite; }
+@keyframes dataStream { 0% { left: -50px; opacity: 0; } 50% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
 
-/* GPU Layout */
-.gpu-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: center; }
-.gpu-visual { background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: 24px; padding: 60px; text-align: center; position: relative; overflow: hidden; }
-.gpu-visual::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--cyan), transparent); }
-.gpu-logos { font-size: 32px; font-weight: 800; letter-spacing: 4px; color: var(--text-muted); display: flex; justify-content: center; gap: 40px; margin-bottom: 30px; }
-.gpu-desc { font-size: 16px; color: var(--text-muted); font-weight: 300; }
+/* ===== PRICING ===== */
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+.price-card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 16px; padding: 40px; display: flex; flex-direction: column; transition: 0.3s; }
+.price-card:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-5px); }
+.price-card.pro { border-color: var(--accent); background: rgba(0,229,255,0.02); }
+.p-name { font-size: 14px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 16px; }
+.price-card.pro .p-name { color: var(--accent); }
+.p-price { font-size: 48px; font-weight: 700; margin-bottom: 32px; display: flex; align-items: baseline; gap: 4px; }
+.p-price span { font-size: 14px; color: var(--text-dim); font-weight: 500; }
+.features { list-style: none; margin-bottom: 40px; flex-grow: 1; border-top: 1px solid var(--border); padding-top: 24px; }
+.features li { font-size: 14px; margin-bottom: 16px; color: #ccc; display: flex; align-items: center; gap: 12px; }
+.features li::before { content: '✓'; color: var(--accent); font-weight: bold; }
 
-/* Pricing */
-.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 24px; }
-.price-card { background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: 24px; padding: 48px; transition: 0.3s; }
-.price-card:hover { border-color: rgba(255,255,255,0.2); }
-.price-card.pro { border-color: rgba(0,240,255,0.3); background: rgba(0,240,255,0.02); }
-.p-name { font-size: 14px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 24px; }
-.price-card.pro .p-name { color: var(--cyan); }
-.p-price { font-size: 64px; font-weight: 300; margin-bottom: 40px; line-height: 1; letter-spacing: -2px; }
-.p-price span { font-size: 16px; font-weight: 500; color: var(--text-muted); letter-spacing: 0; }
-.features { list-style: none; margin-bottom: 40px; }
-.features li { font-size: 15px; margin-bottom: 16px; color: #ccc; font-weight: 300; display: flex; align-items: center; gap: 12px; }
-.features li::before { content: '—'; color: var(--cyan); font-weight: bold; }
-.btn-full { width: 100%; display: block; text-align: center; padding: 16px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; border-radius: 100px; transition: 0.3s; }
+/* ===== FOOTER ===== */
+footer { padding: 60px 5%; border-top: 1px solid var(--border); background: #000; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+.f-logo { font-size: 20px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+.f-logo span { color: var(--accent); }
+.f-text { font-size: 13px; color: var(--text-dim); }
 
-/* About & Community */
-.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-.info-card { padding: 48px; border: 1px solid var(--border-light); border-radius: 24px; background: rgba(255,255,255,0.01); }
-.info-card h3 { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
-.info-card p { font-size: 15px; color: var(--text-muted); font-weight: 300; margin-bottom: 32px; }
-
-footer { padding: 60px 5%; border-top: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; }
-.f-logo { font-size: 18px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
-.f-text { font-size: 13px; color: var(--text-muted); }
-
+/* RTL Adjustments for Arabic */
 html[dir="rtl"] .nav-links { flex-direction: row-reverse; }
+html[dir="rtl"] .eng-btn { text-align: right; }
 html[dir="rtl"] .features li { flex-direction: row-reverse; }
+html[dir="rtl"] .ed-meta-lbl { letter-spacing: 0; }
 
 @media(max-width: 900px) {
   .nav-links { display: none; }
-  .gpu-grid, .pricing-grid, .info-grid { grid-template-columns: 1fr; }
-  footer { flex-direction: column; gap: 20px; text-align: center; }
+  .workspace { grid-template-columns: 1fr; }
+  .gpu-section { grid-template-columns: 1fr; text-align: center; }
 }
 </style>
 </head>
 <body>
 
-<div id="mouse-glow"></div>
-
 <svg style="display:none;">
-  <filter id="heavyNoise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" result="noise"/><feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.8 0" in="noise" result="coloredNoise"/><feComposite operator="in" in="coloredNoise" in2="SourceGraphic" result="composite"/><feBlend mode="overlay" in="composite" in2="SourceGraphic"/></filter>
-  <filter id="pixelate"><feGaussianBlur stdDeviation="6" result="blur"/><feComponentTransfer><feFuncA type="discrete" tableValues="1 1"/></feComponentTransfer></filter>
+  <filter id="heavyNoise"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" result="noise"/><feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.8 0" in="noise" result="coloredNoise"/><feComposite operator="in" in="coloredNoise" in2="SourceGraphic" result="composite"/><feBlend mode="overlay" in="composite" in2="SourceGraphic"/></filter>
+  <filter id="pixelate"><feGaussianBlur stdDeviation="5" result="blur"/><feComponentTransfer><feFuncA type="discrete" tableValues="1 1"/></feComponentTransfer></filter>
 </svg>
+
+<div id="space-bg">
+  <div class="starfield"></div>
+  <div class="starfield"></div>
+  <div class="warp-lines"></div>
+  <div class="ambient-glow"></div>
+</div>
 
 <nav>
   <div class="logo">BL <span>Creative</span></div>
   <div class="nav-links">
-    <a href="#showcase" data-i18n="nav_eng">Architecture</a>
+    <a href="#showcase" data-i18n="nav_eng">Engines</a>
     <a href="#hardware" data-i18n="nav_hw">Hardware</a>
     <a href="#pricing" data-i18n="nav_pr">Pricing</a>
     <a href="#community" data-i18n="nav_com">Community</a>
   </div>
   <div class="nav-actions">
-    <select class="lang-sel" id="langSel" onchange="setLang(this.value)">
+    <select class="lang-btn" id="langSel" onchange="setLang(this.value)">
       <option value="en">EN</option><option value="ar">AR</option>
     </select>
-    <a href="#pricing" class="btn-nav" data-i18n="btn_get">Get Access</a>
+    <a href="#pricing" class="btn btn-primary" data-i18n="btn_get">Download</a>
   </div>
 </nav>
 
 <section class="hero">
-  <div class="badge" data-i18n="hero_badge">Advanced Neural Processing</div>
-  <h1 data-i18n="hero_h1">Vision <strong>Redefined.</strong></h1>
-  <p data-i18n="hero_sub">Professional AI architecture engineered to denoise, upscale, and restore video frames with absolute mathematical precision. Zero compromise on quality.</p>
+  <div class="badge" data-i18n="hero_badge">AI Video Processing Protocol</div>
+  <h1 data-i18n="hero_h1">Absolute <span>Clarity</span></h1>
+  <p class="hero-sub" data-i18n="hero_sub">Professional neural architecture engineered to denoise, upscale, and interpolate frames with zero compromise. See the mathematical precision.</p>
+  <div style="display:flex; gap:16px; justify-content:center;">
+    <a class="btn btn-primary" href="#pricing" data-i18n="btn_get">Get Started</a>
+    <a class="btn btn-ghost" href="#showcase" data-i18n="btn_demo">View Workspace</a>
+  </div>
 </section>
 
-<section class="showcase-sec" id="showcase">
-  <div class="engine-menu" id="tabs-container"></div>
-  
-  <div class="slider-container" id="masterSlider">
-    <div class="engine-info">
-      <div class="e-title" id="eTitle">Engine</div>
-      <div class="e-desc" id="eDesc">Description</div>
+<section class="section" id="showcase">
+  <div class="sec-header">
+    <h2 class="sec-title" data-i18n="eng_h">Neural <span>Workspace</span></h2>
+    <p class="sec-desc" data-i18n="eng_desc">Select an engine to understand its mechanics and see a real-time comparison of raw degraded input versus UltraPurity processing.</p>
+  </div>
+
+  <div class="workspace">
+    <div class="ws-sidebar">
+      <div class="engine-list" id="engineList">
+        </div>
+      <div class="eng-details" id="engDetails">
+        <div class="ed-title" id="edTitle">Engine Name</div>
+        <div class="ed-desc" id="edDesc">Engine description explains how it works.</div>
+        <div class="ed-meta">
+          <div class="ed-meta-item">
+            <span class="ed-meta-lbl" data-i18n="lbl_best">Best For</span>
+            <span class="ed-meta-val" id="edBest">Use cases</span>
+          </div>
+          <div class="ed-meta-item">
+            <span class="ed-meta-lbl" data-i18n="lbl_tech">Technology</span>
+            <span class="ed-meta-val" id="edTech">AI Model info</span>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <img src="" class="sl-img" id="imgAfter" alt="Processed">
-    
-    <div class="sl-clip" id="layerBeforeMask">
-      <img src="" class="sl-img" id="imgBefore" alt="Raw">
-      <div class="sl-label lbl-before" data-i18n="lbl_b">Raw Source</div>
-    </div>
+    <div class="ws-preview" id="masterSlider">
+      <div class="sl-layer" id="layerAfter" style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1600&auto=format&fit=crop');"></div>
+      <div class="sl-label lbl-after">UltraPurity</div>
 
-    <div class="sl-label lbl-after">UltraPurity</div>
-    <div class="sl-line" id="masterLine"></div>
-    <div class="sl-handle" id="masterHdl"></div>
+      <div class="sl-clip" id="layerBeforeMask">
+        <div class="sl-layer" id="layerBefore" style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1600&auto=format&fit=crop');"></div>
+        
+        <div class="sl-layer anim-canvas hide" id="animBefore">
+           <div class="anim-grid"></div>
+           <div class="anim-pulse stutter"></div>
+        </div>
+        <div class="sl-label lbl-before" data-i18n="lbl_b">Raw Source</div>
+      </div>
+
+      <div class="sl-layer anim-canvas hide" id="animAfter" style="z-index: 1; pointer-events: none;">
+         <div class="anim-grid"></div>
+         <div class="anim-pulse smooth"></div>
+      </div>
+
+      <div class="sl-line" id="masterLine"></div>
+      <div class="sl-handle" id="masterHdl">⇔</div>
+    </div>
   </div>
 </section>
 
 <section class="section" id="hardware">
-  <div class="sec-header">
-    <span class="sec-tag" data-i18n="hw_tag">Infrastructure</span>
-    <h2 class="sec-title" data-i18n="hw_h">Hardware <strong>Acceleration</strong></h2>
-  </div>
-  <div class="gpu-grid">
-    <div class="gpu-visual">
-      <div class="gpu-logos"><span>NVIDIA</span> <span>AMD</span></div>
-      <p style="font-family: monospace; color: var(--cyan); letter-spacing: 2px;">TENSOR CORES ACTIVE</p>
+  <div class="gpu-section">
+    <div class="gpu-text">
+      <h2 data-i18n="hw_h">Hardware <span>Acceleration</span></h2>
+      <p data-i18n="hw_p1">UltraPurity interfaces directly with the bare metal of your system. By utilizing NVIDIA Tensor Cores and AMD AI accelerators, we bypass standard processing bottlenecks.</p>
+      <p data-i18n="hw_p2">This enables real-time deep learning inference, allowing you to render 4K and 8K footage at unprecedented speeds.</p>
     </div>
-    <div class="gpu-desc">
-      <p data-i18n="hw_desc">UltraPurity is engineered at the bare-metal level. It directly interfaces with NVIDIA Tensor Cores and AMD AI architectures to deliver real-time, multi-threaded deep learning processing with zero bottleneck.</p>
+    <div class="gpu-visual">
+      <div class="data-line" style="top: 30%;"></div>
+      <div class="data-line" style="top: 70%; animation-delay: 1s;"></div>
+      <div class="chip">GPU</div>
     </div>
   </div>
 </section>
 
 <section class="section" id="pricing">
   <div class="sec-header">
-    <span class="sec-tag" data-i18n="pr_tag">Deployment</span>
-    <h2 class="sec-title" data-i18n="pr_h">Commercial <strong>Licenses</strong></h2>
+    <h2 class="sec-title" data-i18n="pr_h">Commercial <span>Licenses</span></h2>
   </div>
   <div class="pricing-grid">
     <div class="price-card">
@@ -220,42 +275,28 @@ html[dir="rtl"] .features li { flex-direction: row-reverse; }
       <div class="p-price">$29<span>/mo</span></div>
       <ul class="features">
         <li data-i18n="f1">Max 4K Processing</li>
-        <li data-i18n="f2">Standard Engine Speed</li>
-        <li data-i18n="f3">Community Forum Access</li>
+        <li data-i18n="f2">All AI Engines Included</li>
+        <li data-i18n="f3">Community Support</li>
       </ul>
-      <a href="#" class="btn-full" style="background:var(--border-light); color:#fff;" data-i18n="btn_sub">Subscribe</a>
+      <a href="#" class="btn btn-ghost" style="width:100%" data-i18n="btn_sub">Subscribe</a>
     </div>
     <div class="price-card pro">
       <div class="p-name">Professional</div>
-      <div class="p-price" style="color:var(--cyan)">$59<span>/mo</span></div>
+      <div class="p-price" style="color:var(--accent)">$59<span>/mo</span></div>
       <ul class="features">
         <li data-i18n="f4">Unlimited 8K Resolution</li>
         <li data-i18n="f5">Multi-GPU Threading</li>
-        <li data-i18n="f6">Priority Server Support</li>
+        <li data-i18n="f6">Priority Server Access</li>
       </ul>
-      <a href="#" class="btn-full" style="background:#fff; color:#000;" data-i18n="btn_sub">Subscribe</a>
+      <a href="#" class="btn btn-primary" style="width:100%" data-i18n="btn_sub">Subscribe</a>
     </div>
   </div>
 </section>
 
-<section class="section" id="community">
-  <div class="sec-header">
-    <span class="sec-tag" data-i18n="ab_tag">The Company</span>
-    <h2 class="sec-title" data-i18n="ab_h">Beyond <strong>Imagination</strong></h2>
-  </div>
-  <div class="info-grid">
-    <div class="info-card">
-      <h3 data-i18n="m_h">Our Mission</h3>
-      <p data-i18n="m_p">At BL Creative, we build sophisticated AI software that empowers creators with Hollywood-level processing tools, pushing the absolute boundaries of visual fidelity.</p>
-    </div>
-    <div class="info-card">
-      <h3 data-i18n="c_h">The Community</h3>
-      <p data-i18n="c_p">Connect with industry professionals. Share your UltraPurity workflows, get critical feedback, and help shape the mathematical models of our future updates.</p>
-      <div style="display:flex; gap:16px;">
-        <a href="#" class="btn-full" style="border:1px solid var(--border-light); width:auto; padding:12px 32px;">Discord</a>
-      </div>
-    </div>
-  </div>
+<section class="section" id="community" style="text-align:center;">
+  <h2 class="sec-title" data-i18n="com_h">Join The <span>Community</span></h2>
+  <p class="sec-desc" data-i18n="com_p" style="margin-bottom: 32px;">Connect with thousands of industry professionals. Share your UltraPurity workflows, get critical feedback, and help shape the mathematical models of our future updates.</p>
+  <a href="#" class="btn btn-ghost" data-i18n="btn_dis">Join Discord Server</a>
 </section>
 
 <footer>
@@ -264,72 +305,96 @@ html[dir="rtl"] .features li { flex-direction: row-reverse; }
 </footer>
 
 <script>
-// --- Interactive Mouse Glow ---
-const glow = document.getElementById('mouse-glow');
-document.addEventListener('mousemove', (e) => {
-  requestAnimationFrame(() => {
-    glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-  });
-});
-
-// --- Engine Data (Strictly High-End Images + CSS Raw Filters) ---
+// --- ENGINE DATA & EXPLANATIONS ---
 const engineData = [
   { 
-    id: 'clr', name: { en: 'Denoise', ar: 'إزالة التشويش' },
-    desc: { en: 'Removes severe sensor noise while preserving sharp geometric edges.', ar: 'يزيل ضوضاء المستشعر الحادة مع الحفاظ على حواف هندسية نقية.' },
-    img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1600&auto=format&fit=crop', // Detailed face
-    filterBefore: 'flt-noise', filterAfter: ''
+    id: 'clr', name: 'Crystal Clear (Denoise)',
+    desc: { 
+      en: 'Eliminates severe camera ISO noise and compression artifacts by analyzing spatial pixel data, leaving geometric edges perfectly sharp without blurring.', 
+      ar: 'يقضي على ضوضاء الكاميرا (ISO) وعيوب الضغط من خلال تحليل بيانات البكسل المكانية، تاركاً الحواف الهندسية حادة تماماً وبدون أي ضبابية.' 
+    },
+    best: { en: 'Low-light footage, high ISO shots.', ar: 'اللقطات الليلية، والفيديوهات ذات الـ ISO المرتفع.' },
+    tech: { en: 'Spatial Temporal Neural Net', ar: 'شبكة عصبية مكانية وزمنية' },
+    img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1600&auto=format&fit=crop',
+    filterBefore: 'flt-noise'
   },
   { 
-    id: 'upw', name: { en: 'Upscale', ar: 'تكبير الدقة' },
-    desc: { en: 'Reconstructs high-frequency details from low-resolution pixel data.', ar: 'يبني التفاصيل الدقيقة (High-frequency) من بيانات بكسل منخفضة الدقة.' },
-    img: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1600&auto=format&fit=crop', // Macro / texture
-    filterBefore: 'flt-pixel', filterAfter: ''
+    id: 'upw', name: 'Ultra Power (Upscale)',
+    desc: { 
+      en: 'Reconstructs high-frequency details from low-resolution sources. It predicts and generates missing pixels to convert SD/HD to pristine 4K/8K.', 
+      ar: 'يعيد بناء التفاصيل الدقيقة من المصادر منخفضة الدقة. يتوقع ويولد البكسلات المفقودة لتحويل جودة SD/HD إلى 4K/8K بنقاء تام.' 
+    },
+    best: { en: 'Archival footage, digital zoom recovery.', ar: 'اللقطات الأرشيفية، واستعادة جودة التقريب الرقمي.' },
+    tech: { en: 'Generative Adversarial Network (GAN)', ar: 'شبكات التوليد التنافسية (GAN)' },
+    img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1600&auto=format&fit=crop',
+    filterBefore: 'flt-pixel'
   },
   { 
-    id: 'bln', name: { en: 'Color Balance', ar: 'موازنة الألوان' },
-    desc: { en: 'Algorithmic color grading and exposure correction in a single pass.', ar: 'تصحيح خوارزمي دقيق للألوان والتعريض في مسار واحد.' },
-    img: 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=1600&auto=format&fit=crop', // Landscape
-    filterBefore: 'flt-color', filterAfter: ''
+    id: 'fps', name: 'Silk Flow (60-120fps)',
+    desc: { 
+      en: 'Generates perfect intermediate frames to convert stuttering 24/30fps footage into butter-smooth 60fps or 120fps slow motion.', 
+      ar: 'يولد إطارات بينية مثالية لتحويل اللقطات المتقطعة (24/30 إطار) إلى حركة ناعمة جداً بمعدل 60 إطار أو حركة بطيئة 120 إطار.' 
+    },
+    best: { en: 'Action shots, slow-motion generation.', ar: 'لقطات الحركة السريعة، وتوليد التصوير البطيء.' },
+    tech: { en: 'Optical Flow Estimation', ar: 'تقدير التدفق البصري' },
+    isAnim: true
   }
 ];
 
-const tabsContainer = document.getElementById('tabs-container');
+const listContainer = document.getElementById('engineList');
 const imgBefore = document.getElementById('imgBefore');
 const imgAfter = document.getElementById('imgAfter');
-const eTitle = document.getElementById('eTitle');
-const eDesc = document.getElementById('eDesc');
-let currentLang = 'ar';
+const edTitle = document.getElementById('edTitle');
+const edDesc = document.getElementById('edDesc');
+const edBest = document.getElementById('edBest');
+const edTech = document.getElementById('edTech');
+const aBefore = document.getElementById('animBefore');
+const aAfter = document.getElementById('animAfter');
+const engDetails = document.getElementById('engDetails');
 
-function buildTabs() {
-  tabsContainer.innerHTML = '';
+let currentLang = 'ar'; // Default language
+
+function buildList() {
+  listContainer.innerHTML = '';
   engineData.forEach((e, i) => {
     const btn = document.createElement('button');
-    btn.className = 'tab-btn';
-    btn.innerText = e.name[currentLang];
+    btn.className = 'eng-btn';
+    btn.innerHTML = `${e.name} <span>›</span>`;
     btn.onclick = () => switchEngine(i);
-    tabsContainer.appendChild(btn);
+    listContainer.appendChild(btn);
   });
   switchEngine(0);
 }
 
 function switchEngine(index) {
-  document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+  document.querySelectorAll('.eng-btn').forEach((btn, i) => {
     btn.classList.toggle('active', i === index);
   });
-  
-  const data = engineData[index];
-  imgBefore.src = data.img;
-  imgAfter.src = data.img;
-  
-  // Reset classes and apply correct filter
-  imgBefore.className = `sl-img ${data.filterBefore}`;
-  
-  eTitle.innerText = data.name[currentLang];
-  eDesc.innerText = data.desc[currentLang];
+
+  // Fade out/in effect for details
+  engDetails.style.opacity = 0;
+  setTimeout(() => {
+    const data = engineData[index];
+    edTitle.innerText = data.name;
+    edDesc.innerText = data.desc[currentLang];
+    edBest.innerText = data.best[currentLang];
+    edTech.innerText = data.tech[currentLang];
+    
+    if(data.isAnim) {
+      imgBefore.classList.add('hide'); imgAfter.classList.add('hide');
+      aBefore.classList.remove('hide'); aAfter.classList.remove('hide');
+    } else {
+      aBefore.classList.add('hide'); aAfter.classList.add('hide');
+      imgBefore.classList.remove('hide'); imgAfter.classList.remove('hide');
+      imgBefore.style.backgroundImage = `url(${data.img})`;
+      imgAfter.style.backgroundImage = `url(${data.img})`;
+      imgBefore.className = `sl-layer ${data.filterBefore}`;
+    }
+    engDetails.style.opacity = 1;
+  }, 200);
 }
 
-// --- BULLETPROOF RTL/LTR SLIDER ---
+// --- BULLETPROOF LTR SLIDER LOGIC ---
 const slider = document.getElementById('masterSlider');
 const mask = document.getElementById('layerBeforeMask');
 const line = document.getElementById('masterLine');
@@ -341,8 +406,6 @@ function moveSlider(e) {
   const clientX = e.clientX ?? (e.touches ? e.touches[0].clientX : 0);
   let p = ((clientX - rect.left) / rect.width) * 100;
   p = Math.max(0, Math.min(100, p));
-  
-  // clip-path works mathematically from left to right, ignoring text direction
   mask.style.clipPath = `polygon(0 0, ${p}% 0, ${p}% 100%, 0 100%)`;
   line.style.left = `${p}%`;
   handle.style.left = `${p}%`;
@@ -355,33 +418,31 @@ document.addEventListener('touchmove', e => { if(isDragging) moveSlider(e); }, {
 document.addEventListener('mouseup', () => isDragging = false);
 document.addEventListener('touchend', () => isDragging = false);
 
-// --- i18n & Language Logic ---
+// --- TRANSLATION LOGIC ---
 const dict = {
   en: {
-    nav_eng: "Architecture", nav_hw: "Hardware", nav_pr: "Pricing", nav_com: "Community", btn_get: "Download",
-    hero_badge: "Advanced Neural Processing", hero_h1: "Vision <strong>Redefined.</strong>",
-    hero_sub: "Professional AI architecture engineered to denoise, upscale, and restore video frames with absolute mathematical precision. Zero compromise on quality.",
-    btn_demo: "View Architecture", lbl_b: "Raw Source",
-    eng_h: "Neural <strong>Engines</strong>", eng_desc: "See the mathematical precision. Compare raw, degraded input with UltraPurity output.",
-    hw_tag: "Infrastructure", hw_h: "Hardware <strong>Acceleration</strong>", hw_desc: "UltraPurity is engineered at the bare-metal level. It directly interfaces with NVIDIA Tensor Cores and AMD AI architectures to deliver real-time, multi-threaded deep learning processing with zero bottleneck.",
-    pr_tag: "Deployment", pr_h: "Commercial <strong>Licenses</strong>", btn_sub: "Subscribe",
-    f1: "Max 4K Processing", f2: "Standard Engine Speed", f3: "Community Forum Access", f4: "Unlimited 8K Resolution", f5: "Multi-GPU Threading", f6: "Priority Server Support",
-    ab_tag: "The Company", ab_h: "Beyond <strong>Imagination</strong>",
-    m_h: "Our Mission", m_p: "At BL Creative, we bridge the gap between imagination and reality. We build sophisticated AI software that empowers creators with Hollywood-level processing tools, pushing the absolute boundaries of visual fidelity.",
-    c_h: "The Community", c_p: "Connect with industry professionals. Share your UltraPurity workflows, get critical feedback, and help shape the mathematical models of our future updates."
+    nav_eng: "Engines", nav_hw: "Hardware", nav_pr: "Pricing", nav_com: "Community", btn_get: "Download",
+    hero_badge: "AI Video Processing Protocol", hero_h1: "Absolute <span>Clarity</span>",
+    hero_sub: "Professional neural architecture engineered to denoise, upscale, and interpolate frames with zero compromise. See the mathematical precision.",
+    btn_demo: "View Workspace", lbl_b: "Raw Source",
+    eng_h: "Neural <span>Workspace</span>", eng_desc: "Select an engine to understand its mechanics and see a real-time comparison of raw degraded input versus UltraPurity processing.",
+    lbl_best: "Best For", lbl_tech: "Technology",
+    hw_h: "Hardware <span>Acceleration</span>", hw_p1: "UltraPurity interfaces directly with the bare metal of your system. By utilizing NVIDIA Tensor Cores and AMD AI accelerators, we bypass standard processing bottlenecks.", hw_p2: "This enables real-time deep learning inference, allowing you to render 4K and 8K footage at unprecedented speeds.",
+    pr_h: "Commercial <span>Licenses</span>", btn_sub: "Subscribe",
+    f1: "Max 4K Processing", f2: "All AI Engines Included", f3: "Community Forum Access", f4: "Unlimited 8K Resolution", f5: "Multi-GPU Threading", f6: "Priority Server Access",
+    com_h: "Join The <span>Community</span>", com_p: "Connect with thousands of industry professionals. Share your UltraPurity workflows, get critical feedback, and help shape the mathematical models of our future updates.", btn_dis: "Join Discord Server"
   },
   ar: {
-    nav_eng: "الهيكلة", nav_hw: "العتاد", nav_pr: "التراخيص", nav_com: "المجتمع", btn_get: "تحميل البرنامج",
-    hero_badge: "معالجة عصبية متقدمة", hero_h1: "إعادة صياغة <strong>الرؤية.</strong>",
-    hero_sub: "هيكلة ذكاء اصطناعي احترافية صُممت هندسياً لإزالة التشويش، وتكبير الدقة، واستعادة إطارات الفيديو بدقة رياضية مطلقة. جودة لا تقبل المساومة.",
-    btn_demo: "استكشف الهيكلة", lbl_b: "المصدر الخام",
-    eng_h: "المحركات <strong>العصبية</strong>", eng_desc: "شاهد الدقة الرياضية. قارن بين المدخلات الخام والمشوهة وبين مخرجات UltraPurity.",
-    hw_tag: "البنية التحتية", hw_h: "تسريع <strong>العتاد</strong>", hw_desc: "تمت هندسة UltraPurity للعمل على المستوى الجذري. يتخاطب برمجياً بشكل مباشر مع أنوية NVIDIA Tensor ومعماريات AMD للذكاء الاصطناعي لتقديم معالجة تعلم عميق فورية ومتعددة المسارات بدون أي عنق زجاجة.",
-    pr_tag: "التنصيب", pr_h: "تراخيص <strong>تجارية</strong>", btn_sub: "اشترك الآن",
-    f1: "معالجة بدقة 4K كحد أقصى", f2: "سرعة معالجة قياسية", f3: "صلاحية الوصول للمنتديات", f4: "دقة 8K لا محدودة", f5: "استغلال مسارات الكروت المتعددة", f6: "أولوية الدعم الفني",
-    ab_tag: "عن الشركة", ab_h: "ما وراء <strong>الخيال</strong>",
-    m_h: "مهمتنا", m_p: "في BL Creative، نحن نسد الفجوة بين الخيال والواقع. نحن نبني برمجيات ذكاء اصطناعي معقدة تمنح المبدعين أدوات معالجة بمستوى هوليوود، وندفع بالحدود المطلقة للدقة البصرية.",
-    c_h: "المجتمع", c_p: "تواصل مع المحترفين في الصناعة. شارك أعمالك، احصل على تقييمات نقدية، وساهم في تشكيل النماذج الرياضية لتحديثاتنا المستقبلية."
+    nav_eng: "المحركات", nav_hw: "العتاد", nav_pr: "الأسعار", nav_com: "المجتمع", btn_get: "تحميل البرنامج",
+    hero_badge: "بروتوكول معالجة الفيديو بالذكاء الاصطناعي", hero_h1: "النقاء <span>المطلق</span>",
+    hero_sub: "هيكلة عصبية احترافية صُممت هندسياً لإزالة التشويش، وتكبير الدقة، وتوليد الإطارات بدون أي مساومة على الجودة. شاهد الدقة الرياضية بنفسك.",
+    btn_demo: "استكشف بيئة العمل", lbl_b: "المصدر الخام",
+    eng_h: "بيئة العمل <span>العصبية</span>", eng_desc: "اختر المحرك لتعرف كيف يعمل، وشاهد مقارنة حية بين البيانات الخام المشوهة وبين المعالجة الفائقة لـ UltraPurity.",
+    lbl_best: "أفضل استخدام", lbl_tech: "التقنية المستخدمة",
+    hw_h: "تسريع <span>العتاد</span>", hw_p1: "يتصل UltraPurity مباشرة بالبنية التحتية لجهازك. من خلال استغلال أنوية NVIDIA Tensor ومعماريات AMD، نحن نتجاوز عنق الزجاجة في المعالجة التقليدية.", hw_p2: "هذا يتيح معالجة التعلم العميق في الوقت الفعلي، مما يسمح لك برندر لقطات 4K و 8K بسرعات غير مسبوقة.",
+    pr_h: "تراخيص <span>تجارية</span>", btn_sub: "اشترك الآن",
+    f1: "معالجة بدقة 4K كحد أقصى", f2: "جميع المحركات متضمنة", f3: "صلاحية الوصول للمنتديات", f4: "دقة 8K لا محدودة", f5: "استغلال مسارات الكروت المتعددة", f6: "أولوية الوصول للخوادم",
+    com_h: "انضم إلى <span>المجتمع</span>", com_p: "تواصل مع آلاف المحترفين في الصناعة. شارك أعمالك، احصل على تقييمات نقدية، وساهم في تشكيل النماذج الرياضية لتحديثاتنا المستقبلية.", btn_dis: "انضم لسيرفر ديسكورد"
   }
 };
 
@@ -398,7 +459,7 @@ function applyLang(l) {
   document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
   document.body.style.fontFamily = isRTL ? "var(--font-ar)" : "var(--font-en)";
   
-  buildTabs();
+  buildList();
 }
 
 function setLang(l) { applyLang(l); }
