@@ -6,7 +6,7 @@
 <title>BL Creative | UltraPurity AI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ===== VARIABLES & RESET ===== */
 *{margin:0;padding:0;box-sizing:border-box}
@@ -19,7 +19,7 @@
   --border: rgba(255,255,255,0.08);
   --text-main: #ffffff;
   --text-dim: #94a3b8;
-  --font-en: 'Montserrat', sans-serif;
+  --font-en: 'Outfit', sans-serif;
   --font-ar: 'Cairo', sans-serif;
 }
 
@@ -58,7 +58,7 @@ nav { position: fixed; top: 0; width: 100%; height: 72px; display: flex; align-i
 .btn-ghost { background: transparent; border: 1px solid var(--border); color: #fff; }
 .btn-ghost:hover { border-color: var(--accent); background: rgba(0,229,255,0.05); }
 
-/* ===== HERO (Fade In Animation) ===== */
+/* ===== HERO ===== */
 .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 5% 60px; animation: fadeInUp 1s ease-out; }
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 .badge { font-size: 11px; font-weight: 700; letter-spacing: 3px; color: var(--accent); background: rgba(0,229,255,0.05); border: 1px solid rgba(0,229,255,0.2); padding: 6px 16px; border-radius: 100px; margin-bottom: 24px; text-transform: uppercase; }
@@ -68,7 +68,7 @@ nav { position: fixed; top: 0; width: 100%; height: 72px; display: flex; align-i
 
 /* ===== PROFESSIONAL WORKSPACE SHOWCASE ===== */
 .section { max-width: 1400px; margin: 0 auto 100px; padding: 0 5%; }
-.sec-header { text-align: center; margin-bottom: 60px; animation: fadeInUp 1s ease-out; }
+.sec-header { text-align: center; margin-bottom: 60px; }
 .sec-title { font-size: clamp(28px, 4vw, 48px); font-weight: 800; text-transform: uppercase; margin-bottom: 16px; letter-spacing: -1px; }
 .sec-title span { color: var(--accent); }
 .sec-desc { color: var(--text-dim); max-width: 600px; margin: 0 auto; font-size: 15px; }
@@ -92,28 +92,32 @@ nav { position: fixed; top: 0; width: 100%; height: 72px; display: flex; align-i
 .ed-meta-lbl { font-size: 11px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; display: block; }
 .ed-meta-val { font-size: 13px; color: #fff; font-weight: 500; }
 
-/* Right Panel: The Slider */
+/* Right Panel: The Slider (Topaz-Style Razor Sharp) */
 .ws-preview { position: relative; width: 100%; height: 600px; background: #000; border-radius: 12px; overflow: hidden; cursor: ew-resize; border: 1px solid var(--border); direction: ltr !important; }
 .sl-layer { position: absolute; inset: 0; width: 100%; height: 100%; background-size: cover; background-position: center; transition: opacity 0.4s ease; }
+/* Ensure the "Before" layer stretches perfectly to show genuine low resolution */
+.sl-layer.before-img { image-rendering: pixelated; }
+
 .sl-clip { position: absolute; inset: 0; width: 100%; height: 100%; clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); z-index: 2; }
-.sl-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: var(--accent); transform: translateX(-50%); z-index: 8; pointer-events: none; box-shadow: 0 0 10px var(--accent); }
-.sl-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; background: var(--bg-base); border: 2px solid var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 9; pointer-events: none; color: var(--accent); font-size: 12px; }
+.sl-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 1.5px; background: #ffffff; transform: translateX(-50%); z-index: 8; pointer-events: none; box-shadow: 0 0 10px rgba(0,0,0,0.8); }
+.sl-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; background: rgba(0,0,0,0.6); border: 1.5px solid #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 9; pointer-events: none; backdrop-filter: blur(4px); box-shadow: 0 0 15px rgba(0,0,0,0.5); }
+.sl-handle::before, .sl-handle::after { content: ''; width: 0; height: 0; border-top: 4px solid transparent; border-bottom: 4px solid transparent; }
+.sl-handle::before { border-right: 5px solid #fff; margin-right: 4px; }
+.sl-handle::after { border-left: 5px solid #fff; margin-left: 4px; }
+
 .sl-label { position: absolute; top: 20px; padding: 6px 16px; background: rgba(0,0,0,0.8); font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; border-radius: 6px; z-index: 10; pointer-events: none; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(4px); }
 .lbl-before { left: 20px; color: #aaa; }
 .lbl-after { right: 20px; color: var(--accent); border-color: rgba(0,229,255,0.3); }
 
-/* Animation Engine (Silk Flow) */
-.anim-canvas { position: absolute; inset: 0; background: #050508; display: flex; align-items: center; justify-content: center; }
+/* Animation Engine (Silk Flow) - Rebuilt for clarity */
+.anim-canvas { position: absolute; inset: 0; background: #050508; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .anim-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 40px 40px; }
-.anim-pulse { position: absolute; width: 60px; height: 4px; border-radius: 4px; top: 50%; margin-top: -2px; }
-.stutter { background: #ff3366; box-shadow: 0 0 20px #ff3366; animation: moveStutter 2s steps(6, end) infinite; }
-.smooth { background: var(--accent); box-shadow: 0 0 20px var(--accent); animation: moveSmooth 2s linear infinite; }
-@keyframes moveStutter { 0% { left: 10%; opacity: 0.2; } 50% { opacity: 1; } 100% { left: 80%; opacity: 0.2; } }
-@keyframes moveSmooth { 0% { left: 10%; width: 20px; } 50% { width: 150px; } 100% { left: 80%; width: 20px; } }
+.anim-target { position: absolute; top: 50%; left: 10%; width: 40px; height: 40px; background: #fff; border-radius: 8px; transform: translateY(-50%); display: flex; align-items: center; justify-content: center; font-weight: bold; color: #000; font-size: 10px; }
+.stutter { animation: moveStutter 2s steps(10, end) infinite; background: #ff3366; box-shadow: 0 0 20px #ff3366; }
+.smooth { animation: moveSmooth 2s linear infinite; background: var(--accent); box-shadow: 0 0 20px var(--accent); }
+@keyframes moveStutter { 0% { left: 10%; } 100% { left: 80%; } }
+@keyframes moveSmooth { 0% { left: 10%; } 100% { left: 80%; } }
 
-/* SVG Filters (NO BLUR - Only Noise & Pixels) */
-.flt-noise { filter: url(#heavyNoise) grayscale(0.5) contrast(1.2); }
-.flt-pixel { filter: url(#pixelate) contrast(1.1); }
 .hide { display: none !important; }
 
 /* ===== GPU & HARDWARE ===== */
@@ -160,11 +164,6 @@ html[dir="rtl"] .ed-meta-lbl { letter-spacing: 0; }
 </style>
 </head>
 <body>
-
-<svg style="display:none;">
-  <filter id="heavyNoise"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" result="noise"/><feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.8 0" in="noise" result="coloredNoise"/><feComposite operator="in" in="coloredNoise" in2="SourceGraphic" result="composite"/><feBlend mode="overlay" in="composite" in2="SourceGraphic"/></filter>
-  <filter id="pixelate"><feGaussianBlur stdDeviation="5" result="blur"/><feComponentTransfer><feFuncA type="discrete" tableValues="1 1"/></feComponentTransfer></filter>
-</svg>
 
 <div id="space-bg">
   <div class="starfield"></div>
@@ -226,26 +225,27 @@ html[dir="rtl"] .ed-meta-lbl { letter-spacing: 0; }
     </div>
 
     <div class="ws-preview" id="masterSlider">
-      <div class="sl-layer" id="layerAfter" style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1600&auto=format&fit=crop');"></div>
+      
+      <div class="sl-layer" id="layerAfter" style="background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1600&q=100');"></div>
       <div class="sl-label lbl-after">UltraPurity</div>
 
       <div class="sl-clip" id="layerBeforeMask">
-        <div class="sl-layer" id="layerBefore" style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1600&auto=format&fit=crop');"></div>
+        <div class="sl-layer before-img" id="layerBefore" style="background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=10&blur=5');"></div>
         
         <div class="sl-layer anim-canvas hide" id="animBefore">
            <div class="anim-grid"></div>
-           <div class="anim-pulse stutter"></div>
+           <div class="anim-pulse stutter">15 FPS</div>
         </div>
         <div class="sl-label lbl-before" data-i18n="lbl_b">Raw Source</div>
       </div>
 
       <div class="sl-layer anim-canvas hide" id="animAfter" style="z-index: 1; pointer-events: none;">
          <div class="anim-grid"></div>
-         <div class="anim-pulse smooth"></div>
+         <div class="anim-pulse smooth">120 FPS</div>
       </div>
 
       <div class="sl-line" id="masterLine"></div>
-      <div class="sl-handle" id="masterHdl">⇔</div>
+      <div class="sl-handle" id="masterHdl"></div>
     </div>
   </div>
 </section>
@@ -260,7 +260,7 @@ html[dir="rtl"] .ed-meta-lbl { letter-spacing: 0; }
     <div class="gpu-visual">
       <div class="data-line" style="top: 30%;"></div>
       <div class="data-line" style="top: 70%; animation-delay: 1s;"></div>
-      <div class="chip">GPU</div>
+      <div class="chip">TENSOR</div>
     </div>
   </div>
 </section>
@@ -305,45 +305,61 @@ html[dir="rtl"] .ed-meta-lbl { letter-spacing: 0; }
 </footer>
 
 <script>
-// --- ENGINE DATA & EXPLANATIONS ---
+// --- REAL DIFFERENCE ENGINE DATA ---
+// Using Unsplash API tricks: 
+// The 'Before' is physically a 100px blurry/compressed image loaded into a large container.
+// The 'After' is a crisp 1600px image. This creates a GENUINE visual difference!
 const engineData = [
   { 
-    id: 'clr', name: 'Crystal Clear (Denoise)',
+    id: 'clr', name: 'Crystal Clear (Enhance & Denoise)',
     desc: { 
-      en: 'Eliminates severe camera ISO noise and compression artifacts by analyzing spatial pixel data, leaving geometric edges perfectly sharp without blurring.', 
-      ar: 'يقضي على ضوضاء الكاميرا (ISO) وعيوب الضغط من خلال تحليل بيانات البكسل المكانية، تاركاً الحواف الهندسية حادة تماماً وبدون أي ضبابية.' 
+      en: 'Eliminates severe camera noise and compression artifacts, reconstructing missing facial details and skin textures flawlessly.', 
+      ar: 'يقضي على ضوضاء الكاميرا وعيوب الضغط، ويعيد بناء تفاصيل الوجه وملمس البشرة المفقودة بشكل لا تشوبه شائبة.' 
     },
-    best: { en: 'Low-light footage, high ISO shots.', ar: 'اللقطات الليلية، والفيديوهات ذات الـ ISO المرتفع.' },
+    best: { en: 'Low-light footage, compressed media.', ar: 'اللقطات الليلية، والوسائط المضغوطة.' },
     tech: { en: 'Spatial Temporal Neural Net', ar: 'شبكة عصبية مكانية وزمنية' },
-    img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1600&auto=format&fit=crop',
-    filterBefore: 'flt-noise'
+    imgBefore: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=10&blur=4',
+    imgAfter: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1600&q=100'
   },
   { 
     id: 'upw', name: 'Ultra Power (Upscale)',
     desc: { 
-      en: 'Reconstructs high-frequency details from low-resolution sources. It predicts and generates missing pixels to convert SD/HD to pristine 4K/8K.', 
-      ar: 'يعيد بناء التفاصيل الدقيقة من المصادر منخفضة الدقة. يتوقع ويولد البكسلات المفقودة لتحويل جودة SD/HD إلى 4K/8K بنقاء تام.' 
+      en: 'Reconstructs high-frequency details from low-resolution sources. It predicts and generates missing pixels to convert SD/HD to pristine 4K.', 
+      ar: 'يعيد بناء التفاصيل الدقيقة من المصادر منخفضة الدقة. يولد البكسلات المفقودة لتحويل جودة SD/HD إلى 4K بنقاء تام.' 
     },
-    best: { en: 'Archival footage, digital zoom recovery.', ar: 'اللقطات الأرشيفية، واستعادة جودة التقريب الرقمي.' },
+    best: { en: 'Archival footage, digital zoom recovery.', ar: 'اللقطات الأرشيفية، واستعادة التقريب الرقمي.' },
     tech: { en: 'Generative Adversarial Network (GAN)', ar: 'شبكات التوليد التنافسية (GAN)' },
-    img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1600&auto=format&fit=crop',
-    filterBefore: 'flt-pixel'
+    imgBefore: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=200&q=10',
+    imgAfter: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1600&q=100'
   },
   { 
     id: 'fps', name: 'Silk Flow (60-120fps)',
     desc: { 
       en: 'Generates perfect intermediate frames to convert stuttering 24/30fps footage into butter-smooth 60fps or 120fps slow motion.', 
-      ar: 'يولد إطارات بينية مثالية لتحويل اللقطات المتقطعة (24/30 إطار) إلى حركة ناعمة جداً بمعدل 60 إطار أو حركة بطيئة 120 إطار.' 
+      ar: 'يولد إطارات بينية مثالية لتحويل اللقطات المتقطعة إلى حركة ناعمة جداً بمعدل 60 إطار أو حركة بطيئة 120 إطار.' 
     },
-    best: { en: 'Action shots, slow-motion generation.', ar: 'لقطات الحركة السريعة، وتوليد التصوير البطيء.' },
+    best: { en: 'Action shots, slow-motion generation.', ar: 'لقطات الحركة، وتوليد التصوير البطيء.' },
     tech: { en: 'Optical Flow Estimation', ar: 'تقدير التدفق البصري' },
     isAnim: true
+  },
+  {
+    id: 'clr', name: 'Smart Balance (Color Grade)',
+    desc: { 
+      en: 'Recovers dynamic range and applies algorithmic color grading to fix severely under-exposed or improperly white-balanced footage.', 
+      ar: 'يستعيد النطاق الديناميكي ويطبق تصحيح ألوان خوارزمي لإصلاح اللقطات المظلمة أو ذات توازن البياض السيء.' 
+    },
+    best: { en: 'Under-exposed or flat log footage.', ar: 'اللقطات المظلمة أو الخام (Log).' },
+    tech: { en: 'Adaptive Color Transformer', ar: 'محول الألوان التكيفي' },
+    // Uses CSS filter on the before image for color distortion
+    imgBefore: 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1600&q=100',
+    imgAfter: 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1600&q=100',
+    cssFilter: 'grayscale(0.5) sepia(0.5) brightness(0.4)'
   }
 ];
 
 const listContainer = document.getElementById('engineList');
-const imgBefore = document.getElementById('imgBefore');
-const imgAfter = document.getElementById('imgAfter');
+const imgBefore = document.getElementById('layerBefore');
+const imgAfter = document.getElementById('layerAfter');
 const edTitle = document.getElementById('edTitle');
 const edDesc = document.getElementById('edDesc');
 const edBest = document.getElementById('edBest');
@@ -371,7 +387,6 @@ function switchEngine(index) {
     btn.classList.toggle('active', i === index);
   });
 
-  // Fade out/in effect for details
   engDetails.style.opacity = 0;
   setTimeout(() => {
     const data = engineData[index];
@@ -386,9 +401,15 @@ function switchEngine(index) {
     } else {
       aBefore.classList.add('hide'); aAfter.classList.add('hide');
       imgBefore.classList.remove('hide'); imgAfter.classList.remove('hide');
-      imgBefore.style.backgroundImage = `url(${data.img})`;
-      imgAfter.style.backgroundImage = `url(${data.img})`;
-      imgBefore.className = `sl-layer ${data.filterBefore}`;
+      
+      // Load real difference images
+      imgBefore.style.backgroundImage = `url('${data.imgBefore}')`;
+      imgAfter.style.backgroundImage = `url('${data.imgAfter}')`;
+      
+      // Apply CSS filter only if specified (for color balance)
+      imgBefore.style.filter = data.cssFilter ? data.cssFilter : 'none';
+      // Ensure pixelated rendering for stretched low-res images
+      imgBefore.style.imageRendering = data.cssFilter ? 'auto' : 'pixelated';
     }
     engDetails.style.opacity = 1;
   }, 200);
