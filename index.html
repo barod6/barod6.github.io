@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BL Creative — Advanced AI Solutions</title>
-<meta name="description" content="Pioneering AI video enhancement and processing technologies.">
+<title>BL Creative — Advanced AI Video Solutions</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Orbitron:wght@700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -12,452 +11,424 @@
 /* ===== CORE VARIABLES ===== */
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --space-black: #020203;
-  --space-dark: #08080a;
-  --neon-cyan: #00e5ff;
+  --space-black: #030305;
+  --space-dark: #0a0a0f;
+  --neon-cyan: #00f0ff;
+  --neon-blue: #0066ff;
   --neon-purple: #9d4edd;
-  --glass-bg: rgba(12, 12, 16, 0.45);
+  --glass-bg: rgba(10, 10, 15, 0.5);
   --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-highlight: rgba(255, 255, 255, 0.1);
-  --text-main: #f4f4f5;
+  --text-main: #ffffff;
   --text-muted: #8b8b99;
 }
 
 html { scroll-behavior: smooth; background-color: var(--space-black); }
 body {
-  color: var(--text-main);
-  font-family: 'Space Grotesk', 'Alexandria', sans-serif;
-  font-size: 15px; line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  color: var(--text-main); font-family: 'Space Grotesk', 'Alexandria', sans-serif;
+  font-size: 15px; line-height: 1.6; overflow-x: hidden;
 }
 a { text-decoration: none; color: inherit; transition: 0.3s; }
 
-/* ===== DEEP SPACE BACKGROUND ===== */
-#space-container { position: fixed; inset: 0; z-index: -10; background: var(--space-black); overflow: hidden; }
-.nebula { position: absolute; border-radius: 50%; filter: blur(140px); opacity: 0.3; animation: breathe 20s ease-in-out infinite alternate; }
-.nebula-1 { width: 700px; height: 700px; background: radial-gradient(circle, var(--neon-cyan), transparent 70%); top: -200px; left: -100px; }
-.nebula-2 { width: 900px; height: 900px; background: radial-gradient(circle, var(--neon-purple), transparent 70%); bottom: -300px; right: -200px; animation-delay: -10s; }
-@keyframes breathe { 0% { opacity: 0.15; transform: scale(1); } 100% { opacity: 0.35; transform: scale(1.1); } }
-.stars { position: absolute; top: 0; left: 0; width: 100%; height: 200%; }
-.stars-small { width: 1px; height: 1px; animation: animStar 100s linear infinite; }
-.stars-medium { width: 2px; height: 2px; animation: animStar 60s linear infinite; }
-@keyframes animStar { from { transform: translateY(0px); } to { transform: translateY(-100vh); } }
+/* ===== SPACE BACKGROUND ===== */
+#space-bg { position: fixed; inset: 0; z-index: -10; background: var(--space-black); }
+.nebula { position: absolute; border-radius: 50%; filter: blur(150px); opacity: 0.25; animation: pulse 15s ease-in-out infinite alternate; }
+.neb-1 { width: 800px; height: 800px; background: var(--neon-cyan); top: -200px; left: -200px; }
+.neb-2 { width: 600px; height: 600px; background: var(--neon-purple); bottom: -100px; right: -100px; animation-delay: -5s; }
+@keyframes pulse { 0% { opacity: 0.15; transform: scale(0.9); } 100% { opacity: 0.3; transform: scale(1.1); } }
 
 /* ===== NAVIGATION ===== */
-.nav-wrapper { position: fixed; top: 20px; left: 0; right: 0; display: flex; justify-content: center; z-index: 200; padding: 0 4%; }
+.nav-wrap { position: fixed; top: 20px; left: 0; right: 0; display: flex; justify-content: center; z-index: 200; padding: 0 4%; pointer-events: none; }
 nav {
-  display: flex; align-items: center; justify-content: space-between;
-  width: 100%; max-width: 1300px; height: 64px; padding: 0 32px;
-  background: var(--glass-bg); border: 1px solid var(--glass-border); border-top: 1px solid var(--glass-highlight);
-  border-radius: 100px; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+  pointer-events: auto; display: flex; align-items: center; justify-content: space-between;
+  width: 100%; max-width: 1400px; height: 64px; padding: 0 32px;
+  background: rgba(5,5,8,0.7); border: 1px solid var(--glass-border);
+  border-radius: 100px; backdrop-filter: blur(20px); box-shadow: 0 20px 40px rgba(0,0,0,0.8);
 }
-.logo { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 22px; letter-spacing: 2px; text-transform: uppercase; text-shadow: 0 0 15px rgba(0,229,255,0.4); }
-.logo span { color: var(--neon-cyan); font-weight: 700; }
-.nav-center { display: flex; gap: 32px; }
-.nav-center a { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); }
-.nav-center a:hover { color: var(--text-main); text-shadow: 0 0 10px rgba(255,255,255,0.5); }
-.nav-right { display: flex; align-items: center; gap: 12px; }
-.lang-sel { font-family: inherit; font-size: 11px; font-weight: 600; background: rgba(0,0,0,0.6); border: 1px solid var(--glass-border); color: var(--text-main); padding: 8px 12px; border-radius: 100px; cursor: pointer; outline: none; }
-.lang-sel:hover { border-color: var(--neon-cyan); }
-
-/* ===== HERO SECTION ===== */
-.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 160px 6% 80px; text-align: center; }
-.badge { display: inline-flex; align-items: center; gap: 8px; font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--neon-cyan); background: rgba(0, 229, 255, 0.05); border: 1px solid rgba(0, 229, 255, 0.2); padding: 6px 20px; border-radius: 100px; margin-bottom: 24px; }
-.hero h1 { font-size: clamp(40px, 6vw, 76px); font-weight: 700; line-height: 1.1; margin-bottom: 24px; text-transform: uppercase; }
-.hero h1 .product-name { font-family: 'Orbitron', sans-serif; background: linear-gradient(135deg, #fff, var(--neon-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; letter-spacing: 2px; }
-.hero-sub { font-size: 16px; color: var(--text-muted); max-width: 650px; margin: 0 auto 48px; font-weight: 300; line-height: 1.8; }
-
-/* ===== UNIVERSAL SLIDER (Force LTR for logical math) ===== */
-.slider-wrap { position: relative; border-radius: 12px; overflow: hidden; cursor: ew-resize; user-select: none; border: 1px solid var(--glass-border); background: #000; direction: ltr !important; }
-.s-layer { position: absolute; inset: 0; width: 100%; height: 100%; background-size: cover; background-position: center; }
-.s-clip { position: absolute; inset: 0; overflow: hidden; border-right: 2px solid var(--neon-cyan); box-shadow: 2px 0 15px rgba(0,229,255,0.5); }
-.s-handle { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: rgba(0,0,0,0.7); border: 1px solid var(--neon-cyan); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--neon-cyan); z-index: 9; pointer-events: none; font-size: 12px; backdrop-filter: blur(5px); }
-
-/* Hero Slider Images */
-.hero-slider { width: min(1000px, 90vw); height: 500px; margin-bottom: 48px; box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
-.h-img { background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop'); }
-.h-before { filter: grayscale(0.8) blur(3px) contrast(0.7); } /* Simulated Raw/Bad quality */
-.h-after { filter: contrast(1.1) saturate(1.2); } /* Simulated Processed Quality */
-
-/* Scanner effect */
-.scanner { position: absolute; top: 0; bottom: 0; width: 100%; background: linear-gradient(to bottom, transparent, rgba(0,229,255,0.2) 50%, transparent); animation: scan 3s linear infinite; pointer-events: none; mix-blend-mode: overlay; }
-@keyframes scan { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
-
-/* Buttons */
-.btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-.btn { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; padding: 16px 36px; border-radius: 100px; transition: 0.3s; }
+.logo { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
+.logo span { color: var(--neon-cyan); }
+.nav-links { display: flex; gap: 32px; }
+.nav-links a { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); }
+.nav-links a:hover { color: var(--neon-cyan); }
+.nav-actions { display: flex; gap: 16px; align-items: center; }
+.lang-sel { background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); color: #fff; padding: 6px 12px; border-radius: 8px; font-family: inherit; font-size: 11px; font-weight: 600; cursor: pointer; outline: none; }
+.btn { display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 12px 28px; border-radius: 100px; cursor: pointer; transition: 0.3s; border: 1px solid transparent; }
 .btn-primary { background: var(--text-main); color: var(--space-black); }
-.btn-primary:hover { background: var(--neon-cyan); box-shadow: 0 0 25px rgba(0, 229, 255, 0.4); transform: translateY(-2px); }
-.btn-ghost { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-main); backdrop-filter: blur(10px); }
-.btn-ghost:hover { border-color: var(--neon-cyan); background: rgba(0,229,255,0.05); }
+.btn-primary:hover { background: var(--neon-cyan); box-shadow: 0 0 20px rgba(0,240,255,0.4); }
 
-/* ===== SECTION TITLES ===== */
-.section { padding: 120px 6%; max-width: 1300px; margin: 0 auto; position: relative; z-index: 10; }
-.sec-tag { font-size: 11px; font-weight: 700; letter-spacing: 4px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 16px; display: block; text-align: center; }
-.sec-h { font-size: clamp(32px, 4vw, 56px); font-weight: 700; line-height: 1.2; margin-bottom: 60px; text-align: center; text-transform: uppercase; }
-.sec-h span { color: var(--neon-cyan); font-family: 'Orbitron', sans-serif; font-weight: 900; }
+/* ===== HERO ===== */
+.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 140px 6% 60px; text-align: center; }
+.hero-badge { font-size: 10px; font-weight: 700; letter-spacing: 4px; color: var(--neon-cyan); text-transform: uppercase; border: 1px solid rgba(0,240,255,0.2); background: rgba(0,240,255,0.05); padding: 6px 20px; border-radius: 100px; margin-bottom: 30px; }
+.hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(40px, 7vw, 84px); font-weight: 900; line-height: 1; margin-bottom: 24px; letter-spacing: 2px; }
+.hero h1 span { background: linear-gradient(135deg, #fff, var(--neon-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-sub { font-size: 16px; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px; font-weight: 300; }
 
-/* ===== GPU TECH SECTION ===== */
-.gpu-container { display: flex; flex-direction: column; align-items: center; gap: 40px; }
-.gpu-core { position: relative; width: 160px; height: 160px; background: #050505; border: 1px solid rgba(0, 229, 255, 0.4); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 40px rgba(0, 229, 255, 0.15), inset 0 0 30px rgba(0, 229, 255, 0.1); animation: floatGPU 5s ease-in-out infinite; z-index: 2; overflow: hidden; }
-.gpu-core::before { content: ''; position: absolute; width: 200%; height: 200%; background: conic-gradient(transparent, transparent, transparent, var(--neon-cyan)); animation: rotateGPU 4s linear infinite; }
-.gpu-core::after { content: 'TENSOR CORE'; position: absolute; inset: 4px; background: #020202; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 11px; letter-spacing: 2px; color: var(--neon-cyan); font-weight: bold; z-index: 1; }
-@keyframes floatGPU { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-@keyframes rotateGPU { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-.data-streams { display: flex; justify-content: space-between; width: 100%; max-width: 900px; position: relative; }
-.stream { flex: 1; height: 2px; background: rgba(255,255,255,0.05); position: relative; margin: 20px 0; overflow: hidden; }
-.stream::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent); animation: dataFlow 2s linear infinite; }
-@keyframes dataFlow { 100% { left: 200%; } }
-.gpu-desc { text-align: center; max-width: 700px; color: var(--text-muted); font-size: 16px; font-weight: 300; }
+/* ===== 3D GPU HARDWARE SECTION ===== */
+.section { padding: 100px 6%; max-width: 1400px; margin: 0 auto; }
+.sec-title { text-align: center; margin-bottom: 80px; }
+.sec-title h2 { font-size: clamp(32px, 5vw, 56px); font-weight: 700; text-transform: uppercase; margin-bottom: 16px; }
+.sec-title h2 span { color: var(--neon-cyan); font-family: 'Orbitron', sans-serif; }
+.sec-title p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
 
-/* ===== ENGINES (Real Image Previews) ===== */
-.engines-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 32px; }
-.engine-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; transition: 0.4s; backdrop-filter: blur(16px); }
-.engine-card:hover { border-color: rgba(255,255,255,0.3); transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
-.engine-preview { height: 180px; position: relative; border-bottom: 1px solid var(--glass-border); }
-.engine-body { padding: 24px; }
-.engine-name { font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-.engine-name::before { content: ''; display: block; width: 8px; height: 8px; border-radius: 50%; background: currentColor; box-shadow: 0 0 10px currentColor; }
-.engine-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; font-weight: 300; }
+.hw-showcase { display: flex; flex-direction: column; align-items: center; gap: 60px; perspective: 1200px; }
+.gpu-3d {
+  position: relative; width: 300px; height: 300px;
+  transform-style: preserve-3d;
+  transform: rotateX(60deg) rotateZ(-45deg);
+  animation: float3D 6s ease-in-out infinite;
+}
+@keyframes float3D {
+  0%, 100% { transform: rotateX(60deg) rotateZ(-45deg) translateZ(0px); }
+  50% { transform: rotateX(60deg) rotateZ(-45deg) translateZ(30px); }
+}
+/* GPU Layers */
+.gpu-layer { position: absolute; inset: 0; border-radius: 20px; }
+.gpu-base { background: #050505; border: 2px solid #222; box-shadow: 20px 20px 40px rgba(0,0,0,0.9); transform: translateZ(0); }
+.gpu-circuit { background: repeating-linear-gradient(90deg, transparent 0, transparent 10px, rgba(0,240,255,0.05) 10px, rgba(0,240,255,0.05) 12px), repeating-linear-gradient(0deg, transparent 0, transparent 10px, rgba(0,240,255,0.05) 10px, rgba(0,240,255,0.05) 12px); transform: translateZ(2px); }
+.gpu-chip {
+  width: 100px; height: 100px; background: #000; border: 2px solid var(--neon-cyan);
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) translateZ(10px);
+  border-radius: 8px; box-shadow: 0 0 30px rgba(0,240,255,0.4), inset 0 0 20px rgba(0,240,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+}
+.gpu-chip::after { content: 'TENSOR'; font-family: 'Orbitron', sans-serif; font-size: 10px; color: var(--neon-cyan); font-weight: bold; letter-spacing: 2px; }
+.gpu-core-glow { position: absolute; inset: -20px; background: radial-gradient(circle, var(--neon-cyan), transparent 70%); opacity: 0.3; transform: translateZ(5px); animation: pulseGlow 2s infinite alternate; }
+@keyframes pulseGlow { 0% { opacity: 0.2; } 100% { opacity: 0.5; } }
 
-/* Engine Specific Visual Filters */
-/* 1. Quantum (Detail Recov) */
-.img-q { background-image: url('https://images.unsplash.com/photo-1535868463750-c78d9543614f?q=80&w=600&auto=format&fit=crop'); }
-.flt-q-before { filter: blur(4px) contrast(0.8); }
-/* 2. Ultra Power (Color/Upscale) */
-.img-u { background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=600&auto=format&fit=crop'); }
-.flt-u-before { filter: grayscale(0.9) brightness(0.7); }
-/* 3. Crystal Clear (Denoise - using SVG turbulence) */
-.img-c { background-image: url('https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=600&auto=format&fit=crop'); }
-.flt-c-before::after { content:''; position:absolute; inset:0; background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>'); opacity: 0.5; mix-blend-mode: overlay; }
-/* 4. Silk Flow (FPS Animation Simulation) */
-.fps-bg { background: #050508; display: flex; align-items: center; justify-content: center; }
-.fps-ball { width: 30px; height: 30px; border-radius: 50%; background: var(--neon-purple); position: absolute; box-shadow: 0 0 15px var(--neon-purple); }
-.fps-stutter { animation: moveBall 2s steps(8) infinite alternate; opacity: 0.5; }
-.fps-smooth { animation: moveBall 2s linear infinite alternate; }
-@keyframes moveBall { 0% { left: 10%; } 100% { left: 80%; } }
-/* 5. Ghost Wipe (Object Removal) */
-.img-g { background-image: url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=600&auto=format&fit=crop'); }
-.flt-g-before::after { content: '[ TARGET DETECTED ]'; position: absolute; top: 40%; left: 30%; border: 1px dashed #ff4757; color: #ff4757; padding: 10px; font-family: monospace; font-size: 10px; font-weight: bold; background: rgba(0,0,0,0.5); }
-/* 6. Smart Balance (Exposure) */
-.img-s { background-image: url('https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=600&auto=format&fit=crop'); }
-.flt-s-before { filter: brightness(0.3) contrast(1.5); }
+/* Data Beams */
+.data-beams { display: flex; gap: 40px; justify-content: center; margin-top: -40px; }
+.beam { width: 3px; height: 150px; background: linear-gradient(to bottom, var(--neon-cyan), transparent); opacity: 0.5; position: relative; overflow: hidden; }
+.beam::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 30px; background: #fff; box-shadow: 0 0 15px #fff; animation: shoot 1.5s infinite linear; }
+.beam:nth-child(2)::after { animation-delay: 0.5s; }
+.beam:nth-child(3)::after { animation-delay: 1s; }
+@keyframes shoot { 0% { transform: translateY(-30px); } 100% { transform: translateY(150px); } }
+
+/* ===== THE GRAND SHOWCASE (Engines) ===== */
+.showcase-container { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; padding: 24px; backdrop-filter: blur(20px); }
+
+.showcase-tabs { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; justify-content: center; }
+.tab-btn {
+  background: rgba(0,0,0,0.4); border: 1px solid var(--glass-border); color: var(--text-muted);
+  padding: 14px 24px; border-radius: 12px; font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; cursor: pointer; transition: 0.3s; flex: 1; min-width: 140px; text-align: center;
+}
+.tab-btn:hover { background: rgba(255,255,255,0.05); color: #fff; }
+.tab-btn.active { background: rgba(0,240,255,0.1); border-color: var(--neon-cyan); color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0,240,255,0.2); }
+
+/* Master Slider */
+.master-slider {
+  position: relative; width: 100%; height: 500px; background: #000;
+  border-radius: 16px; overflow: hidden; cursor: ew-resize; user-select: none;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.sl-layer { position: absolute; inset: 0; width: 100%; height: 100%; background-size: cover; background-position: center; transition: background-image 0.4s ease; }
+/* The Magic Fix: Using clip-path instead of width makes it strictly follow math, ignoring RTL/LTR layouts */
+.sl-clip { position: absolute; inset: 0; width: 100%; height: 100%; clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); z-index: 2; }
+.sl-divider { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: var(--neon-cyan); transform: translateX(-50%); z-index: 8; pointer-events: none; box-shadow: 0 0 20px var(--neon-cyan); }
+.sl-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; background: rgba(0,0,0,0.8); border: 2px solid var(--neon-cyan); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 9; pointer-events: none; color: var(--neon-cyan); font-size: 14px; backdrop-filter: blur(5px); }
+.sl-label { position: absolute; bottom: 20px; padding: 6px 16px; background: rgba(0,0,0,0.7); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; border-radius: 8px; z-index: 10; pointer-events: none; border: 1px solid rgba(255,255,255,0.1); }
+.lbl-before { left: 20px; color: #aaa; }
+.lbl-after { right: 20px; color: var(--neon-cyan); border-color: rgba(0,240,255,0.3); }
+
+/* --- specific engine visual hacks --- */
+.base-img { background-image: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1200&auto=format&fit=crop'); }
+/* CSS Filters applied via JS based on active tab */
+
+/* Engine 4: Silk Flow (Animation specific) */
+.anim-bg { background: radial-gradient(circle at center, #111 0%, #000 100%); display: flex; align-items: center; background-size: cover; }
+.anim-grid { position: absolute; inset: 0; background: linear-gradient(rgba(0,240,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,240,255,0.1) 1px, transparent 1px); background-size: 40px 40px; opacity: 0.3; }
+.ship { position: absolute; top: 50%; width: 60px; height: 16px; background: var(--neon-cyan); border-radius: 8px; box-shadow: 0 0 20px var(--neon-cyan), -20px 0 20px rgba(0,240,255,0.5); margin-top: -8px; }
+.stutter-ship { animation: fly 2s steps(8, end) infinite; background: #ff4757; box-shadow: 0 0 20px #ff4757; }
+.smooth-ship { animation: fly 2s linear infinite; }
+@keyframes fly { 0% { left: -10%; } 100% { left: 110%; } }
+/* Hide elements logic */
+.hide { display: none !important; }
 
 /* ===== PRICING ===== */
-.billing-toggle { display: flex; justify-content: center; align-items: center; gap: 16px; margin-bottom: 50px; font-size: 14px; font-weight: 600; }
-.toggle-switch { position: relative; width: 56px; height: 28px; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); border-radius: 100px; cursor: pointer; transition: 0.3s; }
-.toggle-dot { position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; background: var(--text-main); border-radius: 50%; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-.is-yearly .toggle-dot { left: 31px; background: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan); }
-
 .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
 .price-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; padding: 40px; backdrop-filter: blur(16px); display: flex; flex-direction: column; transition: 0.4s; }
-.price-card.popular { border-color: rgba(0, 229, 255, 0.5); box-shadow: 0 10px 50px rgba(0, 229, 255, 0.1); transform: scale(1.02); position: relative; overflow: hidden; }
-.price-card.popular::before { content: 'MOST POPULAR'; position: absolute; top: 16px; right: -30px; background: var(--neon-cyan); color: #000; font-size: 9px; font-weight: bold; padding: 4px 30px; transform: rotate(45deg); letter-spacing: 1px; }
-.tier-name { font-family: 'Orbitron', sans-serif; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; }
-.price { font-size: 48px; font-weight: 300; margin-bottom: 8px; display: flex; align-items: baseline; gap: 4px; }
-.price span { font-size: 14px; color: var(--text-muted); font-weight: 500; }
-.features { list-style: none; margin-top: 32px; margin-bottom: 40px; flex-grow: 1; border-top: 1px solid var(--glass-border); padding-top: 32px; }
-.features li { font-size: 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; color: #d4d4d8; font-weight: 300; }
-.features li::before { content: ''; display: inline-block; width: 16px; height: 16px; background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="none" stroke="%2300e5ff" stroke-width="3" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>') no-repeat center; }
+.price-card.popular { border-color: rgba(0, 240, 255, 0.4); box-shadow: 0 10px 40px rgba(0, 240, 255, 0.1); transform: scale(1.02); }
+.t-name { font-family: 'Orbitron', sans-serif; font-size: 14px; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 16px; }
+.price { font-size: 48px; font-weight: 300; margin-bottom: 24px; display: flex; align-items: baseline; gap: 4px; }
+.features { list-style: none; margin-bottom: 40px; flex-grow: 1; border-top: 1px solid var(--glass-border); padding-top: 24px; }
+.features li { font-size: 13px; margin-bottom: 16px; color: #ccc; }
+.features li::before { content: '✓'; color: var(--neon-cyan); margin-inline-end: 10px; font-weight: bold; }
 
 /* ===== FOOTER ===== */
-footer { padding: 80px 6% 40px; border-top: 1px solid var(--glass-border); background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); }
-.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 60px; max-width: 1300px; margin-left: auto; margin-right: auto; }
-.footer-col p { font-size: 13px; color: var(--text-muted); font-weight: 300; margin-top: 16px; max-width: 300px; }
-.footer-col h4 { font-size: 14px; font-weight: 700; margin-bottom: 24px; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px; }
-.footer-col ul { list-style: none; }
-.footer-col ul li { margin-bottom: 16px; }
-.footer-col ul a { font-size: 13px; color: var(--text-muted); font-weight: 300; }
-.footer-col ul a:hover { color: var(--neon-cyan); }
-.footer-bottom { text-align: center; border-top: 1px solid var(--glass-border); padding-top: 24px; font-size: 12px; color: #555; font-weight: 300; }
+footer { padding: 60px 6% 40px; border-top: 1px solid var(--glass-border); background: #000; text-align: center; }
+.footer-logo { font-family: 'Orbitron', sans-serif; font-size: 24px; font-weight: 900; letter-spacing: 2px; margin-bottom: 16px; }
+.footer-logo span { color: var(--neon-cyan); }
+.footer-text { font-size: 12px; color: var(--text-muted); }
 
-@media(max-width: 900px) {
-  .nav-center { display: none; }
-  .footer-top { grid-template-columns: 1fr; }
-  .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
-  .price-card.popular { transform: none; }
-}
+/* SVG Filters (Hidden in DOM, used by CSS) */
 </style>
 </head>
 <body>
 
-<div id="space-container">
-  <div class="nebula nebula-1"></div>
-  <div class="nebula nebula-2"></div>
-  <div id="stars-container"></div>
+<svg style="display:none;">
+  <filter id="heavyNoise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.8"/></feComponentTransfer></filter>
+  <filter id="pixelate"><feGaussianBlur stdDeviation="4" result="blur"/><feComponentTransfer><feFuncA type="discrete" tableValues="1 1"/></feComponentTransfer></filter>
+</svg>
+
+<div id="space-bg">
+  <div class="nebula neb-1"></div>
+  <div class="nebula neb-2"></div>
 </div>
 
-<div class="nav-wrapper">
+<div class="nav-wrap">
   <nav>
     <div class="logo">BL <span>Creative</span></div>
-    <div class="nav-center">
-      <a href="#ultrapurity" data-i18n="nav_prod">Products</a>
-      <a href="#engines" data-i18n="nav_eng">Engines</a>
+    <div class="nav-links">
       <a href="#hardware" data-i18n="nav_hw">Hardware</a>
+      <a href="#engines" data-i18n="nav_eng">Engines</a>
       <a href="#pricing" data-i18n="nav_pr">Pricing</a>
     </div>
-    <div class="nav-right">
+    <div class="nav-actions">
       <select class="lang-sel" id="langSel" onchange="setLang(this.value)">
-        <option value="en">EN</option>
-        <option value="ar">AR</option>
-        <option value="fr">FR</option>
-        <option value="es">ES</option>
-        <option value="pt">PT</option>
-        <option value="de">DE</option>
-        <option value="it">IT</option>
-        <option value="ja">JA</option>
-        <option value="ko">KO</option>
-        <option value="zh">ZH</option>
+        <option value="en">EN</option><option value="ar">AR</option>
+        <option value="fr">FR</option><option value="es">ES</option>
+        <option value="de">DE</option><option value="ja">JA</option>
+        <option value="ko">KO</option><option value="zh">ZH</option>
         <option value="ru">RU</option>
-        <option value="tr">TR</option>
       </select>
-      <a class="btn btn-ghost" href="#contact" data-i18n="nav_contact" style="padding: 10px 24px; font-size: 11px;">Contact Us</a>
+      <a class="btn btn-primary" href="#pricing" data-i18n="btn_get">Get System</a>
     </div>
   </nav>
 </div>
 
-<section class="hero" id="ultrapurity">
-  <div class="badge" data-i18n="hero_badge">Flagship Protocol</div>
-  <h1>
-    <span class="product-name">UltraPurity</span><br>
-    <span style="font-weight:300; font-size: 0.6em; letter-spacing: 2px;" data-i18n="hero_h1">Vision Reimagined</span>
-  </h1>
-  <p class="hero-sub" data-i18n="hero_sub">
-    The ultimate AI video processing suite. Six neural engines built to analyze, reconstruct, and upscale your footage beyond reality.
-  </p>
-
-  <div class="slider-wrap hero-slider" id="heroSlider">
-    <div class="s-layer h-img h-before"></div>
-    <div class="s-clip" id="heroClip" style="width: 50%;">
-      <div class="s-layer h-img h-after" style="width: 100vw; max-width: 1000px;"></div>
-      <div class="scanner"></div>
-    </div>
-    <div class="s-handle" id="heroHdl" style="left: 50%;">⇔</div>
+<section class="hero">
+  <div class="hero-badge" data-i18n="hero_badge">Flagship AI Software</div>
+  <h1><span>UltraPurity</span></h1>
+  <p class="hero-sub" data-i18n="hero_sub">The ultimate video processing architecture. Six distinct neural engines designed to extract, reconstruct, and upscale reality with mathematical precision.</p>
+  <div class="nav-actions" style="justify-content:center;">
+    <a class="btn btn-primary" href="#engines" data-i18n="cta_demo">View Live Demo</a>
   </div>
+</section>
 
-  <div class="btns">
-    <a class="btn btn-primary" href="#pricing" data-i18n="cta_get">Deploy UltraPurity</a>
-    <a class="btn btn-ghost" href="#engines" data-i18n="cta_exp">View Architecture</a>
+<section class="section" id="hardware">
+  <div class="sec-title">
+    <h2 data-i18n="hw_h">Powered by <span>Tensor</span></h2>
+    <p data-i18n="hw_desc">Directly interfaces with NVIDIA & AMD cores. Hardware-level deep learning super sampling ensures zero processing bottleneck.</p>
+  </div>
+  
+  <div class="hw-showcase">
+    <div class="gpu-3d">
+      <div class="gpu-layer gpu-base"></div>
+      <div class="gpu-layer gpu-circuit"></div>
+      <div class="gpu-core-glow"></div>
+      <div class="gpu-chip"></div>
+    </div>
+    <div class="data-beams">
+      <div class="beam"></div>
+      <div class="beam"></div>
+      <div class="beam"></div>
+    </div>
   </div>
 </section>
 
 <section class="section" id="engines">
-  <span class="sec-tag" data-i18n="eng_tag">Processing Architecture</span>
-  <h2 class="sec-h" data-i18n="eng_h">The <span>Neural Engines</span></h2>
-  <div class="engines-grid" id="enginesGrid"></div>
-</section>
+  <div class="sec-title">
+    <h2 data-i18n="eng_h">The <span>Neural Engines</span></h2>
+    <p data-i18n="eng_desc">Select a module below to view the real-time difference between raw data and UltraPurity processing.</p>
+  </div>
 
-<section class="section" id="hardware">
-  <span class="sec-tag" data-i18n="hw_tag">Hardware Acceleration</span>
-  <h2 class="sec-h" data-i18n="hw_h">Powered by <span>Tensor Cores</span></h2>
-  <div class="gpu-container">
-    <div class="gpu-core"></div>
-    <div class="data-streams">
-      <div class="stream"></div>
-      <div class="stream" style="animation-delay: 0.5s;"></div>
-      <div class="stream" style="animation-delay: 1s;"></div>
+  <div class="showcase-container">
+    <div class="showcase-tabs" id="tabs-container">
+      </div>
+
+    <div class="master-slider" id="masterSlider">
+      <div class="sl-layer base-img" id="layerAfter"></div>
+      <div class="sl-label lbl-after" id="lblA">UltraPurity</div>
+
+      <div class="sl-clip" id="layerBeforeMask">
+        <div class="sl-layer base-img" id="layerBefore" style="width: 100%;"></div>
+        <div class="sl-layer anim-bg hide" id="animBefore">
+           <div class="anim-grid"></div>
+           <div class="ship stutter-ship"></div>
+        </div>
+        <div class="sl-label lbl-before" id="lblB">Raw Source</div>
+      </div>
+
+      <div class="sl-layer anim-bg hide" id="animAfter" style="z-index: 1; pointer-events: none;">
+         <div class="anim-grid"></div>
+         <div class="ship smooth-ship"></div>
+      </div>
+
+      <div class="sl-divider" id="masterDiv"></div>
+      <div class="sl-handle" id="masterHdl">⇔</div>
     </div>
-    <p class="gpu-desc" data-i18n="hw_desc">
-      Engineered to extract maximum performance from NVIDIA and AMD architectures. Real-time deep learning processing with zero bottleneck.
-    </p>
   </div>
 </section>
 
 <section class="section" id="pricing">
-  <span class="sec-tag" data-i18n="pr_tag">Commercial Licenses</span>
-  <h2 class="sec-h" data-i18n="pr_h">Select <span>Deployment</span></h2>
-  
-  <div class="billing-toggle" onclick="toggleBilling()">
-    <span id="lblMonthly" style="color:var(--text-main)" data-i18n="pr_mo">Monthly</span>
-    <div class="toggle-switch" id="billToggle"><div class="toggle-dot"></div></div>
-    <span id="lblYearly" style="color:var(--text-muted)" data-i18n="pr_yr">Yearly (-20%)</span>
+  <div class="sec-title">
+    <h2 data-i18n="pr_h">Commercial <span>Licenses</span></h2>
   </div>
-
   <div class="pricing-grid">
     <div class="price-card">
-      <div class="tier-name" data-i18n="t1_n">Creator</div>
-      <div class="price">$<span class="price-val" data-mo="29" data-yr="24">29</span><span data-i18n="pr_per">/mo</span></div>
+      <div class="t-name">Creator</div>
+      <div class="price">$29<span>/mo</span></div>
       <ul class="features">
-        <li data-i18n="f1">Max 4K Resolution</li>
-        <li data-i18n="f2">Standard Processing Speed</li>
+        <li data-i18n="f1">4K Max Resolution</li>
+        <li data-i18n="f2">Standard Speed</li>
         <li data-i18n="f3">Community Support</li>
       </ul>
-      <a href="#" class="btn btn-ghost" style="width:100%; justify-content:center" data-i18n="btn_sub">Subscribe</a>
+      <a href="#" class="btn btn-primary" style="background:var(--glass-border); color:#fff;" data-i18n="btn_sub">Subscribe</a>
     </div>
-
     <div class="price-card popular">
-      <div class="tier-name" style="color:var(--neon-cyan)" data-i18n="t2_n">Professional</div>
-      <div class="price">$<span class="price-val" data-mo="59" data-yr="49">59</span><span data-i18n="pr_per">/mo</span></div>
+      <div class="t-name" style="color:var(--neon-cyan)">Professional</div>
+      <div class="price">$59<span>/mo</span></div>
       <ul class="features">
-        <li data-i18n="f4">Max 8K Resolution</li>
-        <li data-i18n="f5">GPU Multi-threading</li>
-        <li data-i18n="f6">Priority Email Support</li>
+        <li data-i18n="f4">8K Max Resolution</li>
+        <li data-i18n="f5">Multi-GPU Threading</li>
+        <li data-i18n="f6">Priority Support</li>
       </ul>
-      <a href="#" class="btn btn-primary" style="width:100%; justify-content:center" data-i18n="btn_sub">Subscribe</a>
-    </div>
-
-    <div class="price-card">
-      <div class="tier-name" data-i18n="t3_n">Studio</div>
-      <div class="price">$<span class="price-val" data-mo="149" data-yr="119">149</span><span data-i18n="pr_per">/mo</span></div>
-      <ul class="features">
-        <li data-i18n="f7">Unlimited Resolution</li>
-        <li data-i18n="f8">Render Farm Deployment</li>
-        <li data-i18n="f9">24/7 Dedicated Support</li>
-      </ul>
-      <a href="#" class="btn btn-ghost" style="width:100%; justify-content:center" data-i18n="btn_sub">Subscribe</a>
+      <a href="#" class="btn btn-primary" data-i18n="btn_sub">Subscribe</a>
     </div>
   </div>
 </section>
 
-<footer id="contact">
-  <div class="footer-top">
-    <div class="footer-col">
-      <div class="logo">BL <span>Creative</span></div>
-      <p data-i18n="ft_desc">Bridging the gap between imagination and reality. We build software that empowers creators with tools previously reserved for massive Hollywood studios.</p>
-    </div>
-    <div class="footer-col">
-      <h4 data-i18n="nav_prod">Products</h4>
-      <ul><li><a href="#">UltraPurity</a></li><li><a href="#">Future Suite</a></li></ul>
-    </div>
-    <div class="footer-col">
-      <h4 data-i18n="ft_com">Community</h4>
-      <ul><li><a href="#">Discord Server</a></li><li><a href="#">Developer Forums</a></li></ul>
-    </div>
-    <div class="footer-col">
-      <h4 data-i18n="ft_leg">Legal</h4>
-      <ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul>
-    </div>
-  </div>
-  <div class="footer-bottom">© 2026 BL Creative (bl-creative.com). All rights reserved.</div>
+<footer>
+  <div class="footer-logo">BL <span>Creative</span></div>
+  <div class="footer-text">© 2026 BL Creative (bl-creative.com). All rights reserved.</div>
 </footer>
 
 <script>
-// --- Background Stars ---
-function createStars() {
-  const container = document.getElementById('stars-container');
-  const layers = [{ name: 'stars-small', count: 400 }, { name: 'stars-medium', count: 150 }];
-  layers.forEach(layer => {
-    const div = document.createElement('div'); div.className = `stars ${layer.name}`;
-    let shadows = '';
-    for(let i=0; i<layer.count; i++) {
-      shadows += `${Math.floor(Math.random() * window.innerWidth)}px ${Math.floor(Math.random() * window.innerHeight * 2)}px rgba(255,255,255,${Math.random() * 0.5 + 0.1}), `;
-    }
-    div.style.boxShadow = shadows.slice(0, -2); container.appendChild(div);
-  });
-}
-createStars(); window.addEventListener('resize', () => { document.getElementById('stars-container').innerHTML = ''; createStars(); });
-
-// --- Real Engines Data & Building ---
-const engines = [
-  { name:"QUANTUM AI", color:"#00e5ff", classBefore:"img-q flt-q-before", classAfter:"img-q", desc:{ en:"Deep neural detail reconstruction.", ar:"إعادة بناء عصبية للتفاصيل المفقودة."} },
-  { name:"ULTRA POWER", color:"#ff4757", classBefore:"img-u flt-u-before", classAfter:"img-u", desc:{ en:"Cinematic upscaling and color restore.", ar:"تكبير دقة سينمائي واستعادة ألوان."} },
-  { name:"CRYSTAL CLEAR", color:"#2ed573", classBefore:"img-c flt-c-before", classAfter:"img-c", desc:{ en:"Precision denoising from bad sources.", ar:"إزالة ضوضاء دقيقة بذكاء اصطناعي."} },
-  { name:"SILK FLOW", color:"#9d4edd", isAnim:true, desc:{ en:"Flawless 60/120 FPS motion generation.", ar:"توليد إطارات للوصول لحركة 120 إطار ناعمة."} },
-  { name:"GHOST WIPE", color:"#ff7f50", classBefore:"img-g flt-g-before", classAfter:"img-g", desc:{ en:"Seamless AI object removal.", ar:"إزالة الكائنات بسلاسة تامة."} },
-  { name:"SMART BALANCE", color:"#eccc68", classBefore:"img-s flt-s-before", classAfter:"img-s", desc:{ en:"Algorithmic exposure grading.", ar:"تصحيح خوارزمي دقيق للتعريض."} }
+// --- ENGINE DATA & LOGIC ---
+const engineData = [
+  { 
+    id: 'qai', name: 'QUANTUM AI', color: '#00f0ff',
+    img: 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=1200&auto=format&fit=crop',
+    filterBefore: 'blur(5px) contrast(0.8)', filterAfter: 'contrast(1.1) saturate(1.2)'
+  },
+  { 
+    id: 'clr', name: 'CRYSTAL CLEAR', color: '#2ed573',
+    img: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=1200&auto=format&fit=crop',
+    // Using inline SVG filter wrapper for severe noise
+    filterBefore: 'url(#heavyNoise) brightness(0.6)', filterAfter: 'none'
+  },
+  { 
+    id: 'upw', name: 'ULTRA POWER', color: '#ff4757',
+    img: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200&auto=format&fit=crop',
+    filterBefore: 'grayscale(1) brightness(0.5)', filterAfter: 'saturate(1.5) contrast(1.2)'
+  },
+  { 
+    id: 'fps', name: 'SILK FLOW', color: '#9d4edd',
+    isAnim: true // Triggers the spaceship animation instead of image
+  },
+  { 
+    id: 'bln', name: 'SMART BALANCE', color: '#eccc68',
+    img: 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=1200&auto=format&fit=crop',
+    filterBefore: 'brightness(0.3) sepia(0.8) hue-rotate(-30deg)', filterAfter: 'brightness(1.2) saturate(1.3)'
+  }
 ];
 
-const grid = document.getElementById('enginesGrid');
-function buildEngines(l) {
-  grid.innerHTML = '';
-  engines.forEach((e, i) => {
-    const card = document.createElement('div'); card.className = 'engine-card';
-    
-    // Check if it's the FPS engine (Animation) or Image engine
-    let previewHTML = '';
-    if(e.isAnim) {
-      previewHTML = `
-        <div class="s-layer fps-bg"><div class="fps-ball fps-stutter"></div></div>
-        <div class="s-clip" id="ec${i}" style="width: 50%; border-right: 2px solid ${e.color}">
-          <div class="s-layer fps-bg" style="width: 350px;"><div class="fps-ball fps-smooth"></div></div>
-          <div class="scanner" style="background: linear-gradient(to bottom, transparent, ${e.color}33 50%, transparent)"></div>
-        </div>`;
+// Initialize Tabs
+const tabsContainer = document.getElementById('tabs-container');
+const lBefore = document.getElementById('layerBefore');
+const lAfter = document.getElementById('layerAfter');
+const aBefore = document.getElementById('animBefore');
+const aAfter = document.getElementById('animAfter');
+const masterDiv = document.getElementById('masterDiv');
+const masterHdl = document.getElementById('masterHdl');
+const lblA = document.getElementById('lblA');
+
+function switchEngine(index) {
+  // Update Tabs UI
+  document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', i === index);
+    if(i === index) {
+      btn.style.borderColor = engineData[i].color;
+      btn.style.color = engineData[i].color;
+      masterDiv.style.background = engineData[i].color;
+      masterDiv.style.boxShadow = `0 0 20px ${engineData[i].color}`;
+      masterHdl.style.borderColor = engineData[i].color;
+      masterHdl.style.color = engineData[i].color;
+      lblA.style.color = engineData[i].color;
+      lblA.style.borderColor = engineData[i].color;
     } else {
-      previewHTML = `
-        <div class="s-layer ${e.classBefore}"></div>
-        <div class="s-clip" id="ec${i}" style="width: 50%; border-right: 2px solid ${e.color}">
-          <div class="s-layer ${e.classAfter}" style="width: 350px;"></div>
-          <div class="scanner" style="background: linear-gradient(to bottom, transparent, ${e.color}33 50%, transparent)"></div>
-        </div>`;
+      btn.style.borderColor = ''; btn.style.color = '';
     }
-
-    card.innerHTML = `
-      <div class="slider-wrap engine-preview" id="ep${i}">
-        ${previewHTML}
-        <div class="s-handle" id="eh${i}" style="left:50%; border-color:${e.color}; color:${e.color}; width:28px; height:28px; font-size:10px;">⇔</div>
-      </div>
-      <div class="engine-body">
-        <div class="engine-name" style="color:${e.color}">${e.name}</div>
-        <div class="engine-desc">${(e.desc[l]||e.desc.en)}</div>
-      </div>`;
-    grid.appendChild(card);
-    setupSlider(card.querySelector(`#ep${i}`), card.querySelector(`#ec${i}`), card.querySelector(`#eh${i}`));
   });
-}
 
-// --- Bulletproof Slider Logic (Always LTR container fixes the math) ---
-function setupSlider(wrap, clip, hdl) {
-  let drag = false;
-  function mv(x) {
-    const r = wrap.getBoundingClientRect();
-    let p = ((x - r.left) / r.width) * 100;
-    p = Math.max(0, Math.min(100, p));
-    clip.style.width = p + '%';
-    hdl.style.left = p + '%';
+  const data = engineData[index];
+  
+  if(data.isAnim) {
+    // Show Animation, hide images
+    lBefore.classList.add('hide'); lAfter.classList.add('hide');
+    aBefore.classList.remove('hide'); aAfter.classList.remove('hide');
+  } else {
+    // Show Images, hide animation
+    aBefore.classList.add('hide'); aAfter.classList.add('hide');
+    lBefore.classList.remove('hide'); lAfter.classList.remove('hide');
+    
+    lBefore.style.backgroundImage = `url(${data.img})`;
+    lAfter.style.backgroundImage = `url(${data.img})`;
+    lBefore.style.filter = data.filterBefore;
+    lAfter.style.filter = data.filterAfter;
   }
-  wrap.addEventListener('mousedown', e => { drag=true; mv(e.clientX); });
-  wrap.addEventListener('touchstart', e => { drag=true; mv(e.touches[0].clientX); }, {passive:true});
-  document.addEventListener('mousemove', e => { if(drag) mv(e.clientX); });
-  document.addEventListener('touchmove', e => { if(drag) mv(e.touches[0].clientX); }, {passive:true});
-  document.addEventListener('mouseup', () => drag=false);
-  document.addEventListener('touchend', () => drag=false);
-}
-setupSlider(document.getElementById('heroSlider'), document.getElementById('heroClip'), document.getElementById('heroHdl'));
-
-// --- Pricing Toggle ---
-let isYearly = false;
-function toggleBilling() {
-  isYearly = !isYearly;
-  document.getElementById('billToggle').classList.toggle('is-yearly', isYearly);
-  document.getElementById('lblMonthly').style.color = isYearly ? 'var(--text-muted)' : 'var(--text-main)';
-  document.getElementById('lblYearly').style.color = isYearly ? 'var(--text-main)' : 'var(--text-muted)';
-  document.querySelectorAll('.price-val').forEach(el => { el.innerText = isYearly ? el.getAttribute('data-yr') : el.getAttribute('data-mo'); });
 }
 
-// --- i18n Dictionary (Core + Fallbacks for other langs) ---
+engineData.forEach((e, i) => {
+  const btn = document.createElement('button');
+  btn.className = 'tab-btn';
+  btn.innerText = e.name;
+  btn.onclick = () => switchEngine(i);
+  tabsContainer.appendChild(btn);
+});
+
+// Init first tab
+switchEngine(0);
+
+// --- UNIVERSAL SLIDER LOGIC (BULLETPROOF RTL/LTR) ---
+const slider = document.getElementById('masterSlider');
+const mask = document.getElementById('layerBeforeMask');
+
+let isDragging = false;
+function moveSlider(e) {
+  const rect = slider.getBoundingClientRect();
+  const clientX = e.clientX ?? (e.touches ? e.touches[0].clientX : 0);
+  // Calculate raw percentage relative to the left edge of the screen
+  let p = ((clientX - rect.left) / rect.width) * 100;
+  p = Math.max(0, Math.min(100, p));
+  
+  // clip-path: polygon(top-left, top-right, bottom-right, bottom-left)
+  // This physically cuts the layer from 0% (left) to p% (mouse position). 
+  // It completely ignores DOM directionality!
+  mask.style.clipPath = `polygon(0 0, ${p}% 0, ${p}% 100%, 0 100%)`;
+  masterDiv.style.left = `${p}%`;
+  masterHdl.style.left = `${p}%`;
+}
+
+slider.addEventListener('mousedown', e => { isDragging = true; moveSlider(e); });
+slider.addEventListener('touchstart', e => { isDragging = true; moveSlider(e); }, {passive:true});
+document.addEventListener('mousemove', e => { if(isDragging) moveSlider(e); });
+document.addEventListener('touchmove', e => { if(isDragging) moveSlider(e); }, {passive:true});
+document.addEventListener('mouseup', () => isDragging = false);
+document.addEventListener('touchend', () => isDragging = false);
+
+// --- i18n Dictionary ---
 const dictionary = {
   en: {
-    nav_prod: "Products", nav_eng: "Engines", nav_hw: "Hardware", nav_pr: "Pricing", nav_contact: "Contact Us",
-    hero_badge: "Flagship Protocol", hero_h1: "Vision Reimagined",
-    hero_sub: "The ultimate AI video processing suite. Six neural engines built to analyze, reconstruct, and upscale your footage beyond reality.",
-    cta_get: "Deploy UltraPurity", cta_exp: "View Architecture",
-    hw_tag: "Hardware Acceleration", hw_h: "Powered by <span>Tensor Cores</span>",
-    hw_desc: "Engineered to extract maximum performance from NVIDIA and AMD architectures. Real-time deep learning processing with zero bottleneck.",
-    eng_tag: "Processing Architecture", eng_h: "The <span>Neural Engines</span>",
-    pr_tag: "Commercial Licenses", pr_h: "Select <span>Deployment</span>", pr_mo: "Monthly", pr_yr: "Yearly (-20%)", pr_per: "/mo",
-    t1_n: "Creator", t2_n: "Professional", t3_n: "Studio",
-    f1: "Max 4K Resolution", f2: "Standard Processing", f3: "Community Support", f4: "Max 8K Resolution", f5: "GPU Multi-threading", f6: "Priority Support", f7: "Unlimited Resolution", f8: "Render Farm Deploy", f9: "24/7 Dedicated Support",
-    btn_sub: "Subscribe", ft_desc: "Bridging the gap between imagination and reality. We build software that empowers creators.", ft_com: "Community", ft_leg: "Legal"
+    nav_hw: "Hardware", nav_eng: "Engines", nav_pr: "Pricing", btn_get: "Get System",
+    hero_badge: "Flagship AI Software", hero_sub: "The ultimate video processing architecture. Six distinct neural engines designed to extract, reconstruct, and upscale reality with mathematical precision.",
+    cta_demo: "View Live Demo",
+    hw_h: "Powered by <span>Tensor</span>", hw_desc: "Directly interfaces with NVIDIA & AMD cores. Hardware-level deep learning super sampling ensures zero processing bottleneck.",
+    eng_h: "The <span>Neural Engines</span>", eng_desc: "Select a module below to view the real-time difference between raw data and UltraPurity processing.",
+    pr_h: "Commercial <span>Licenses</span>",
+    f1: "4K Max Resolution", f2: "Standard Speed", f3: "Community Support", f4: "8K Max Resolution", f5: "Multi-GPU Threading", f6: "Priority Support", btn_sub: "Subscribe"
   },
   ar: {
-    nav_prod: "المنتجات", nav_eng: "المحركات", nav_hw: "العتاد", nav_pr: "الأسعار", nav_contact: "تواصل معنا",
-    hero_badge: "البروتوكول الرائد", hero_h1: "رؤية تتشكل من جديد",
-    hero_sub: "أقوى حزمة ذكاء اصطناعي لمعالجة الفيديو. ستة محركات عصبية صُممت لتحليل، بناء، ورفع دقة اللقطات لتتجاوز الواقع.",
-    cta_get: "استخدم UltraPurity", cta_exp: "تصفح الهيكلة",
-    hw_tag: "تسريع العتاد", hw_h: "مدعوم بأنوية <span>الذكاء الاصطناعي</span>",
-    hw_desc: "مُهندس لاستخراج الأداء الأقصى من معمارية كروت NVIDIA و AMD. معالجة تعلم عميق بالوقت الفعلي بدون أي عنق زجاجة.",
-    eng_tag: "هيكلة المعالجة", eng_h: "المحركات <span>العصبية</span>",
-    pr_tag: "التراخيص التجارية", pr_h: "اختر <span>خطتك</span>", pr_mo: "شهري", pr_yr: "سنوي (خصم 20%)", pr_per: "/شهر",
-    t1_n: "المبدعين", t2_n: "المحترفين", t3_n: "الاستوديوهات",
-    f1: "دقة قصوى 4K", f2: "معالجة قياسية", f3: "دعم المجتمع", f4: "دقة قصوى 8K", f5: "استغلال مسارات GPU", f6: "دعم فني بأولوية", f7: "دقة لا محدودة", f8: "دعم مزارع الرندر", f9: "دعم مخصص 24/7",
-    btn_sub: "اشترك الآن", ft_desc: "نسد الفجوة بين الخيال والواقع، لنبني برمجيات تمنح المبدعين أدوات استوديوهات هوليوود.", ft_com: "المجتمع", ft_leg: "قانوني"
+    nav_hw: "العتاد", nav_eng: "المحركات", nav_pr: "الأسعار", btn_get: "تحميل النظام",
+    hero_badge: "برمجيات الذكاء الاصطناعي الرائدة", hero_sub: "البنية المطلقة لمعالجة الفيديو. محركات عصبية مصممة لاستخراج، وبناء، ورفع دقة الواقع بدقة رياضية متناهية.",
+    cta_demo: "شاهد المعاينة الحية",
+    hw_h: "مدعوم بأنوية <span>الذكاء الاصطناعي</span>", hw_desc: "تخاطب مباشر مع كروت NVIDIA و AMD. معالجة تعلم عميق بالوقت الفعلي بدون أي تقطيع أو تأخير في الأداء.",
+    eng_h: "المحركات <span>العصبية</span>", eng_desc: "اختر أحد المحركات بالأسفل لمشاهدة الفرق المباشر بين البيانات الخام والمعالجة بواسطة UltraPurity.",
+    pr_h: "التراخيص <span>التجارية</span>",
+    f1: "دقة 4K كحد أقصى", f2: "سرعة معالجة قياسية", f3: "دعم عبر المجتمع", f4: "دقة 8K كحد أقصى", f5: "معالجة متعددة المسارات", f6: "دعم فني بأولوية", btn_sub: "اشترك الآن"
   }
 };
 
 function applyLang(l) {
-  // Fallback to English if translation is missing for the other languages
   const t = dictionary[l] || dictionary.en; 
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
@@ -467,10 +438,13 @@ function applyLang(l) {
   const isRTL = l === 'ar';
   document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
   document.body.style.fontFamily = isRTL ? "'Alexandria', sans-serif" : "'Space Grotesk', sans-serif";
-  buildEngines(l);
+  
+  // RTL adjustments for specific elements if needed
+  const navLinks = document.querySelector('.nav-links');
+  if(navLinks) navLinks.style.flexDirection = isRTL ? 'row-reverse' : 'row';
 }
 function setLang(l) { applyLang(l); }
-applyLang('ar');
+applyLang('ar'); // Default load
 </script>
 </body>
 </html>
