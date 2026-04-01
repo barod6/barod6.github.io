@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BL Creative | UltraPurity AI</title>
+<title>BL Creative | AI Video Processing</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -11,14 +11,14 @@
 /* ===== VARIABLES & RESET ===== */
 *{margin:0;padding:0;box-sizing:border-box}
 :root {
-  --bg-base: #030304;
-  --bg-surface: rgba(14, 15, 20, 0.7);
-  --bg-card: rgba(22, 24, 30, 0.9);
-  --accent: #00f0ff;
-  --accent-glow: rgba(0, 240, 255, 0.4);
+  --bg-base: #020203;
+  --bg-panel: #0a0a0e;
+  --bg-card: #121218;
+  --accent: #00e5ff;
+  --accent-glow: rgba(0, 229, 255, 0.4);
   --border: rgba(255,255,255,0.08);
   --text-main: #ffffff;
-  --text-dim: #94a3b8;
+  --text-dim: #8b8b99;
   --font-en: 'Outfit', sans-serif;
   --font-ar: 'Cairo', sans-serif;
 }
@@ -31,160 +31,148 @@ body {
 }
 a { text-decoration: none; color: inherit; transition: 0.3s ease; }
 
-/* ===== BACKGROUND ===== */
-#space-bg { position: fixed; inset: 0; z-index: -10; background: var(--bg-base); overflow: hidden; perspective: 1000px; }
-.warp-grid {
-  position: absolute; width: 200vw; height: 200vh; top: -50vh; left: -50vw;
-  background-image: linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
-  background-size: 80px 80px; transform: rotateX(65deg) translateZ(-200px);
-  animation: warp 8s linear infinite; box-shadow: inset 0 0 200px 150px var(--bg-base);
-}
-@keyframes warp { 0% { transform: rotateX(65deg) translateZ(-200px) translateY(0); } 100% { transform: rotateX(65deg) translateZ(-200px) translateY(80px); } }
+/* ===== BACKGROUND (Subtle Tech Grid) ===== */
+#bg-canvas { position: fixed; inset: 0; z-index: -10; background: var(--bg-base); }
+.bg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 60px 60px; perspective: 1000px; }
+.bg-glow { position: absolute; width: 800px; height: 800px; border-radius: 50%; background: radial-gradient(circle, var(--accent-glow), transparent 60%); filter: blur(100px); top: -300px; left: 50%; transform: translateX(-50%); opacity: 0.3; animation: breathe 8s infinite alternate; }
+@keyframes breathe { 0% { opacity: 0.2; transform: translateX(-50%) scale(0.9); } 100% { opacity: 0.4; transform: translateX(-50%) scale(1.1); } }
 
 /* ===== NAVIGATION ===== */
-nav { position: fixed; top: 0; width: 100%; height: 76px; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; background: rgba(3,3,4,0.85); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border); z-index: 100; }
-.logo { font-size: 22px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; }
+nav { position: fixed; top: 0; width: 100%; height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 4%; background: rgba(2,2,3,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); z-index: 100; }
+.logo { font-size: 22px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
 .logo span { color: var(--accent); }
-.nav-links { display: flex; gap: 40px; }
-.nav-links a { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); transition: 0.3s; }
+.nav-links { display: flex; gap: 32px; }
+.nav-links a { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); transition: 0.3s; }
 .nav-links a:hover { color: var(--text-main); }
 .nav-actions { display: flex; gap: 16px; align-items: center; }
-.lang-btn { background: var(--bg-surface); border: 1px solid var(--border); color: #fff; padding: 8px 16px; border-radius: 8px; font-family: inherit; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+.lang-btn { background: transparent; border: 1px solid var(--border); color: #fff; padding: 6px 12px; border-radius: 6px; font-family: inherit; font-size: 11px; font-weight: 800; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
 .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
-.btn { display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; padding: 12px 28px; border-radius: 8px; cursor: pointer; transition: 0.3s; border: none; }
-.btn-primary { background: var(--accent); color: #000; box-shadow: 0 0 20px rgba(0,240,255,0.2); }
-.btn-primary:hover { background: #fff; box-shadow: 0 0 30px rgba(255,255,255,0.4); transform: translateY(-2px); }
+.btn { display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; padding: 10px 24px; border-radius: 6px; cursor: pointer; transition: 0.3s; border: none; }
+.btn-primary { background: var(--accent); color: #000; box-shadow: 0 0 15px rgba(0,229,255,0.2); }
+.btn-primary:hover { background: #fff; box-shadow: 0 0 25px rgba(255,255,255,0.4); transform: translateY(-2px); }
 
 /* ===== HERO ===== */
-.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 140px 5% 60px; }
-.badge { font-size: 11px; font-weight: 800; letter-spacing: 3px; color: var(--accent); border: 1px solid rgba(0,240,255,0.3); padding: 8px 24px; border-radius: 100px; margin-bottom: 24px; text-transform: uppercase; background: rgba(0,240,255,0.05); backdrop-filter: blur(10px); }
-.hero h1 { font-size: clamp(40px, 6vw, 84px); font-weight: 900; line-height: 1.1; letter-spacing: -1px; margin-bottom: 24px; text-transform: uppercase; }
-.hero h1 span { color: var(--accent); }
-.hero-sub { font-size: 17px; color: var(--text-dim); max-width: 650px; margin: 0 auto 48px; font-weight: 400; line-height: 1.8; }
+.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 4% 60px; }
+.badge { font-size: 10px; font-weight: 800; letter-spacing: 3px; color: var(--accent); border: 1px solid rgba(0,229,255,0.3); padding: 6px 20px; border-radius: 100px; margin-bottom: 24px; text-transform: uppercase; background: rgba(0,229,255,0.05); }
+.hero h1 { font-size: clamp(40px, 6vw, 80px); font-weight: 900; line-height: 1.1; letter-spacing: -1px; margin-bottom: 24px; text-transform: uppercase; }
+.hero h1 span { color: var(--accent); text-shadow: 0 0 20px var(--accent-glow); }
+.hero-sub { font-size: 16px; color: var(--text-dim); max-width: 600px; margin: 0 auto 40px; font-weight: 400; line-height: 1.8; }
 
-/* ===== THE NEW WORKSPACE (Horizontal Layout) ===== */
-.section { max-width: 1400px; margin: 0 auto 120px; padding: 0 5%; }
-.sec-header { text-align: center; margin-bottom: 50px; }
-.sec-title { font-size: clamp(32px, 5vw, 56px); font-weight: 900; text-transform: uppercase; margin-bottom: 16px; letter-spacing: -1px; }
+/* ===== THE WORKSPACE (Effects Bin & Cinematic Viewer) ===== */
+.section { max-width: 1400px; margin: 0 auto 120px; padding: 0 4%; }
+.sec-header { text-align: center; margin-bottom: 40px; }
+.sec-title { font-size: clamp(28px, 4vw, 48px); font-weight: 900; text-transform: uppercase; margin-bottom: 12px; letter-spacing: -1px; }
 .sec-title span { color: var(--accent); }
 
-.workspace { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 24px; padding: 24px; backdrop-filter: blur(30px); box-shadow: 0 40px 100px rgba(0,0,0,0.8); display: flex; flex-direction: column; gap: 24px; }
+.workspace-panel { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.8); display: flex; flex-direction: column; gap: 20px; backdrop-filter: blur(20px); }
 
-/* Horizontal Engine Menu */
-.engine-tabs { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
-.tab-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-dim); padding: 16px; border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.3s; display: flex; flex-direction: column; gap: 4px; align-items: center; justify-content: center; }
-.tab-btn:hover { border-color: rgba(255,255,255,0.2); color: #fff; transform: translateY(-2px); }
-.tab-btn.active { background: rgba(0,240,255,0.05); border-color: var(--accent); color: var(--accent); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-.tab-name { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: inherit; }
-
-/* Engine Details Bar */
-.eng-details-bar { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; background: rgba(0,0,0,0.4); border-radius: 12px; border: 1px solid var(--border); flex-wrap: wrap; gap: 16px; }
-.ed-desc { font-size: 14px; font-weight: 500; color: #fff; flex: 1; min-width: 300px; }
-.ed-tech { font-size: 11px; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; padding: 6px 16px; border: 1px solid rgba(0,240,255,0.3); border-radius: 100px; background: rgba(0,240,255,0.05); white-space: nowrap; }
-
-/* The Master Slider */
-.ws-preview { position: relative; width: 100%; height: 65vh; min-height: 500px; background: #000; border-radius: 16px; overflow: hidden; cursor: ew-resize; border: 1px solid var(--border); direction: ltr !important; }
-.sl-layer { position: absolute; inset: 0; width: 100%; height: 100%; background-size: cover; background-position: center; transition: opacity 0.4s ease; }
+/* 1. Cinematic Viewer (The Slider) */
+.viewer-container { position: relative; width: 100%; height: 60vh; min-height: 500px; background: #000; border-radius: 12px; overflow: hidden; cursor: ew-resize; border: 1px solid #222; direction: ltr !important; }
+.sl-layer { position: absolute; inset: 0; width: 100%; height: 100%; background-size: cover; background-position: center; }
 .sl-clip { position: absolute; inset: 0; width: 100%; height: 100%; clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); z-index: 2; }
-.sl-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: #fff; transform: translateX(-50%); z-index: 8; pointer-events: none; box-shadow: 0 0 15px rgba(0,0,0,0.8); }
-.sl-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: rgba(0,0,0,0.6); border: 2px solid #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 9; pointer-events: none; backdrop-filter: blur(5px); box-shadow: 0 0 15px rgba(0,0,0,0.5); }
+.sl-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: var(--accent); transform: translateX(-50%); z-index: 8; pointer-events: none; box-shadow: 0 0 15px var(--accent); }
+.sl-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: rgba(0,0,0,0.7); border: 2px solid var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 9; pointer-events: none; backdrop-filter: blur(5px); box-shadow: 0 0 15px rgba(0,0,0,0.5); }
 .sl-handle::before, .sl-handle::after { content: ''; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
-.sl-handle::before { border-right: 5px solid #fff; margin-right: 6px; }
-.sl-handle::after { border-left: 5px solid #fff; margin-left: 6px; }
+.sl-handle::before { border-right: 5px solid var(--accent); margin-right: 4px; }
+.sl-handle::after { border-left: 5px solid var(--accent); margin-left: 4px; }
+.sl-label { position: absolute; bottom: 20px; padding: 6px 16px; background: rgba(0,0,0,0.8); font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; border-radius: 6px; z-index: 10; pointer-events: none; border: 1px solid rgba(255,255,255,0.1); }
+.lbl-before { left: 20px; color: #888; }
+.lbl-after { right: 20px; color: var(--accent); border-color: rgba(0,229,255,0.3); }
 
-.sl-label { position: absolute; bottom: 24px; padding: 6px 16px; background: rgba(0,0,0,0.8); font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; border-radius: 6px; z-index: 10; pointer-events: none; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(4px); }
-.lbl-before { left: 24px; color: #aaa; }
-.lbl-after { right: 24px; color: var(--accent); border-color: rgba(0,240,255,0.4); box-shadow: 0 0 15px rgba(0,240,255,0.1); }
+/* Animation Canvas for 200 FPS (Waveform/Radar) */
+.anim-canvas { position: absolute; inset: 0; background: #050508; display: flex; flex-direction: column; justify-content: center; gap: 60px; padding: 0 40px; }
+.waveform-track { position: relative; width: 100%; height: 60px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: flex-end; }
+.wf-label { position: absolute; top: -20px; left: 0; font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
+.bar { width: 4px; background: #fff; margin-right: 4px; border-radius: 2px 2px 0 0; }
+/* Stutter Waveform (Gaps & uneven) */
+.wf-stutter .bar { animation: pulseStutter 2s steps(4, end) infinite; background: #ff3366; box-shadow: 0 0 10px #ff3366; }
+@keyframes pulseStutter { 0%, 100% { height: 10px; opacity: 0.2; } 50% { height: 40px; opacity: 1; } }
+/* Smooth Waveform (Dense & flowing) */
+.wf-smooth .bar { animation: pulseSmooth 1.5s ease-in-out infinite alternate; background: var(--accent); box-shadow: 0 0 15px var(--accent); }
+@keyframes pulseSmooth { 0% { height: 20px; } 100% { height: 60px; } }
 
-/* CAMERA PAN ANIMATION (For 200 FPS) */
-.anim-pan-layer { position: absolute; inset: 0; width: 100%; height: 100%; background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=2000&q=80'); background-size: cover; background-repeat: repeat-x; }
-/* Stuttering 15fps feel */
-.pan-stutter { animation: panCam 3s steps(12, end) infinite alternate; filter: blur(1px); }
-/* Smooth 200fps feel */
-.pan-smooth { animation: panCam 3s linear infinite alternate; }
-@keyframes panCam { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
-.fps-badge { position: absolute; top: 24px; font-size: 24px; font-weight: 900; padding: 8px 20px; border-radius: 8px; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); z-index: 10; font-family: 'Outfit', sans-serif; }
-.b-stutter { left: 24px; color: #ff3366; border: 1px solid #ff3366; }
-.b-smooth { right: 24px; color: var(--accent); border: 1px solid var(--accent); }
+/* 2. Expanding Effects Bin (The New Menu) */
+.effects-bin { display: flex; gap: 12px; height: 120px; }
+.effect-thumb { flex: 1; position: relative; border-radius: 8px; overflow: hidden; cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid var(--border); background-size: cover; background-position: center; filter: grayscale(0.7) brightness(0.4); display: flex; align-items: flex-end; padding: 12px; }
+.effect-thumb::before { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent, rgba(0,0,0,0.9)); z-index: 1; }
+.effect-thumb:hover { filter: grayscale(0.3) brightness(0.7); }
+.effect-thumb.active { flex: 2.5; filter: grayscale(0) brightness(1); border-color: var(--accent); box-shadow: 0 0 20px rgba(0,229,255,0.2); }
+.ef-title { position: relative; z-index: 2; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8); white-space: nowrap; opacity: 0; transform: translateY(10px); transition: 0.3s; }
+.effect-thumb.active .ef-title { opacity: 1; transform: translateY(0); color: var(--accent); }
 
-/* SVG CSS FILTERS FOR REALISTIC DEGRADATION */
-.flt-noise { filter: url(#heavyNoise) grayscale(0.2) contrast(1.1); }
-.flt-pixel { filter: url(#pixelate); }
-.flt-color { filter: brightness(0.4) contrast(1.5) sepia(0.6) hue-rotate(-20deg); }
-.flt-motion { filter: url(#motionBlur) contrast(0.9); transform: scale(1.05); } /* Scale fixes blur edge bleed */
-.flt-artifact { filter: url(#jpegArtifact) contrast(1.2); }
-
+/* SVG Filters */
+.flt-noise { filter: url(#heavyNoise) grayscale(0.3) contrast(1.2); }
+.flt-pixel { filter: url(#pixelate) contrast(1.1); }
+.flt-color { filter: brightness(0.3) sepia(0.6) hue-rotate(-20deg) contrast(1.5); }
+.flt-motion { filter: url(#motionBlur); transform: scale(1.05); }
+.flt-artifact { filter: url(#jpegArtifact); }
 .hide { display: none !important; }
 
-/* ===== 3D EXPLODED GPU ANIMATION ===== */
-.gpu-section { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 24px; padding: 80px 5%; margin-bottom: 120px; backdrop-filter: blur(20px); }
-.gpu-text h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 900; margin-bottom: 24px; text-transform: uppercase; line-height: 1.2; }
+/* ===== EXPLODED GPU 3D ANIMATION ===== */
+.gpu-section { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 16px; padding: 60px 40px; margin-bottom: 120px; }
+.gpu-text h2 { font-size: clamp(24px, 4vw, 40px); font-weight: 900; margin-bottom: 20px; text-transform: uppercase; line-height: 1.2; }
 .gpu-text h2 span { color: var(--accent); }
-.gpu-text p { color: var(--text-dim); font-size: 16px; margin-bottom: 32px; line-height: 1.8; font-weight: 500; }
-
-.gpu-showcase { position: relative; height: 350px; display: flex; align-items: center; justify-content: center; perspective: 1000px; }
+.gpu-text p { color: var(--text-dim); font-size: 15px; margin-bottom: 24px; line-height: 1.7; }
+.gpu-showcase { position: relative; height: 350px; display: flex; align-items: center; justify-content: center; perspective: 1200px; }
 .gpu-exploded { position: relative; width: 220px; height: 300px; transform-style: preserve-3d; transform: rotateX(60deg) rotateZ(-35deg); animation: floatExplode 5s infinite alternate ease-in-out; }
 @keyframes floatExplode { 0% { transform: rotateX(60deg) rotateZ(-35deg) translateY(0); } 100% { transform: rotateX(60deg) rotateZ(-35deg) translateY(-20px); } }
-
 .gpu-layer { position: absolute; inset: 0; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.8); }
-.layer-pcb { background: #080808; border: 2px solid #222; transform: translateZ(-20px); background-image: repeating-linear-gradient(0deg, transparent, transparent 15px, rgba(0,240,255,0.05) 15px, rgba(0,240,255,0.05) 17px); }
-.layer-chip { width: 80px; height: 80px; background: #000; border: 2px solid var(--accent); position: absolute; top: 50%; left: 50%; margin: -40px 0 0 -40px; border-radius: 8px; transform: translateZ(30px); box-shadow: 0 0 30px rgba(0,240,255,0.4); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 10px; color: var(--accent); letter-spacing: 2px; }
-.layer-shroud { background: rgba(20,20,25,0.9); border: 2px solid #333; transform: translateZ(80px); backdrop-filter: blur(4px); display: flex; flex-direction: column; align-items: center; justify-content: space-evenly; }
-.fan { width: 100px; height: 100px; border: 3px solid #111; border-radius: 50%; background: conic-gradient(from 0deg, transparent 0deg, rgba(0,240,255,0.1) 45deg, transparent 90deg, rgba(0,240,255,0.1) 135deg, transparent 180deg, rgba(0,240,255,0.1) 225deg, transparent 270deg, rgba(0,240,255,0.1) 315deg); animation: spinFan 0.5s linear infinite; }
+.layer-pcb { background: #080808; border: 2px solid #222; transform: translateZ(-20px); background-image: repeating-linear-gradient(0deg, transparent, transparent 10px, rgba(0,229,255,0.05) 10px, rgba(0,229,255,0.05) 12px); }
+.layer-chip { width: 80px; height: 80px; background: #000; border: 2px solid var(--accent); position: absolute; top: 50%; left: 50%; margin: -40px 0 0 -40px; border-radius: 8px; transform: translateZ(30px); box-shadow: 0 0 30px rgba(0,229,255,0.4), inset 0 0 20px rgba(0,229,255,0.2); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 10px; color: var(--accent); letter-spacing: 2px; }
+.layer-shroud { background: rgba(20,20,25,0.8); border: 2px solid #333; transform: translateZ(80px); backdrop-filter: blur(4px); display: flex; flex-direction: column; align-items: center; justify-content: space-evenly; }
+.fan { width: 100px; height: 100px; border: 3px solid #111; border-radius: 50%; background: conic-gradient(from 0deg, transparent 0deg, rgba(0,229,255,0.1) 45deg, transparent 90deg, rgba(0,229,255,0.1) 135deg, transparent 180deg, rgba(0,229,255,0.1) 225deg, transparent 270deg, rgba(0,229,255,0.1) 315deg); animation: spinFan 1s linear infinite; }
 @keyframes spinFan { 100% { transform: rotate(360deg); } }
 
 /* ===== PRICING ===== */
-.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
-.price-card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 24px; padding: 48px; display: flex; flex-direction: column; transition: 0.4s; }
-.price-card:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-8px); }
-.price-card.pro { border-color: rgba(0,240,255,0.4); background: rgba(0,240,255,0.03); box-shadow: 0 20px 50px rgba(0,240,255,0.1); position: relative; overflow: hidden; }
-.price-card.pro::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--accent); }
-.p-name { font-size: 15px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 24px; }
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+.price-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 16px; padding: 40px; display: flex; flex-direction: column; transition: 0.3s; }
+.price-card:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-5px); }
+.price-card.pro { border-color: var(--accent); background: rgba(0,229,255,0.02); box-shadow: 0 10px 40px rgba(0,229,255,0.1); }
+.p-name { font-size: 13px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 16px; }
 .price-card.pro .p-name { color: var(--accent); }
-.p-price { font-size: 56px; font-weight: 800; margin-bottom: 32px; display: flex; align-items: baseline; gap: 4px; line-height: 1; }
-.p-price span { font-size: 14px; color: var(--text-dim); font-weight: 600; }
-.features { list-style: none; margin-bottom: 48px; flex-grow: 1; border-top: 1px solid var(--border); padding-top: 32px; }
-.features li { font-size: 14px; margin-bottom: 16px; color: #e2e8f0; display: flex; align-items: center; gap: 12px; font-weight: 600; }
-.features li::before { content: '✓'; color: var(--accent); font-weight: 900; font-size: 16px; }
-.btn-full { width: 100%; display: block; text-align: center; }
+.p-price { font-size: 48px; font-weight: 800; margin-bottom: 24px; display: flex; align-items: baseline; gap: 4px; line-height: 1; }
+.p-price span { font-size: 13px; color: var(--text-dim); font-weight: 600; }
+.features { list-style: none; margin-bottom: 40px; flex-grow: 1; border-top: 1px solid var(--border); padding-top: 24px; }
+.features li { font-size: 13px; margin-bottom: 16px; color: #ccc; display: flex; align-items: center; gap: 12px; font-weight: 500; }
+.features li::before { content: '✓'; color: var(--accent); font-weight: 900; font-size: 14px; }
+.btn-full { width: 100%; text-align: center; }
 
-/* ===== FOOTER & COMMUNITY ===== */
-.community-box { text-align: center; padding: 80px 5%; background: linear-gradient(to top, rgba(0,240,255,0.05), transparent); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 60px; border-radius: 24px; }
-footer { padding: 40px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
-.f-logo { font-size: 20px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
+/* ===== FOOTER ===== */
+footer { padding: 60px 4%; border-top: 1px solid var(--border); background: rgba(0,0,0,0.8); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+.f-logo { font-size: 18px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; }
 .f-logo span { color: var(--accent); }
-.f-text { font-size: 13px; color: var(--text-dim); font-weight: 600; }
+.f-text { font-size: 12px; color: var(--text-dim); font-weight: 600; }
 
-/* RTL Adjustments for Arabic */
+/* RTL Adjustments */
 html[dir="rtl"] .nav-links { flex-direction: row-reverse; }
 html[dir="rtl"] .features li { flex-direction: row-reverse; }
-html[dir="rtl"] .ed-tech { letter-spacing: 0; }
 
 @media(max-width: 900px) {
   .nav-links { display: none; }
-  .engine-tabs { grid-template-columns: 1fr 1fr; }
-  .gpu-section { grid-template-columns: 1fr; text-align: center; padding: 40px 20px; }
+  .gpu-section { grid-template-columns: 1fr; text-align: center; }
+  .effects-bin { flex-wrap: wrap; height: auto; }
+  .effect-thumb { height: 80px; min-width: 30%; }
 }
 </style>
 </head>
 <body>
 
 <svg style="display:none;">
-  <filter id="heavyNoise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" result="noise"/><feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.9 0" in="noise" result="coloredNoise"/><feComposite operator="in" in="coloredNoise" in2="SourceGraphic" result="composite"/><feBlend mode="overlay" in="composite" in2="SourceGraphic"/></filter>
+  <filter id="heavyNoise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise"/><feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.8 0" in="noise" result="coloredNoise"/><feComposite operator="in" in="coloredNoise" in2="SourceGraphic" result="composite"/><feBlend mode="overlay" in="composite" in2="SourceGraphic"/></filter>
   <filter id="pixelate"><feGaussianBlur stdDeviation="6" result="blur"/><feComponentTransfer><feFuncA type="discrete" tableValues="1 1"/></feComponentTransfer></filter>
-  <filter id="motionBlur"><feGaussianBlur stdDeviation="8 0" result="blur"/></filter>
-  <filter id="jpegArtifact"><feTurbulence type="fractalNoise" baseFrequency="0.1" numOctaves="1" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="G"/></filter>
+  <filter id="motionBlur"><feGaussianBlur stdDeviation="12 0" result="blur"/></filter>
+  <filter id="jpegArtifact"><feTurbulence type="fractalNoise" baseFrequency="0.15" numOctaves="1" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="15" xChannelSelector="R" yChannelSelector="G"/></filter>
 </svg>
 
-<div id="space-bg">
-  <div class="warp-grid"></div>
-  <div class="ambient-glow"></div>
+<div id="bg-canvas">
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
 </div>
 
 <nav>
   <div class="logo">BL <span>Creative</span></div>
   <div class="nav-links">
-    <a href="#showcase" data-i18n="nav_eng">Engines</a>
+    <a href="#showcase" data-i18n="nav_eng">Architecture</a>
     <a href="#hardware" data-i18n="nav_hw">Hardware</a>
     <a href="#pricing" data-i18n="nav_pr">Pricing</a>
   </div>
@@ -198,53 +186,51 @@ html[dir="rtl"] .ed-tech { letter-spacing: 0; }
 </nav>
 
 <section class="hero">
-  <div class="badge" data-i18n="hero_badge">Advanced Processing Protocol</div>
-  <h1 data-i18n="hero_h1">Absolute <span>Perfection.</span></h1>
-  <p class="hero-sub" data-i18n="hero_sub">Professional neural architecture engineered to denoise, upscale, and interpolate video frames up to 200 FPS with zero compromise. See the mathematical precision.</p>
-  <div style="display:flex; gap:16px; justify-content:center;">
+  <div class="badge" data-i18n="hero_badge">Advanced Neural Core</div>
+  <h1 data-i18n="hero_h1">Vision <span>Redefined.</span></h1>
+  <p class="hero-sub" data-i18n="hero_sub">Professional AI architecture engineered to denoise, upscale, and interpolate video frames up to 200 FPS. Experience uncompromising mathematical precision.</p>
+  <div style="display:flex; gap:16px;">
     <a class="btn btn-primary" href="#pricing" data-i18n="btn_get">Get Started</a>
-    <a class="btn btn-ghost" href="#showcase" data-i18n="btn_demo">View Engines</a>
+    <a class="btn btn-ghost" href="#showcase" data-i18n="btn_demo">View Workspace</a>
   </div>
 </section>
 
 <section class="section" id="showcase">
   <div class="sec-header">
     <h2 class="sec-title" data-i18n="eng_h">Neural <span>Workspace</span></h2>
-    <p class="sec-desc" data-i18n="eng_desc">Select a processing module from the menu to witness the real-time difference between raw degraded input and UltraPurity's output.</p>
+    <p class="sec-desc" data-i18n="eng_desc">Select a module from the timeline below to witness the real-time difference between degraded input and UltraPurity's output.</p>
   </div>
 
-  <div class="workspace">
-    <div class="engine-tabs" id="tabs-container">
-      </div>
-
-    <div class="eng-details-bar">
-      <div class="ed-desc" id="edDesc">Engine Description</div>
-      <div class="ed-tech" id="edTech">Technology Used</div>
-    </div>
-
-    <div class="ws-preview" id="masterSlider">
-      
+  <div class="workspace-panel">
+    
+    <div class="viewer-container" id="masterSlider">
       <div class="sl-layer" id="layerAfter" style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1600&q=100');"></div>
       <div class="sl-label lbl-after">UltraPurity</div>
 
       <div class="sl-clip" id="layerBeforeMask">
-        <div class="sl-layer before-img" id="layerBefore" style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1600&q=100');"></div>
+        <div class="sl-layer before-img" id="layerBefore" style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=10'); image-rendering: pixelated;"></div>
         
-        <div class="sl-layer hide" id="animBefore">
-           <div class="anim-pan-layer pan-stutter"></div>
-           <div class="fps-badge b-stutter">24 FPS</div>
+        <div class="sl-layer anim-canvas hide" id="animBefore">
+           <div class="waveform-track wf-stutter" id="stutterTrack">
+             <div class="wf-label" style="color:#ff3366">24 FPS (Raw)</div>
+             </div>
         </div>
         <div class="sl-label lbl-before" data-i18n="lbl_b">Raw Source</div>
       </div>
 
-      <div class="sl-layer hide" id="animAfter" style="z-index: 1; pointer-events: none;">
-         <div class="anim-pan-layer pan-smooth"></div>
-         <div class="fps-badge b-smooth">200 FPS</div>
+      <div class="sl-layer anim-canvas hide" id="animAfter" style="z-index: 1; pointer-events: none;">
+         <div class="waveform-track wf-smooth" id="smoothTrack">
+           <div class="wf-label" style="color:var(--accent)">200 FPS (Silk Flow)</div>
+           </div>
       </div>
 
       <div class="sl-line" id="masterLine"></div>
       <div class="sl-handle" id="masterHdl"></div>
     </div>
+
+    <div class="effects-bin" id="effectsBin">
+      </div>
+
   </div>
 </section>
 
@@ -296,86 +282,85 @@ html[dir="rtl"] .ed-tech { letter-spacing: 0; }
   </div>
 </section>
 
-<section class="section community-box">
-  <h2 class="sec-title" data-i18n="com_h">Join The <span>Community</span></h2>
-  <p data-i18n="com_p" style="color: var(--text-dim); max-width: 600px; margin: 0 auto 30px; font-size: 16px;">Connect with thousands of industry professionals. Share your workflows, get critical feedback, and help shape our future updates.</p>
-  <a href="#" class="btn btn-ghost" data-i18n="btn_dis">Join Discord Server</a>
-</section>
-
 <footer>
   <div class="f-logo">BL <span>Creative</span></div>
   <div class="f-text">© 2026 BL Creative (bl-creative.com). All rights reserved.</div>
 </footer>
 
 <script>
+// --- WAVEFORM GENERATOR FOR 200FPS ANIMATION ---
+function generateWaveform(containerId, count) {
+  const container = document.getElementById(containerId);
+  for(let i=0; i<count; i++) {
+    let bar = document.createElement('div');
+    bar.className = 'bar';
+    bar.style.animationDelay = `${Math.random() * 2}s`;
+    container.appendChild(bar);
+  }
+}
+generateWaveform('stutterTrack', 15); // Sparse bars
+generateWaveform('smoothTrack', 80);  // Dense bars
+
 // --- 6 DISTINCT ENGINE PREVIEWS ---
 const engineData = [
   { 
     id: 'clr', name: { en: 'Denoise', ar: 'إزالة التشويش' },
-    desc: { en: 'Eliminate severe ISO noise while preserving pores and textures.', ar: 'يقضي على ضوضاء الكاميرا (ISO) الحادة مع الحفاظ على مسام وتفاصيل البشرة.' },
-    tech: 'Spatial Net', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1600&q=100',
-    cssFilter: 'flt-noise' // SVG Noise
+    img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1600&q=100',
+    cssFilter: 'flt-noise'
   },
   { 
     id: 'upw', name: { en: 'Upscale', ar: 'تكبير الدقة' },
-    desc: { en: 'Reconstruct high-frequency architectural details from pixelated SD/HD.', ar: 'يعيد بناء التفاصيل المعمارية الدقيقة من مصادر مبكسلة ومنخفضة الدقة.' },
-    tech: 'GAN Model', img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=100', // Mansion
-    cssFilter: 'flt-pixel' // SVG Pixelation
+    img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=100',
+    cssFilter: 'flt-pixel'
   },
   { 
-    id: 'fps', name: { en: 'Silk Flow (200FPS)', ar: 'التدفق (200 إطار)' },
-    desc: { en: 'Generate flawless intermediate frames. Compare stuttering 15fps to butter-smooth 200fps.', ar: 'يولد إطارات بينية خالية من العيوب. قارن بين تقطيع 15 إطار وسلاسة 200 إطار.' },
-    tech: 'Optical Flow', isAnim: true // Triggers CSS Panning Camera
+    id: 'fps', name: { en: 'Silk Flow (200fps)', ar: 'التدفق (200 إطار)' },
+    img: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=800&q=50',
+    isAnim: true 
   },
   {
     id: 'bln', name: { en: 'Smart Balance', ar: 'توازن الألوان' },
-    desc: { en: 'Algorithmically recover dynamic range and fix severe color casting.', ar: 'يستعيد النطاق الديناميكي خوارزمياً ويصلح التشوهات اللونية الحادة.' },
-    tech: 'Adaptive Color', img: 'https://images.unsplash.com/photo-1506744626753-1fa28f67c9bf?auto=format&fit=crop&w=1600&q=100', // Landscape
-    cssFilter: 'flt-color' // CSS Brightness/Sepia
+    img: 'https://images.unsplash.com/photo-1506744626753-1fa28f67c9bf?auto=format&fit=crop&w=1600&q=100',
+    cssFilter: 'flt-color'
   },
   {
     id: 'shp', name: { en: 'Sharpen', ar: 'زيادة الحدة' },
-    desc: { en: 'Reverse severe motion blur and out-of-focus subjects automatically.', ar: 'يعكس تأثير ضبابية الحركة (Motion Blur) ويعيد التركيز للقطات المهتزة.' },
-    tech: 'De-Blur Engine', img: 'https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1600&q=100', // Dog
-    cssFilter: 'flt-motion' // SVG Directional Blur
+    img: 'https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1600&q=100',
+    cssFilter: 'flt-motion'
   },
   {
     id: 'art', name: { en: 'De-Artifact', ar: 'إزالة عيوب الضغط' },
-    desc: { en: 'Clean up heavy blocky JPEG and compression artifacts from low bitrate media.', ar: 'ينظف التقطعات الرقمية وعيوب الضغط الناتجة عن انخفاض معدل البت (Bitrate).' },
-    tech: 'Compression Net', img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1600&q=100', // Abstract lines
-    cssFilter: 'flt-artifact' // SVG Displacement
+    img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1600&q=100',
+    cssFilter: 'flt-artifact'
   }
 ];
 
-const tabsContainer = document.getElementById('tabs-container');
-const edDesc = document.getElementById('edDesc');
-const edTech = document.getElementById('edTech');
+const binContainer = document.getElementById('effectsBin');
 const imgBefore = document.getElementById('layerBefore');
 const imgAfter = document.getElementById('layerAfter');
 const aBefore = document.getElementById('animBefore');
 const aAfter = document.getElementById('animAfter');
 let currentLang = 'ar';
 
-function buildTabs() {
-  tabsContainer.innerHTML = '';
+function buildBin() {
+  binContainer.innerHTML = '';
   engineData.forEach((e, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'tab-btn';
-    btn.innerHTML = `<span class="tab-name">${e.name[currentLang]}</span>`;
-    btn.onclick = () => switchEngine(i);
-    tabsContainer.appendChild(btn);
+    const thumb = document.createElement('div');
+    thumb.className = 'effect-thumb';
+    thumb.style.backgroundImage = `url('${e.img}')`;
+    thumb.innerHTML = `<div class="ef-title">${e.name[currentLang]}</div>`;
+    thumb.onclick = () => switchEngine(i);
+    binContainer.appendChild(thumb);
   });
   switchEngine(0);
 }
 
 function switchEngine(index) {
-  document.querySelectorAll('.tab-btn').forEach((btn, i) => {
-    btn.classList.toggle('active', i === index);
+  document.querySelectorAll('.effect-thumb').forEach((thumb, i) => {
+    thumb.classList.toggle('active', i === index);
   });
 
   const data = engineData[index];
-  edDesc.innerText = data.desc[currentLang];
-  edTech.innerText = data.tech;
   
   if(data.isAnim) {
     imgBefore.classList.add('hide'); imgAfter.classList.add('hide');
@@ -416,26 +401,24 @@ document.addEventListener('touchend', () => isDragging = false);
 // --- TRANSLATION LOGIC ---
 const dict = {
   en: {
-    nav_eng: "Engines", nav_hw: "Hardware", nav_pr: "Pricing", btn_get: "Download",
+    nav_eng: "Architecture", nav_hw: "Hardware", nav_pr: "Pricing", btn_get: "Download",
     hero_badge: "AI Video Processing Protocol", hero_h1: "Absolute <span>Perfection.</span>",
     hero_sub: "Professional neural architecture engineered to denoise, upscale, and interpolate video frames up to 200 FPS with zero compromise. See the mathematical precision.",
     btn_demo: "View Workspace", lbl_b: "Raw Source",
-    eng_h: "Neural <span>Workspace</span>", eng_desc: "Select a processing module from the menu to witness the real-time difference between raw degraded input and UltraPurity's output.",
+    eng_h: "Neural <span>Workspace</span>", eng_desc: "Select a module from the timeline below to witness the real-time difference between degraded input and UltraPurity's output.",
     hw_h: "Hardware <span>Acceleration</span>", hw_p1: "UltraPurity bypasses software limitations by interfacing directly with the bare metal of your system. By utilizing NVIDIA Tensor Cores and AMD AI accelerators, we eliminate standard processing bottlenecks.",
     pr_h: "Commercial <span>Licenses</span>", btn_sub: "Subscribe",
-    f1: "Max 4K Processing", f2: "All Basic AI Engines", f3: "Community Support", f4: "Unlimited 8K Resolution", f5: "Multi-GPU Threading & 200FPS", f6: "Priority Server Access",
-    com_h: "Join The <span>Community</span>", com_p: "Connect with thousands of industry professionals. Share your workflows, get critical feedback, and help shape our future updates.", btn_dis: "Join Discord Server"
+    f1: "Max 4K Processing", f2: "All Basic AI Engines", f3: "Community Support", f4: "Unlimited 8K Resolution", f5: "Multi-GPU Threading & 200FPS", f6: "Priority Server Access"
   },
   ar: {
-    nav_eng: "المحركات", nav_hw: "العتاد", nav_pr: "الأسعار", btn_get: "تحميل البرنامج",
+    nav_eng: "الهيكلة", nav_hw: "العتاد", nav_pr: "الأسعار", btn_get: "تحميل البرنامج",
     hero_badge: "بروتوكول معالجة الفيديو بالذكاء الاصطناعي", hero_h1: "الكمال <span>المطلق.</span>",
     hero_sub: "هيكلة عصبية احترافية صُممت هندسياً لإزالة التشويش، وتكبير الدقة، وتوليد الإطارات حتى 200 إطار بالثانية بدون مساومة. شاهد الدقة الرياضية.",
     btn_demo: "استكشف بيئة العمل", lbl_b: "المصدر الخام",
-    eng_h: "بيئة العمل <span>العصبية</span>", eng_desc: "اختر المحرك من القائمة العلوية لتشهد الفرق الحقيقي والمباشر بين المدخلات الخام المشوهة وبين مخرجات UltraPurity الفائقة.",
+    eng_h: "بيئة العمل <span>العصبية</span>", eng_desc: "اختر وحدة معالجة من الشريط بالأسفل لتشهد الفرق الحقيقي بين المدخلات الخام المشوهة ومخرجات UltraPurity.",
     hw_h: "تسريع <span>العتاد</span>", hw_p1: "يتجاوز UltraPurity قيود البرمجيات عبر الاتصال المباشر بالبنية التحتية لجهازك. من خلال استغلال أنوية NVIDIA Tensor ومعماريات AMD، نقضي على عنق الزجاجة تماماً.",
     pr_h: "تراخيص <span>تجارية</span>", btn_sub: "اشترك الآن",
-    f1: "معالجة بدقة 4K كحد أقصى", f2: "جميع المحركات الأساسية", f3: "دعم من المجتمع", f4: "دقة 8K لا محدودة", f5: "استغلال مسارات الكروت & 200FPS", f6: "أولوية الوصول للخوادم",
-    com_h: "انضم إلى <span>المجتمع</span>", com_p: "تواصل مع آلاف المحترفين في الصناعة. شارك أعمالك، احصل على تقييمات نقدية، وساهم في تشكيل تحديثاتنا المستقبلية.", btn_dis: "انضم لسيرفر ديسكورد"
+    f1: "معالجة بدقة 4K كحد أقصى", f2: "جميع المحركات الأساسية", f3: "دعم من المجتمع", f4: "دقة 8K لا محدودة", f5: "استغلال مسارات الكروت & 200FPS", f6: "أولوية الوصول للخوادم"
   }
 };
 
@@ -453,7 +436,7 @@ function applyLang(l) {
   document.body.style.fontFamily = isRTL ? "var(--font-ar)" : "var(--font-en)";
   document.getElementById('langSel').value = l;
   
-  buildTabs();
+  buildBin();
 }
 function setLang(l) { applyLang(l); }
 applyLang('ar'); // Default load
