@@ -3,673 +3,876 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ultra Purity — AI Video Enhancement</title>
-<meta name="description" content="Six AI-powered engines that fix noise, sharpen detail, remove artifacts, and remaster your videos frame by frame.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<title>BL Creative — Ultra Purity</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --sky:#0ea5e9;
-  --sky-dim:#0284c7;
-  --sky-glow:rgba(14,165,233,0.12);
-  --bg:#0d0d0d;
-  --surface:#161616;
-  --surface2:#1c1c1c;
-  --border:#242424;
-  --text:#ebebeb;
-  --muted:#6e6e6e;
-  --radius:10px;
+  --c:#0ea5e9;
+  --c2:#7dd3fc;
+  --bg:#080808;
+  --t:#f0f0f0;
+  --dim:#666;
+  --wire:#1a1a1a;
 }
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+body{background:var(--bg);color:var(--t);font-family:'DM Sans',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 a{text-decoration:none;color:inherit}
-::selection{background:var(--sky-glow);color:var(--sky)}
 
-/* ===== NAV ===== */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:16px 6%;height:62px;
-  background:rgba(13,13,13,0.88);
-  border-bottom:1px solid var(--border);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+/* ─── FIXED NAV (minimal) ─── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:22px 48px;
+  mix-blend-mode:normal;
+  transition:background .4s;
 }
-.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:19px;letter-spacing:-0.5px}
-.logo span{color:var(--sky)}
-.nav-center{display:flex;gap:32px}
-.nav-center a{font-size:13px;color:var(--muted);transition:color .2s}
-.nav-center a:hover{color:var(--text)}
-.nav-right{display:flex;align-items:center;gap:12px}
-.lang-sel{
-  font-size:12px;font-family:'DM Sans',sans-serif;
-  background:var(--surface2);border:1px solid var(--border);
-  color:var(--muted);padding:6px 10px;border-radius:6px;
-  cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;
-}
-.lang-sel:hover{border-color:var(--muted)}
-.btn-nav{
-  background:var(--sky);color:#fff;
-  font-size:13px;font-weight:500;
-  padding:8px 20px;border-radius:6px;
-  white-space:nowrap;transition:background .2s;
-}
-.btn-nav:hover{background:var(--sky-dim)}
+#nav.solid{background:rgba(8,8,8,.95);border-bottom:1px solid var(--wire)}
+.logo{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:18px;letter-spacing:2px;text-transform:uppercase}
+.logo em{color:var(--c);font-style:normal}
+.nav-r{display:flex;gap:16px;align-items:center}
+.nav-lang{background:none;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.5);font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:1px;padding:6px 12px;cursor:pointer;transition:.2s}
+.nav-lang:hover{border-color:var(--c);color:var(--c)}
+.nav-dl{background:var(--c);color:#000;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:12px;letter-spacing:2px;text-transform:uppercase;padding:10px 24px;transition:.2s}
+.nav-dl:hover{background:var(--c2)}
 
-/* ===== HERO ===== */
-.hero{
+/* ─── SECTION BASE ─── */
+.panel{
   min-height:100vh;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  padding:100px 6% 60px;
-  text-align:center;
-}
-.badge{
-  display:inline-block;
-  font-size:11px;letter-spacing:2.5px;
-  color:var(--sky);text-transform:uppercase;
-  border:1px solid rgba(14,165,233,0.28);
-  background:rgba(14,165,233,0.06);
-  padding:5px 16px;border-radius:20px;
-  margin-bottom:28px;
-}
-.hero h1{
-  font-family:'Syne',sans-serif;
-  font-size:clamp(38px,6.5vw,76px);
-  font-weight:800;line-height:1.02;
-  letter-spacing:-2.5px;
-  margin-bottom:20px;
-}
-.hero h1 .sky{color:var(--sky)}
-.hero-sub{
-  font-size:17px;color:var(--muted);
-  max-width:500px;margin:0 auto 44px;
-  font-weight:300;line-height:1.7;
-}
-
-/* Compare Slider — Hero */
-.compare-wrap{
+  scroll-snap-align:start;
   position:relative;
-  width:min(820px,90vw);height:360px;
-  border-radius:14px;overflow:hidden;
-  cursor:ew-resize;
-  border:1px solid var(--border);
-  margin-bottom:44px;
-  user-select:none;
+  overflow:hidden;
 }
-.c-layer{position:absolute;inset:0;width:100%;height:100%}
-.c-clip{position:absolute;inset:0;overflow:hidden}
-.c-label{
-  position:absolute;top:14px;
-  padding:4px 12px;
-  background:rgba(0,0,0,0.72);
-  font-size:11px;letter-spacing:1.5px;
-  border-radius:5px;text-transform:uppercase;
-  pointer-events:none;z-index:10;
-  border:1px solid rgba(255,255,255,0.06);
+
+/* ─── 01 — HERO (comparison fills screen) ─── */
+#s1{display:flex;flex-direction:column}
+.cmp-fullscreen{
+  position:relative;
+  width:100%;height:100vh;
+  cursor:ew-resize;user-select:none;
+  overflow:hidden;
 }
-.c-label-left{left:14px;color:#777}
-.c-label-right{right:14px;color:var(--sky)}
-.c-divider{
-  position:absolute;top:0;bottom:0;
-  width:2px;background:var(--sky);
+.cf-before,.cf-after{
+  position:absolute;inset:0;width:100%;height:100%;
+}
+.cf-clip{position:absolute;inset:0;overflow:hidden}
+.cf-clip-inner{position:absolute;inset:0;width:100%;height:100%}
+
+/* real scenes (svg fallback) */
+.scene-before{
+  width:100%;height:100%;
+  background:
+    url('assets/before.jpg') center/cover no-repeat,
+    #0c0c0c;
+  filter:grayscale(.5) blur(.5px) brightness(.7) contrast(.9);
+}
+.scene-after{
+  width:100%;height:100%;
+  background:
+    url('assets/after.jpg') center/cover no-repeat,
+    #050d1c;
+}
+
+/* SVG city fallback — rendered inline via JS */
+
+/* slider handle */
+.cf-line{
+  position:absolute;top:0;bottom:0;width:1px;
+  background:rgba(255,255,255,.6);z-index:10;pointer-events:none;
   transform:translateX(-50%);
-  z-index:8;pointer-events:none;
 }
-.c-handle{
-  position:absolute;top:50%;
-  transform:translate(-50%,-50%);
-  width:34px;height:34px;
-  background:var(--sky);border-radius:50%;
+.cf-handle{
+  position:absolute;top:50%;transform:translate(-50%,-50%);
+  width:44px;height:44px;border-radius:50%;
+  border:2px solid #fff;background:rgba(8,8,8,.7);
+  backdrop-filter:blur(8px);
   display:flex;align-items:center;justify-content:center;
-  font-size:11px;color:#fff;font-weight:700;
-  z-index:9;pointer-events:none;
-  box-shadow:0 0 0 3px rgba(14,165,233,0.25);
-  letter-spacing:1px;
+  z-index:11;pointer-events:none;
 }
+.cf-handle svg{width:16px;height:16px}
 
-/* Hero image layers */
-.hero-before{
-  background:
-    linear-gradient(180deg,rgba(20,20,20,0.4) 0%,rgba(12,12,12,0.8) 100%),
-    url("assets/sample-before.jpg") center/cover no-repeat;
-  filter:grayscale(0.6) blur(0.5px) brightness(0.75) contrast(0.85);
-}
-.hero-after{
-  background:
-    linear-gradient(180deg,rgba(6,18,36,0.3) 0%,rgba(4,12,24,0.7) 100%),
-    url("assets/sample-after.jpg") center/cover no-repeat;
-}
-/* Fallback city scene when no real images */
-.city-b,.city-a{width:100%;height:100%}
-
-/* CTA buttons */
-.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.btn-primary{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--sky);color:#fff;
-  font-size:14px;font-weight:500;
-  padding:13px 28px;border-radius:8px;
-  transition:background .2s,transform .15s;
-}
-.btn-primary:hover{background:var(--sky-dim);transform:translateY(-1px)}
-.btn-ghost{
-  display:inline-flex;align-items:center;gap:8px;
-  border:1px solid var(--border);color:var(--muted);
-  font-size:14px;padding:13px 28px;border-radius:8px;
-  transition:border-color .2s,color .2s;
-}
-.btn-ghost:hover{border-color:var(--muted);color:var(--text)}
-
-/* ===== STATS STRIP ===== */
-.stats-strip{
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-  display:grid;grid-template-columns:repeat(4,1fr);
-}
-.stat{
-  text-align:center;padding:36px 20px;
-  border-right:1px solid var(--border);
-}
-.stat:last-child{border-right:none}
-.stat-num{
-  font-family:'Syne',sans-serif;
-  font-size:38px;font-weight:800;
-  color:var(--sky);letter-spacing:-1.5px;
-  line-height:1;
-}
-.stat-label{font-size:13px;color:var(--muted);margin-top:6px}
-
-/* ===== ENGINES ===== */
-.section{padding:80px 6%;max-width:1280px;margin:0 auto}
-.section-tag{
-  font-size:11px;letter-spacing:2.5px;color:var(--sky);
-  text-transform:uppercase;margin-bottom:12px;display:block;
-}
-.section-h{
-  font-family:'Syne',sans-serif;
-  font-size:clamp(26px,3.2vw,42px);
-  font-weight:700;letter-spacing:-1.2px;
-  line-height:1.1;margin-bottom:50px;
-}
-.engines-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
-  gap:18px;
-}
-.engine-card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:12px;overflow:hidden;
-  transition:border-color .25s,transform .2s;
-}
-.engine-card:hover{
-  border-color:rgba(14,165,233,0.25);
-  transform:translateY(-2px);
-}
-.engine-compare{
-  height:170px;position:relative;
-  cursor:ew-resize;overflow:hidden;
-  user-select:none;
-}
-.ec-divider{
-  position:absolute;top:0;bottom:0;
-  width:1.5px;background:var(--sky);
-  transform:translateX(-50%);z-index:5;
+/* overlay content ON TOP of comparison */
+.hero-overlay{
+  position:absolute;inset:0;z-index:20;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  padding:0 60px 64px;
+  background:linear-gradient(
+    0deg,
+    rgba(8,8,8,.85) 0%,
+    rgba(8,8,8,.3) 40%,
+    transparent 70%
+  );
   pointer-events:none;
 }
-.ec-handle{
-  position:absolute;top:50%;
-  transform:translate(-50%,-50%);
-  width:26px;height:26px;
-  background:var(--sky);border-radius:50%;
-  z-index:6;pointer-events:none;
+.hero-eyebrow{
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--c);margin-bottom:16px;
+  display:flex;align-items:center;gap:12px;
+}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--c)}
+.hero-title{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:clamp(64px,10vw,130px);
+  font-weight:800;
+  line-height:.88;
+  letter-spacing:-3px;
+  text-transform:uppercase;
+  margin-bottom:24px;
+}
+.hero-title .line2{color:var(--sky)}
+.hero-body{
+  font-size:16px;font-weight:300;color:rgba(240,240,240,.7);
+  max-width:480px;line-height:1.65;margin-bottom:36px;
+}
+.hero-actions{
+  display:flex;gap:14px;align-items:center;
+  pointer-events:all;
+}
+.btn-main{
+  background:var(--c);color:#000;
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:700;font-size:13px;letter-spacing:2px;
+  text-transform:uppercase;padding:14px 36px;
+  transition:.2s;display:inline-flex;align-items:center;gap:10px;
+}
+.btn-main:hover{background:var(--c2)}
+.btn-ghost{
+  font-family:'DM Sans',sans-serif;
+  font-size:13px;letter-spacing:1px;
+  color:rgba(255,255,255,.5);
+  border-bottom:1px solid rgba(255,255,255,.2);
+  padding-bottom:2px;
+  transition:.2s;
+}
+.btn-ghost:hover{color:#fff;border-color:#fff}
+
+/* comparison labels */
+.cf-lbl{
+  position:absolute;top:32px;z-index:21;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  padding:5px 12px;
+  border:1px solid rgba(255,255,255,.15);
+  backdrop-filter:blur(8px);
+  background:rgba(8,8,8,.5);
+  pointer-events:none;
+}
+.cf-lbl-l{left:28px;color:rgba(255,255,255,.4)}
+.cf-lbl-r{right:28px;color:var(--c)}
+
+/* scroll hint */
+.scroll-hint{
+  position:absolute;bottom:28px;right:60px;z-index:22;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,.3);
+  animation:bob 2.5s ease-in-out infinite;
+}
+.scroll-hint svg{width:16px;height:16px;opacity:.4}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* ─── STATS BAR ─── */
+.stats-bar{
+  background:var(--bg);
+  border-top:1px solid var(--wire);
+  border-bottom:1px solid var(--wire);
+  display:flex;
+}
+.sb{
+  flex:1;padding:28px 40px;
+  border-right:1px solid var(--wire);
+  display:flex;gap:16px;align-items:baseline;
+}
+.sb:last-child{border-right:none}
+.sb-num{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:800;font-size:42px;color:var(--c);
+  line-height:1;letter-spacing:-1px;
+}
+.sb-unit{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;color:var(--c);opacity:.6}
+.sb-label{font-size:12px;color:var(--dim);letter-spacing:1px;margin-top:2px}
+
+/* ─── 02 — ENGINES ─── */
+#s2{
+  scroll-snap-align:start;
+  padding:120px 0 0;
+  min-height:auto;
+}
+.eng-header{
+  padding:0 60px 60px;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  border-bottom:1px solid var(--wire);
+}
+.eng-ey{
+  font-family:'DM Sans',sans-serif;
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--c);margin-bottom:12px;
+}
+.eng-h{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:800;font-size:clamp(42px,5vw,70px);
+  text-transform:uppercase;letter-spacing:-2px;line-height:.92;
+}
+.eng-sub{font-size:14px;color:var(--dim);max-width:320px;text-align:right;line-height:1.6}
+
+/* engine list — full-width rows */
+.eng-row{
+  display:grid;grid-template-columns:80px 280px 1fr 280px;
+  align-items:stretch;
+  border-bottom:1px solid var(--wire);
+  min-height:180px;
+  transition:background .2s;
+  cursor:default;
+}
+.eng-row:hover{background:rgba(14,165,233,.03)}
+.eng-row:hover .er-num{color:var(--c)}
+.er-num{
   display:flex;align-items:center;justify-content:center;
-  font-size:9px;color:#fff;font-weight:700;
+  font-family:'DM Sans',sans-serif;
+  font-size:11px;letter-spacing:1px;color:var(--dim);
+  border-right:1px solid var(--wire);
+  writing-mode:vertical-rl;
+  transition:.2s;
 }
-.engine-body{padding:18px 20px 22px}
-.engine-tag{
-  font-family:'Syne',sans-serif;
-  font-size:11px;font-weight:700;
-  letter-spacing:2px;text-transform:uppercase;
-  margin-bottom:8px;
+.er-info{
+  padding:28px 32px;border-right:1px solid var(--wire);
+  display:flex;flex-direction:column;justify-content:center;
 }
-.engine-desc{font-size:13px;color:var(--muted);line-height:1.55}
+.er-name{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:800;font-size:22px;letter-spacing:-0.5px;
+  text-transform:uppercase;margin-bottom:10px;
+}
+.er-desc{font-size:13px;color:var(--dim);line-height:1.55;font-weight:300}
+.er-tech{
+  display:inline-block;margin-top:14px;
+  font-family:'DM Sans',sans-serif;
+  font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 10px;border:1px solid;opacity:.5;
+}
 
-/* ===== DOWNLOAD SECTION ===== */
-.dl-section{
-  text-align:center;
-  padding:90px 6%;
-  background:var(--surface);
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-  margin:60px 0 0;
+/* mini compare inside row */
+.er-compare{
+  position:relative;cursor:ew-resize;user-select:none;
+  overflow:hidden;border-right:1px solid var(--wire);
 }
-.dl-section h2{
-  font-family:'Syne',sans-serif;
-  font-size:clamp(28px,3.5vw,48px);
-  font-weight:800;letter-spacing:-1.5px;
+.er-stat{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:28px 40px;gap:20px;
+}
+.er-kv{display:flex;flex-direction:column;gap:3px}
+.er-k{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);font-family:'DM Sans',sans-serif}
+.er-v{font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:700;letter-spacing:0}
+
+/* ─── 03 — HOW ─── */
+#s3{
+  scroll-snap-align:start;
+  padding:120px 60px;
+  min-height:auto;
+}
+.how-top{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:start;
+  margin-bottom:80px;
+}
+.how-h{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:800;font-size:clamp(48px,6vw,80px);
+  text-transform:uppercase;letter-spacing:-2px;line-height:.9;
+}
+.how-intro{font-size:15px;color:var(--dim);line-height:1.7;font-weight:300;max-width:420px;padding-top:8px}
+.steps-h{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--wire);
+  border:1px solid var(--wire);
+}
+.step{
+  background:var(--bg);
+  padding:36px 28px;
+  display:flex;flex-direction:column;gap:12px;
+  transition:background .2s;
+}
+.step:hover{background:#0d0d0d}
+.step-n{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:48px;font-weight:800;color:var(--wire);
+  letter-spacing:-2px;line-height:1;
+  transition:.2s;
+}
+.step:hover .step-n{color:var(--c);opacity:.4}
+.step-t{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:700;font-size:16px;
+  letter-spacing:.5px;text-transform:uppercase;
+}
+.step-d{font-size:13px;color:var(--dim);line-height:1.55;font-weight:300}
+.step-tag{
+  font-family:'DM Sans',sans-serif;font-size:10px;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--c);margin-top:auto;
+}
+
+/* ─── 04 — DOWNLOAD ─── */
+#s4{
+  scroll-snap-align:start;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+}
+.dl-main{
+  flex:1;display:grid;grid-template-columns:1fr 1fr;
+  border-top:1px solid var(--wire);
+}
+.dl-left{
+  padding:100px 60px;
+  border-right:1px solid var(--wire);
+  display:flex;flex-direction:column;justify-content:center;
+}
+.dl-ey{
+  font-family:'DM Sans',sans-serif;font-size:11px;
+  letter-spacing:3px;text-transform:uppercase;color:var(--c);
   margin-bottom:16px;
+  display:flex;align-items:center;gap:10px;
 }
-.dl-section p{font-size:16px;color:var(--muted);margin-bottom:36px;max-width:420px;margin-left:auto;margin-right:auto}
-.dl-note{font-size:12px;color:var(--muted);margin-top:16px}
+.dl-ey::before{content:'';width:28px;height:1px;background:var(--c)}
+.dl-h{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:800;font-size:clamp(52px,7vw,96px);
+  text-transform:uppercase;letter-spacing:-3px;
+  line-height:.85;margin-bottom:28px;
+}
+.dl-h em{color:var(--c);font-style:normal;display:block}
+.dl-body{
+  font-size:15px;color:var(--dim);line-height:1.7;font-weight:300;
+  max-width:400px;margin-bottom:44px;
+}
+.dl-cta{display:flex;flex-direction:column;gap:12px}
+.btn-lg{
+  display:inline-flex;align-items:center;gap:14px;
+  background:var(--c);color:#000;
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:700;font-size:14px;letter-spacing:1.5px;
+  text-transform:uppercase;padding:18px 40px;
+  width:fit-content;transition:.2s;
+}
+.btn-lg:hover{background:var(--c2)}
+.btn-lg svg{width:18px;height:18px}
+.dl-fine{
+  font-size:12px;color:var(--dim);
+  font-family:'DM Sans',sans-serif;
+  letter-spacing:.5px;
+}
+.dl-right{
+  display:grid;grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr 1fr;
+  gap:1px;background:var(--wire);
+}
+.spec-cell{
+  background:var(--bg);
+  padding:32px 36px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  gap:6px;
+  transition:background .2s;
+}
+.spec-cell:hover{background:#0d0d0d}
+.sc-k{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);font-family:'DM Sans',sans-serif}
+.sc-v{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:26px;letter-spacing:-.5px}
+.spec-cell.big{grid-column:span 2;padding:40px 36px}
+.spec-cell.big .sc-v{font-size:14px;color:var(--dim);font-weight:300;font-family:'DM Sans',sans-serif;letter-spacing:0;line-height:1.6}
 
-/* ===== FOOTER ===== */
+/* ─── FOOTER ─── */
 footer{
-  padding:36px 6%;
-  border-top:1px solid var(--border);
-  display:flex;align-items:center;
-  justify-content:space-between;
+  border-top:1px solid var(--wire);
+  padding:28px 60px;
+  display:flex;align-items:center;justify-content:space-between;
   flex-wrap:wrap;gap:12px;
 }
-.footer-note{font-size:12px;color:var(--muted)}
+.f-logo{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:16px;letter-spacing:2px;text-transform:uppercase}
+.f-logo em{color:var(--c);font-style:normal}
+.f-links{display:flex;gap:28px}
+.f-links a{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);font-family:'DM Sans',sans-serif;transition:.2s}
+.f-links a:hover{color:var(--t)}
+.f-copy{font-size:11px;color:var(--dim);letter-spacing:.5px;font-family:'DM Sans',sans-serif;text-transform:uppercase}
 
-/* ===== RESPONSIVE ===== */
-@media(max-width:768px){
-  .nav-center{display:none}
-  .stats-strip{grid-template-columns:repeat(2,1fr)}
-  .stat:nth-child(2){border-right:none}
-  .stat:nth-child(3){border-top:1px solid var(--border)}
-  .engines-grid{grid-template-columns:1fr}
+/* ─── LANG POPUP ─── */
+.lang-pop{
+  position:fixed;top:0;right:0;bottom:0;width:280px;z-index:9999;
+  background:#0c0c0c;border-left:1px solid var(--wire);
+  transform:translateX(100%);transition:.35s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;overflow-y:auto;
 }
-@media(max-width:480px){
-  .stats-strip{grid-template-columns:1fr 1fr}
-  .hero h1{letter-spacing:-1.5px}
+.lang-pop.open{transform:translateX(0)}
+.lp-head{padding:28px 28px 20px;border-bottom:1px solid var(--wire);display:flex;justify-content:space-between;align-items:center}
+.lp-title{font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+.lp-close{background:none;border:none;color:var(--dim);font-size:20px;cursor:pointer;line-height:1;transition:.2s}
+.lp-close:hover{color:var(--t)}
+.lp-opt{
+  padding:16px 28px;border-bottom:1px solid var(--wire);
+  font-family:'DM Sans',sans-serif;font-size:14px;
+  letter-spacing:.5px;cursor:pointer;
+  display:flex;justify-content:space-between;
+  transition:background .15s;color:var(--dim);
+}
+.lp-opt:hover,.lp-opt.active{background:rgba(14,165,233,.06);color:var(--c)}
+.lang-overlay{position:fixed;inset:0;z-index:9998;display:none}
+.lang-overlay.open{display:block}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1024px){
+  .eng-row{grid-template-columns:60px 1fr 1fr}
+  .er-stat{display:none}
+  .dl-main{grid-template-columns:1fr}
+  .dl-right{display:none}
+}
+@media(max-width:768px){
+  #nav{padding:18px 24px}
+  .hero-overlay{padding:0 24px 48px}
+  .stats-bar{flex-wrap:wrap}
+  .sb{flex:0 0 50%;border-bottom:1px solid var(--wire)}
+  .eng-header,.how-top,#s3,footer{padding-left:24px;padding-right:24px}
+  .eng-row{grid-template-columns:50px 1fr}
+  .er-compare{display:none}
+  .steps-h{grid-template-columns:1fr 1fr}
+  .dl-left{padding:60px 24px}
+  footer{flex-direction:column;align-items:flex-start}
+  .f-links{display:none}
 }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav>
-  <div class="logo">Ultra<span>Purity</span></div>
-  <nav class="nav-center">
-    <a href="#engines" data-i18n="nav_engines">Engines</a>
-    <a href="#download" data-i18n="nav_download">Download</a>
-    <a href="https://github.com/bl-creative" target="_blank">GitHub</a>
-  </nav>
-  <div class="nav-right">
-    <select class="lang-sel" id="langSel" onchange="setLang(this.value)">
-      <option value="en">EN — English</option>
-      <option value="ar">AR — العربية</option>
-      <option value="fr">FR — Français</option>
-      <option value="es">ES — Español</option>
-      <option value="pt">PT — Português</option>
-      <option value="de">DE — Deutsch</option>
-      <option value="it">IT — Italiano</option>
-      <option value="ja">JA — 日本語</option>
-      <option value="ko">KO — 한국어</option>
-      <option value="zh">ZH — 中文</option>
-      <option value="ru">RU — Русский</option>
-      <option value="tr">TR — Türkçe</option>
-    </select>
-    <a class="btn-nav" href="#download" data-i18n="nav_cta">Download Free</a>
+<nav id="nav">
+  <div class="logo">BL<em>CREATIVE</em></div>
+  <div class="nav-r">
+    <button class="nav-lang" onclick="openLang()" id="langBtn">EN</button>
+    <a class="nav-dl" href="#s4" data-i18n="n_cta">Download Free</a>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="badge" data-i18n="hero_badge">AI Video Enhancement</div>
-  <h1>
-    <span data-i18n="hero_h1a">Your footage,</span><br>
-    <span class="sky" data-i18n="hero_h1b">reborn in ultra</span>
-  </h1>
-  <p class="hero-sub" data-i18n="hero_sub">
-    Six AI-powered engines that fix noise, sharpen detail,<br>remove artifacts, and remaster your videos frame by frame.
-  </p>
-
-  <!-- HERO COMPARE SLIDER -->
-  <div class="compare-wrap" id="heroSlider">
-    <!-- BEFORE -->
-    <div class="c-layer hero-before" id="heroLayerB">
-      <svg id="heroSvgB" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0"></svg>
-    </div>
-    <!-- AFTER (clipped) -->
-    <div class="c-clip" id="heroClip" style="right:50%">
-      <div class="c-layer hero-after" style="position:absolute;inset:0;width:820px">
-        <svg id="heroSvgA" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0"></svg>
-      </div>
-    </div>
-    <div class="c-label c-label-left" data-i18n="lbl_before">Original</div>
-    <div class="c-label c-label-right" data-i18n="lbl_after">Ultra Purity</div>
-    <div class="c-divider" id="heroDiv" style="left:50%"></div>
-    <div class="c-handle" id="heroHdl" style="left:50%">⇔</div>
+<!-- LANG PANEL -->
+<div class="lang-overlay" id="langOverlay" onclick="closeLang()"></div>
+<div class="lang-pop" id="langPop">
+  <div class="lp-head">
+    <span class="lp-title" data-i18n="n_lang">Language</span>
+    <button class="lp-close" onclick="closeLang()">✕</button>
   </div>
-
-  <div class="hero-btns">
-    <a class="btn-primary" href="#download">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15V3m0 12-4-4m4 4 4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17"/></svg>
-      <span data-i18n="cta_download">Download for Windows</span>
-    </a>
-    <a class="btn-ghost" href="https://github.com/bl-creative" target="_blank">
-      <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"/></svg>
-      <span data-i18n="cta_github">View on GitHub</span>
-    </a>
-  </div>
-</section>
-
-<!-- STATS -->
-<div class="stats-strip">
-  <div class="stat"><div class="stat-num">6</div><div class="stat-label" data-i18n="stat1">AI Engines</div></div>
-  <div class="stat"><div class="stat-num">120</div><div class="stat-label" data-i18n="stat2">FPS Support</div></div>
-  <div class="stat"><div class="stat-num">4K</div><div class="stat-label" data-i18n="stat3">Max Output</div></div>
-  <div class="stat"><div class="stat-num">12</div><div class="stat-label" data-i18n="stat4">Languages</div></div>
+  <div id="langList"></div>
 </div>
 
-<!-- ENGINES -->
-<section id="engines" class="section">
-  <span class="section-tag" data-i18n="engines_tag">Processing Engines</span>
-  <h2 class="section-h">
-    <span data-i18n="engines_h">Six engines.<br>One perfect video.</span>
-  </h2>
-  <div class="engines-grid" id="enginesGrid"></div>
+<!-- ══════════════════ S1 — HERO ══════════════════ -->
+<section class="panel" id="s1">
+  <!-- FULL SCREEN COMPARE -->
+  <div class="cmp-fullscreen" id="heroSlider">
+
+    <!-- BEFORE layer -->
+    <div class="cf-before" id="cfBefore">
+      <div class="scene-before">
+        <!-- SVG fallback cityscape before -->
+        <svg id="svgB" style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <filter id="grn"><feTurbulence type="fractalNoise" baseFrequency=".75" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feBlend in="SourceGraphic" mode="multiply" result="r"/></filter>
+          </defs>
+          <rect width="1440" height="900" fill="#0d0d0d"/>
+          <rect x="0" y="500" width="1440" height="400" fill="#090909"/>
+          <!-- buildings -->
+          <rect x="40" y="380" width="55" height="520" fill="#161616"/>
+          <rect x="105" y="300" width="70" height="600" fill="#131313"/>
+          <rect x="185" y="200" width="80" height="700" fill="#151515"/>
+          <rect x="275" y="350" width="50" height="550" fill="#181818"/>
+          <rect x="335" y="250" width="75" height="650" fill="#121212"/>
+          <rect x="420" y="150" width="95" height="750" fill="#141414"/>
+          <rect x="525" y="320" width="60" height="580" fill="#161616"/>
+          <rect x="595" y="220" width="80" height="680" fill="#131313"/>
+          <rect x="685" y="280" width="55" height="620" fill="#181818"/>
+          <rect x="750" y="180" width="90" height="720" fill="#141414"/>
+          <rect x="850" y="310" width="65" height="590" fill="#161616"/>
+          <rect x="925" y="240" width="75" height="660" fill="#121212"/>
+          <rect x="1010" y="170" width="85" height="730" fill="#151515"/>
+          <rect x="1105" y="330" width="60" height="570" fill="#181818"/>
+          <rect x="1175" y="200" width="80" height="700" fill="#141414"/>
+          <rect x="1265" y="280" width="55" height="620" fill="#161616"/>
+          <rect x="1330" y="240" width="70" height="660" fill="#131313"/>
+          <rect x="1410" y="360" width="50" height="540" fill="#181818"/>
+          <!-- noise -->
+          <rect width="1440" height="900" filter="url(#grn)" opacity=".18"/>
+          <!-- haze -->
+          <rect width="1440" height="900" fill="rgba(10,10,10,.4)"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- AFTER layer (clipped) -->
+    <div class="cf-clip" id="cfClip" style="right:50%">
+      <div class="cf-clip-inner">
+        <div class="scene-after">
+          <svg id="svgA" style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="sk" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#010c22"/>
+                <stop offset="60%" stop-color="#020c1a"/>
+                <stop offset="100%" stop-color="#010408"/>
+              </linearGradient>
+            </defs>
+            <rect width="1440" height="900" fill="url(#sk)"/>
+            <rect x="0" y="500" width="1440" height="400" fill="#020810"/>
+            <!-- buildings — sharp, deep blue -->
+            <rect x="40" y="380" width="55" height="520" fill="#0a1e4a"/>
+            <rect x="105" y="300" width="70" height="600" fill="#091838"/>
+            <rect x="185" y="200" width="80" height="700" fill="#0b2050"/>
+            <rect x="275" y="350" width="50" height="550" fill="#0c1c42"/>
+            <rect x="335" y="250" width="75" height="650" fill="#081430"/>
+            <rect x="420" y="150" width="95" height="750" fill="#060e28"/>
+            <rect x="525" y="320" width="60" height="580" fill="#0a1c44"/>
+            <rect x="595" y="220" width="80" height="680" fill="#091838"/>
+            <rect x="685" y="280" width="55" height="620" fill="#0c1e48"/>
+            <rect x="750" y="180" width="90" height="720" fill="#071230"/>
+            <rect x="850" y="310" width="65" height="590" fill="#0a1c46"/>
+            <rect x="925" y="240" width="75" height="660" fill="#08143a"/>
+            <rect x="1010" y="170" width="85" height="730" fill="#0b1e4c"/>
+            <rect x="1105" y="330" width="60" height="570" fill="#0c1e48"/>
+            <rect x="1175" y="200" width="80" height="700" fill="#091838"/>
+            <rect x="1265" y="280" width="55" height="620" fill="#0a1c44"/>
+            <rect x="1330" y="240" width="70" height="660" fill="#091634"/>
+            <rect x="1410" y="360" width="50" height="540" fill="#0b2050"/>
+            <!-- windows — sky blue lights -->
+            <rect x="200" y="230" width="5" height="3" fill="#0ea5e9" opacity=".8"/>
+            <rect x="220" y="260" width="4" height="3" fill="#7dd3fc" opacity=".6"/>
+            <rect x="210" y="290" width="5" height="3" fill="#0ea5e9" opacity=".5"/>
+            <rect x="440" y="180" width="6" height="4" fill="#0ea5e9" opacity=".9"/>
+            <rect x="460" y="210" width="5" height="3" fill="#7dd3fc" opacity=".7"/>
+            <rect x="450" y="240" width="4" height="3" fill="#0ea5e9" opacity=".6"/>
+            <rect x="770" y="200" width="6" height="4" fill="#0ea5e9" opacity=".8"/>
+            <rect x="790" y="230" width="5" height="3" fill="#7dd3fc" opacity=".6"/>
+            <rect x="1030" y="190" width="5" height="4" fill="#0ea5e9" opacity=".9"/>
+            <rect x="1050" y="220" width="4" height="3" fill="#7dd3fc" opacity=".7"/>
+            <!-- horizon glow -->
+            <rect x="0" y="496" width="1440" height="2" fill="rgba(14,165,233,.15)"/>
+            <!-- reflection in water -->
+            <rect x="0" y="500" width="1440" height="50" fill="rgba(14,165,233,.03)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Labels -->
+    <div class="cf-lbl cf-lbl-l" data-i18n="lbl_b">BEFORE</div>
+    <div class="cf-lbl cf-lbl-r" data-i18n="lbl_a">AFTER</div>
+
+    <!-- Handle -->
+    <div class="cf-line" id="cfLine" style="left:50%"></div>
+    <div class="cf-handle" id="cfHandle" style="left:50%">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 3L2 8L5 13" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M11 3L14 8L11 13" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <!-- Overlay text -->
+    <div class="hero-overlay">
+      <div class="hero-eyebrow" data-i18n="hero_ey">AI Video Enhancement</div>
+      <div class="hero-title">
+        <div data-i18n="h1a">EVERY</div>
+        <div data-i18n="h1b">FRAME</div>
+        <div class="line2" data-i18n="h1c">PERFECTED</div>
+      </div>
+      <p class="hero-body" data-i18n="h_sub">Six AI engines. Sharper detail. Cleaner noise.<br>Cinema-grade output. Free for Windows.</p>
+      <div class="hero-actions">
+        <a class="btn-main" href="#s4">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 11V1M8 11l-3-3M8 11l3-3M1 13h14"/></svg>
+          <span data-i18n="cta_dl">Download Free</span>
+        </a>
+        <a class="btn-ghost" href="#s2" data-i18n="cta_engines">See All Engines ↓</a>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <svg viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="1.5"><path d="M8 2v12M4 10l4 4 4-4"/></svg>
+      <span data-i18n="scroll">Scroll</span>
+    </div>
+  </div><!-- /cmp-fullscreen -->
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="sb"><div><div class="sb-num" id="n1" data-t="6">0</div><div class="sb-label" data-i18n="s_e">AI Engines</div></div></div>
+    <div class="sb"><div><div class="sb-num" id="n2" data-t="120">0</div><div class="sb-unit">fps</div><div class="sb-label" data-i18n="s_fps">Support</div></div></div>
+    <div class="sb"><div><div class="sb-num">4K</div><div class="sb-label" data-i18n="s_res">Max Output</div></div></div>
+    <div class="sb"><div><div class="sb-num" id="n4" data-t="12">0</div><div class="sb-label" data-i18n="s_lang">Languages</div></div></div>
+  </div>
 </section>
 
-<!-- DOWNLOAD -->
-<section id="download" class="dl-section">
-  <h2 data-i18n="dl_h">Ready to upgrade your footage?</h2>
-  <p data-i18n="dl_sub">Free download. Windows 10/11 · GPU required · No subscription</p>
-  <a class="btn-primary" href="https://github.com/bl-creative/ultra-purity/releases" style="display:inline-flex" target="_blank">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15V3m0 12-4-4m4 4 4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17"/></svg>
-    <span data-i18n="dl_btn">Download Ultra Purity</span>
-  </a>
-  <div class="dl-note" data-i18n="dl_note">Version 7.0 · Requires NVIDIA/AMD GPU with 4GB+ VRAM</div>
+<!-- ══════════════════ S2 — ENGINES ══════════════════ -->
+<section id="s2">
+  <div class="eng-header">
+    <div>
+      <div class="eng-ey" data-i18n="e_ey">Processing Engines</div>
+      <h2 class="eng-h" data-i18n="e_h">Six engines.<br>Zero compromise.</h2>
+    </div>
+    <p class="eng-sub" data-i18n="e_sub">Each engine is purpose-built for a specific type of enhancement. Stack them freely.</p>
+  </div>
+  <div id="engList"></div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="logo">Ultra<span>Purity</span></div>
-  <div class="footer-note">© 2026 <a href="https://bl-creative.com" style="color:var(--sky)">bl-creative.com</a> — All rights reserved</div>
-</footer>
+<!-- ══════════════════ S3 — HOW ══════════════════ -->
+<section id="s3">
+  <div class="how-top">
+    <h2 class="how-h" data-i18n="hw_h">Import.<br>Process.<br>Export.</h2>
+    <p class="how-intro" data-i18n="hw_intro">Ultra Purity is built around a single workflow. Load any video, choose your engine based on the smart diagnostic, preview 3 seconds, then export at full quality.</p>
+  </div>
+  <div class="steps-h" id="stepsGrid"></div>
+</section>
 
-<!-- ============================================================ -->
-<!-- JS: Compare Sliders + i18n                                    -->
-<!-- ============================================================ -->
+<!-- ══════════════════ S4 — DOWNLOAD ══════════════════ -->
+<section class="panel" id="s4">
+  <div class="dl-main">
+    <div class="dl-left">
+      <div class="dl-ey" data-i18n="dl_ey">Free Download</div>
+      <h2 class="dl-h">
+        <span data-i18n="dl_h1">Upgrade</span>
+        <em data-i18n="dl_h2">your footage</em>
+      </h2>
+      <p class="dl-body" data-i18n="dl_body">No subscription. No watermarks. No limits on export length. Built for creators who demand the best quality from every frame.</p>
+      <div class="dl-cta">
+        <a class="btn-lg" href="https://github.com/bl-creative/ultra-purity/releases" target="_blank">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 11V1M8 11l-3-3M8 11l3-3M1 13h14"/></svg>
+          <span data-i18n="dl_btn">Download Ultra Purity</span>
+        </a>
+        <div class="dl-fine" data-i18n="dl_fine">v7.0 — Windows 10/11 — NVIDIA / AMD GPU Required</div>
+      </div>
+    </div>
+    <div class="dl-right">
+      <div class="spec-cell">
+        <div class="sc-k" data-i18n="sp_ver">Version</div>
+        <div class="sc-v">7.0</div>
+      </div>
+      <div class="spec-cell">
+        <div class="sc-k" data-i18n="sp_os">Platform</div>
+        <div class="sc-v">Win 10/11</div>
+      </div>
+      <div class="spec-cell">
+        <div class="sc-k" data-i18n="sp_gpu">GPU VRAM</div>
+        <div class="sc-v">4 GB+</div>
+      </div>
+      <div class="spec-cell">
+        <div class="sc-k" data-i18n="sp_lic">License</div>
+        <div class="sc-v" data-i18n="sp_lic_v">Free</div>
+      </div>
+      <div class="spec-cell">
+        <div class="sc-k" data-i18n="sp_fps">Max FPS</div>
+        <div class="sc-v">120</div>
+      </div>
+      <div class="spec-cell">
+        <div class="sc-k" data-i18n="sp_out">Max Output</div>
+        <div class="sc-v">4K UHD</div>
+      </div>
+      <div class="spec-cell big">
+        <div class="sc-k" data-i18n="sp_req">Requirements</div>
+        <div class="sc-v" data-i18n="sp_req_v">Windows 10 or 11 · NVIDIA RTX / AMD RX GPU with 4GB+ VRAM · 16GB RAM recommended · SSD storage</div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="f-logo">BL<em>CREATIVE</em></div>
+    <div class="f-links">
+      <a href="#s2" data-i18n="n_engines">Engines</a>
+      <a href="#s3" data-i18n="n_how">How It Works</a>
+      <a href="https://github.com/bl-creative" target="_blank">GitHub</a>
+      <a href="https://bl-creative.com" target="_blank">bl-creative.com</a>
+    </div>
+    <div class="f-copy">© 2026 bl-creative.com</div>
+  </footer>
+</section>
+
 <script>
-// ---- i18n strings ----
-const i18n = {
-  en:{
-    nav_engines:"Engines",nav_download:"Download",nav_cta:"Download Free",
-    hero_badge:"AI Video Enhancement",
-    hero_h1a:"Your footage,",hero_h1b:"reborn in ultra",
-    hero_sub:"Six AI-powered engines that fix noise, sharpen detail,<br>remove artifacts, and remaster your videos frame by frame.",
-    lbl_before:"Original",lbl_after:"Ultra Purity",
-    cta_download:"Download for Windows",cta_github:"View on GitHub",
-    stat1:"AI Engines",stat2:"FPS Support",stat3:"Max Output",stat4:"Languages",
-    engines_tag:"Processing Engines",engines_h:"Six engines.<br>One perfect video.",
-    dl_h:"Ready to upgrade your footage?",
-    dl_sub:"Free download. Windows 10/11 · GPU required · No subscription",
-    dl_btn:"Download Ultra Purity",
-    dl_note:"Version 7.0 · Requires NVIDIA/AMD GPU with 4GB+ VRAM",
+/* ══════════ DATA ══════════ */
+const ENGINES = [
+  { num:'01', name:'QUANTUM AI',    col:'#0ea5e9',
+    desc:{ en:'Deep neural reconstruction from compressed, low-quality footage.', ar:'إعادة بناء عصبية عميقة من اللقطات المضغوطة.', fr:'Reconstruction neuronale depuis les séquences compressées.', es:'Reconstrucción neuronal profunda desde metraje comprimido.', pt:'Reconstrução neural profunda de filmagem comprimida.', de:'Tiefe neuronale Rekonstruktion aus komprimiertem Material.', it:'Ricostruzione neurale da filmato compresso.', ja:'圧縮映像からの深層ニューラル復元。', ko:'압축 영상에서의 심층 신경망 재구성.', zh:'从压缩素材进行深度神经重建。', ru:'Глубокая нейронная реконструкция сжатого видео.', tr:'Sıkıştırılmış görüntüden derin sinir rekonstrüksiyonu.' },
+    tech:'Real-ESRGAN · 4× Upscale',
+    kvs:{ en:[['Method','Real-ESRGAN'],['Scale','4×'],['Speed','Fast']], ar:[['الطريقة','Real-ESRGAN'],['التكبير','×4'],['السرعة','سريع']] }
   },
-  ar:{
-    nav_engines:"المحركات",nav_download:"تحميل",nav_cta:"تحميل مجاني",
-    hero_badge:"تحسين الفيديو بالذكاء الاصطناعي",
-    hero_h1a:"مقاطعك الفيديو،",hero_h1b:"تولد من جديد",
-    hero_sub:"ستة محركات مدعومة بالذكاء الاصطناعي تصلح الضوضاء، تحسن التفاصيل، وتزيل العيوب إطاراً إطاراً.",
-    lbl_before:"الأصل",lbl_after:"Ultra Purity",
-    cta_download:"تحميل لنظام Windows",cta_github:"عرض على GitHub",
-    stat1:"محركات ذكاء اصطناعي",stat2:"دعم إطارات",stat3:"أقصى دقة",stat4:"لغة",
-    engines_tag:"محركات المعالجة",engines_h:"ستة محركات.<br>فيديو واحد مثالي.",
-    dl_h:"جاهز لترقية مقاطعك؟",
-    dl_sub:"تحميل مجاني · Windows 10/11 · يتطلب GPU · بدون اشتراك",
-    dl_btn:"تحميل Ultra Purity",
-    dl_note:"الإصدار 7.0 · يتطلب GPU من NVIDIA/AMD بـ 4GB+ VRAM",
+  { num:'02', name:'ULTRA POWER',   col:'#f97316',
+    desc:{ en:'Maximum enhancement — Real-ESRGAN + LAB color restoration + BT.709.', ar:'أقصى تحسين — Real-ESRGAN + ترميم ألوان LAB + BT.709.', fr:'Enhancement maximal — Real-ESRGAN + restauration LAB + BT.709.', es:'Mejora máxima — Real-ESRGAN + restauración LAB + BT.709.', pt:'Melhoria máxima — Real-ESRGAN + restauração LAB + BT.709.', de:'Max Verbesserung — Real-ESRGAN + LAB + BT.709.', it:'Miglioramento massimo — Real-ESRGAN + LAB + BT.709.', ja:'最大強化 — Real-ESRGAN + LAB + BT.709。', ko:'최대 향상 — Real-ESRGAN + LAB + BT.709.', zh:'最大增强 — Real-ESRGAN + LAB + BT.709。', ru:'Максимальное улучшение — Real-ESRGAN + LAB + BT.709.', tr:'Maksimum geliştirme — Real-ESRGAN + LAB + BT.709.' },
+    tech:'SRVGGNet · BT.709 · LAB',
+    kvs:{ en:[['Method','SRVGGNet'],['Color','LAB restore'],['Output','BT.709']] }
   },
-  fr:{
-    nav_engines:"Moteurs",nav_download:"Télécharger",nav_cta:"Télécharger",
-    hero_badge:"Amélioration vidéo par IA",
-    hero_h1a:"Vos vidéos,",hero_h1b:"réinventées en ultra",
-    hero_sub:"Six moteurs IA pour corriger le bruit, affiner les détails et restaurer vos vidéos image par image.",
-    lbl_before:"Original",lbl_after:"Ultra Purity",
-    cta_download:"Télécharger pour Windows",cta_github:"Voir sur GitHub",
-    stat1:"Moteurs IA",stat2:"FPS supportés",stat3:"Résolution max",stat4:"Langues",
-    engines_tag:"Moteurs de traitement",engines_h:"Six moteurs.<br>Une vidéo parfaite.",
-    dl_h:"Prêt à améliorer vos vidéos ?",
-    dl_sub:"Gratuit · Windows 10/11 · GPU requis · Sans abonnement",
-    dl_btn:"Télécharger Ultra Purity",
-    dl_note:"Version 7.0 · Nécessite un GPU NVIDIA/AMD avec 4Go+ VRAM",
+  { num:'03', name:'CRYSTAL CLEAR', col:'#22d3ee',
+    desc:{ en:'Precision denoising and sharpening — zero artifact output.', ar:'إزالة ضوضاء دقيقة وشحذ — بلا عيوب في الإخراج.', fr:'Débruitage et netteté précis — sortie sans artefacts.', es:'Denoising y nitidez precisos — sin artefactos.', pt:'Denoising preciso e nitidez — sem artefatos.', de:'Präzises Entrauschen & Schärfen — ohne Artefakte.', it:'Denoising preciso — zero artefatti.', ja:'精密ノイズ除去とシャープ化 — アーティファクトゼロ。', ko:'정밀 노이즈 제거와 선명화 — 아티팩트 없음.', zh:'精准去噪与锐化 — 零伪影。', ru:'Точное шумоподавление без артефактов.', tr:'Hassas gürültü giderme ve keskinleştirme — artefakt yok.' },
+    tech:'Bilateral · Wavelet NR',
+    kvs:{ en:[['Filter','Bilateral'],['NR','Wavelet'],['Output','Artifact-free']] }
   },
-  es:{
-    nav_engines:"Motores",nav_download:"Descargar",nav_cta:"Descargar gratis",
-    hero_badge:"Mejora de vídeo con IA",
-    hero_h1a:"Tus vídeos,",hero_h1b:"renacidos en ultra",
-    hero_sub:"Seis motores de IA que corrigen el ruido, mejoran los detalles y restauran tus vídeos fotograma a fotograma.",
-    lbl_before:"Original",lbl_after:"Ultra Purity",
-    cta_download:"Descargar para Windows",cta_github:"Ver en GitHub",
-    stat1:"Motores IA",stat2:"FPS soportados",stat3:"Resolución máx",stat4:"Idiomas",
-    engines_tag:"Motores de procesamiento",engines_h:"Seis motores.<br>Un vídeo perfecto.",
-    dl_h:"¿Listo para mejorar tus vídeos?",
-    dl_sub:"Descarga gratuita · Windows 10/11 · GPU requerida · Sin suscripción",
-    dl_btn:"Descargar Ultra Purity",
-    dl_note:"Versión 7.0 · Requiere GPU NVIDIA/AMD con 4GB+ VRAM",
+  { num:'04', name:'SILK FLOW',     col:'#a78bfa',
+    desc:{ en:'Temporal smoothing — natural 60 / 120 FPS motion interpolation.', ar:'تنعيم زمني — استيفاء حركة طبيعي بـ 60/120 إطار.', fr:'Lissage temporel — interpolation 60/120 FPS.', es:'Suavizado temporal — interpolación de movimiento 60/120 FPS.', pt:'Suavização temporal — interpolação de movimento 60/120 FPS.', de:'Zeitliche Glättung — 60/120 FPS Bewegungsinterpolation.', it:'Smoothing temporale — interpolazione 60/120 FPS.', ja:'時間的スムージング — 60/120FPSモーション補間。', ko:'시간적 스무딩 — 60/120 FPS 모션 보간.', zh:'时间平滑 — 60/120 FPS 运动插帧。', ru:'Временное сглаживание — интерполяция 60/120 FPS.', tr:'Zamansal düzeltme — 60/120 FPS hareket interpolasyonu.' },
+    tech:'RIFE · Optical Flow',
+    kvs:{ en:[['Method','RIFE'],['Flow','Optical'],['FPS','60 / 120']] }
   },
-  pt:{nav_engines:"Motores",nav_download:"Baixar",nav_cta:"Baixar grátis",hero_badge:"Melhoria de vídeo com IA",hero_h1a:"Seus vídeos,",hero_h1b:"renascidos em ultra",hero_sub:"Seis motores de IA que corrigem ruídos, melhoram detalhes e restauram seus vídeos quadro a quadro.",lbl_before:"Original",lbl_after:"Ultra Purity",cta_download:"Baixar para Windows",cta_github:"Ver no GitHub",stat1:"Motores IA",stat2:"FPS suportados",stat3:"Resolução máx",stat4:"Idiomas",engines_tag:"Motores de processamento",engines_h:"Seis motores.<br>Um vídeo perfeito.",dl_h:"Pronto para melhorar seus vídeos?",dl_sub:"Download gratuito · Windows 10/11 · GPU necessária",dl_btn:"Baixar Ultra Purity",dl_note:"Versão 7.0 · Requer GPU NVIDIA/AMD com 4GB+ VRAM"},
-  de:{nav_engines:"Engines",nav_download:"Download",nav_cta:"Kostenlos laden",hero_badge:"KI-Videoverbesserung",hero_h1a:"Deine Videos,",hero_h1b:"ultra wiedergeboren",hero_sub:"Sechs KI-Engines für weniger Rauschen, mehr Schärfe und perfekte Wiederherstellung — Bild für Bild.",lbl_before:"Original",lbl_after:"Ultra Purity",cta_download:"Für Windows laden",cta_github:"Auf GitHub ansehen",stat1:"KI-Engines",stat2:"FPS Support",stat3:"Max. Auflösung",stat4:"Sprachen",engines_tag:"Verarbeitungs-Engines",engines_h:"Sechs Engines.<br>Ein perfektes Video.",dl_h:"Bereit für bessere Videos?",dl_sub:"Kostenlos · Windows 10/11 · GPU erforderlich",dl_btn:"Ultra Purity laden",dl_note:"Version 7.0 · Benötigt NVIDIA/AMD GPU mit 4GB+ VRAM"},
-  it:{nav_engines:"Motori",nav_download:"Scarica",nav_cta:"Scarica gratis",hero_badge:"Miglioramento video con IA",hero_h1a:"I tuoi video,",hero_h1b:"rinati in ultra",hero_sub:"Sei motori IA che eliminano il rumore, affinano i dettagli e rimasterizzano i tuoi video fotogramma per fotogramma.",lbl_before:"Originale",lbl_after:"Ultra Purity",cta_download:"Scarica per Windows",cta_github:"Vedi su GitHub",stat1:"Motori IA",stat2:"FPS supportati",stat3:"Risoluzione max",stat4:"Lingue",engines_tag:"Motori di elaborazione",engines_h:"Sei motori.<br>Un video perfetto.",dl_h:"Pronto a migliorare i tuoi video?",dl_sub:"Download gratuito · Windows 10/11 · GPU richiesta",dl_btn:"Scarica Ultra Purity",dl_note:"Versione 7.0 · Richiede GPU NVIDIA/AMD con 4GB+ VRAM"},
-  ja:{nav_engines:"エンジン",nav_download:"ダウンロード",nav_cta:"無料ダウンロード",hero_badge:"AI動画高画質化",hero_h1a:"あなたの動画を、",hero_h1b:"ウルトラに生まれ変わらせる",hero_sub:"ノイズ除去、シャープ化、アーティファクト除去など6つのAIエンジンがフレームごとに映像を復元します。",lbl_before:"元の映像",lbl_after:"Ultra Purity",cta_download:"Windows版をダウンロード",cta_github:"GitHubで見る",stat1:"AIエンジン",stat2:"FPS対応",stat3:"最大解像度",stat4:"対応言語",engines_tag:"処理エンジン",engines_h:"6つのエンジン。<br>1つの完璧な動画。",dl_h:"映像をアップグレードする準備はできましたか？",dl_sub:"無料・Windows 10/11・GPU必須・サブスク不要",dl_btn:"Ultra Purityをダウンロード",dl_note:"v7.0 · NVIDIA/AMD GPU 4GB+ VRAM 必須"},
-  ko:{nav_engines:"엔진",nav_download:"다운로드",nav_cta:"무료 다운로드",hero_badge:"AI 영상 향상",hero_h1a:"당신의 영상을,",hero_h1b:"울트라로 재탄생",hero_sub:"노이즈 제거, 디테일 강화, 아티팩트 제거까지 6개의 AI 엔진이 프레임 단위로 영상을 복원합니다.",lbl_before:"원본",lbl_after:"Ultra Purity",cta_download:"Windows용 다운로드",cta_github:"GitHub에서 보기",stat1:"AI 엔진",stat2:"FPS 지원",stat3:"최대 해상도",stat4:"지원 언어",engines_tag:"처리 엔진",engines_h:"여섯 개의 엔진.<br>완벽한 영상 하나.",dl_h:"영상을 업그레이드할 준비가 됐나요?",dl_sub:"무료 · Windows 10/11 · GPU 필요 · 구독 없음",dl_btn:"Ultra Purity 다운로드",dl_note:"v7.0 · NVIDIA/AMD GPU 4GB+ VRAM 필요"},
-  zh:{nav_engines:"引擎",nav_download:"下载",nav_cta:"免费下载",hero_badge:"AI 视频增强",hero_h1a:"您的视频，",hero_h1b:"超清重生",hero_sub:"六款 AI 引擎逐帧消除噪点、锐化细节、修复压缩失真，让画质焕然一新。",lbl_before:"原始画面",lbl_after:"Ultra Purity",cta_download:"下载 Windows 版",cta_github:"在 GitHub 查看",stat1:"AI 引擎",stat2:"帧率支持",stat3:"最大输出",stat4:"支持语言",engines_tag:"处理引擎",engines_h:"六款引擎。<br>一个完美视频。",dl_h:"准备好升级您的视频了吗？",dl_sub:"免费下载 · Windows 10/11 · 需要 GPU · 无需订阅",dl_btn:"下载 Ultra Purity",dl_note:"v7.0 · 需要 NVIDIA/AMD GPU 4GB+ 显存"},
-  ru:{nav_engines:"Движки",nav_download:"Скачать",nav_cta:"Скачать бесплатно",hero_badge:"ИИ-улучшение видео",hero_h1a:"Ваши видео,",hero_h1b:"возрождены в ультра",hero_sub:"Шесть ИИ-движков устраняют шум, усиливают детали и восстанавливают ваши видео кадр за кадром.",lbl_before:"Оригинал",lbl_after:"Ultra Purity",cta_download:"Скачать для Windows",cta_github:"Открыть на GitHub",stat1:"ИИ-движки",stat2:"Поддержка FPS",stat3:"Макс. вывод",stat4:"Языков",engines_tag:"Движки обработки",engines_h:"Шесть движков.<br>Одно идеальное видео.",dl_h:"Готовы улучшить видео?",dl_sub:"Бесплатно · Windows 10/11 · Нужен GPU",dl_btn:"Скачать Ultra Purity",dl_note:"v7.0 · Требуется NVIDIA/AMD GPU с 4GB+ VRAM"},
-  tr:{nav_engines:"Motorlar",nav_download:"İndir",nav_cta:"Ücretsiz İndir",hero_badge:"Yapay Zeka Video İyileştirme",hero_h1a:"Görüntüleriniz,",hero_h1b:"ultra kalitede yeniden doğuyor",hero_sub:"Gürültü giderme, keskinleştirme ve artefakt temizleme için altı yapay zeka motoru, kare kare çalışır.",lbl_before:"Orijinal",lbl_after:"Ultra Purity",cta_download:"Windows için İndir",cta_github:"GitHub'da Gör",stat1:"YZ Motoru",stat2:"FPS Desteği",stat3:"Max Çıktı",stat4:"Dil",engines_tag:"İşleme Motorları",engines_h:"Altı motor.<br>Bir mükemmel video.",dl_h:"Görüntülerinizi yükseltmeye hazır mısınız?",dl_sub:"Ücretsiz · Windows 10/11 · GPU gerekli",dl_btn:"Ultra Purity İndir",dl_note:"v7.0 · NVIDIA/AMD GPU 4GB+ VRAM gereklidir"},
-};
-
-// ---- Engines Data ----
-const engines = [
-  {
-    name:"QUANTUM AI",
-    color:"#0ea5e9",
-    desc:{
-      en:"Deep neural reconstruction — recovers lost detail from compressed, low-quality footage using AI prediction.",
-      ar:"إعادة بناء عصبية عميقة تستعيد التفاصيل المفقودة من اللقطات المضغوطة.",
-      fr:"Reconstruction neuronale — récupère les détails perdus des séquences compressées.",
-      es:"Reconstrucción neuronal profunda para recuperar detalles de metraje comprimido.",
-      pt:"Reconstrução neural — recupera detalhes perdidos de filmagens comprimidas.",
-      de:"Tiefe neuronale Rekonstruktion für verlorene Details in komprimiertem Material.",
-      it:"Ricostruzione neurale che recupera i dettagli persi nei video compressi.",
-      ja:"深層ニューラルネットワークで圧縮映像の失われたディテールを復元します。",
-      ko:"심층 신경망으로 압축된 저화질 영상의 세부 정보를 복원합니다.",
-      zh:"深度神经网络重建，从压缩低质量素材中恢复丢失的细节。",
-      ru:"Глубокая нейронная реконструкция — восстанавливает потерянные детали сжатого видео.",
-      tr:"Derin sinir ağı ile sıkıştırılmış düşük kaliteli görüntülerden kayıp detayları kurtarır."
-    },
-    svgB: `<svg width="100%" height="170" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="170" fill="#161616"/><rect x="20" y="60" width="20" height="110" fill="#1c1c1c"/><rect x="50" y="40" width="25" height="130" fill="#1a1a1a"/><rect x="85" y="70" width="18" height="100" fill="#1e1e1e"/><rect x="113" y="45" width="28" height="125" fill="#1c1c1c"/><rect x="151" y="80" width="15" height="90" fill="#1a1a1a"/><rect x="176" y="30" width="32" height="140" fill="#1e1e1e"/><rect x="220" y="70" width="20" height="100" fill="#1c1c1c"/><rect x="250" y="50" width="24" height="120" fill="#1a1a1a"/><rect x="284" y="75" width="16" height="95" fill="#1e1e1e"/><rect x="310" y="55" width="22" height="115" fill="#1c1c1c"/><rect x="0" y="140" width="400" height="30" fill="#111"/></svg>`,
-    svgA: `<svg width="100%" height="170" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="170" fill="#050f1e"/><rect x="20" y="60" width="20" height="110" fill="#0c1e40"/><rect x="50" y="40" width="25" height="130" fill="#0a1835"/><rect x="85" y="70" width="18" height="100" fill="#0e2045"/><rect x="113" y="45" width="28" height="125" fill="#081530"/><rect x="151" y="80" width="15" height="90" fill="#0c1c3a"/><rect x="176" y="30" width="32" height="140" fill="#071228"/><rect x="220" y="70" width="20" height="100" fill="#0e1e3c"/><rect x="250" y="50" width="24" height="120" fill="#0a1830"/><rect x="284" y="75" width="16" height="95" fill="#0c1e3a"/><rect x="310" y="55" width="22" height="115" fill="#081530"/><rect x="0" y="140" width="400" height="30" fill="#040c1c"/><line x1="0" y1="60" x2="400" y2="60" stroke="#0ea5e9" stroke-width="0.5" opacity="0.15"/><line x1="0" y1="100" x2="400" y2="100" stroke="#0ea5e9" stroke-width="0.5" opacity="0.1"/></svg>`
+  { num:'05', name:'GHOST WIPE',    col:'#f472b6',
+    desc:{ en:'AI-powered object removal — ProPainter inpainting + SAM2 tracking.', ar:'إزالة الكائنات بالذكاء الاصطناعي — ProPainter + SAM2.', fr:'Suppression d\'objets IA — ProPainter + SAM2.', es:'Eliminación de objetos IA — ProPainter + SAM2.', pt:'Remoção de objetos IA — ProPainter + SAM2.', de:'KI-Objektentfernung — ProPainter + SAM2.', it:'Rimozione oggetti IA — ProPainter + SAM2.', ja:'AIオブジェクト除去 — ProPainter + SAM2。', ko:'AI 객체 제거 — ProPainter + SAM2.', zh:'AI 物体移除 — ProPainter + SAM2。', ru:'Удаление объектов ИИ — ProPainter + SAM2.', tr:'AI nesne kaldırma — ProPainter + SAM2.' },
+    tech:'ProPainter · SAM2',
+    kvs:{ en:[['Inpaint','ProPainter'],['Track','SAM2'],['Mask','90%+ coverage']] }
   },
-  {
-    name:"ULTRA POWER",
-    color:"#f97316",
-    desc:{
-      en:"Maximum enhancement with Real-ESRGAN upscaling and color restoration for cinematic output.",
-      ar:"تحسين أقصى بتقنية Real-ESRGAN لتكبير الدقة وترميم الألوان لجودة سينمائية.",
-      fr:"Enhancement maximal avec Real-ESRGAN et restauration des couleurs pour un rendu cinématographique.",
-      es:"Mejora máxima con Real-ESRGAN y restauración de color para salida cinematográfica.",
-      pt:"Melhoria máxima com Real-ESRGAN e restauração de cores para saída cinematográfica.",
-      de:"Maximale Verbesserung mit Real-ESRGAN-Upscaling und Farbwiederherstellung.",
-      it:"Miglioramento massimo con Real-ESRGAN e restauro del colore per output cinematografico.",
-      ja:"Real-ESRGANアップスケーリングと色復元でシネマ品質の出力を実現。",
-      ko:"Real-ESRGAN 업스케일링과 색상 복원으로 영화 수준의 출력을 제공합니다.",
-      zh:"Real-ESRGAN 超分辨率与色彩修复，呈现电影级画质输出。",
-      ru:"Максимальное улучшение с Real-ESRGAN апскейлингом и восстановлением цвета.",
-      tr:"Real-ESRGAN upscaling ve renk restorasyonu ile maksimum kalite geliştirme."
-    },
-    svgB: `<svg width="100%" height="170" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="170" fill="#161616"/><rect x="10" y="40" width="380" height="130" fill="#141414"/><circle cx="120" cy="85" r="40" fill="#1c1c1c"/><circle cx="240" cy="90" r="55" fill="#1a1a1a"/><circle cx="340" cy="70" r="30" fill="#1e1e1e"/><rect x="0" y="140" width="400" height="30" fill="#0f0f0f"/></svg>`,
-    svgA: `<svg width="100%" height="170" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="170" fill="#110800"/><rect x="10" y="40" width="380" height="130" fill="#0f0700"/><circle cx="120" cy="85" r="40" fill="#2a1000" stroke="#f97316" stroke-width="0.5" opacity="0.7"/><circle cx="240" cy="90" r="55" fill="#200c00" stroke="#f97316" stroke-width="0.5" opacity="0.5"/><circle cx="340" cy="70" r="30" fill="#2a1400" stroke="#f97316" stroke-width="0.3" opacity="0.5"/><rect x="0" y="140" width="400" height="30" fill="#080400"/></svg>`
-  },
-  {
-    name:"CRYSTAL CLEAR",
-    color:"#06b6d4",
-    desc:{
-      en:"Precision denoising and sharpening without artifacts. Ideal for clean, detailed footage.",
-      ar:"إزالة دقيقة للضوضاء وشحذ للتفاصيل بدون عيوب. مثالي للقطات النظيفة.",
-      fr:"Débruitage précis et netteté sans artefacts. Idéal pour les séquences propres et détaillées.",
-      es:"Eliminación de ruido precisa sin artefactos. Ideal para metraje limpio y detallado.",
-      pt:"Redução de ruído precisa sem artefatos. Ideal para filmagens limpas e detalhadas.",
-      de:"Präzise Rauschreduzierung ohne Artefakte. Ideal für sauberes, detailliertes Material.",
-      it:"Riduzione del rumore precisa senza artefatti. Ideale per riprese pulite e dettagliate.",
-      ja:"アーティファクトなしの精密ノイズ除去とシャープ化。クリーンな映像に最適。",
-      ko:"아티팩트 없는 정밀 노이즈 제거 및 선명화. 깔끔한 영상에 이상적입니다.",
-      zh:"精准去噪与锐化，无伪影。适合清晰细腻的素材。",
-      ru:"Точное шумоподавление и резкость без артефактов. Идеально для чистых материалов.",
-      tr:"Artefaktsız hassas gürültü azaltma ve keskinleştirme. Temiz görüntüler için ideal."
-    },
-    svgB: `<svg width="100%" height="170" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="170" fill="#161616"/><filter id="nb"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="170" filter="url(#nb)" opacity="0.15"/><rect x="40" y="20" width="320" height="130" rx="4" fill="#1a1a1a"/></svg>`,
-    svgA: `<svg width="100%" height="170" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="170" fill="#020c10"/><rect x="40" y="20" width="320" height="130" rx="4" fill="#041820"/><rect x="60" y="40" width="60" height="40" rx="2" fill="#062030" stroke="#06b6d4" stroke-width="0.5" opacity="0.5"/><rect x="140" y="35" width="80" height="50" rx="2" fill="#051a28" stroke="#06b6d4" stroke-width="0.5" opacity="0.4"/><rect x="240" y="42" width="60" height="38" rx="2" fill="#062030" stroke="#06b6d4" stroke-width="0.3" opacity="0.4"/></svg>`
-  },
-  {
-    name:"SILK FLOW",
-    color:"#8b5cf6",
-    desc:{
-      en:"Temporal smoothing for 60/120 FPS conversion with natural motion interpolation.",
-      ar:"تنعيم زمني لتحويل 60/120 إطار مع استيفاء الحركة الطبيعي.",
-      fr:"Lissage temporel pour la conversion 60/120 FPS avec interpolation naturelle du mouvement.",
-      es:"Suavizado temporal para conversión 60/120 FPS con interpolación natural de movimiento.",
-      pt:"Suavização temporal para conversão 60/120 FPS com interpolação de movimento natural.",
-      de:"Zeitliche Glättung für 60/120 FPS-Konvertierung mit natürlicher Bewegungsinterpolation.",
-      it:"Smoothing temporale per la conversione 60/120 FPS con interpolazione del movimento.",
-      ja:"60/120FPS変換のための時間的スムージングと自然なモーション補間。",
-      ko:"자연스러운 모션 보간을 통한 60/120 FPS 변환을 위한 시간적 스무딩.",
-      zh:"60/120 FPS 转换的时间平滑处理，配合自然运动插帧。",
-      ru:"Временное сглаживание для конвертации 60/120 FPS с естественной интерполяцией движения.",
-      tr:"Doğal hareket interpolasyonu ile 60/120 FPS dönüşümü için zamansal düzeltme."
-    },
-    svgB: `<svg width="100%" height="170" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="170" fill="#161616"/><path d="M0 120 C50 80 100 140 200 100 S350 60 400 90 L400 170 L0 170Z" fill="#1a1a1a"/><path d="M0 140 C80 100 160 150 280 120 S380 90 400 110 L400 170 L0 170Z" fill="#141414"/></svg>`,
-    svgA: `<svg width="100%" height="170" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="170" fill="#0a0514"/><path d="M0 120 C50 80 100 140 200 100 S350 60 400 90 L400 170 L0 170Z" fill="#140824" stroke="#8b5cf6" stroke-width="0.5" opacity="0.5"/><path d="M0 140 C80 100 160 150 280 120 S380 90 400 110 L400 170 L0 170Z" fill="#0e0620"/><circle cx="200" cy="100" r="20" fill="none" stroke="#8b5cf6" stroke-width="0.5" opacity="0.3"/></svg>`
-  },
-  {
-    name:"GHOST WIPE",
-    color:"#ec4899",
-    desc:{
-      en:"AI object removal powered by ProPainter — erase unwanted elements seamlessly from video.",
-      ar:"إزالة الكائنات بالذكاء الاصطناعي بواسطة ProPainter — امحِ العناصر غير المرغوبة بسلاسة.",
-      fr:"Suppression d'objets par IA avec ProPainter — effacez les éléments indésirables de vos vidéos.",
-      es:"Eliminación de objetos por IA con ProPainter — borra elementos no deseados de tus vídeos.",
-      pt:"Remoção de objetos por IA com ProPainter — apague elementos indesejados dos seus vídeos.",
-      de:"KI-Objektentfernung mit ProPainter — unerwünschte Elemente nahtlos aus Video entfernen.",
-      it:"Rimozione di oggetti IA con ProPainter — cancella elementi indesiderati dal video.",
-      ja:"ProPainterを使ったAIオブジェクト除去 — 不要な要素を映像からシームレスに消去。",
-      ko:"ProPainter 기반 AI 객체 제거 — 영상에서 불필요한 요소를 완벽하게 지웁니다.",
-      zh:"ProPainter 驱动的 AI 物体移除 — 从视频中无缝删除不需要的元素。",
-      ru:"Удаление объектов с помощью ИИ на основе ProPainter — стирайте нежелательные элементы.",
-      tr:"ProPainter destekli AI nesne kaldırma — videolardan istenmeyen öğeleri sorunsuzca siler."
-    },
-    svgB: `<svg width="100%" height="170" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="170" fill="#161616"/><rect x="80" y="50" width="120" height="80" rx="3" fill="#1e1e1e" stroke="#333" stroke-width="1" stroke-dasharray="4 2"/><rect x="220" y="60" width="60" height="50" rx="3" fill="#1c1c1c" stroke="#2a2a2a" stroke-width="0.5"/><text x="140" y="97" font-family="monospace" font-size="9" fill="#444" text-anchor="middle">OBJECT</text></svg>`,
-    svgA: `<svg width="100%" height="170" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="170" fill="#130610"/><rect x="80" y="50" width="120" height="80" rx="3" fill="#0f0410" stroke="#ec4899" stroke-width="0.5" opacity="0.3"/><rect x="220" y="60" width="60" height="50" rx="3" fill="#130610"/><text x="140" y="97" font-family="monospace" font-size="9" fill="#ec4899" text-anchor="middle" opacity="0.5">REMOVED</text><circle cx="140" cy="90" r="30" fill="none" stroke="#ec4899" stroke-width="0.5" opacity="0.25" stroke-dasharray="3 3"/></svg>`
-  },
-  {
-    name:"SMART BALANCE",
-    color:"#22c55e",
-    desc:{
-      en:"Auto color grading, dynamic range expansion, and exposure correction in one intelligent pass.",
-      ar:"تصحيح ألوان تلقائي وتوسيع النطاق الديناميكي وتصحيح التعريض في تمرير واحد ذكي.",
-      fr:"Étalonnage automatique, expansion de la plage dynamique et correction d'exposition en une passe.",
-      es:"Gradación automática, expansión de rango dinámico y corrección de exposición en un solo paso.",
-      pt:"Gradação automática de cor, expansão de alcance dinâmico e correção de exposição em uma passagem.",
-      de:"Auto-Farbkorrektur, Dynamikbereich-Erweiterung und Belichtungskorrektur in einem Durchlauf.",
-      it:"Gradazione automatica dei colori, espansione della gamma dinamica e correzione dell'esposizione.",
-      ja:"自動カラーグレーディング、ダイナミックレンジ拡張、露出補正を一度に処理。",
-      ko:"자동 색상 그레이딩, 동적 범위 확장 및 노출 보정을 한 번에 처리합니다.",
-      zh:"自动调色、动态范围扩展和曝光校正，一次智能处理完成。",
-      ru:"Автоматическая цветокоррекция, расширение динамического диапазона и экспозиция за один проход.",
-      tr:"Otomatik renk düzeltme, dinamik aralık genişletme ve pozlama düzeltmesi tek geçişte."
-    },
-    svgB: `<svg width="100%" height="170" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="170" fill="#161616"/><rect x="0" y="0" width="130" height="170" fill="#111"/><rect x="130" y="0" width="140" height="170" fill="#171717"/><rect x="270" y="0" width="130" height="170" fill="#121212"/></svg>`,
-    svgA: `<svg width="100%" height="170" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="170" fill="#050e0a"/><rect x="0" y="0" width="130" height="170" fill="#04120a"/><rect x="130" y="0" width="140" height="170" fill="#061508"/><rect x="270" y="0" width="130" height="170" fill="#030e06"/><line x1="0" y1="85" x2="400" y2="85" stroke="#22c55e" stroke-width="0.5" opacity="0.2"/><circle cx="130" cy="85" r="2" fill="#22c55e" opacity="0.5"/><circle cx="270" cy="85" r="2" fill="#22c55e" opacity="0.5"/></svg>`
+  { num:'06', name:'SMART BALANCE', col:'#34d399',
+    desc:{ en:'Auto color grading, dynamic range expansion and exposure correction.', ar:'تصحيح ألوان تلقائي وتوسيع نطاق ديناميكي وتصحيح تعريض.', fr:'Étalonnage auto, plage dynamique et correction d\'exposition.', es:'Gradación auto, rango dinámico y corrección de exposición.', pt:'Gradação automática, range dinâmico e correção de exposição.', de:'Auto-Farbkorrektur, Dynamikbereich und Belichtung.', it:'Gradazione auto, range dinamico e correzione esposizione.', ja:'自動調色、ダイナミックレンジ、露出補正。', ko:'자동 조색, 동적 범위 및 노출 보정.', zh:'自动调色、动态范围扩展与曝光校正。', ru:'Авто цветокоррекция, динамический диапазон и экспозиция.', tr:'Otomatik renk, dinamik aralık ve pozlama düzeltme.' },
+    tech:'LAB · HDR · FFmpeg',
+    kvs:{ en:[['Color','LAB restore'],['Range','HDR expand'],['Codec','FFmpeg']] }
   },
 ];
 
-// ---- Build Engine Cards ----
-const grid = document.getElementById('enginesGrid');
-let lang = 'en';
+const STEPS = [
+  { en:['Import','Load any video. Auto-diagnostic runs immediately and scores your footage A–D.','Auto-detect'], ar:['استيراد','حمّل أي فيديو. يعمل التشخيص التلقائي فوراً ويمنح اللقطة درجة A–D.','تشخيص تلقائي'], fr:['Importer','Chargez n\'importe quelle vidéo. Diagnostic auto immédiat, score A–D.','Détection auto'], es:['Importar','Carga cualquier vídeo. Diagnóstico automático inmediato, puntuación A–D.','Detección auto'], pt:['Importar','Carregue qualquer vídeo. Diagnóstico automático imediato, nota A–D.','Detecção auto'], de:['Importieren','Laden Sie jedes Video. Auto-Diagnose mit A–D-Bewertung.','Auto-Analyse'], it:['Importa','Carica qualsiasi video. Diagnosi automatica A–D.','Auto-rileva'], ja:['読み込み','任意の動画を読み込み。自動診断でA〜Dの評価。','自動検出'], ko:['가져오기','아무 영상이나 불러오세요. 즉각적인 자동 진단 및 A–D 점수.','자동 감지'], zh:['导入','加载任意视频，立即自动诊断并评分A–D。','自动检测'], ru:['Импорт','Загрузите любое видео. Авто-диагностика и оценка A–D.','Авто-анализ'], tr:['İçe aktar','Herhangi bir video yükleyin. Anında otomatik tanı ve A–D puanı.','Otomatik algıla'] },
+  { en:['Choose Engine','Pick the engine that matches your footage type and diagnostic score.','Diagnostic-guided'], ar:['اختر المحرك','اختر المحرك الملائم بناءً على التشخيص.','موجّه بالتشخيص'], fr:['Choisir','Sélectionnez le moteur selon le diagnostic.','Guidé par diagnostic'], es:['Elegir Motor','Elige el motor según el diagnóstico.','Diagnóstico'], pt:['Escolher Motor','Escolha o motor com base no diagnóstico.','Diagnóstico'], de:['Engine wählen','Wählen Sie eine Engine nach Diagnose.','Diagnose-geführt'], it:['Scegli Motore','Scegli il motore in base alla diagnosi.','Guidato da diagnosi'], ja:['エンジン選択','診断に基づいてエンジンを選択。','診断ガイド'], ko:['엔진 선택','진단 결과에 따라 엔진을 선택하세요.','진단 안내'], zh:['选择引擎','根据诊断结果选择引擎。','诊断引导'], ru:['Выбор движка','Выберите движок на основе диагностики.','По диагностике'], tr:['Motor seç','Tanıya göre motoru seçin.','Tanı rehberli'] },
+  { en:['Preview 3s','A 3-second AI-processed clip is generated for real-time before/after review.','3-sec render'], ar:['معاينة 3 ثوانٍ','يُنشأ مقطع 3 ثوانٍ للمراجعة الفورية قبل/بعد.','عرض 3 ثوانٍ'], fr:['Aperçu 3s','Un clip de 3s est généré pour la comparaison avant/après.','Rendu 3s'], es:['Vista previa 3s','Se genera un clip de 3s para comparación.','Renderizado 3s'], pt:['Pré-visualização 3s','Um clip de 3s é gerado para comparação.','Renderizado 3s'], de:['3s-Vorschau','Ein 3-Sekunden-Clip für den Vergleich.','3-Sek. Render'], it:['Anteprima 3s','Un clip da 3s per il confronto prima/dopo.','Render 3s'], ja:['3秒プレビュー','3秒クリップで前後比較。','3秒レンダー'], ko:['3초 미리보기','3초 클립으로 전후 비교.','3초 렌더'], zh:['3秒预览','生成3秒片段进行前后对比。','3秒渲染'], ru:['Превью 3 сек','3-секундный клип для сравнения.','3-сек. рендер'], tr:['3s önizleme','Karşılaştırma için 3 saniyelik klip.','3 saniye render'] },
+  { en:['Apply & Export','Process the full video at maximum quality. Stack engines freely.','Lossless'], ar:['تطبيق وتصدير','معالجة الفيديو الكامل بأقصى جودة. يمكنك تراكم المحركات بحرية.','بدون فقدان'], fr:['Appliquer & Exporter','Traitement complet. Combinez les moteurs librement.','Sans perte'], es:['Aplicar & Exportar','Procesa el vídeo completo. Combina motores libremente.','Sin pérdidas'], pt:['Aplicar & Exportar','Processa o vídeo completo. Combine motores livremente.','Sem perdas'], de:['Anwenden & Exportieren','Volles Video verarbeiten. Engines frei kombinieren.','Verlustfrei'], it:['Applica & Esporta','Elabora il video completo. Combina i motori.','Senza perdita'], ja:['適用＆出力','フルビデオを処理。エンジンの自由な積み重ね。','可逆'], ko:['적용 & 내보내기','전체 영상 처리. 엔진 자유롭게 중첩.','무손실'], zh:['应用与导出','处理完整视频，自由叠加引擎。','无损'], ru:['Применить & Экспорт','Обработка полного видео. Движки стекируются свободно.','Без потерь'], tr:['Uygula & Dışa aktar','Tam videoyu işle. Motorları özgürce katmanla.','Kayıpsız'] },
+];
 
-function buildEngines(l) {
-  grid.innerHTML = '';
-  engines.forEach((e, i) => {
-    const card = document.createElement('div');
-    card.className = 'engine-card';
-    card.innerHTML = `
-      <div class="engine-compare" id="ec${i}" data-idx="${i}">
-        <div style="position:absolute;inset:0">${e.svgB}</div>
-        <div style="position:absolute;inset:0;overflow:hidden;right:50%" id="em${i}">
-          <div style="position:absolute;inset:0;width:100%">${e.svgA}</div>
-        </div>
-        <div class="ec-divider" id="ed${i}" style="left:50%"></div>
-        <div class="ec-handle" id="eh${i}" style="left:50%">⇔</div>
+const I18N = {
+  en:{ n_cta:'Download Free', n_lang:'Language', lbl_b:'BEFORE', lbl_a:'AFTER', hero_ey:'AI Video Enhancement', h1a:'EVERY', h1b:'FRAME', h1c:'PERFECTED', h_sub:'Six AI engines. Sharper detail. Cleaner noise.<br>Cinema-grade output. Free for Windows.', cta_dl:'Download Free', cta_engines:'See All Engines ↓', scroll:'Scroll', s_e:'AI Engines', s_fps:'FPS Support', s_res:'Max Output', s_lang:'Languages', e_ey:'Processing Engines', e_h:'Six engines.<br>Zero compromise.', e_sub:'Each engine is purpose-built. Stack them freely.', hw_h:'Import.<br>Process.<br>Export.', hw_intro:'Load any video, choose your engine based on the smart diagnostic, preview 3 seconds, then export at full quality.', dl_ey:'Free Download', dl_h1:'Upgrade', dl_h2:'your footage', dl_body:'No subscription. No watermarks. No limits. Built for creators who demand the best from every frame.', dl_btn:'Download Ultra Purity', dl_fine:'v7.0 — Windows 10/11 — NVIDIA / AMD GPU Required', n_engines:'Engines', n_how:'How It Works', sp_ver:'Version', sp_os:'Platform', sp_gpu:'GPU VRAM', sp_lic:'License', sp_lic_v:'Free', sp_fps:'Max FPS', sp_out:'Max Output', sp_req:'Requirements', sp_req_v:'Windows 10 or 11 · NVIDIA RTX / AMD RX GPU with 4GB+ VRAM · 16GB RAM · SSD' },
+  ar:{ n_cta:'تحميل مجاني', n_lang:'اللغة', lbl_b:'قبل', lbl_a:'بعد', hero_ey:'تحسين الفيديو بالذكاء الاصطناعي', h1a:'كل', h1b:'إطار', h1c:'مثالي', h_sub:'ستة محركات ذكاء اصطناعي. تفاصيل أوضح. ضوضاء أقل.<br>جودة سينمائية. مجاني لنظام Windows.', cta_dl:'تحميل مجاني', cta_engines:'استعرض المحركات ↓', scroll:'انزل', s_e:'محركات ذكاء اصطناعي', s_fps:'دعم الإطارات', s_res:'أقصى دقة', s_lang:'لغة', e_ey:'محركات المعالجة', e_h:'ستة محركات.<br>بلا تنازلات.', e_sub:'كل محرك مُصمَّم لغرض محدد. يمكنك دمجها بحرية.', hw_h:'تحميل.<br>معالجة.<br>تصدير.', hw_intro:'حمّل أي فيديو، اختر المحرك المناسب بناءً على التشخيص الذكي، راجع معاينة 3 ثوانٍ، ثم صدّر بجودة كاملة.', dl_ey:'تحميل مجاني', dl_h1:'حسِّن', dl_h2:'مقاطعك الآن', dl_body:'بدون اشتراك. بدون علامات مائية. بدون قيود على مدة التصدير. صُنع لصانعي المحتوى الذين لا يقبلون بالأقل.', dl_btn:'تحميل Ultra Purity', dl_fine:'v7.0 — Windows 10/11 — يتطلب GPU من NVIDIA / AMD', n_engines:'المحركات', n_how:'طريقة الاستخدام', sp_ver:'الإصدار', sp_os:'النظام', sp_gpu:'ذاكرة GPU', sp_lic:'الترخيص', sp_lic_v:'مجاني', sp_fps:'أقصى إطارات', sp_out:'أقصى دقة', sp_req:'المتطلبات', sp_req_v:'Windows 10/11 · GPU من NVIDIA RTX / AMD RX بسعة 4GB+ · 16GB رام · SSD' },
+  fr:{ n_cta:'Télécharger', n_lang:'Langue', lbl_b:'AVANT', lbl_a:'APRÈS', hero_ey:'Amélioration vidéo par IA', h1a:'CHAQUE', h1b:'IMAGE', h1c:'PERFECTIONNÉE', h_sub:'Six moteurs IA. Plus de détails. Moins de bruit.<br>Qualité cinéma. Gratuit pour Windows.', cta_dl:'Télécharger', cta_engines:'Voir les moteurs ↓', scroll:'Défiler', s_e:'Moteurs IA', s_fps:'FPS supportés', s_res:'Résolution max', s_lang:'Langues', e_ey:'Moteurs de traitement', e_h:'Six moteurs.<br>Zéro compromis.', e_sub:'Chaque moteur est conçu pour un usage précis. Combinez-les librement.', hw_h:'Importer.<br>Traiter.<br>Exporter.', hw_intro:'Chargez n\'importe quelle vidéo, choisissez votre moteur selon le diagnostic, prévisualisez 3s, puis exportez.', dl_ey:'Téléchargement gratuit', dl_h1:'Améliorez', dl_h2:'vos vidéos', dl_body:'Sans abonnement. Sans filigrane. Sans limites.', dl_btn:'Télécharger Ultra Purity', dl_fine:'v7.0 — Windows 10/11 — GPU NVIDIA/AMD requis', n_engines:'Moteurs', n_how:'Comment ça marche', sp_ver:'Version', sp_os:'Plateforme', sp_gpu:'VRAM GPU', sp_lic:'Licence', sp_lic_v:'Gratuit', sp_fps:'FPS max', sp_out:'Résolution max', sp_req:'Configuration', sp_req_v:'Windows 10/11 · GPU NVIDIA RTX / AMD RX 4Go+ VRAM · 16Go RAM · SSD' },
+  es:{ n_cta:'Descargar', n_lang:'Idioma', lbl_b:'ANTES', lbl_a:'DESPUÉS', hero_ey:'Mejora de vídeo con IA', h1a:'CADA', h1b:'FOTOGRAMA', h1c:'PERFECCIONADO', h_sub:'Seis motores IA. Más detalle. Menos ruido.<br>Calidad cinema. Gratis para Windows.', cta_dl:'Descargar', cta_engines:'Ver motores ↓', scroll:'Scroll', s_e:'Motores IA', s_fps:'FPS', s_res:'Res. máx', s_lang:'Idiomas', e_ey:'Motores de procesamiento', e_h:'Seis motores.<br>Cero compromisos.', e_sub:'Cada motor está diseñado para un propósito. Combínalos.', hw_h:'Importar.<br>Procesar.<br>Exportar.', hw_intro:'Carga cualquier vídeo, elige el motor según el diagnóstico, previsualiza 3s, exporta.', dl_ey:'Descarga gratuita', dl_h1:'Mejora', dl_h2:'tus vídeos', dl_body:'Sin suscripción. Sin marcas de agua. Sin límites.', dl_btn:'Descargar Ultra Purity', dl_fine:'v7.0 — Windows 10/11 — GPU NVIDIA/AMD requerida', n_engines:'Motores', n_how:'Cómo funciona', sp_ver:'Versión', sp_os:'Plataforma', sp_gpu:'VRAM GPU', sp_lic:'Licencia', sp_lic_v:'Gratis', sp_fps:'FPS máx', sp_out:'Salida máx', sp_req:'Requisitos', sp_req_v:'Windows 10/11 · GPU NVIDIA RTX/AMD RX 4GB+ VRAM · 16GB RAM · SSD' },
+  pt:{ n_cta:'Baixar', n_lang:'Idioma', lbl_b:'ANTES', lbl_a:'DEPOIS', hero_ey:'Melhoria de vídeo com IA', h1a:'CADA', h1b:'QUADRO', h1c:'APERFEIÇOADO', h_sub:'Seis motores IA. Mais detalhe. Menos ruído.<br>Qualidade cinema. Grátis para Windows.', cta_dl:'Baixar', cta_engines:'Ver motores ↓', scroll:'Rolar', s_e:'Motores IA', s_fps:'FPS', s_res:'Res. máx', s_lang:'Idiomas', e_ey:'Motores de processamento', e_h:'Seis motores.<br>Zero compromisso.', e_sub:'Cada motor é construído para um propósito. Combine-os.', hw_h:'Importar.<br>Processar.<br>Exportar.', hw_intro:'Carregue qualquer vídeo, escolha o motor pelo diagnóstico, visualize 3s, exporte.', dl_ey:'Download gratuito', dl_h1:'Melhore', dl_h2:'seus vídeos', dl_body:'Sem assinatura. Sem marcas d\'água. Sem limites.', dl_btn:'Baixar Ultra Purity', dl_fine:'v7.0 — Windows 10/11 — GPU NVIDIA/AMD necessária', n_engines:'Motores', n_how:'Como funciona', sp_ver:'Versão', sp_os:'Plataforma', sp_gpu:'VRAM GPU', sp_lic:'Licença', sp_lic_v:'Gratuito', sp_fps:'FPS máx', sp_out:'Saída máx', sp_req:'Requisitos', sp_req_v:'Windows 10/11 · GPU NVIDIA RTX/AMD RX 4GB+ VRAM · 16GB RAM · SSD' },
+  de:{ n_cta:'Herunterladen', n_lang:'Sprache', lbl_b:'VORHER', lbl_a:'NACHHER', hero_ey:'KI-Videoverbesserung', h1a:'JEDES', h1b:'BILD', h1c:'PERFEKTIONIERT', h_sub:'Sechs KI-Engines. Mehr Details. Weniger Rauschen.<br>Kinoqualität. Kostenlos für Windows.', cta_dl:'Herunterladen', cta_engines:'Alle Engines ↓', scroll:'Scrollen', s_e:'KI-Engines', s_fps:'FPS', s_res:'Max. Auflösung', s_lang:'Sprachen', e_ey:'Verarbeitungs-Engines', e_h:'Sechs Engines.<br>Null Kompromisse.', e_sub:'Jede Engine ist zweckgebaut. Kombiniere sie frei.', hw_h:'Importieren.<br>Verarbeiten.<br>Exportieren.', hw_intro:'Lade jedes Video, wähle eine Engine nach Diagnose, sieh dir 3s Vorschau an, exportiere.', dl_ey:'Kostenloser Download', dl_h1:'Verbessere', dl_h2:'deine Videos', dl_body:'Kein Abo. Kein Wasserzeichen. Keine Limits.', dl_btn:'Ultra Purity herunterladen', dl_fine:'v7.0 — Windows 10/11 — NVIDIA/AMD GPU erforderlich', n_engines:'Engines', n_how:'Wie es funktioniert', sp_ver:'Version', sp_os:'Plattform', sp_gpu:'GPU VRAM', sp_lic:'Lizenz', sp_lic_v:'Kostenlos', sp_fps:'Max FPS', sp_out:'Max Auflösung', sp_req:'Anforderungen', sp_req_v:'Windows 10/11 · NVIDIA RTX/AMD RX GPU 4GB+ VRAM · 16GB RAM · SSD' },
+  it:{ n_cta:'Scarica', n_lang:'Lingua', lbl_b:'PRIMA', lbl_a:'DOPO', hero_ey:'Miglioramento video con IA', h1a:'OGNI', h1b:'FOTOGRAMMA', h1c:'PERFEZIONATO', h_sub:'Sei motori IA. Più dettagli. Meno rumore.<br>Qualità cinema. Gratis per Windows.', cta_dl:'Scarica', cta_engines:'Tutti i motori ↓', scroll:'Scorri', s_e:'Motori IA', s_fps:'FPS', s_res:'Risoluzione max', s_lang:'Lingue', e_ey:'Motori di elaborazione', e_h:'Sei motori.<br>Zero compromessi.', e_sub:'Ogni motore è progettato per uno scopo. Combinali.', hw_h:'Importa.<br>Elabora.<br>Esporta.', hw_intro:'Carica qualsiasi video, scegli il motore in base alla diagnosi, visualizza 3s, esporta.', dl_ey:'Download gratuito', dl_h1:'Migliora', dl_h2:'i tuoi video', dl_body:'Nessun abbonamento. Nessuna filigrana. Nessun limite.', dl_btn:'Scarica Ultra Purity', dl_fine:'v7.0 — Windows 10/11 — GPU NVIDIA/AMD richiesta', n_engines:'Motori', n_how:'Come funziona', sp_ver:'Versione', sp_os:'Piattaforma', sp_gpu:'VRAM GPU', sp_lic:'Licenza', sp_lic_v:'Gratuito', sp_fps:'FPS max', sp_out:'Output max', sp_req:'Requisiti', sp_req_v:'Windows 10/11 · GPU NVIDIA RTX/AMD RX 4GB+ VRAM · 16GB RAM · SSD' },
+  ja:{ n_cta:'ダウンロード', n_lang:'言語', lbl_b:'処理前', lbl_a:'処理後', hero_ey:'AI動画高画質化', h1a:'すべての', h1b:'フレームを', h1c:'極限まで', h_sub:'6つのAIエンジン。鮮明な細部。クリアなノイズ除去。<br>映画品質出力。Windows版無料。', cta_dl:'無料ダウンロード', cta_engines:'全エンジンを見る ↓', scroll:'スクロール', s_e:'AIエンジン', s_fps:'FPS対応', s_res:'最大出力', s_lang:'対応言語', e_ey:'処理エンジン', e_h:'6エンジン。<br>妥協なし。', e_sub:'各エンジンは特定の目的に特化。自由に組み合わせ可能。', hw_h:'読込。<br>処理。<br>出力。', hw_intro:'任意の動画を読み込み、診断結果に基づいてエンジンを選択、3秒プレビュー、フル品質で出力。', dl_ey:'無料ダウンロード', dl_h1:'映像を', dl_h2:'極限まで', dl_body:'サブスク不要。透かし不要。制限なし。最高品質を求めるクリエイターのために。', dl_btn:'Ultra Purityをダウンロード', dl_fine:'v7.0 — Windows 10/11 — NVIDIA/AMD GPU必須', n_engines:'エンジン', n_how:'使い方', sp_ver:'バージョン', sp_os:'プラットフォーム', sp_gpu:'GPU VRAM', sp_lic:'ライセンス', sp_lic_v:'無料', sp_fps:'最大FPS', sp_out:'最大出力', sp_req:'動作要件', sp_req_v:'Windows 10/11 · NVIDIA RTX/AMD RX GPU 4GB+ VRAM · 16GB RAM · SSD' },
+  ko:{ n_cta:'다운로드', n_lang:'언어', lbl_b:'이전', lbl_a:'이후', hero_ey:'AI 영상 향상', h1a:'모든', h1b:'프레임을', h1c:'완벽하게', h_sub:'6개의 AI 엔진. 선명한 디테일. 깨끗한 노이즈 제거.<br>영화급 출력. Windows 무료.', cta_dl:'무료 다운로드', cta_engines:'모든 엔진 보기 ↓', scroll:'스크롤', s_e:'AI 엔진', s_fps:'FPS 지원', s_res:'최대 출력', s_lang:'지원 언어', e_ey:'처리 엔진', e_h:'여섯 엔진.<br>타협 없음.', e_sub:'각 엔진은 특정 목적으로 제작. 자유롭게 중첩 가능.', hw_h:'가져오기.<br>처리.<br>내보내기.', hw_intro:'아무 영상이나 불러오고, 진단 결과로 엔진을 선택하고, 3초 미리보기 후 내보내세요.', dl_ey:'무료 다운로드', dl_h1:'영상을', dl_h2:'업그레이드', dl_body:'구독 없음. 워터마크 없음. 제한 없음. 타협하지 않는 크리에이터를 위해.', dl_btn:'Ultra Purity 다운로드', dl_fine:'v7.0 — Windows 10/11 — NVIDIA/AMD GPU 필요', n_engines:'엔진', n_how:'사용 방법', sp_ver:'버전', sp_os:'플랫폼', sp_gpu:'GPU VRAM', sp_lic:'라이선스', sp_lic_v:'무료', sp_fps:'최대 FPS', sp_out:'최대 출력', sp_req:'시스템 요구사항', sp_req_v:'Windows 10/11 · NVIDIA RTX/AMD RX GPU 4GB+ VRAM · 16GB RAM · SSD' },
+  zh:{ n_cta:'免费下载', n_lang:'语言', lbl_b:'处理前', lbl_a:'处理后', hero_ey:'AI 视频增强', h1a:'每一', h1b:'帧画面', h1c:'臻于完美', h_sub:'六款 AI 引擎。更清晰的细节。更干净的噪点。<br>电影级输出。Windows 版免费。', cta_dl:'免费下载', cta_engines:'查看全部引擎 ↓', scroll:'滚动', s_e:'AI 引擎', s_fps:'帧率支持', s_res:'最大输出', s_lang:'支持语言', e_ey:'处理引擎', e_h:'六款引擎。<br>零妥协。', e_sub:'每款引擎专为特定目的而生，可自由叠加。', hw_h:'导入。<br>处理。<br>导出。', hw_intro:'加载任意视频，根据智能诊断选择引擎，预览3秒，全质量导出。', dl_ey:'免费下载', dl_h1:'升级', dl_h2:'您的视频', dl_body:'无需订阅。无水印。无限制。为追求极致画质的创作者而生。', dl_btn:'下载 Ultra Purity', dl_fine:'v7.0 — Windows 10/11 — 需要 NVIDIA/AMD GPU', n_engines:'引擎', n_how:'使用方法', sp_ver:'版本', sp_os:'平台', sp_gpu:'显存要求', sp_lic:'授权', sp_lic_v:'免费', sp_fps:'最大帧率', sp_out:'最大输出', sp_req:'系统要求', sp_req_v:'Windows 10/11 · NVIDIA RTX/AMD RX GPU 4GB+ 显存 · 16GB 内存 · SSD' },
+  ru:{ n_cta:'Скачать бесплатно', n_lang:'Язык', lbl_b:'ДО', lbl_a:'ПОСЛЕ', hero_ey:'ИИ-улучшение видео', h1a:'КАЖДЫЙ', h1b:'КАДР', h1c:'ИДЕАЛЕН', h_sub:'Шесть ИИ-движков. Чёткие детали. Чистый сигнал.<br>Киноуровень. Бесплатно для Windows.', cta_dl:'Скачать бесплатно', cta_engines:'Все движки ↓', scroll:'Прокрутить', s_e:'ИИ-движков', s_fps:'Поддержка FPS', s_res:'Макс. вывод', s_lang:'Языков', e_ey:'Движки обработки', e_h:'Шесть движков.<br>Ноль компромиссов.', e_sub:'Каждый движок создан для конкретной задачи. Стекируйте свободно.', hw_h:'Импорт.<br>Обработка.<br>Экспорт.', hw_intro:'Загрузите любое видео, выберите движок по диагностике, просмотрите 3 секунды, экспортируйте.', dl_ey:'Бесплатная загрузка', dl_h1:'Улучшите', dl_h2:'своё видео', dl_body:'Без подписки. Без водяных знаков. Без ограничений.', dl_btn:'Скачать Ultra Purity', dl_fine:'v7.0 — Windows 10/11 — GPU NVIDIA/AMD обязателен', n_engines:'Движки', n_how:'Как работает', sp_ver:'Версия', sp_os:'Платформа', sp_gpu:'VRAM GPU', sp_lic:'Лицензия', sp_lic_v:'Бесплатно', sp_fps:'Макс FPS', sp_out:'Макс вывод', sp_req:'Требования', sp_req_v:'Windows 10/11 · GPU NVIDIA RTX/AMD RX 4GB+ VRAM · 16GB RAM · SSD' },
+  tr:{ n_cta:'Ücretsiz İndir', n_lang:'Dil', lbl_b:'ÖNCE', lbl_a:'SONRA', hero_ey:'Yapay Zeka Video Geliştirme', h1a:'HER', h1b:'KARE', h1c:'MÜKEMMELLEŞTİRİLDİ', h_sub:'Altı AI motoru. Daha net detay. Daha temiz gürültü.<br>Sinema kalitesi. Windows için ücretsiz.', cta_dl:'Ücretsiz İndir', cta_engines:'Tüm motorlar ↓', scroll:'Kaydır', s_e:'AI Motoru', s_fps:'FPS Desteği', s_res:'Max Çıktı', s_lang:'Dil', e_ey:'İşleme Motorları', e_h:'Altı motor.<br>Sıfır ödün.', e_sub:'Her motor özel bir amaç için tasarlandı. Özgürce katmanlayın.', hw_h:'İçe aktar.<br>İşle.<br>Dışa aktar.', hw_intro:'Herhangi bir video yükleyin, tanıya göre motor seçin, 3 saniyelik önizleme yapın, dışa aktarın.', dl_ey:'Ücretsiz İndirme', dl_h1:'Görüntülerinizi', dl_h2:'yükseltin', dl_body:'Abonelik yok. Filigran yok. Sınır yok.', dl_btn:'Ultra Purity İndir', dl_fine:'v7.0 — Windows 10/11 — NVIDIA/AMD GPU gerekli', n_engines:'Motorlar', n_how:'Nasıl çalışır', sp_ver:'Sürüm', sp_os:'Platform', sp_gpu:'GPU VRAM', sp_lic:'Lisans', sp_lic_v:'Ücretsiz', sp_fps:'Maks FPS', sp_out:'Maks çıktı', sp_req:'Gereksinimler', sp_req_v:'Windows 10/11 · NVIDIA RTX/AMD RX GPU 4GB+ VRAM · 16GB RAM · SSD' },
+};
+
+/* ══ Build Engine rows ══ */
+function mkEngSvgB(c){return`<svg width="100%" height="100%" viewBox="0 0 420 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><filter id="g${c.slice(1)}"><feTurbulence type="fractalNoise" baseFrequency=".75" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feBlend in="SourceGraphic" mode="multiply"/></filter></defs><rect width="420" height="180" fill="#0e0e0e"/><rect x="20" y="60" width="22" height="120" fill="#1a1a1a"/><rect x="52" y="40" width="28" height="140" fill="#161616"/><rect x="90" y="72" width="20" height="108" fill="#1e1e1e"/><rect x="120" y="38" width="32" height="142" fill="#181818"/><rect x="162" y="68" width="18" height="112" fill="#161616"/><rect x="190" y="22" width="38" height="158" fill="#141414"/><rect x="238" y="56" width="24" height="124" fill="#1a1a1a"/><rect x="272" y="44" width="28" height="136" fill="#181818"/><rect x="310" y="70" width="20" height="110" fill="#1c1c1c"/><rect x="340" y="48" width="26" height="132" fill="#161616"/><rect x="376" y="78" width="22" height="102" fill="#1e1e1e"/><rect width="420" height="180" filter="url(#g${c.slice(1)})" opacity=".18"/><rect width="420" height="180" fill="rgba(8,8,8,.35)"/></svg>`}
+function mkEngSvgA(c){return`<svg width="100%" height="100%" viewBox="0 0 420 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><rect width="420" height="180" fill="#040c1c"/><rect x="20" y="60" width="22" height="120" fill="#0c2050"/><rect x="52" y="40" width="28" height="140" fill="#091838"/><rect x="90" y="72" width="20" height="108" fill="#0e2258"/><rect x="120" y="38" width="32" height="142" fill="#08152e"/><rect x="162" y="68" width="18" height="112" fill="#0c1e4c"/><rect x="190" y="22" width="38" height="158" fill="#060e2c"/><rect x="238" y="56" width="24" height="124" fill="#0a1c48"/><rect x="272" y="44" width="28" height="136" fill="#091838"/><rect x="310" y="70" width="20" height="110" fill="#0c2050"/><rect x="340" y="48" width="26" height="132" fill="#091a3e"/><rect x="376" y="78" width="22" height="102" fill="#0e2254"/><rect x="0" y="148" width="420" height="32" fill="#020810"/><line x1="0" y1="148" x2="420" y2="148" stroke="${c}" stroke-width=".5" opacity=".5"/><rect x="96" y="52" width="4" height="3" fill="${c}" opacity=".8"/><rect x="200" y="40" width="4" height="3" fill="${c}" opacity=".7"/><rect x="316" y="82" width="3" height="2" fill="${c}" opacity=".6"/></svg>`}
+
+function buildEngines(l){
+  const list = document.getElementById('engList');
+  list.innerHTML = '';
+  ENGINES.forEach((e,i)=>{
+    const row = document.createElement('div');
+    row.className = 'eng-row';
+    row.innerHTML=`
+      <div class="er-num">${e.num}</div>
+      <div class="er-info" style="border-left:2px solid ${e.col}">
+        <div class="er-name" style="color:${e.col}">${e.name}</div>
+        <div class="er-desc">${e.desc[l]||e.desc.en}</div>
+        <div class="er-tech" style="border-color:${e.col};color:${e.col}">${e.tech}</div>
       </div>
-      <div class="engine-body">
-        <div class="engine-tag" style="color:${e.color}">${e.name}</div>
-        <div class="engine-desc">${(e.desc[l]||e.desc.en)}</div>
+      <div class="er-compare" id="erc${i}">
+        <div style="position:absolute;inset:0">${mkEngSvgB(e.col)}</div>
+        <div style="position:absolute;inset:0;overflow:hidden;right:50%" id="erm${i}">
+          <div style="position:absolute;inset:0;width:100%">${mkEngSvgA(e.col)}</div>
+        </div>
+        <div style="position:absolute;top:0;bottom:0;width:1px;background:${e.col};left:50%;transform:translateX(-50%)" id="erl${i}"></div>
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:22px;height:22px;background:${e.col};border-radius:50%;display:flex;align-items:center;justify-content:center" id="erk${i}"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M3 1.5L1 5L3 8.5M7 1.5L9 5L7 8.5" stroke="rgba(0,0,0,.9)" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="er-stat">
+        ${(e.kvs[l]||e.kvs.en).map(kv=>`<div class="er-kv"><div class="er-k">${kv[0]}</div><div class="er-v" style="color:${e.col}">${kv[1]}</div></div>`).join('')}
       </div>`;
-    grid.appendChild(card);
-    makeSlider(card.querySelector('.engine-compare'),
-               card.querySelector(`#em${i}`),
-               card.querySelector(`#ed${i}`),
-               card.querySelector(`#eh${i}`));
+    list.appendChild(row);
+    mkSlider(
+      row.querySelector(`#erc${i}`),
+      row.querySelector(`#erm${i}`),
+      row.querySelector(`#erl${i}`),
+      row.querySelector(`#erk${i}`)
+    );
   });
 }
 
-// ---- Generic Slider Factory ----
-function makeSlider(wrap, mask, div, hdl) {
-  let drag = false;
-  function mv(x) {
-    const r = wrap.getBoundingClientRect();
-    const p = Math.max(0, Math.min(1, (x - r.left) / r.width));
-    const pct = (p * 100).toFixed(1);
-    mask.style.right = (100 - p * 100).toFixed(1) + '%';
-    div.style.left = pct + '%';
-    hdl.style.left = pct + '%';
-  }
-  wrap.addEventListener('mousedown', e => { drag=true; mv(e.clientX); });
-  wrap.addEventListener('touchstart', e => { drag=true; mv(e.touches[0].clientX); }, {passive:true});
-  document.addEventListener('mousemove', e => { if(drag) mv(e.clientX); });
-  document.addEventListener('touchmove', e => { if(drag) mv(e.touches[0].clientX); }, {passive:true});
-  document.addEventListener('mouseup', () => drag=false);
-  document.addEventListener('touchend', () => drag=false);
+function buildSteps(l){
+  const g = document.getElementById('stepsGrid');
+  g.innerHTML = '';
+  STEPS.forEach((s,i)=>{
+    const d = s[l]||s.en;
+    const el = document.createElement('div');
+    el.className = 'step';
+    el.innerHTML=`<div class="step-n">0${i+1}</div><div class="step-t">${d[0]}</div><div class="step-d">${d[1]}</div><div class="step-tag">${d[2]}</div>`;
+    g.appendChild(el);
+  });
 }
 
-// ---- Hero Slider ----
-(function(){
-  const wrap = document.getElementById('heroSlider');
-  const clip = document.getElementById('heroClip');
-  const divEl = document.getElementById('heroDiv');
-  const hdl   = document.getElementById('heroHdl');
-  let drag = false;
-  function mv(x) {
-    const r = wrap.getBoundingClientRect();
-    const p = Math.max(0, Math.min(1, (x - r.left) / r.width));
-    const pct = (p * 100).toFixed(1);
-    clip.style.right = (100 - p * 100).toFixed(1) + '%';
-    divEl.style.left = pct + '%';
-    hdl.style.left   = pct + '%';
-  }
-  wrap.addEventListener('mousedown', e => { drag=true; mv(e.clientX); });
-  wrap.addEventListener('touchstart', e => { drag=true; mv(e.touches[0].clientX); }, {passive:true});
-  document.addEventListener('mousemove', e => { if(drag) mv(e.clientX); });
-  document.addEventListener('touchmove', e => { if(drag) mv(e.touches[0].clientX); }, {passive:true});
-  document.addEventListener('mouseup', () => drag=false);
-  document.addEventListener('touchend', () => drag=false);
-})();
+/* ══ Slider ══ */
+function mkSlider(wrap, mask, line, knob){
+  if(!wrap)return;
+  let drag=false;
+  const mv=x=>{
+    const r=wrap.getBoundingClientRect();
+    const p=Math.max(0,Math.min(1,(x-r.left)/r.width));
+    const pct=(p*100).toFixed(1)+'%';
+    mask.style.right=(100-p*100).toFixed(1)+'%';
+    line.style.left=pct;
+    knob.style.left=pct;
+  };
+  wrap.addEventListener('mousedown',e=>{drag=true;mv(e.clientX)});
+  wrap.addEventListener('touchstart',e=>{drag=true;mv(e.touches[0].clientX)},{passive:true});
+  document.addEventListener('mousemove',e=>{if(drag)mv(e.clientX)});
+  document.addEventListener('touchmove',e=>{if(drag)mv(e.touches[0].clientX)},{passive:true});
+  document.addEventListener('mouseup',()=>drag=false);
+  document.addEventListener('touchend',()=>drag=false);
+}
 
-// ---- i18n Apply ----
-function applyLang(l) {
-  const t = i18n[l] || i18n.en;
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if(t[key]) el.innerHTML = t[key];
+/* ══ Hero slider ══ */
+mkSlider(
+  document.getElementById('heroSlider'),
+  document.getElementById('cfClip'),
+  document.getElementById('cfLine'),
+  document.getElementById('cfHandle')
+);
+
+/* ══ Nav solid on scroll ══ */
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('solid',window.scrollY>40);
+},{ passive:true });
+
+/* ══ Counter ══ */
+function count(el,to,dur){
+  let v=0,step=to/(dur/16);
+  const t=()=>{v=Math.min(v+step,to);el.textContent=Math.floor(v);if(v<to)requestAnimationFrame(t)};
+  t();
+}
+const io=new IntersectionObserver(es=>{
+  if(es[0].isIntersecting){
+    count(document.getElementById('n1'),6,600);
+    count(document.getElementById('n2'),120,900);
+    count(document.getElementById('n4'),12,700);
+    io.disconnect();
+  }
+},{threshold:.2});
+io.observe(document.querySelector('.stats-bar'));
+
+/* ══ Lang system ══ */
+let CL='en';
+const LNAMES={en:'English',ar:'العربية',fr:'Français',es:'Español',pt:'Português',de:'Deutsch',it:'Italiano',ja:'日本語',ko:'한국어',zh:'中文',ru:'Русский',tr:'Türkçe'};
+const lpList=document.getElementById('langList');
+Object.keys(I18N).forEach(k=>{
+  const d=document.createElement('div');
+  d.className='lp-opt'+(k==='en'?' active':'');
+  d.innerHTML=`<span>${LNAMES[k]}</span><span style="opacity:.4">${I18N[k].n_cta.split(' ').slice(-1)[0]}</span>`;
+  d.onclick=()=>setLang(k);
+  lpList.appendChild(d);
+});
+function openLang(){document.getElementById('langPop').classList.add('open');document.getElementById('langOverlay').classList.add('open')}
+function closeLang(){document.getElementById('langPop').classList.remove('open');document.getElementById('langOverlay').classList.remove('open')}
+function setLang(l){
+  CL=l;
+  const t=I18N[l]||I18N.en;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.getAttribute('data-i18n');
+    if(t[k]!==undefined)el.innerHTML=t[k];
   });
-  document.documentElement.lang = l;
-  const isRTL = l === 'ar';
-  document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+  document.documentElement.lang=l;
+  document.documentElement.dir=l==='ar'?'rtl':'ltr';
+  document.getElementById('langBtn').textContent = l.toUpperCase();
+  lpList.querySelectorAll('.lp-opt').forEach((o,i)=>o.classList.toggle('active',Object.keys(I18N)[i]===l));
+  closeLang();
   buildEngines(l);
+  buildSteps(l);
 }
 
-function setLang(l) {
-  lang = l;
-  applyLang(l);
-}
-
-// ---- Init ----
-applyLang('en');
+/* ══ Init ══ */
+buildEngines('en');
+buildSteps('en');
 </script>
 </body>
 </html>
