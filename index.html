@@ -3,458 +3,929 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>BL Creative | UltraPurity</title>
+<title>Ultra Purity — BL Creative</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=Tajawal:wght@200;300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
 <style>
-/* ─────────────────────────── RESET & VARIABLES ─────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --bg: #000000;
-  --surface: #0a0a0c;
-  --surface-hover: #121216;
-  --border: #1f1f23;
-  --border-hover: #33333a;
-  --accent: #0A84FF; /* Professional Trust Blue */
-  --accent-hover: #0066CC;
-  --text-main: #ffffff;
-  --text-muted: #8e8e93;
-  --font-en: 'Inter', sans-serif;
-  --font-ar: 'Cairo', sans-serif;
+/* ─────────────────────────── RESET ─────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#060608;--bg2:#0c0c10;--bg3:#111116;--card:#0f0f14;
+  --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);
+  --blue:#0af;--blue2:#007acc;--cyan:#00e0ff;--white:#e8e8f0;
+  --grey:#666;--grey2:#444;--grey3:#888;
+  --font-h:'Inter', sans-serif;
+  --font-b:'Inter', sans-serif;
+  --font-m:'DM Mono', monospace;
+  --r:10px;
 }
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--bg);color:var(--white);font-family:var(--font-b);overflow-x:hidden;cursor:none;font-weight:300;}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:#080808}::-webkit-scrollbar-thumb{background:#0af}
+a{text-decoration:none;color:inherit}
 
-html { scroll-behavior: smooth; font-size: 16px; background: var(--bg); }
-body {
-  background: var(--bg); color: var(--text-main);
-  font-family: var(--font-en); overflow-x: hidden;
-  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-}
-a { text-decoration: none; color: inherit; transition: 0.2s; }
-ul { list-style: none; }
+/* ─────────────────────────── CURSOR ─────────────────────────── */
+#cur{position:fixed;width:8px;height:8px;background:#0af;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;mix-blend-mode:screen}
+#cur-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(0,170,255,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s;mix-blend-mode:screen}
 
-/* ─────────────────────────── NAVIGATION ─────────────────────────── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 500; height: 72px;
-  display: flex; align-items: center; justify-content: space-between; padding: 0 5%;
-  background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
-}
-.logo { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.5px; }
-.logo span { color: var(--accent); }
-.nav-links { display: flex; gap: 2.5rem; }
-.nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: color 0.2s; }
-.nav-links a:hover { color: var(--text-main); }
-.nav-right { display: flex; align-items: center; gap: 1.5rem; }
-.lang-sel {
-  background: transparent; border: none; color: var(--text-muted);
-  font-family: inherit; font-size: 0.85rem; font-weight: 500; cursor: pointer; outline: none;
-}
-.lang-sel:hover { color: var(--text-main); }
-.btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  font-size: 0.85rem; font-weight: 600; padding: 0.75rem 1.5rem; border-radius: 6px;
-  cursor: pointer; transition: 0.2s; border: none;
-}
-.btn-primary { background: var(--accent); color: #fff; }
-.btn-primary:hover { background: var(--accent-hover); }
-.btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); }
-.btn-outline:hover { border-color: var(--text-muted); }
+/* ─────────────────────────── CANVAS ─────────────────────────── */
+#cvs{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5}
+
+/* ─────────────────────────── NAV ─────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;height:64px;display:flex;align-items:center;padding:0 4vw;gap:3rem;background:rgba(6,6,8,.7);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.n-logo {font-family:var(--font-h); font-weight:400; font-size:1.4rem; letter-spacing:-0.5px; color:#fff;}
+.n-logo span {color:var(--blue); font-weight:300;}
+.n-links{display:flex;gap:2rem;flex:1}
+.n-links a{font-family:var(--font-m);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grey3);transition:color .2s;font-weight:400;}
+.n-links a:hover{color:var(--white)}
+.n-right{display:flex;align-items:center;gap:.8rem;margin-left:auto}
+.lang-sel{background:var(--bg3);border:1px solid var(--border);color:var(--grey3);font-family:var(--font-b);font-size:.8rem;letter-spacing:.04em;padding:6px 10px;border-radius:6px;cursor:pointer;outline:none;appearance:none;transition:border-color .2s;font-weight:400;}
+.lang-sel:hover{border-color:var(--blue);color:var(--white)}
+.btn-dl-nav{background:var(--blue);color:#000;font-family:var(--font-h);font-size:.8rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:8px 20px;border-radius:6px;border:none;cursor:pointer;transition:all .2s}
+.btn-dl-nav:hover{background:#fff;transform:translateY(-1px)}
 
 /* ─────────────────────────── HERO ─────────────────────────── */
-.hero {
-  min-height: 90vh; display: flex; flex-direction: column; align-items: center;
-  justify-content: center; text-align: center; padding: 120px 5% 60px;
-}
-.hero-badge {
-  font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; color: var(--text-muted);
-  border: 1px solid var(--border); padding: 0.4rem 1rem; border-radius: 100px; margin-bottom: 2rem;
-  text-transform: uppercase;
-}
-.hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -1px; margin-bottom: 1.5rem; max-width: 900px; }
-.hero-sub { font-size: 1.125rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 2.5rem; font-weight: 400; line-height: 1.6; }
-.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+#hero{min-height:100vh;display:flex;align-items:center;padding:64px 4vw 0;position:relative;z-index:1;overflow:hidden}
+.h-left{flex:1;max-width:600px}
+.h-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(0,170,255,.06);border:1px solid rgba(0,170,255,.18);border-radius:100px;padding:5px 14px;margin-bottom:2rem;animation:up .8s ease both}
+.h-pill-dot{width:5px;height:5px;background:#0af;border-radius:50%;animation:blink 2s infinite}
+.h-pill span{font-family:var(--font-m);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#0af;font-weight:400;}
+.h-title{font-family:var(--font-h);font-size:clamp(3.5rem,8vw,7rem);font-weight:300;line-height:1.05;letter-spacing:-.04em;text-transform:uppercase;animation:up .8s .08s ease both}
+.h-title .gr{background:linear-gradient(120deg,#fff 0%,#0af 45%,#00e0ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.h-sub{font-family:var(--font-m);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grey3);margin-top:1rem;animation:up .8s .14s ease both;font-weight:300;}
+.h-desc{color:#8888aa;font-size:1.05rem;line-height:1.8;margin-top:1.5rem;max-width:500px;font-weight:300;animation:up .8s .2s ease both}
+.h-btns{display:flex;gap:1rem;margin-top:2.5rem;animation:up .8s .26s ease both}
+.btn-prim{display:inline-flex;align-items:center;gap:10px;background:#0af;color:#000;font-family:var(--font-h);font-size:.9rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:13px 30px;border-radius:8px;border:none;cursor:pointer;transition:all .25s}
+.btn-prim:hover{background:#00e0ff;transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,170,255,.35)}
+.btn-sec{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--white);font-family:var(--font-h);font-size:.9rem;font-weight:400;letter-spacing:.06em;text-transform:uppercase;padding:13px 30px;border-radius:8px;border:1px solid var(--border2);cursor:pointer;transition:all .25s}
+.btn-sec:hover{border-color:#0af;color:#0af}
+.h-stats{display:flex;gap:2.5rem;margin-top:3rem;animation:up .8s .32s ease both}
+.h-stat-n{font-family:var(--font-h);font-size:2rem;font-weight:300;color:#fff}
+.h-stat-n em{font-style:normal;color:#0af;font-size:1.4rem;font-weight:300;}
+.h-stat-l{font-family:var(--font-m);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);font-weight:400;}
+.h-right{flex:1;position:relative;min-height:500px;display:flex;align-items:center;justify-content:center}
+/* GPU 3D card */
+.gpu-scene{width:460px;height:360px;perspective:1200px;position:relative}
+.gpu-card{width:100%;height:100%;transform-style:preserve-3d;animation:gpuRot 8s ease-in-out infinite;position:relative}
+.gpu-face{position:absolute;inset:0;border-radius:16px;overflow:hidden}
+#gpuCanvas{width:100%;height:100%;display:block}
+.gpu-glow{position:absolute;inset:-40px;background:radial-gradient(ellipse,rgba(0,170,255,.15) 0%,transparent 65%);pointer-events:none;animation:glowPulse 3s ease-in-out infinite}
+.gpu-orbit{position:absolute;border-radius:50%;border:1px solid rgba(0,170,255,.1);pointer-events:none}
+.gpu-orbit:nth-child(1){width:500px;height:500px;top:50%;left:50%;transform:translate(-50%,-50%) rotateX(70deg);animation:orbit1 6s linear infinite}
+.gpu-orbit:nth-child(2){width:650px;height:650px;top:50%;left:50%;transform:translate(-50%,-50%) rotateX(70deg);animation:orbit1 10s linear infinite reverse}
 
-/* ─────────────────────────── THE MASTER SHOWCASE (Topaz Style) ─────────────────────────── */
-.section { max-width: 1200px; margin: 0 auto 120px; padding: 0 5%; }
-.sec-header { text-align: center; margin-bottom: 3rem; }
-.sec-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -1px; margin-bottom: 1rem; }
-.sec-desc { color: var(--text-muted); font-size: 1rem; max-width: 600px; margin: 0 auto; }
+/* ─────────────────────────── FEATURE STRIP ─────────────────────────── */
+.feat-strip{display:grid;grid-template-columns:repeat(5,1fr);background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;z-index:1}
+.fs-item{padding:24px 20px;border-right:1px solid var(--border);transition:background .2s}
+.fs-item:last-child{border-right:none}
+.fs-item:hover{background:var(--bg3)}
+.fs-icon{font-size:1.4rem;margin-bottom:.6rem;font-weight:300;}
+.fs-title{font-family:var(--font-h);font-size:.9rem;font-weight:400;letter-spacing:.02em;text-transform:uppercase;margin-bottom:.4rem}
+.fs-text{font-size:.8rem;color:var(--grey3);line-height:1.6;font-weight:300;}
 
-/* Cinematic Edge-to-Edge Slider */
-.slider-container {
-  position: relative; width: 100%; height: 70vh; min-height: 500px;
-  background: var(--surface); border-radius: 12px; overflow: hidden;
-  border: 1px solid var(--border); cursor: ew-resize; direction: ltr !important;
-  margin-bottom: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-}
-.sl-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none; }
-.sl-clip { position: absolute; inset: 0; width: 100%; height: 100%; clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); z-index: 2; }
-.sl-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 1.5px; background: #fff; transform: translateX(-50%); z-index: 8; pointer-events: none; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
-.sl-handle {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  width: 36px; height: 24px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.3);
-  border-radius: 12px; display: flex; align-items: center; justify-content: center; z-index: 9; backdrop-filter: blur(4px);
-}
-.sl-handle::before, .sl-handle::after { content: ''; width: 0; height: 0; border-top: 4px solid transparent; border-bottom: 4px solid transparent; }
-.sl-handle::before { border-right: 4px solid #fff; margin-right: 4px; }
-.sl-handle::after { border-left: 4px solid #fff; margin-left: 4px; }
+/* ─────────────────────────── ENGINES ─────────────────────────── */
+#engines{padding:100px 4vw;position:relative;z-index:1}
+.sec-label{font-family:var(--font-m);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:#0af;margin-bottom:.8rem;font-weight:400;}
+.sec-title{font-family:var(--font-h);font-size:clamp(2rem,4vw,3.2rem);font-weight:300;text-transform:uppercase;letter-spacing:-.02em;line-height:1.1}
+.sec-title em{font-style:normal;color:#0af;font-weight:400;}
+.sec-bar{width:48px;height:1px;background:linear-gradient(90deg,#0af,transparent);margin:1.5rem 0 3.5rem}
+/* Engine tabs */
+.eng-nav{display:flex;gap:0;background:var(--bg3);border:1px solid var(--border);border-radius:10px;overflow:hidden;width:fit-content;margin-bottom:3rem;flex-wrap:wrap}
+.eng-nav-btn{font-family:var(--font-m);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:10px 20px;border:none;background:none;color:var(--grey3);cursor:pointer;transition:all .2s;border-right:1px solid var(--border);font-weight:400;}
+.eng-nav-btn:last-child{border-right:none}
+.eng-nav-btn:hover{color:var(--white);background:rgba(255,255,255,.04)}
+.eng-nav-btn.on{background:rgba(0,170,255,.12);color:#0af;font-weight:500;}
+/* Engine panel */
+.eng-panel{display:none;animation:fadeIn .3s ease}
+.eng-panel.on{display:grid;grid-template-columns:1fr 1.2fr;gap:3rem;align-items:center}
+.ep-info{}
+.ep-num{font-family:var(--font-m);font-size:.65rem;color:var(--grey);letter-spacing:.12em;margin-bottom:.8rem;font-weight:400;}
+.ep-name{font-family:var(--font-h);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;text-transform:uppercase;letter-spacing:-.02em;line-height:1.1;margin-bottom:.5rem}
+.ep-tag{display:inline-block;font-family:var(--font-m);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(0,170,255,.05);border:1px solid rgba(0,170,255,.2);color:#0af;padding:4px 12px;border-radius:4px;margin-bottom:1.5rem;font-weight:400;}
+.ep-desc{color:#888;font-size:1rem;line-height:1.8;margin-bottom:2rem;font-weight:300;}
+.ep-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:2rem}
+.ep-spec{background:var(--card);padding:16px 14px}
+.ep-spec-v{font-family:var(--font-h);font-size:1.5rem;font-weight:300;color:#fff}
+.ep-spec-v span{color:#0af;font-weight:300;}
+.ep-spec-l{font-family:var(--font-m);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);margin-top:4px;font-weight:400;}
+.ep-features{display:flex;flex-direction:column;gap:.6rem}
+.ep-feat{display:flex;align-items:center;gap:8px;font-size:.9rem;color:#aaa;font-weight:300;}
+.ep-feat::before{content:'';width:4px;height:4px;background:#0af;border-radius:50%;flex-shrink:0}
+/* Engine visual */
+.ep-visual{position:relative}
+.ep-canvas-wrap{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--border2);background:#080810;aspect-ratio:16/9; direction: ltr !important;}
+.ep-canvas-wrap canvas{display:block;width:100%;height:100%}
+/* Slider overlay */
+.slider-overlay{position:absolute;inset:0;pointer-events:none}
+.sl-line{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.8);left:50%;transform:translateX(-50%);z-index:10;cursor:ew-resize;pointer-events:all;box-shadow:0 0 10px rgba(0,0,0,0.5);}
+.sl-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.4);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:400;color:#fff;backdrop-filter:blur(4px);cursor:ew-resize;user-select:none;pointer-events:all}
+.sl-tag{position:absolute;top:12px;font-family:var(--font-m);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:4px;font-weight:400;}
+.sl-tag.b{left:12px;background:rgba(0,0,0,.6);color:#888}
+.sl-tag.a{right:12px;background:rgba(0,170,255,.15);color:#0af;border:1px solid rgba(0,170,255,.3);}
+/* FPS engine special */
+.fps-engine-visual{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--border2);background:#050508;aspect-ratio:16/9;display:flex;flex-direction:column; direction: ltr !important;}
+.fps-top{flex:1;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.fps-counter-big{font-family:var(--font-h);font-size:clamp(3rem,7vw,5rem);font-weight:300;letter-spacing:-.04em;transition:color .3s}
+.fps-unit{font-family:var(--font-m);font-size:.9rem;letter-spacing:.1em;color:var(--grey3);margin-left:.3rem;font-weight:300;}
+.fps-label{font-family:var(--font-m);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grey);margin-top:4px;text-align:center;font-weight:400;}
+.fps-bottom{height:70px;border-top:1px solid var(--border);padding:0 16px;display:flex;align-items:flex-end;gap:2px;padding-bottom:8px;position:relative}
+.fps-bar-item{flex:1;border-radius:2px 2px 0 0;transition:height .08s,background .3s}
+.fps-info-row{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:rgba(0,0,0,.4);border-top:1px solid var(--border)}
+.fps-info-badge{font-family:var(--font-m);font-size:.65rem;letter-spacing:.08em;padding:4px 12px;border-radius:4px;color:#000;font-weight:400;}
+.fps-info-badge.from{background:#333;color:#999}
+.fps-info-badge.to{background:#0af}
+.fps-arrow{color:var(--grey);font-size:.8rem;font-weight:300;}
 
-/* Clean Labels */
-.sl-label { position: absolute; bottom: 20px; padding: 6px 12px; background: rgba(0,0,0,0.6); font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; border-radius: 4px; z-index: 10; color: #fff; }
-.lbl-before { left: 20px; color: #aaa; }
-.lbl-after { right: 20px; }
-
-/* Engine Grid Selector */
-.engine-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
-.eng-card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
-  padding: 1.5rem; cursor: pointer; transition: 0.2s; text-align: left;
-}
-.eng-card:hover { border-color: var(--border-hover); background: var(--surface-hover); }
-.eng-card.active { border-color: var(--accent); background: rgba(10, 132, 255, 0.05); }
-.eng-title { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; display: flex; justify-content: space-between; }
-.eng-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
-
-/* Animation Engine specifically for Frame Boost */
-.anim-canvas { position: absolute; inset: 0; background: #000; display: flex; flex-direction: column; justify-content: center; overflow: hidden; padding: 0 40px; gap: 80px; }
-.track { position: relative; width: 100%; height: 1px; background: rgba(255,255,255,0.1); }
-.pulse-obj { position: absolute; top: -10px; width: 20px; height: 20px; border-radius: 50%; }
-.stutter { background: #ff3b30; animation: moveStutter 2s steps(8, end) infinite; }
-.smooth { background: var(--accent); box-shadow: 0 0 20px var(--accent); animation: moveSmooth 2s linear infinite; width: 80px; border-radius: 10px; }
-@keyframes moveStutter { 0% { left: 0; opacity: 0.3; } 50% { opacity: 1; } 100% { left: 90%; opacity: 0.3; } }
-@keyframes moveSmooth { 0% { left: 0; } 100% { left: 90%; } }
-
-/* SVG Filters (Strictly Raw vs Clean) */
-.flt-noise { filter: url(#heavyNoise) grayscale(0.2) contrast(1.1); }
-.flt-pixel { filter: url(#pixelate); }
-.flt-color { filter: brightness(0.4) sepia(0.4) contrast(1.4); }
-.flt-motion { filter: url(#motionBlur) contrast(0.9); transform: scale(1.05); }
-.flt-artifact { filter: url(#jpegArtifact); }
-.hide { display: none !important; }
+/* ─────────────────────────── COMPARE SECTION ─────────────────────────── */
+#compare{padding:100px 4vw;background:var(--bg2);border-top:1px solid var(--border);position:relative;z-index:1}
+.cmp-tabs{display:flex;gap:.5rem;margin-bottom:2rem;flex-wrap:wrap}
+.cmp-tab{font-family:var(--font-m);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:8px 18px;border-radius:6px;border:1px solid var(--border);background:none;color:var(--grey3);cursor:pointer;transition:all .2s;font-weight:400;}
+.cmp-tab:hover{border-color:var(--border2);color:var(--white)}
+.cmp-tab.on{background:rgba(0,170,255,.05);border-color:rgba(0,170,255,.3);color:#0af}
+.cmp-stage{position:relative;width:100%;max-width:900px;margin:0 auto;aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid var(--border2);box-shadow:0 0 60px rgba(0,170,255,.05); direction: ltr !important;}
+.cmp-stage canvas{position:absolute;inset:0;width:100%;height:100%}
+.cmp-sl-line{position:absolute;top:0;bottom:0;left:50%;width:1px;background:rgba(255,255,255,.6);transform:translateX(-50%);z-index:20;cursor:ew-resize}
+.cmp-sl-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:36px;height:36px;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:400;color:#fff;backdrop-filter:blur(4px);cursor:ew-resize;z-index:21;user-select:none}
+.cmp-tag{position:absolute;top:14px;font-family:var(--font-m);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:5px;z-index:22;font-weight:400;}
+.cmp-tag.b{left:14px;background:rgba(0,0,0,.65);color:#888}
+.cmp-tag.a{right:14px;background:rgba(0,170,255,.1);border:1px solid rgba(0,170,255,.2);color:#0af}
 
 /* ─────────────────────────── PRICING ─────────────────────────── */
-.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
-.price-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2.5rem; display: flex; flex-direction: column; }
-.price-card.pro { border-color: var(--accent); }
-.p-name { font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem; }
-.p-price { font-size: 3rem; font-weight: 800; margin-bottom: 1.5rem; letter-spacing: -1px; }
-.p-price span { font-size: 1rem; color: var(--text-muted); font-weight: 500; }
-.p-features { margin-bottom: 2.5rem; flex-grow: 1; }
-.p-features li { font-size: 0.9rem; margin-bottom: 1rem; color: #ccc; display: flex; align-items: center; gap: 0.75rem; }
-.p-features li::before { content: '✓'; color: var(--accent); font-weight: 800; }
-.btn-full { width: 100%; }
+#pricing{padding:100px 4vw;position:relative;z-index:1}
+.price-toggle{display:flex;gap:0;background:var(--bg3);border:1px solid var(--border);border-radius:8px;overflow:hidden;width:fit-content;margin-bottom:3rem}
+.pt-opt{font-family:var(--font-h);font-size:.85rem;font-weight:400;letter-spacing:.05em;text-transform:uppercase;padding:10px 24px;cursor:pointer;color:var(--grey3);transition:all .2s;border:none;background:none}
+.pt-opt.on{background:#0af;color:#000;font-weight:500;}
+.pt-save{font-family:var(--font-m);font-size:.65rem;background:rgba(0,255,130,.1);color:#0f9;border:1px solid rgba(0,255,130,.2);padding:4px 12px;border-radius:4px;letter-spacing:.06em;margin-left:1rem;align-self:center;font-weight:400;}
+.price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)}
+.pc{background:var(--card);padding:36px 28px;position:relative;overflow:hidden;transition:transform .3s}
+.pc:hover{transform:translateY(-2px)}
+.pc.hot{background:linear-gradient(160deg,#0c141a 0%,#080a0e 100%);border-top:1px solid #0af}
+.pc-badge{font-family:var(--font-m);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:4px;display:inline-block;margin-bottom:1.5rem;background:rgba(0,170,255,.1);border:1px solid rgba(0,170,255,.2);color:#0af;font-weight:400;}
+.pc-badge.pop{background:linear-gradient(90deg,#0af,#00e0ff);color:#000;border:none;}
+.pc-name{font-family:var(--font-h);font-size:1.5rem;font-weight:400;text-transform:uppercase;letter-spacing:.02em;margin-bottom:.5rem}
+.pc-desc{font-size:.9rem;color:var(--grey3);margin-bottom:2rem;line-height:1.6;font-weight:300;}
+.pc-price{display:flex;align-items:flex-end;gap:4px;margin-bottom:.5rem}
+.pc-cur{font-family:var(--font-h);font-size:1.2rem;font-weight:300;color:var(--grey3);margin-bottom:4px}
+.pc-val{font-family:var(--font-h);font-size:3.2rem;font-weight:300;line-height:1;color:#fff;letter-spacing:-.03em;}
+.pc-mo{font-size:.85rem;color:var(--grey3);margin-bottom:6px;font-weight:300;}
+.pc-note{font-family:var(--font-m);font-size:.65rem;color:var(--grey);margin-bottom:2rem;min-height:1em;font-weight:400;}
+.pc-feats{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin-bottom:2.5rem}
+.pc-feats li{display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:#ccc;font-weight:300;}
+.pc-feats li::before{content:'—';color:#0af;font-size:.9rem;flex-shrink:0;font-weight:300;}
+.pc-feats li.no{color:var(--grey2)}
+.pc-feats li.no::before{content:'·';color:var(--grey2)}
+.pc-btn{width:100%;font-family:var(--font-h);font-size:.9rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:14px;border-radius:6px;cursor:pointer;transition:all .2s;border:none}
+.pc-btn.out{background:none;border:1px solid var(--border2);color:var(--white)}
+.pc-btn.out:hover{border-color:#0af;color:#0af}
+.pc-btn.fill{background:#0af;color:#000}
+.pc-btn.fill:hover{background:#00e0ff;transform:translateY(-1px)}
 
-/* ─────────────────────────── HARDWARE & FEATURES ─────────────────────────── */
-.feat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; border-top: 1px solid var(--border); padding-top: 4rem; }
-.feat-item h3 { font-size: 1.125rem; font-weight: 700; margin-bottom: 0.75rem; }
-.feat-item p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+/* ─────────────────────────── ABOUT ─────────────────────────── */
+#about{padding:100px 4vw;background:var(--bg2);border-top:1px solid var(--border);position:relative;z-index:1}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.about-p{color:#999;font-size:1.05rem;line-height:1.8;margin-bottom:1.5rem;font-weight:300;}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-top:2.5rem}
+.pillar{background:var(--card);padding:24px 20px}
+.pillar-ic{font-size:1.4rem;margin-bottom:.8rem;font-weight:300;}
+.pillar-t{font-family:var(--font-h);font-size:.9rem;font-weight:400;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.4rem}
+.pillar-d{font-size:.85rem;color:var(--grey3);line-height:1.6;font-weight:300;}
+.compat-box{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.compat-bar{background:var(--bg3);padding:12px 16px;display:flex;gap:6px;border-bottom:1px solid var(--border)}
+.wb{width:10px;height:10px;border-radius:50%}
+.compat-body{padding:24px}
+.compat-row{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.chip{background:rgba(0,170,255,.05);border:1px solid rgba(0,170,255,.15);border-radius:6px;padding:6px 14px;font-family:var(--font-m);font-size:.7rem;color:#0af;letter-spacing:.06em;font-weight:400;}
+.compat-stat{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border)}
+.cstat{background:var(--bg3);padding:18px;text-align:center}
+.cstat-v{font-family:var(--font-h);font-size:1.8rem;font-weight:300;color:#fff}
+.cstat-v span{color:#0af;font-weight:300;}
+.cstat-l{font-family:var(--font-m);font-size:.65rem;color:var(--grey);letter-spacing:.08em;text-transform:uppercase;margin-top:4px;font-weight:400;}
+
+/* ─────────────────────────── COMMUNITY ─────────────────────────── */
+#community{padding:100px 4vw;position:relative;z-index:1}
+.comm-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:3rem}
+.cc{background:var(--card);padding:32px 24px;transition:background .2s}
+.cc:hover{background:var(--bg3)}
+.cc-icon{font-size:1.6rem;margin-bottom:1.2rem;font-weight:300;}
+.cc-title{font-family:var(--font-h);font-size:1.05rem;font-weight:400;text-transform:uppercase;letter-spacing:.03em;margin-bottom:.5rem}
+.cc-text{font-size:.9rem;color:var(--grey3);line-height:1.6;margin-bottom:1.5rem;font-weight:300;}
+.cc-link{font-family:var(--font-h);font-size:.85rem;font-weight:500;color:#0af;letter-spacing:.04em;text-transform:uppercase}
+.cc-link:hover{color:#00e0ff}
+
+/* ─────────────────────────── DOWNLOAD ─────────────────────────── */
+#dl-cta{padding:100px 4vw;text-align:center;border-top:1px solid var(--border);position:relative;z-index:1;overflow:hidden}
+#dl-cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:400px;background:radial-gradient(ellipse,rgba(0,170,255,.05) 0%,transparent 60%);pointer-events:none}
+.dl-title{font-family:var(--font-h);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:300;text-transform:uppercase;letter-spacing:-.03em;margin-bottom:1rem}
+.dl-title span{color:#0af;font-weight:300;}
+.dl-sub{color:var(--grey3);margin-bottom:2.5rem;font-size:1.05rem;font-weight:300;}
+.dl-plats{display:flex;gap:.8rem;justify-content:center;margin-top:2rem;flex-wrap:wrap}
+.dl-plat{display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:10px 20px;font-family:var(--font-m);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--grey3);transition:all .2s;font-weight:400;}
+.dl-plat:hover{border-color:rgba(0,170,255,.3);color:#0af}
+
+/* ─────────────────────────── CONTACT ─────────────────────────── */
+#contact{padding:80px 4vw;background:var(--bg2);border-top:1px solid var(--border);position:relative;z-index:1}
+.contact-inner{max-width:520px;margin:0 auto;text-align:center}
+.contact-inner .sec-bar{margin:1.5rem auto 2.5rem}
+.contact-p{color:#888;font-size:1rem;line-height:1.7;margin-bottom:2rem;font-weight:300;}
+.contact-row{display:flex;gap:0}
+.contact-in{flex:1;background:var(--card);border:1px solid var(--border);border-right:none;color:var(--white);font-family:var(--font-b);font-size:.95rem;padding:14px 18px;border-radius:6px 0 0 6px;outline:none;transition:border-color .2s;font-weight:300;}
+.contact-in:focus{border-color:rgba(0,170,255,.4)}
+.contact-sub{background:#0af;color:#000;font-family:var(--font-h);font-size:.9rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:14px 24px;border-radius:0 6px 6px 0;border:none;cursor:pointer;transition:background .2s;white-space:nowrap}
+.contact-sub:hover{background:#00e0ff}
+.soc-row{display:flex;justify-content:center;gap:2rem;margin-top:2.5rem}
+.soc-a{display:flex;align-items:center;gap:8px;font-family:var(--font-h);font-size:.8rem;font-weight:400;letter-spacing:.06em;text-transform:uppercase;color:var(--grey3);transition:color .2s}
+.soc-a:hover{color:#0af}
 
 /* ─────────────────────────── FOOTER ─────────────────────────── */
-footer { padding: 3rem 5%; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; background: var(--bg); }
-.f-logo { font-size: 1.25rem; font-weight: 800; }
-.f-text { font-size: 0.85rem; color: var(--text-muted); }
+footer{background:var(--bg);border-top:1px solid var(--border);padding:36px 4vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;position:relative;z-index:1}
+.f-logo{display:flex;align-items:center;gap:8px}
+.f-copy{font-family:var(--font-m);font-size:.7rem;color:var(--grey2);letter-spacing:.06em;font-weight:400;}
+.f-links{display:flex;gap:2rem}
+.f-links a{font-family:var(--font-m);font-size:.7rem;color:var(--grey2);letter-spacing:.06em;transition:color .2s;font-weight:400;}
+.f-links a:hover{color:var(--grey3)}
 
-/* RTL Support */
-html[dir="rtl"] .nav-links { flex-direction: row-reverse; }
-html[dir="rtl"] .eng-card { text-align: right; }
-html[dir="rtl"] .p-features li { flex-direction: row-reverse; }
+/* ─────────────────────────── SCROLL REVEAL ─────────────────────────── */
+.rv{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:translateY(0)}
 
-@media(max-width: 900px) {
-  .nav-links { display: none; }
-  .slider-container { height: 50vh; }
+/* ─────────────────────────── ANIMATIONS ─────────────────────────── */
+@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,170,255,.4)}50%{opacity:.5;box-shadow:0 0 0 5px rgba(0,170,255,0)}}
+@keyframes gpuRot{0%,100%{transform:rotateY(-8deg) rotateX(4deg)}50%{transform:rotateY(8deg) rotateX(-4deg)}}
+@keyframes glowPulse{0%,100%{opacity:.4}50%{opacity:.8}}
+@keyframes orbit1{from{transform:translate(-50%,-50%) rotateX(70deg) rotateZ(0deg)}to{transform:translate(-50%,-50%) rotateX(70deg) rotateZ(360deg)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ─────────────────────────── RESPONSIVE ─────────────────────────── */
+@media(max-width:1024px){
+  .price-grid{grid-template-columns:1fr 1fr}
+  .ep-panel,.eng-panel.on{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr}
+  .h-right{display:none}
+}
+@media(max-width:700px){
+  .price-grid{grid-template-columns:1fr}
+  .comm-grid{grid-template-columns:1fr 1fr}
+  .feat-strip{grid-template-columns:1fr 1fr}
+  .n-links{display:none}
+  .eng-nav{overflow-x:auto}
+}
+@media(max-width:480px){
+  .comm-grid{grid-template-columns:1fr}
+  .feat-strip{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
-<svg style="display:none;">
-  <filter id="heavyNoise"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" result="noise"/><feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.8 0" in="noise" result="coloredNoise"/><feComposite operator="in" in="coloredNoise" in2="SourceGraphic" result="composite"/><feBlend mode="overlay" in="composite" in2="SourceGraphic"/></filter>
-  <filter id="pixelate"><feGaussianBlur stdDeviation="5" result="blur"/><feComponentTransfer><feFuncA type="discrete" tableValues="1 1"/></feComponentTransfer></filter>
-  <filter id="motionBlur"><feGaussianBlur stdDeviation="10 0" result="blur"/></filter>
-  <filter id="jpegArtifact"><feTurbulence type="fractalNoise" baseFrequency="0.15" numOctaves="1" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="15" xChannelSelector="R" yChannelSelector="G"/></filter>
-</svg>
-
 <nav>
-  <div class="logo">BL<span>Creative</span></div>
-  <div class="nav-links">
-    <a href="#showcase" data-k="nav_eng">Features</a>
-    <a href="#pricing" data-k="nav_pr">Pricing</a>
-    <a href="#about" data-k="nav_ab">About</a>
+  <a href="#" class="n-logo">BL<span style="color:#0af">Creative</span></a>
+  <div class="n-links">
+    <a href="#engines" data-k="nav_engines">Engines</a>
+    <a href="#compare" data-k="nav_compare">Compare</a>
+    <a href="#pricing" data-k="nav_pricing">Pricing</a>
+    <a href="#about" data-k="nav_about">About</a>
+    <a href="#contact" data-k="nav_contact">Contact</a>
   </div>
-  <div class="nav-right">
+  <div class="n-right">
     <select class="lang-sel" id="langSel" onchange="setLang(this.value)"></select>
-    <a href="#pricing" class="btn btn-primary" data-k="btn_get">Download</a>
+    <a href="#dl-cta" class="btn-dl-nav" data-k="nav_dl">Download Free</a>
   </div>
 </nav>
 
-<section class="hero">
-  <div class="hero-badge" data-k="hero_badge">AI Video Enhancement Protocol</div>
-  <h1 data-k="hero_h1">Tell your story.<br>We'll make it the highest quality possible.</h1>
-  <p class="hero-sub" data-k="hero_sub">Professional AI tools to upscale, denoise, and interpolate your footage. Built for creators who demand uncompromising quality.</p>
-  <div class="hero-actions">
-    <a class="btn btn-primary" href="#pricing" data-k="btn_get">Download Now</a>
-    <a class="btn btn-outline" href="#showcase" data-k="btn_demo">See Results</a>
+<section id="hero">
+  <div class="h-left">
+    <div class="h-pill"><div class="h-pill-dot"></div><span data-k="hero_badge">AI-Powered Video Enhancement</span></div>
+    <h1 class="h-title"><span class="gr">Ultra<br>Purity</span></h1>
+    <div class="h-sub" data-k="hero_sub">by BL Creative</div>
+    <p class="h-desc" data-k="hero_desc">The most powerful video enhancement suite. 6 AI engines that crush noise, bypass platform compression, and boost to 200fps — on any GPU.</p>
+    <div class="h-btns">
+      <a href="#dl-cta" class="btn-prim">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        <span data-k="hero_cta">Download Free</span>
+      </a>
+      <a href="#compare" class="btn-sec" data-k="hero_see">See Results</a>
+    </div>
+    <div class="h-stats">
+      <div><div class="h-stat-n">6<em>×</em></div><div class="h-stat-l" data-k="stat1">AI Engines</div></div>
+      <div><div class="h-stat-n">200<em>fps</em></div><div class="h-stat-l" data-k="stat2">Frame Boost</div></div>
+      <div><div class="h-stat-n">4<em>K</em></div><div class="h-stat-l" data-k="stat3">Upscale</div></div>
+      <div><div class="h-stat-n">All<em>+</em></div><div class="h-stat-l" data-k="stat4">GPU Support</div></div>
+    </div>
   </div>
-</section>
-
-<section class="section" id="showcase">
-  <div class="sec-header">
-    <h2 class="sec-title" data-k="eng_h">Every tool you need.</h2>
-    <p class="sec-desc" data-k="eng_desc">Select a module below to compare the original raw footage with UltraPurity's AI reconstruction.</p>
-  </div>
-
-  <div class="slider-container" id="masterSlider">
-    <div class="sl-layer" id="layerAfter" style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1600&q=100');"></div>
-    <div class="sl-label lbl-after">UltraPurity</div>
-
-    <div class="sl-clip" id="layerBeforeMask">
-      <div class="sl-layer before-img" id="layerBefore" style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=10'); image-rendering: pixelated;"></div>
-      
-      <div class="sl-layer anim-canvas hide" id="animBefore">
-         <div class="track"><div class="pulse-obj stutter"></div></div>
+  <div class="h-right">
+    <div class="gpu-scene">
+      <div class="gpu-glow"></div>
+      <div class="gpu-orbit"></div>
+      <div class="gpu-orbit"></div>
+      <div class="gpu-card">
+        <div class="gpu-face"><canvas id="gpuCanvas" width="460" height="360"></canvas></div>
       </div>
-      <div class="sl-label lbl-before" data-k="lbl_b">Original</div>
-    </div>
-
-    <div class="sl-layer anim-canvas hide" id="animAfter" style="z-index: 1; pointer-events: none;">
-       <div class="track"><div class="pulse-obj smooth"></div></div>
-    </div>
-
-    <div class="sl-line" id="masterLine"></div>
-    <div class="sl-handle" id="masterHdl"></div>
-  </div>
-
-  <div class="engine-grid" id="engineList">
-    </div>
-</section>
-
-<section class="section" id="about">
-  <div class="sec-header">
-    <h2 class="sec-title" data-k="hw_h">Built for Performance</h2>
-  </div>
-  <div class="feat-grid">
-    <div class="feat-item">
-      <h3 data-k="f1t">Hardware Acceleration</h3>
-      <p data-k="f1d">Interfaces directly with NVIDIA Tensor Cores and AMD AI architectures to deliver real-time, multi-threaded deep learning inference.</p>
-    </div>
-    <div class="feat-item">
-      <h3 data-k="f2t">Platform Bypass</h3>
-      <p data-k="f2d">Our output encoding forces platforms like TikTok and YouTube to process your uploads at the highest original bitrate possible.</p>
-    </div>
-    <div class="feat-item">
-      <h3 data-k="f3t">Absolute Privacy</h3>
-      <p data-k="f3d">All AI models run locally on your machine. Your footage is never uploaded to the cloud, ensuring complete data security.</p>
     </div>
   </div>
 </section>
 
-<section class="section" id="pricing">
-  <div class="sec-header">
-    <h2 class="sec-title" data-k="pr_h">Simple Pricing</h2>
+<div class="feat-strip rv">
+  <div class="fs-item"><div class="fs-icon">🎯</div><div class="fs-title" data-k="f1t">Platform Bypass</div><div class="fs-text" data-k="f1d">Force TikTok, Instagram & YouTube to upload at full original quality.</div></div>
+  <div class="fs-item"><div class="fs-icon">🧠</div><div class="fs-title" data-k="f2t">Real AI Models</div><div class="fs-text" data-k="f2d">RealESRGAN, NAFNet & RIFE — production-grade neural networks.</div></div>
+  <div class="fs-item"><div class="fs-icon">⚡</div><div class="fs-title" data-k="f3t">Any GPU</div><div class="fs-text" data-k="f3d">NVIDIA, AMD, Intel Arc — all supported with full GPU acceleration.</div></div>
+  <div class="fs-item"><div class="fs-icon">🎞</div><div class="fs-title" data-k="f4t">200fps Boost</div><div class="fs-text" data-k="f4d">AI frame interpolation from any source to buttery-smooth 200fps.</div></div>
+  <div class="fs-item"><div class="fs-icon">🔮</div><div class="fs-title" data-k="f5t">Object Removal</div><div class="fs-text" data-k="f5d">Remove anything from static or moving scenes with AI inpainting.</div></div>
+</div>
+
+<section id="engines" class="rv">
+  <div class="sec-label" data-k="eng_label">AI Processing Suite</div>
+  <h2 class="sec-title">6 <em>Engines</em>. One Tool.</h2>
+  <div class="sec-bar" style="height:1px;"></div>
+  <div class="eng-nav" id="engNav">
+    <button class="eng-nav-btn on" data-eng="ultra" data-k="e1n">Ultra Power</button>
+    <button class="eng-nav-btn" data-eng="crystal" data-k="e2n">Crystal Clear</button>
+    <button class="eng-nav-btn" data-eng="silk" data-k="e3n">Silk Flow</button>
+    <button class="eng-nav-btn" data-eng="ghost" data-k="e4n">Ghost Wipe</button>
+    <button class="eng-nav-btn" data-eng="smart" data-k="e5n">Smart Balance</button>
+    <button class="eng-nav-btn" data-eng="frame" data-k="e6n">Frame Boost</button>
   </div>
-  <div class="pricing-grid">
-    <div class="price-card">
-      <div class="p-name" data-k="pn_free">Starter</div>
-      <div class="p-price">$29<span data-k="mo">/mo</span></div>
-      <ul class="p-features">
-        <li data-k="ff1">Max 4K Processing</li>
-        <li data-k="ff2">All Basic AI Engines</li>
-        <li data-k="ff3">Community Support</li>
-      </ul>
-      <a href="#" class="btn btn-outline btn-full" data-k="btn_sub">Subscribe</a>
+
+  <div class="eng-panel on" data-eng="ultra">
+    <div class="ep-info">
+      <div class="ep-num">ENGINE 01 / 06</div>
+      <div class="ep-name" style="background:linear-gradient(90deg,#fff,#0af);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Ultra Power</div>
+      <div class="ep-tag">RealESRGAN · 4× Upscale</div>
+      <p class="ep-desc" data-k="e1d">The most powerful upscaling engine. RealESRGAN reconstructs lost detail at 4K resolution — recovering texture, sharpness, and depth that compression destroyed. Every frame processed independently with GPU-accelerated inference.</p>
+      <div class="ep-specs">
+        <div class="ep-spec"><div class="ep-spec-v">4<span>×</span></div><div class="ep-spec-l" data-k="m_scale">Scale Factor</div></div>
+        <div class="ep-spec"><div class="ep-spec-v">+<span>340%</span></div><div class="ep-spec-l" data-k="m_detail">Detail Gain</div></div>
+        <div class="ep-spec"><div class="ep-spec-v">BT<span>.709</span></div><div class="ep-spec-l" data-k="m_color">Color Space</div></div>
+      </div>
+      <div class="ep-features">
+        <div class="ep-feat" data-k="e1f1">4K / 6K output support</div>
+        <div class="ep-feat" data-k="e1f2">Compression artifact removal</div>
+        <div class="ep-feat" data-k="e1f3">Texture & edge reconstruction</div>
+        <div class="ep-feat" data-k="e1f4">HDR-aware processing</div>
+      </div>
     </div>
-    <div class="price-card pro">
-      <div class="p-name" style="color:var(--accent)" data-k="pn_pro">Professional</div>
-      <div class="p-price">$59<span data-k="mo">/mo</span></div>
-      <ul class="p-features">
-        <li data-k="pf4">Unlimited 8K Resolution</li>
-        <li data-k="pf5">Multi-GPU Threading & 200FPS</li>
-        <li data-k="pf6">Priority Server Access</li>
+    <div class="ep-visual">
+      <div class="ep-canvas-wrap" id="wrap-ultra">
+        <canvas id="cv-ultra" width="640" height="360"></canvas>
+        <div class="slider-overlay"><div class="sl-line" id="sl-ultra"><div class="sl-btn">⟺</div></div><div class="sl-tag b" data-k="before">Before</div><div class="sl-tag a" data-k="after">After</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eng-panel" data-eng="crystal">
+    <div class="ep-info">
+      <div class="ep-num">ENGINE 02 / 06</div>
+      <div class="ep-name" style="background:linear-gradient(90deg,#fff,#00e0ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Crystal Clear</div>
+      <div class="ep-tag">NAFNet · Deep Denoising</div>
+      <p class="ep-desc" data-k="e2d">Neural denoising powered by NAFNet. Removes grain, digital noise, banding, and muddy low-light artifacts while preserving every real detail in the scene. The result looks like it was shot on premium cinema glass.</p>
+      <div class="ep-specs">
+        <div class="ep-spec"><div class="ep-spec-v">-<span>95%</span></div><div class="ep-spec-l" data-k="m_noise">Noise</div></div>
+        <div class="ep-spec"><div class="ep-spec-v">+<span>210%</span></div><div class="ep-spec-l" data-k="m_sharp">Sharpness</div></div>
+        <div class="ep-spec"><div class="ep-spec-v"><span>4K</span></div><div class="ep-spec-l" data-k="m_out">Output</div></div>
+      </div>
+      <div class="ep-features">
+        <div class="ep-feat" data-k="e2f1">Temporal noise reduction</div>
+        <div class="ep-feat" data-k="e2f2">Low-light recovery</div>
+        <div class="ep-feat" data-k="e2f3">Banding elimination</div>
+        <div class="ep-feat" data-k="e2f4">Detail-preserving algorithm</div>
+      </div>
+    </div>
+    <div class="ep-visual">
+      <div class="ep-canvas-wrap" id="wrap-crystal">
+        <canvas id="cv-crystal" width="640" height="360"></canvas>
+        <div class="slider-overlay"><div class="sl-line" id="sl-crystal"><div class="sl-btn">⟺</div></div><div class="sl-tag b" data-k="before">Before</div><div class="sl-tag a" data-k="after">After</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eng-panel" data-eng="silk">
+    <div class="ep-info">
+      <div class="ep-num">ENGINE 03 / 06</div>
+      <div class="ep-name" style="background:linear-gradient(90deg,#fff,#aaa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Silk Flow</div>
+      <div class="ep-tag">AI Motion Stabilization</div>
+      <p class="ep-desc" data-k="e3d">Cinematic motion stabilization using optical flow analysis. Eliminates camera shake, rolling shutter, and micro-jitter while preserving intentional motion. Makes handheld footage look Steadicam-smooth.</p>
+      <div class="ep-specs">
+        <div class="ep-spec"><div class="ep-spec-v">-<span>99%</span></div><div class="ep-spec-l" data-k="m_jitter">Jitter</div></div>
+        <div class="ep-spec"><div class="ep-spec-v">0<span>ms</span></div><div class="ep-spec-l" data-k="m_lag">Latency</div></div>
+        <div class="ep-spec"><div class="ep-spec-v"><span>6K</span></div><div class="ep-spec-l" data-k="m_res">Max Res</div></div>
+      </div>
+      <div class="ep-features">
+        <div class="ep-feat" data-k="e3f1">Rolling shutter correction</div>
+        <div class="ep-feat" data-k="e3f2">Optical flow analysis</div>
+        <div class="ep-feat" data-k="e3f3">Crop-free stabilization</div>
+        <div class="ep-feat" data-k="e3f4">4K/6K support</div>
+      </div>
+    </div>
+    <div class="ep-visual">
+      <div class="ep-canvas-wrap" id="wrap-silk">
+        <canvas id="cv-silk" width="640" height="360"></canvas>
+        <div class="slider-overlay"><div class="sl-line" id="sl-silk"><div class="sl-btn">⟺</div></div><div class="sl-tag b" data-k="before">Before</div><div class="sl-tag a" data-k="after">After</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eng-panel" data-eng="ghost">
+    <div class="ep-info">
+      <div class="ep-num">ENGINE 04 / 06</div>
+      <div class="ep-name" style="background:linear-gradient(90deg,#fff,#ccc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Ghost Wipe</div>
+      <div class="ep-tag">ProPainter + SAM2 · Inpainting</div>
+      <p class="ep-desc" data-k="e4d">Remove any object from your video — moving or static. SAM2 tracks it across every frame, ProPainter reconstructs the background with AI. The result is seamless and undetectable.</p>
+      <div class="ep-specs">
+        <div class="ep-spec"><div class="ep-spec-v"><span>SAM</span>2</div><div class="ep-spec-l" data-k="m_track">Tracking</div></div>
+        <div class="ep-spec"><div class="ep-spec-v">+<span>90%</span></div><div class="ep-spec-l" data-k="m_fill">Fill Rate</div></div>
+        <div class="ep-spec"><div class="ep-spec-v">Any<span>+</span></div><div class="ep-spec-l" data-k="m_obj">Object</div></div>
+      </div>
+      <div class="ep-features">
+        <div class="ep-feat" data-k="e4f1">Moving object tracking</div>
+        <div class="ep-feat" data-k="e4f2">AI background reconstruction</div>
+        <div class="ep-feat" data-k="e4f3">Temporal consistency</div>
+        <div class="ep-feat" data-k="e4f4">One-click selection</div>
+      </div>
+    </div>
+    <div class="ep-visual">
+      <div class="ep-canvas-wrap" id="wrap-ghost">
+        <canvas id="cv-ghost" width="640" height="360"></canvas>
+        <div class="slider-overlay"><div class="sl-line" id="sl-ghost"><div class="sl-btn">⟺</div></div><div class="sl-tag b" data-k="before">Before</div><div class="sl-tag a" data-k="after">After</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eng-panel" data-eng="smart">
+    <div class="ep-info">
+      <div class="ep-num">ENGINE 05 / 06</div>
+      <div class="ep-name" style="background:linear-gradient(90deg,#fff,#4fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Smart Balance</div>
+      <div class="ep-tag">AI Color Science · HDR</div>
+      <p class="ep-desc" data-k="e5d">Intelligent color grading powered by scene analysis. The AI reads your footage, corrects white balance, contrast, and saturation — then optimizes specifically for TikTok, Instagram, and YouTube color profiles.</p>
+      <div class="ep-specs">
+        <div class="ep-spec"><div class="ep-spec-v">ΔE<span>&lt;1</span></div><div class="ep-spec-l" data-k="m_acc">Accuracy</div></div>
+        <div class="ep-spec"><div class="ep-spec-v">10<span>-bit</span></div><div class="ep-spec-l" data-k="m_depth">Bit Depth</div></div>
+        <div class="ep-spec"><div class="ep-spec-v">HDR<span>+</span></div><div class="ep-spec-l" data-k="m_hdr">Output</div></div>
+      </div>
+      <div class="ep-features">
+        <div class="ep-feat" data-k="e5f1">Scene-aware analysis</div>
+        <div class="ep-feat" data-k="e5f2">Platform-optimized profiles</div>
+        <div class="ep-feat" data-k="e5f3">HDR tone mapping</div>
+        <div class="ep-feat" data-k="e5f4">10-bit processing</div>
+      </div>
+    </div>
+    <div class="ep-visual">
+      <div class="ep-canvas-wrap" id="wrap-smart">
+        <canvas id="cv-smart" width="640" height="360"></canvas>
+        <div class="slider-overlay"><div class="sl-line" id="sl-smart"><div class="sl-btn">⟺</div></div><div class="sl-tag b" data-k="before">Before</div><div class="sl-tag a" data-k="after">After</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eng-panel" data-eng="frame">
+    <div class="ep-info">
+      <div class="ep-num">ENGINE 06 / 06</div>
+      <div class="ep-name" style="background:linear-gradient(90deg,#fff,#ff9500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Frame Boost</div>
+      <div class="ep-tag">RIFE · AI Interpolation · 200fps</div>
+      <p class="ep-desc" data-k="e6d">The most advanced frame interpolation available. RIFE v4 synthesizes completely new frames between existing ones — no ghosting, no blurring. Transform 24fps footage into a mesmerizing 200fps experience.</p>
+      <div class="ep-specs">
+        <div class="ep-spec"><div class="ep-spec-v">200<span>fps</span></div><div class="ep-spec-l" data-k="m_max">Max FPS</div></div>
+        <div class="ep-spec"><div class="ep-spec-v">8<span>×</span></div><div class="ep-spec-l" data-k="m_mult">Multiplier</div></div>
+        <div class="ep-spec"><div class="ep-spec-v">0<span>%</span></div><div class="ep-spec-l" data-k="m_ghost">Ghosting</div></div>
+      </div>
+      <div class="ep-features">
+        <div class="ep-feat" data-k="e6f1">24 → 200fps conversion</div>
+        <div class="ep-feat" data-k="e6f2">RIFE v4 neural model</div>
+        <div class="ep-feat" data-k="e6f3">Zero ghosting artifacts</div>
+        <div class="ep-feat" data-k="e6f4">Real-time preview mode</div>
+      </div>
+    </div>
+    <div class="ep-visual">
+      <div class="fps-engine-visual" id="fpsViz">
+        <div class="fps-top" id="fpsTop">
+          <div>
+            <div style="text-align:center">
+              <span class="fps-counter-big" id="fpsNum">24</span><span class="fps-unit">fps</span>
+            </div>
+            <div class="fps-label" id="fpsLbl">Source</div>
+          </div>
+        </div>
+        <div class="fps-bottom" id="fpsBars"></div>
+        <div class="fps-info-row">
+          <div class="fps-info-badge from">24fps Input</div>
+          <div class="fps-arrow">→</div>
+          <div class="fps-info-badge to" id="fpsOutput">200fps Output</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="compare" class="rv">
+  <div class="sec-label" data-k="cmp_label">Before / After</div>
+  <h2 class="sec-title">See the <em>Difference</em></h2>
+  <div class="sec-bar" style="height:1px;"></div>
+  <div class="cmp-tabs" id="cmpTabs">
+    <button class="cmp-tab on" data-eng="ultra" data-k="e1n">Ultra Power</button>
+    <button class="cmp-tab" data-eng="crystal" data-k="e2n">Crystal Clear</button>
+    <button class="cmp-tab" data-eng="silk" data-k="e3n">Silk Flow</button>
+    <button class="cmp-tab" data-eng="ghost" data-k="e4n">Ghost Wipe</button>
+    <button class="cmp-tab" data-eng="smart" data-k="e5n">Smart Balance</button>
+    <button class="cmp-tab" data-eng="frame" data-k="e6n">Frame Boost</button>
+  </div>
+  <div class="cmp-stage" id="cmpStage">
+    <canvas id="cmpCvs" width="900" height="506"></canvas>
+    <div class="cmp-sl-line" id="cmpLine"><div class="cmp-sl-btn">⟺</div></div>
+    <div class="cmp-tag b" data-k="cmp_orig">Original</div>
+    <div class="cmp-tag a" data-k="cmp_enh">Enhanced</div>
+  </div>
+</section>
+
+<section id="pricing" class="rv">
+  <div class="sec-label" data-k="price_label">Plans & Pricing</div>
+  <h2 class="sec-title">Choose Your <em>Power</em></h2>
+  <div class="sec-bar" style="height:1px;"></div>
+  <div style="display:flex;align-items:center;margin-bottom:3rem;gap:1rem;flex-wrap:wrap">
+    <div class="price-toggle">
+      <button class="pt-opt on" id="ptM" onclick="setPrice('m')" data-k="price_mo">Monthly</button>
+      <button class="pt-opt" id="ptA" onclick="setPrice('a')" data-k="price_yr">Annual</button>
+    </div>
+    <div class="pt-save" data-k="price_save">Save 40%</div>
+  </div>
+  <div class="price-grid">
+    <div class="pc">
+      <div class="pc-badge" data-k="pb_free">Free Forever</div>
+      <div class="pc-name" data-k="pn_free">Starter</div>
+      <div class="pc-desc" data-k="pd_free">Perfect for getting started.</div>
+      <div class="pc-price"><div class="pc-cur">$</div><div class="pc-val">0</div><div class="pc-mo" data-k="mo">/mo</div></div>
+      <div class="pc-note"></div>
+      <ul class="pc-feats">
+        <li data-k="ff1">Crystal Clear engine</li>
+        <li data-k="ff2">720p output max</li>
+        <li data-k="ff3">5 exports/day</li>
+        <li class="no" data-k="ff4">Watermark on output</li>
+        <li class="no" data-k="ff5">No AI Upscale</li>
+        <li class="no" data-k="ff6">No Frame Boost</li>
       </ul>
-      <a href="#" class="btn btn-primary btn-full" data-k="btn_sub">Subscribe</a>
+      <button class="pc-btn out" data-k="cta_free">Download Free</button>
+    </div>
+    <div class="pc hot">
+      <div class="pc-badge pop" data-k="pb_pro">Most Popular</div>
+      <div class="pc-name" data-k="pn_pro">Pro</div>
+      <div class="pc-desc" data-k="pd_pro">For creators who demand the best.</div>
+      <div class="pc-price"><div class="pc-cur">$</div><div class="pc-val" id="ppro">19</div><div class="pc-mo" data-k="mo">/mo</div></div>
+      <div class="pc-note" id="pnote_pro"></div>
+      <ul class="pc-feats">
+        <li data-k="pf1">All 6 AI Engines</li>
+        <li data-k="pf2">4K output, no watermark</li>
+        <li data-k="pf3">Unlimited exports</li>
+        <li data-k="pf4">200fps Frame Boost</li>
+        <li data-k="pf5">Ghost Wipe removal</li>
+        <li class="no" data-k="pf6">No team workspace</li>
+      </ul>
+      <button class="pc-btn fill" data-k="cta_pro">Get Pro</button>
+    </div>
+    <div class="pc">
+      <div class="pc-badge" data-k="pb_studio">Best Value</div>
+      <div class="pc-name" data-k="pn_studio">Studio</div>
+      <div class="pc-desc" data-k="pd_studio">For professional production teams.</div>
+      <div class="pc-price"><div class="pc-cur">$</div><div class="pc-val" id="pstudio">39</div><div class="pc-mo" data-k="mo">/mo</div></div>
+      <div class="pc-note" id="pnote_studio"></div>
+      <ul class="pc-feats">
+        <li data-k="sf1">Everything in Pro</li>
+        <li data-k="sf2">6K output support</li>
+        <li data-k="sf3">5 seats / team</li>
+        <li data-k="sf4">Batch processing</li>
+        <li data-k="sf5">API access</li>
+        <li data-k="sf6">Priority support</li>
+      </ul>
+      <button class="pc-btn out" data-k="cta_studio">Get Studio</button>
+    </div>
+    <div class="pc">
+      <div class="pc-badge" data-k="pb_ent">Custom</div>
+      <div class="pc-name" data-k="pn_ent">Enterprise</div>
+      <div class="pc-desc" data-k="pd_ent">Unlimited scale and white-label.</div>
+      <div class="pc-price"><div class="pc-val" style="font-size:1.8rem" data-k="p_ent">Custom</div></div>
+      <div class="pc-note"></div>
+      <ul class="pc-feats">
+        <li data-k="ef1">Everything in Studio</li>
+        <li data-k="ef2">Unlimited seats</li>
+        <li data-k="ef3">On-premise deployment</li>
+        <li data-k="ef4">White-label option</li>
+        <li data-k="ef5">SLA guarantee</li>
+        <li data-k="ef6">Custom AI training</li>
+      </ul>
+      <button class="pc-btn out" data-k="cta_ent">Contact Sales</button>
+    </div>
+  </div>
+</section>
+
+<section id="dl-cta" class="rv">
+  <div class="dl-title"><span data-k="dl1">Upgrade</span> <span data-k="dl2">Your Video.</span></div>
+  <div class="dl-sub" data-k="dl_sub">Free to start · No credit card · Works on any GPU</div>
+  <a href="#" class="btn-prim" style="margin:0 auto;display:inline-flex">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+    <span data-k="dl_btn">Download Ultra Purity — Free</span>
+  </a>
+  <div class="dl-plats">
+    <div class="dl-plat">🖥 <span data-k="win">Windows 10/11</span></div>
+    <div class="dl-plat">🍎 <span data-k="mac">macOS 12+</span></div>
+    <div class="dl-plat">🐧 <span data-k="linux">Linux (Beta)</span></div>
+  </div>
+</section>
+
+<section id="about" class="rv">
+  <div class="about-grid">
+    <div>
+      <div class="sec-label" data-k="ab_label">About BL Creative</div>
+      <h2 class="sec-title">Built for <em>Creators</em></h2>
+      <div class="sec-bar" style="height:1px;"></div>
+      <p class="about-p" data-k="ab1">BL Creative was founded with one mission: give every creator access to studio-grade video enhancement — regardless of GPU, budget, or technical skill level.</p>
+      <p class="about-p" data-k="ab2">Ultra Purity is the direct answer to overpriced, underpowered tools. Every engine is engineered for maximum quality and minimum friction.</p>
+      <p class="about-p" data-k="ab3">In frame boost, noise removal, and platform bypass — we don't compete with Topaz. We surpass it.</p>
+      <div class="pillars">
+        <div class="pillar"><div class="pillar-ic">🎯</div><div class="pillar-t" data-k="pl1t">Precision</div><div class="pillar-d" data-k="pl1d">Every pixel to the highest possible standard.</div></div>
+        <div class="pillar"><div class="pillar-ic">⚡</div><div class="pillar-t" data-k="pl2t">Speed</div><div class="pillar-d" data-k="pl2d">GPU-accelerated real-time preview.</div></div>
+        <div class="pillar"><div class="pillar-ic">🌍</div><div class="pillar-t" data-k="pl3t">Access</div><div class="pillar-d" data-k="pl3d">Every GPU — no proprietary hardware.</div></div>
+        <div class="pillar"><div class="pillar-ic">🔒</div><div class="pillar-t" data-k="pl4t">Privacy</div><div class="pillar-d" data-k="pl4d">All processing local. Videos never leave your machine.</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="compat-box">
+        <div class="compat-bar">
+          <div class="wb" style="background:#ff5f57"></div>
+          <div class="wb" style="background:#febc2e"></div>
+          <div class="wb" style="background:#28c840"></div>
+        </div>
+        <div class="compat-body">
+          <div class="sec-label" style="margin-bottom:.8rem" data-k="compat_label">GPU Compatibility</div>
+          <div class="compat-row">
+            <div class="chip">NVIDIA RTX / GTX</div>
+            <div class="chip">AMD RX / Vega</div>
+            <div class="chip">Intel Arc</div>
+            <div class="chip">Apple M1/M2/M3</div>
+            <div class="chip">CPU Fallback</div>
+          </div>
+          <div class="compat-stat">
+            <div class="cstat"><div class="cstat-v">4<span>K</span></div><div class="cstat-l" data-k="cs1">Max Output</div></div>
+            <div class="cstat"><div class="cstat-v">200<span>fps</span></div><div class="cstat-l" data-k="cs2">Frame Boost</div></div>
+            <div class="cstat"><div class="cstat-v">6<span>×</span></div><div class="cstat-l" data-k="cs3">AI Engines</div></div>
+            <div class="cstat"><div class="cstat-v">0<span>%</span></div><div class="cstat-l" data-k="cs4">Cloud Processing</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="community" class="rv">
+  <div class="sec-label" data-k="comm_label">Community</div>
+  <h2 class="sec-title">Join the <em>Movement</em></h2>
+  <div class="sec-bar" style="height:1px;"></div>
+  <div class="comm-grid">
+    <div class="cc"><div class="cc-icon">💬</div><div class="cc-title" data-k="cm1t">Discord</div><div class="cc-text" data-k="cm1d">Join 12,000+ creators sharing tips, presets, and results.</div><a href="#" class="cc-link" data-k="cm1l">Join Discord →</a></div>
+    <div class="cc"><div class="cc-icon">🎬</div><div class="cc-title" data-k="cm2t">Tutorials</div><div class="cc-text" data-k="cm2d">Step-by-step guides for every engine from beginner to advanced.</div><a href="#" class="cc-link" data-k="cm2l">Watch Free →</a></div>
+    <div class="cc"><div class="cc-icon">📦</div><div class="cc-title" data-k="cm3t">Preset Library</div><div class="cc-text" data-k="cm3d">Download community presets for TikTok, Reels, and YouTube Shorts.</div><a href="#" class="cc-link" data-k="cm3l">Browse →</a></div>
+    <div class="cc"><div class="cc-icon">🗺</div><div class="cc-title" data-k="cm4t">Roadmap</div><div class="cc-text" data-k="cm4d">See what's coming — RIFE v4.6, SwinIR, and real-time preview.</div><a href="#" class="cc-link" data-k="cm4l">View Roadmap →</a></div>
+  </div>
+</section>
+
+<section id="contact" class="rv">
+  <div class="contact-inner">
+    <div class="sec-label" data-k="ct_label">Get in Touch</div>
+    <h2 class="sec-title">Stay <em>Updated</em></h2>
+    <div class="sec-bar" style="height:1px;"></div>
+    <p class="contact-p" data-k="ct_desc">Get early access to new engines, exclusive presets, and release notes.</p>
+    <div class="contact-row">
+      <input type="email" class="contact-in" placeholder="your@email.com" data-k-ph="ct_ph"/>
+      <button class="contact-sub" data-k="ct_btn">Subscribe</button>
+    </div>
+    <div class="soc-row">
+      <a href="#" class="soc-a">🐦 Twitter</a>
+      <a href="#" class="soc-a">▶ YouTube</a>
+      <a href="#" class="soc-a">📸 Instagram</a>
+      <a href="#" class="soc-a">💬 Discord</a>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="f-logo">BL<span style="color:var(--accent)">Creative</span></div>
-  <div class="f-text" data-k="f_copy">© 2026 BL Creative. All rights reserved.</div>
+  <div class="f-logo"><span style="font-family:var(--font-h); font-weight:400; font-size:1.4rem; letter-spacing:-0.5px; color:#fff;">BL<span style="color:#0af; font-weight:300;">Creative</span></span></div>
+  <div class="f-copy" data-k="f_copy">© 2026 BL Creative. All rights reserved.</div>
+  <div class="f-links"><a href="#" data-k="f_priv">Privacy</a><a href="#" data-k="f_terms">Terms</a><a href="#" data-k="f_sup">Support</a></div>
 </footer>
 
 <script>
-// --- ENGINE DATA (Strictly High-End & Clean) ---
-const engineData = [
-  { 
-    id: 'clr', name: { en: 'Denoise', ar: 'إزالة التشويش' },
-    desc: { en: 'Removes severe camera noise and compression artifacts while preserving sharp geometric edges and skin texture.', ar: 'يزيل ضوضاء الكاميرا وعيوب الضغط مع الحفاظ على الحواف الهندسية وملمس البشرة.' },
-    imgBefore: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=10&blur=2',
-    imgAfter: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1600&q=100',
-    cssFilter: 'flt-noise'
-  },
-  { 
-    id: 'upw', name: { en: 'Upscale', ar: 'تكبير الدقة' },
-    desc: { en: 'Reconstructs high-frequency architectural and natural details from low-resolution pixel data.', ar: 'يعيد بناء التفاصيل الدقيقة العالية التردد من مصادر بكسل منخفضة الدقة.' },
-    imgBefore: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=200&q=10',
-    imgAfter: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1600&q=100',
-    cssFilter: 'flt-pixel'
-  },
-  { 
-    id: 'fps', name: { en: 'Frame Boost (200FPS)', ar: 'رفع الإطارات (200 إطار)' },
-    desc: { en: 'Synthesizes flawless intermediate frames to convert stuttering 24fps footage into butter-smooth 200fps.', ar: 'يولد إطارات بينية خالية من العيوب لتحويل اللقطات المتقطعة إلى حركة ناعمة بـ 200 إطار.' },
-    isAnim: true
-  },
-  {
-    id: 'shp', name: { en: 'Sharpen', ar: 'زيادة الحدة' },
-    desc: { en: 'Reverses severe motion blur and out-of-focus subjects automatically using deep learning.', ar: 'يعكس تأثير ضبابية الحركة (Motion Blur) ويعيد التركيز للقطات المهتزة تلقائياً.' },
-    imgBefore: 'https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1600&q=100',
-    imgAfter: 'https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1600&q=100',
-    cssFilter: 'flt-motion'
-  },
-  {
-    id: 'bln', name: { en: 'Color Balance', ar: 'توازن الألوان' },
-    desc: { en: 'Algorithmically recovers dynamic range and fixes severe color casting in under-exposed footage.', ar: 'يستعيد النطاق الديناميكي ويصلح التشوهات اللونية الحادة في اللقطات المظلمة.' },
-    imgBefore: 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1600&q=100',
-    imgAfter: 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1600&q=100',
-    cssFilter: 'flt-color'
-  },
-  {
-    id: 'art', name: { en: 'De-Artifact', ar: 'إزالة عيوب الضغط' },
-    desc: { en: 'Cleans up heavy blocky JPEG and compression artifacts from low bitrate media exports.', ar: 'ينظف التقطعات الرقمية وعيوب الضغط الناتجة عن التصدير بمعدل بت (Bitrate) منخفض.' },
-    imgBefore: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1600&q=100',
-    imgAfter: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1600&q=100',
-    cssFilter: 'flt-artifact'
-  }
-];
+/* ━━━━━━━━━━━━━━━━━ CURSOR ━━━━━━━━━━━━━━━━━ */
+// ... (Cursor logic intact)
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
 
-const listContainer = document.getElementById('engineList');
-const imgBefore = document.getElementById('layerBefore');
-const imgAfter = document.getElementById('layerAfter');
-const aBefore = document.getElementById('animBefore');
-const aAfter = document.getElementById('animAfter');
-let currentLang = 'ar';
+/* ━━━━━━━━━━━━━━━━━ BG PARTICLES ━━━━━━━━━━━━━━━━━ */
+// ... (Particles logic intact)
+const bgCvs=document.getElementById('cvs'),bx=bgCvs.getContext('2d');
+let W=bgCvs.width=window.innerWidth,H=bgCvs.height=window.innerHeight;
+window.addEventListener('resize',()=>{W=bgCvs.width=window.innerWidth;H=bgCvs.height=window.innerHeight});
+const pts=Array.from({length:70},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()+.3,a:Math.random()*.5+.1}));
+(function bgLoop(){
+  bx.clearRect(0,0,W,H);
+  pts.forEach(p=>{p.x=(p.x+p.vx+W)%W;p.y=(p.y+p.vy+H)%H;bx.beginPath();bx.arc(p.x,p.y,p.r,0,Math.PI*2);bx.fillStyle=`rgba(0,170,255,${p.a})`;bx.fill()});
+  pts.forEach((p,i)=>pts.slice(i+1).forEach(q=>{const d=Math.hypot(p.x-q.x,p.y-q.y);if(d<110){bx.beginPath();bx.moveTo(p.x,p.y);bx.lineTo(q.x,q.y);bx.strokeStyle=`rgba(0,170,255,${(1-d/110)*.06})`;bx.lineWidth=.5;bx.stroke()}}));
+  requestAnimationFrame(bgLoop);
+})();
 
-function buildGrid() {
-  listContainer.innerHTML = '';
-  engineData.forEach((e, i) => {
-    const card = document.createElement('div');
-    card.className = 'eng-card';
-    card.innerHTML = `<div class="eng-title">${e.name[currentLang]}</div><div class="eng-desc">${e.desc[currentLang]}</div>`;
-    card.onclick = () => switchEngine(i);
-    listContainer.appendChild(card);
-  });
-  switchEngine(0);
-}
+/* ━━━━━━━━━━━━━━━━━ GPU HERO CANVAS ━━━━━━━━━━━━━━━━━ */
+// ... (GPU Canvas logic intact)
+(function(){
+  const c=document.getElementById('gpuCanvas');if(!c)return;
+  const g=c.getContext('2d');let t=0;
+  const drawGpu=()=>{
+    g.clearRect(0,0,460,360);
+    const pcb=g.createLinearGradient(0,0,460,360);pcb.addColorStop(0,'#0d1825');pcb.addColorStop(1,'#080e18');
+    g.fillStyle=pcb;g.beginPath();g.roundRect(10,30,440,290,14);g.fill();
+    g.strokeStyle='rgba(0,170,255,.12)';g.lineWidth=1;g.stroke();
+    g.fillStyle='#0c1822';for(let i=0;i<9;i++){g.beginPath();g.roundRect(18,48+i*0,100,280,2);g.fillStyle=`rgba(12,24,34,${.9})`;g.fill();g.strokeStyle='rgba(0,170,255,.06)';g.lineWidth=.5;g.beginPath();g.moveTo(18+i*11,48);g.lineTo(18+i*11,328);g.stroke()}
+    for(let i=0;i<9;i++){g.strokeStyle='rgba(0,170,255,.06)';g.lineWidth=.5;g.beginPath();g.moveTo(342+i*11,48);g.lineTo(342+i*11,328);g.stroke()}
+    const cg=g.createLinearGradient(148,95,312,250);cg.addColorStop(0,'#071220');cg.addColorStop(1,'#050d18');
+    g.fillStyle=cg;g.beginPath();g.roundRect(148,95,164,160,7);g.fill();
+    g.strokeStyle=`rgba(0,${170+Math.sin(t*.05)*30},255,${.3+Math.sin(t*.08)*.15})`;g.lineWidth=1;g.stroke();
+    g.fillStyle=`rgba(0,170,255,${.6+Math.sin(t*.06)*.2})`;g.font='300 11px Inter,sans-serif';g.letterSpacing='3px';g.textAlign='center';g.fillText('BL AI CORE',230,178);
+    g.fillStyle='rgba(0,170,255,.35)';g.font='300 7px DM Mono,monospace';g.letterSpacing='1px';g.fillText('ULTRA PURITY v7',230,194);
+    [[168,112],[200,112],[262,112],[295,112],[168,248],[295,248]].forEach(([cx,cy],i)=>{const p=.5+Math.sin(t*.07+i)*.4;g.beginPath();g.arc(cx,cy,2,0,Math.PI*2);g.fillStyle=`rgba(0,${150+p*100},255,${p})`;g.fill()});
+    for(let i=0;i<5;i++){g.fillStyle='#0b1820';g.beginPath();g.roundRect(148+i*32,45,26,42,3);g.fill();g.strokeStyle='rgba(0,170,255,.1)';g.lineWidth=.5;g.stroke();const gv=.3+Math.sin(t*.1+i*.5)*.2;g.fillStyle=`rgba(0,170,255,${gv})`;g.beginPath();g.roundRect(154+i*32,51,14,6,1);g.fill()}
+    const gl=g.createLinearGradient(10,31,450,31);gl.addColorStop(0,'transparent');gl.addColorStop(.3,'rgba(0,170,255,.7)');gl.addColorStop(.7,'rgba(0,224,255,.5)');gl.addColorStop(1,'transparent');
+    g.fillStyle=gl;g.fillRect(10,30,440,2);
+    [[130,175,148,175],[312,175,330,175]].forEach(([x1,y1,x2,y2],i)=>{const f=.3+Math.sin(t*.1+i*1.5)*.3;g.strokeStyle=`rgba(0,170,255,${f})`;g.lineWidth=1;g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.stroke()});
+    g.fillStyle='#0a1420';g.beginPath();g.roundRect(10,312,440,22,4);g.fill();
+    g.fillStyle='rgba(0,170,255,.04)';g.fillRect(16,315,428,14);
+    t++;requestAnimationFrame(drawGpu);
+  };
+  drawGpu();
+})();
 
-function switchEngine(index) {
-  document.querySelectorAll('.eng-card').forEach((card, i) => {
-    card.classList.toggle('active', i === index);
-  });
-
-  const data = engineData[index];
-  
-  if(data.isAnim) {
-    imgBefore.classList.add('hide'); imgAfter.classList.add('hide');
-    aBefore.classList.remove('hide'); aAfter.classList.remove('hide');
-  } else {
-    aBefore.classList.add('hide'); aAfter.classList.add('hide');
-    imgBefore.classList.remove('hide'); imgAfter.classList.remove('hide');
-    
-    imgBefore.style.backgroundImage = `url('${data.imgBefore}')`;
-    imgAfter.style.backgroundImage = `url('${data.imgAfter}')`;
-    imgBefore.className = `sl-layer ${data.cssFilter}`;
-  }
-  
-  // Smooth scroll up to slider on mobile
-  if(window.innerWidth < 900) {
-    document.getElementById('showcase').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-}
-
-// --- LTR BULLETPROOF SLIDER LOGIC ---
-const slider = document.getElementById('masterSlider');
-const mask = document.getElementById('layerBeforeMask');
-const line = document.getElementById('masterLine');
-const handle = document.getElementById('masterHdl');
-let isDragging = false;
-
-function moveSlider(e) {
-  const rect = slider.getBoundingClientRect();
-  const clientX = e.clientX ?? (e.touches ? e.touches[0].clientX : 0);
-  let p = ((clientX - rect.left) / rect.width) * 100;
-  p = Math.max(0, Math.min(100, p));
-  mask.style.clipPath = `polygon(0 0, ${p}% 0, ${p}% 100%, 0 100%)`;
-  line.style.left = `${p}%`;
-  handle.style.left = `${p}%`;
-}
-
-slider.addEventListener('mousedown', e => { isDragging = true; moveSlider(e); });
-slider.addEventListener('touchstart', e => { isDragging = true; moveSlider(e); }, {passive:true});
-document.addEventListener('mousemove', e => { if(isDragging) moveSlider(e); });
-document.addEventListener('touchmove', e => { if(isDragging) moveSlider(e); }, {passive:true});
-document.addEventListener('mouseup', () => isDragging = false);
-document.addEventListener('touchend', () => isDragging = false);
-
-// --- TRANSLATION LOGIC (i18n) ---
-const LANGS = { en: 'English', ar: 'العربية' };
-const D = {
-  en: {
-    nav_eng: "Features", nav_pr: "Pricing", nav_ab: "About", btn_get: "Download",
-    hero_badge: "AI Video Enhancement Protocol", hero_h1: "Tell your story.<br>We'll make it the highest quality possible.",
-    hero_sub: "Professional AI tools to upscale, denoise, and interpolate your footage. Built for creators who demand uncompromising quality.",
-    btn_demo: "See Results", lbl_b: "Original",
-    eng_h: "Every tool you need.", eng_desc: "Select a module below to compare the original raw footage with UltraPurity's AI reconstruction.",
-    hw_h: "Built for Performance", f1t: "Hardware Acceleration", f1d: "Interfaces directly with NVIDIA Tensor Cores and AMD AI architectures to deliver real-time, multi-threaded deep learning inference.",
-    f2t: "Platform Bypass", f2d: "Our output encoding forces platforms like TikTok and YouTube to process your uploads at the highest original bitrate possible.",
-    f3t: "Absolute Privacy", f3d: "All AI models run locally on your machine. Your footage is never uploaded to the cloud, ensuring complete data security.",
-    pr_h: "Simple Pricing", btn_sub: "Subscribe", pn_free: "Creator", pn_pro: "Professional", mo: "/mo",
-    ff1: "Max 4K Processing", ff2: "All Basic AI Engines", ff3: "Community Support",
-    pf4: "Unlimited 8K Resolution", pf5: "Multi-GPU Threading & 200FPS", pf6: "Priority Server Access",
-    f_copy: "© 2026 BL Creative. All rights reserved."
-  },
-  ar: {
-    nav_eng: "الميزات", nav_pr: "الأسعار", nav_ab: "عن البرنامج", btn_get: "تحميل البرنامج",
-    hero_badge: "بروتوكول معالجة الفيديو بالذكاء الاصطناعي", hero_h1: "اروي قصتك.<br>ونحن سنجعلها بأعلى جودة ممكنة.",
-    hero_sub: "أدوات ذكاء اصطناعي احترافية لتكبير الدقة، إزالة التشويش، وتوليد الإطارات. مصمم للمبدعين الذين يطمحون لجودة لا تقبل المساومة.",
-    btn_demo: "شاهد النتائج", lbl_b: "الأصلي",
-    eng_h: "كل أداة تحتاجها.", eng_desc: "اختر أداة من الأسفل لمقارنة الفيديو الخام الأصلي مع إعادة البناء الفائقة من UltraPurity.",
-    hw_h: "مصمم للأداء الفائق", f1t: "تسريع العتاد (Hardware)", f1d: "يتخاطب مباشرة مع أنوية NVIDIA Tensor ومعماريات AMD لتقديم معالجة ذكاء اصطناعي فورية ومتعددة المسارات.",
-    f2t: "تجاوز خوارزميات المنصات", f2d: "نظام التشفير الخاص بنا يجبر منصات مثل TikTok و YouTube على رفع فيديوهاتك بأعلى معدل بت (Bitrate) أصلي.",
-    f3t: "خصوصية مطلقة", f3d: "جميع نماذج الذكاء الاصطناعي تعمل محلياً على جهازك. لا يتم رفع لقطاتك إلى السحابة أبداً، مما يضمن أمان بياناتك.",
-    pr_h: "أسعار بسيطة ومباشرة", btn_sub: "اشترك الآن", pn_free: "المبدعين", pn_pro: "الاحترافية", mo: "/شهر",
-    ff1: "معالجة بدقة 4K كحد أقصى", ff2: "جميع المحركات الأساسية", ff3: "دعم من المجتمع",
-    pf4: "دقة 8K لا محدودة", pf5: "استغلال الكروت المتعددة و 200FPS", pf6: "أولوية الوصول للخوادم",
-    f_copy: "© 2026 BL Creative. جميع الحقوق محفوظة."
-  }
+/* ━━━━━━━━━━━━━━━━━ ENGINE CANVAS PREVIEWS ━━━━━━━━━━━━━━━━━ */
+const ENG_STYLES={
+  ultra:{before:{bright:.72,contrast:.82,sat:.8,blur:1.2,noise:.25},after:{bright:1.04,contrast:1.12,sat:1.05,blur:0,noise:0}},
+  crystal:{before:{bright:.65,contrast:.78,sat:.65,blur:.8,noise:.45},after:{bright:1.02,contrast:1.14,sat:1.08,blur:0,noise:0}},
+  silk:{before:{bright:.8,contrast:.88,sat:.85,blur:.3,jitter:6},after:{bright:1.01,contrast:1.04,sat:.98,blur:0,jitter:0}},
+  ghost:{before:{bright:.82,contrast:.9,sat:.85,blur:0,hasObject:true},after:{bright:1.0,contrast:1.04,sat:1.0,blur:0,hasObject:false}},
+  smart:{before:{bright:.68,contrast:.76,sat:.55,hue:-12,blur:0},after:{bright:1.06,contrast:1.14,sat:1.22,hue:0,blur:0}},
+  frame:{before:{bright:.82,contrast:.88,sat:.85},after:{bright:1.02,contrast:1.05,sat:1.0}}
 };
-
-function applyLang(l) {
-  currentLang = l;
-  const dict = D[l] || D.en; 
-  document.querySelectorAll('[data-k]').forEach(el => {
-    const key = el.getAttribute('data-k');
-    if(dict[key]) el.innerHTML = dict[key];
-  });
-  
-  const isRTL = l === 'ar';
-  document.documentElement.lang = l;
-  document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
-  document.body.style.fontFamily = isRTL ? "var(--font-ar)" : "var(--font-en)";
-  
-  buildGrid(); // Rebuild grid to apply translations
+function makeScene(type,W,H,style,t){
+  const oc=document.createElement('canvas');oc.width=W;oc.height=H;const ox=oc.getContext('2d');
+  if(type==='city'){
+    const bg=ox.createLinearGradient(0,0,0,H);bg.addColorStop(0,'#050810');bg.addColorStop(1,'#0a0d18');
+    ox.fillStyle=bg;ox.fillRect(0,0,W,H);
+    for(let i=0;i<40;i++){const a=.2+Math.sin(i*7.3+t*.02)*.15;ox.beginPath();ox.arc(i*17%W,i*11%80,Math.random()*.8+.3,0,Math.PI*2);ox.fillStyle=`rgba(200,220,255,${a})`;ox.fill()}
+    const builds=[[0,30,H*.4,W*.1],[W*.08,25,H*.6,W*.08],[W*.16,32,H*.5,W*.12],[W*.28,20,H*.7,W*.09],[W*.36,28,H*.55,W*.1],[W*.46,22,H*.65,W*.08],[W*.55,35,H*.45,W*.12],[W*.66,26,H*.6,W*.09],[W*.74,30,H*.5,W*.1],[W*.84,24,H*.65,W*.08],[W*.92,32,H*.4,W*.08]];
+    builds.forEach(([bx,wd,ht,bw])=>{
+      const bg2=ox.createLinearGradient(bx,H-ht,bx,H);bg2.addColorStop(0,`rgba(20,30,50,.95)`);bg2.addColorStop(1,`rgba(10,16,28,.95)`);
+      ox.fillStyle=bg2;ox.fillRect(bx,H-ht,bw,ht);
+      for(let wy=H-ht+8;wy<H-4;wy+=10){for(let wxi=bx+4;wxi<bx+bw-4;wxi+=7){if(Math.random()>.35){const won=Math.sin(wxi*3.1+wy*.7+t*.05)>.1;ox.fillStyle=won?`rgba(255,220,120,${.3+Math.random()*.4})`:`rgba(40,50,70,.3)`;ox.fillRect(wxi,wy,4,5)}}}
+    });
+    ox.fillStyle='rgba(0,170,255,.03)';ox.fillRect(0,H*.85,W,H*.15);
+    const rg=ox.createLinearGradient(0,H*.85,0,H);rg.addColorStop(0,'rgba(0,170,255,.06)');rg.addColorStop(1,'transparent');ox.fillStyle=rg;ox.fillRect(0,H*.85,W,H*.15);
+  } else if(type==='portrait'){
+    const bg=ox.createLinearGradient(0,0,W,H);bg.addColorStop(0,'#0d1020');bg.addColorStop(1,'#151825');
+    ox.fillStyle=bg;ox.fillRect(0,0,W,H);
+    const cx=W*.5,cy=H*.38;
+    ox.beginPath();ox.arc(cx,cy,H*.15,0,Math.PI*2);ox.fillStyle='#705848';ox.fill();
+    ox.beginPath();ox.ellipse(cx,H*.7,H*.22,H*.22,0,0,Math.PI);ox.fillStyle='#5a4838';ox.fill();
+    ox.fillStyle='rgba(255,255,255,.03)';ox.fillRect(0,0,W,H);
+    const rl=ox.createRadialGradient(cx+60,cy-20,0,cx,cy,H*.35);rl.addColorStop(0,'rgba(0,170,255,.08)');rl.addColorStop(1,'transparent');ox.fillStyle=rl;ox.fillRect(0,0,W,H);
+  }
+  const {bright=1,contrast=1,sat=1,blur:bl=0,noise:ns=0,jitter=0,hasObject=false}=style;
+  if(ns>0){const id=ox.getImageData(0,0,W,H);for(let i=0;i<id.data.length;i+=4){const n=(Math.random()-.5)*ns*160;id.data[i]+=n;id.data[i+1]+=n;id.data[i+2]+=n}ox.putImageData(id,0,0)}
+  if(hasObject){ox.fillStyle='rgba(180,140,100,.85)';ox.beginPath();ox.ellipse(W*.65,H*.55,W*.08,H*.2,-.2,0,Math.PI*2);ox.fill();ox.strokeStyle='rgba(200,160,120,.4)';ox.lineWidth=2;ox.stroke()}
+  if(jitter>0){const jx=(Math.random()-.5)*jitter;const jy=(Math.random()-.5)*jitter;const id=ox.getImageData(0,0,W,H);ox.clearRect(0,0,W,H);ox.putImageData(id,jx,jy)}
+  return {canvas:oc,bright,contrast,sat,blur:bl,hue:style.hue||0};
 }
+const sliders={};
+function initEngineCanvas(engKey,type){
+  const cv=document.getElementById('cv-'+engKey);if(!cv)return;
+  const g=cv.getContext('2d');const W=640,H=360;
+  const before=ENG_STYLES[engKey].before,after=ENG_STYLES[engKey].after;
+  const bs=makeScene(type,W,H,before,0),as2=makeScene(type,W,H,after,0);
+  let pct=50,drag=false;
+  const draw=()=>{
+    g.clearRect(0,0,W,H);
+    g.save();g.filter=`brightness(${as2.bright}) contrast(${as2.contrast}) saturate(${as2.sat}) hue-rotate(${as2.hue||0}deg)`;g.drawImage(as2.canvas,0,0,W,H);g.restore();
+    g.save();g.beginPath();g.rect(0,0,pct/100*W,H);g.clip();
+    g.filter=`brightness(${bs.bright}) contrast(${bs.contrast}) saturate(${bs.sat}) hue-rotate(${bs.hue||0}deg)${bs.blur>0?' blur('+bs.blur+'px)':''}`;
+    g.drawImage(bs.canvas,0,0,W,H);g.restore();g.filter='none';
+  };
+  draw();
+  const wrap=document.getElementById('wrap-'+engKey);const sl=document.getElementById('sl-'+engKey);
+  if(!wrap||!sl)return;
+  const upd=cx=>{const r=wrap.getBoundingClientRect();pct=Math.max(5,Math.min(95,(cx-r.left)/r.width*100));sl.style.left=pct+'%';draw()};
+  sl.addEventListener('mousedown',e=>{drag=true;e.stopPropagation()});
+  wrap.addEventListener('mousedown',e=>{drag=true;upd(e.clientX)});
+  document.addEventListener('mousemove',e=>{if(drag)upd(e.clientX)});
+  document.addEventListener('mouseup',()=>drag=false);
+  wrap.addEventListener('touchstart',e=>{drag=true;upd(e.touches[0].clientX)},{passive:true});
+  document.addEventListener('touchmove',e=>{if(drag)upd(e.touches[0].clientX)},{passive:true});
+  document.addEventListener('touchend',()=>drag=false);
+  sliders[engKey]={pct,draw};
+}
+initEngineCanvas('ultra','city');
+initEngineCanvas('crystal','portrait');
+initEngineCanvas('silk','city');
+initEngineCanvas('ghost','portrait');
+initEngineCanvas('smart','portrait');
 
-// Build Lang Selector
-const sel = document.getElementById('langSel');
-Object.entries(LANGS).forEach(([code, name]) => {
-  const opt = document.createElement('option');
-  opt.value = code; opt.textContent = name;
-  sel.appendChild(opt);
+/* ━━━━━━━━━━━━━━━━━ ENGINE TABS ━━━━━━━━━━━━━━━━━ */
+document.getElementById('engNav').addEventListener('click',e=>{
+  const btn=e.target.closest('.eng-nav-btn');if(!btn)return;
+  document.querySelectorAll('.eng-nav-btn').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.eng-panel').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelector(`.eng-panel[data-eng="${btn.dataset.eng}"]`).classList.add('on');
 });
 
-function setLang(l) { applyLang(l); }
-sel.value = 'ar';
-applyLang('ar'); // Default load
+/* ━━━━━━━━━━━━━━━━━ FPS ENGINE ━━━━━━━━━━━━━━━━━ */
+(function(){
+  const bars=document.getElementById('fpsBars'),numEl=document.getElementById('fpsNum'),lblEl=document.getElementById('fpsLbl');
+  if(!bars)return;
+  const N=48;const barEls=[];
+  for(let i=0;i<N;i++){const b=document.createElement('div');b.className='fps-bar-item';b.style.height='10%';bars.appendChild(b);barEls.push(b)}
+  let fpsNow=24,fpsTarget=24,phase=0,tick=0;
+  const heights=Array.from({length:N},()=>Math.random()*.3+.1);
+  const PHASES=[{fps:24,label:'Source',color:'#444'},{fps:24,label:'Processing...',color:'#666'},{fps:60,label:'60fps',color:'#888'},{fps:120,label:'120fps',color:'#aaa'},{fps:200,label:'200fps ✦',color:'#0af'}];
+  let phI=0;
+  setInterval(()=>{phI=(phI+1)%PHASES.length;const ph=PHASES[phI];fpsTarget=ph.fps;if(lblEl)lblEl.textContent=ph.label;if(numEl){numEl.style.color=ph.color}}, 1800);
+  setInterval(()=>{if(Math.abs(fpsNow-fpsTarget)>1)fpsNow+=(fpsTarget-fpsNow)*.18;if(numEl)numEl.textContent=Math.round(fpsNow)},40);
+  (function fpsAnim(){
+    const t=Date.now()*.001;
+    barEls.forEach((b,i)=>{const base=fpsNow/200;const wave=.3+base*.7;const h=wave*(.4+Math.sin(t*8+i*.4)*.3+Math.cos(t*5+i*.7)*.2)+.1;heights[i]+=(h-heights[i])*.2;const pct=Math.max(5,Math.min(100,heights[i]*100));b.style.height=pct+'%';const hot=fpsNow>100;b.style.background=hot?`rgba(0,${140+pct*.6|0},${200+pct*.5|0},.8)`:`rgba(${80+pct|0},${80+pct|0},${80+pct|0},.6)`});
+    requestAnimationFrame(fpsAnim);
+  })();
+})();
 
+/* ━━━━━━━━━━━━━━━━━ MAIN COMPARE ━━━━━━━━━━━━━━━━━ */
+(function(){
+  const stage=document.getElementById('cmpStage'),cv=document.getElementById('cmpCvs'),line=document.getElementById('cmpLine');
+  if(!stage||!cv)return;
+  const g=cv.getContext('2d');const W=900,H=506;
+  let pct=50,drag=false,curEng='ultra';
+  const engTypes={ultra:'city',crystal:'portrait',silk:'city',ghost:'portrait',smart:'portrait',frame:'city'};
+  let bs,as2;
+  const loadEng=eng=>{curEng=eng;const t=engTypes[eng]||'city';bs=makeScene(t,W,H,ENG_STYLES[eng].before,0);as2=makeScene(t,W,H,ENG_STYLES[eng].after,0);draw()};
+  const draw=()=>{
+    g.clearRect(0,0,W,H);
+    g.save();g.filter=`brightness(${as2.bright}) contrast(${as2.contrast}) saturate(${as2.sat}) hue-rotate(${as2.hue||0}deg)`;g.drawImage(as2.canvas,0,0,W,H);g.restore();
+    g.save();g.beginPath();g.rect(0,0,pct/100*W,H);g.clip();
+    g.filter=`brightness(${bs.bright}) contrast(${bs.contrast}) saturate(${bs.sat}) hue-rotate(${bs.hue||0}deg)${bs.blur>0?' blur('+bs.blur+'px)':''}`;
+    g.drawImage(bs.canvas,0,0,W,H);g.restore();g.filter='none';
+  };
+  loadEng('ultra');
+  const upd=cx=>{const r=stage.getBoundingClientRect();pct=Math.max(5,Math.min(95,(cx-r.left)/r.width*100));line.style.left=pct+'%';draw()};
+  line.addEventListener('mousedown',e=>{drag=true;e.stopPropagation()});
+  stage.addEventListener('mousedown',e=>{drag=true;upd(e.clientX)});
+  document.addEventListener('mousemove',e=>{if(drag)upd(e.clientX)});
+  document.addEventListener('mouseup',()=>drag=false);
+  stage.addEventListener('touchstart',e=>{drag=true;upd(e.touches[0].clientX)},{passive:true});
+  document.addEventListener('touchmove',e=>{if(drag)upd(e.touches[0].clientX)},{passive:true});
+  document.addEventListener('touchend',()=>drag=false);
+  document.getElementById('cmpTabs').addEventListener('click',e=>{
+    const t=e.target.closest('.cmp-tab');if(!t)return;
+    document.querySelectorAll('.cmp-tab').forEach(b=>b.classList.remove('on'));t.classList.add('on');loadEng(t.dataset.eng);
+  });
+})();
+
+/* ━━━━━━━━━━━━━━━━━ PRICING ━━━━━━━━━━━━━━━━━ */
+const P={m:{pro:19,studio:39},a:{pro:11,studio:23}};
+window.setPrice=function(mode){
+  document.getElementById('ptM').classList.toggle('on',mode==='m');
+  document.getElementById('ptA').classList.toggle('on',mode==='a');
+  document.getElementById('ppro').textContent=P[mode].pro;
+  document.getElementById('pstudio').textContent=P[mode].studio;
+  document.getElementById('pnote_pro').textContent=mode==='a'?`$${P.a.pro*12}/yr · Save $${(P.m.pro-P.a.pro)*12}`:'';
+  document.getElementById('pnote_studio').textContent=mode==='a'?`$${P.a.studio*12}/yr · Save $${(P.m.studio-P.a.studio)*12}`:'';
+};
+setPrice('m');
+
+/* ━━━━━━━━━━━━━━━━━ SCROLL REVEAL ━━━━━━━━━━━━━━━━━ */
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')}),{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+/* ━━━━━━━━━━━━━━━━━ I18N ━━━━━━━━━━━━━━━━━ */
+const LANGS={en:'English',ar:'العربية',fr:'Français',de:'Deutsch',es:'Español',it:'Italiano',pt:'Português',ru:'Русский',ja:'日本語',ko:'한국어',zh:'中文',tr:'Türkçe'};
+const D={
+  en:{nav_engines:'Engines',nav_compare:'Compare',nav_pricing:'Pricing',nav_about:'About',nav_contact:'Contact',nav_dl:'Download Free',hero_badge:'AI-Powered Video Enhancement',hero_sub:'by BL Creative',hero_desc:'The most powerful video enhancement suite. 6 AI engines that crush noise, bypass platform compression, and boost to 200fps — on any GPU.',hero_cta:'Download Free',hero_see:'See Results',stat1:'AI Engines',stat2:'Frame Boost',stat3:'Upscale',stat4:'GPU Support',f1t:'Platform Bypass',f1d:'Force platforms to upload at full original quality.',f2t:'Real AI Models',f2d:'RealESRGAN, NAFNet & RIFE — production neural networks.',f3t:'Any GPU',f3d:'NVIDIA, AMD, Intel Arc — all supported.',f4t:'200fps Boost',f4d:'AI interpolation to buttery-smooth 200fps.',f5t:'Object Removal',f5d:'Remove anything from static or moving scenes.',eng_label:'AI Processing Suite',e1n:'Ultra Power',e2n:'Crystal Clear',e3n:'Silk Flow',e4n:'Ghost Wipe',e5n:'Smart Balance',e6n:'Frame Boost',before:'Before',after:'After',m_scale:'Scale Factor',m_detail:'Detail Gain',m_color:'Color Space',m_noise:'Noise',m_sharp:'Sharpness',m_out:'Output',m_jitter:'Jitter',m_lag:'Latency',m_res:'Max Res',m_track:'Tracking',m_fill:'Fill Rate',m_obj:'Object',m_acc:'Accuracy',m_depth:'Bit Depth',m_hdr:'Output',m_max:'Max FPS',m_mult:'Multiplier',m_ghost:'Ghosting',cmp_label:'Before / After',cmp_orig:'Original',cmp_enh:'Enhanced',price_label:'Plans & Pricing',price_mo:'Monthly',price_yr:'Annual',price_save:'Save 40%',mo:'/mo',pb_free:'Free Forever',pn_free:'Starter',pd_free:'Perfect for getting started.',pb_pro:'Most Popular',pn_pro:'Pro',pd_pro:'For creators who demand the best.',pb_studio:'Best Value',pn_studio:'Studio',pd_studio:'For professional teams.',pb_ent:'Custom',pn_ent:'Enterprise',pd_ent:'Unlimited scale.',p_ent:'Custom',cta_free:'Download Free',cta_pro:'Get Pro',cta_studio:'Get Studio',cta_ent:'Contact Sales',dl1:'Upgrade',dl2:'Your Video.',dl_sub:'Free to start · No credit card · Works on any GPU',dl_btn:'Download Ultra Purity — Free',win:'Windows 10/11',mac:'macOS 12+',linux:'Linux (Beta)',ab_label:'About BL Creative',ab1:'BL Creative was founded to give every creator access to studio-grade video enhancement.',ab2:'Ultra Purity is the direct answer to overpriced, underpowered tools.',ab3:'In frame boost, noise removal, and platform bypass — we surpass Topaz.',pl1t:'Precision',pl1d:'Every pixel to the highest standard.',pl2t:'Speed',pl2d:'GPU-accelerated real-time preview.',pl3t:'Access',pl3d:'Every GPU — no proprietary hardware.',pl4t:'Privacy',pl4d:'All processing local. Videos never leave your machine.',compat_label:'GPU Compatibility',cs1:'Max Output',cs2:'Frame Boost',cs3:'AI Engines',cs4:'Cloud Processing',comm_label:'Community',cm1t:'Discord',cm1d:'Join 12,000+ creators sharing tips and results.',cm1l:'Join Discord →',cm2t:'Tutorials',cm2d:'Step-by-step guides for every engine.',cm2l:'Watch Free →',cm3t:'Preset Library',cm3d:'Download community presets.',cm3l:'Browse →',cm4t:'Roadmap',cm4d:"See what's coming next.",cm4l:'View Roadmap →',ct_label:'Get in Touch',ct_desc:'Get early access to new engines and release notes.',ct_btn:'Subscribe',ct_ph:'your@email.com',f_copy:'© 2025 BL Creative. All rights reserved.',f_priv:'Privacy',f_terms:'Terms',f_sup:'Support',ff1:'Crystal Clear engine',ff2:'720p output max',ff3:'5 exports/day',ff4:'Watermark on output',ff5:'No AI Upscale',ff6:'No Frame Boost',pf1:'All 6 AI Engines',pf2:'4K output, no watermark',pf3:'Unlimited exports',pf4:'200fps Frame Boost',pf5:'Ghost Wipe removal',pf6:'No team workspace',sf1:'Everything in Pro',sf2:'6K output support',sf3:'5 seats / team',sf4:'Batch processing',sf5:'API access',sf6:'Priority support',ef1:'Everything in Studio',ef2:'Unlimited seats',ef3:'On-premise deployment',ef4:'White-label option',ef5:'SLA guarantee',ef6:'Custom AI training',e1d:'4K AI upscaling using RealESRGAN. Recovers detail, sharpness, and depth that compression destroyed.',e2d:'NAFNet deep denoising. Removes grain and noise while preserving every real scene detail.',e3d:'AI motion stabilization. Eliminates jitter and rolling shutter for cinematic fluid footage.',e4d:'Remove any object from video using SAM2 tracking + ProPainter AI inpainting.',e5d:'Intelligent color grading. AI reads your scene and optimizes for social media platforms.',e6d:'RIFE v4 frame interpolation. Convert any fps to silky-smooth 200fps with zero ghosting.',e1f1:'4K / 6K output support',e1f2:'Compression artifact removal',e1f3:'Texture & edge reconstruction',e1f4:'HDR-aware processing',e2f1:'Temporal noise reduction',e2f2:'Low-light recovery',e2f3:'Banding elimination',e2f4:'Detail-preserving algorithm',e3f1:'Rolling shutter correction',e3f2:'Optical flow analysis',e3f3:'Crop-free stabilization',e3f4:'4K/6K support',e4f1:'Moving object tracking',e4f2:'AI background reconstruction',e4f3:'Temporal consistency',e4f4:'One-click selection',e5f1:'Scene-aware analysis',e5f2:'Platform-optimized profiles',e5f3:'HDR tone mapping',e5f4:'10-bit processing',e6f1:'24 → 200fps conversion',e6f2:'RIFE v4 neural model',e6f3:'Zero ghosting artifacts',e6f4:'Real-time preview mode'},
+  ar:{nav_engines:'المحركات',nav_compare:'مقارنة',nav_pricing:'الأسعار',nav_about:'عنا',nav_contact:'تواصل',nav_dl:'تحميل مجاني',hero_badge:'تحسين الفيديو بالذكاء الاصطناعي',hero_sub:'من BL Creative',hero_desc:'أقوى مجموعة لتحسين الفيديو. 6 محركات ذكاء اصطناعي تكسر الضوضاء وتتجاوز ضغط المنصات وترفع الفريمات إلى 200 إطار.',hero_cta:'تحميل مجاناً',hero_see:'شاهد النتائج',stat1:'محرك AI',stat2:'رفع الفريمات',stat3:'تكبير',stat4:'دعم GPU',f1t:'تجاوز المنصات',f1d:'يجبر المنصات على رفع الفيديو بأعلى جودة ممكنة.',f2t:'نماذج ذكاء اصطناعي حقيقية',f2d:'شبكات عصبية قوية مثل RealESRGAN و NAFNet.',f3t:'أي كرت شاشة',f3d:'ندعم كروت NVIDIA و AMD و Intel.',f4t:'200fps إطار',f4d:'توليد إطارات للوصول إلى حركة ناعمة بـ 200 إطار.',f5t:'إزالة الكائنات',f5d:'إزالة أي شيء من المشاهد الثابتة أو المتحركة.',eng_label:'حزمة معالجة الذكاء الاصطناعي',e1n:'ألترا باور',e2n:'كريستال كلير',e3n:'سيلك فلو',e4n:'جوست وايب',e5n:'سمارت بالانس',e6n:'فريم بوست',before:'قبل',after:'بعد',m_scale:'معدل التكبير',m_detail:'مستوى التفاصيل',m_color:'مساحة الألوان',m_noise:'الضوضاء',m_sharp:'الحدة',m_out:'دقة الإخراج',m_jitter:'الاهتزاز',m_lag:'التأخير',m_res:'أقصى دقة',m_track:'التتبع',m_fill:'معدل التعبئة',m_obj:'الكائنات',m_acc:'الدقة',m_depth:'عمق البت',m_hdr:'الناتج',m_max:'أقصى إطارات',m_mult:'مضاعف الإطارات',m_ghost:'تشوه الأطياف',cmp_label:'قبل / بعد',cmp_orig:'الأصلي',cmp_enh:'محسّن',price_label:'الخطط والأسعار',price_mo:'شهري',price_yr:'سنوي',price_save:'وفّر 40%',mo:'/شهر',pb_free:'مجاني للأبد',pn_free:'البداية',pd_free:'مثالي للمبتدئين.',pb_pro:'الأكثر شعبية',pn_pro:'الاحترافية',pd_pro:'للمبدعين الذين يبحثون عن الأفضل.',pb_studio:'الأفضل قيمة',pn_studio:'استوديو',pd_studio:'لفرق الإنتاج المحترفة.',pb_ent:'مخصص',pn_ent:'الشركات',pd_ent:'نطاق غير محدود.',p_ent:'مخصص',cta_free:'تحميل مجاناً',cta_pro:'احصل على Pro',cta_studio:'احصل على Studio',cta_ent:'تواصل مع المبيعات',dl1:'طوّر',dl2:'فيديوك.',dl_sub:'مجاناً للبدء · بدون بطاقة ائتمان',dl_btn:'تحميل ألترا بيوريتي — مجاناً',win:'ويندوز 10/11',mac:'ماك OS 12+',linux:'لينكس (نسخة تجريبية)',ab_label:'عن BL Creative',ab1:'أُسست BL Creative لمنح كل منشئ محتوى إمكانية الوصول إلى تحسين فيديو على مستوى الاستوديو.',ab2:'برنامج Ultra Purity هو إجابتنا المباشرة للبرامج باهظة الثمن.',ab3:'في رفع الفريمات وإزالة الضوضاء وتجاوز المنصات — نحن نتفوق على Topaz.',pl1t:'الدقة',pl1d:'كل بيكسل بأعلى جودة ممكنة.',pl2t:'السرعة',pl2d:'معاينة فورية بتسريع كرت الشاشة.',pl3t:'الوصول',pl3d:'يعمل على أي كرت شاشة.',pl4t:'الخصوصية',pl4d:'جميع المعالجات تتم محلياً في جهازك.',compat_label:'توافق كروت الشاشة',cs1:'أقصى دقة',cs2:'رفع الإطارات',cs3:'محركات ذكاء اصطناعي',cs4:'معالجة سحابية',comm_label:'المجتمع',cm1t:'ديسكورد',cm1d:'انضم لأكثر من 12,000 صانع محتوى.',cm1l:'انضم للديسكورد →',cm2t:'دروس',cm2d:'أدلة خطوة بخطوة لكل محرك.',cm2l:'شاهد مجاناً →',cm3t:'مكتبة الإعدادات',cm3d:'حمل إعدادات جاهزة للـ TikTok و YouTube.',cm3l:'تصفح →',cm4t:'خارطة الطريق',cm4d:'شاهد ما هو قادم قريباً.',cm4l:'شاهد الخارطة →',ct_label:'تواصل معنا',ct_desc:'احصل على وصول مبكر للمحركات الجديدة.',ct_btn:'اشتراك',ct_ph:'بريدك@الإلكتروني',f_copy:'© 2025 BL Creative. جميع الحقوق محفوظة.',f_priv:'الخصوصية',f_terms:'الشروط',f_sup:'الدعم',ff1:'محرك Crystal Clear',ff2:'إخراج بدقة 720p كحد أقصى',ff3:'5 تصديرات يومياً',ff4:'علامة مائية على الفيديو',ff5:'لا يوجد تكبير AI',ff6:'لا يوجد رفع إطارات',pf1:'جميع المحركات الستة',pf2:'إخراج 4K بدون علامة مائية',pf3:'تصديرات غير محدودة',pf4:'رفع إطارات إلى 200fps',pf5:'إزالة الكائنات Ghost Wipe',pf6:'لا توجد مساحة عمل للفرق',sf1:'كل شيء في باقة Pro',sf2:'دعم دقة 6K',sf3:'5 حسابات للفريق',sf4:'معالجة مجمعة',sf5:'وصول API',sf6:'دعم فني بأولوية',ef1:'كل شيء في الاستوديو',ef2:'حسابات لا محدودة',ef3:'استضافة داخلية',ef4:'بدون علامات تجارية',ef5:'ضمان جودة الخدمة',ef6:'تدريب ذكاء اصطناعي مخصص',e1d:'تكبير دقة الفيديو بتقنية RealESRGAN واستعادة التفاصيل التي دمرها الضغط.',e2d:'إزالة الضوضاء العميق NAFNet. يزيل التشويش مع الحفاظ على كل تفاصيل المشهد.',e3d:'تثبيت الحركة الذكي. يزيل الاهتزاز والـ Rolling Shutter للقطات سينمائية سلسة.',e4d:'إزالة أي كائن من الفيديو وتعبئة الفراغ بذكاء اصطناعي عبر SAM2 و ProPainter.',e5d:'تصحيح ألوان ذكي يتم تحسينه ليناسب منصات التواصل الاجتماعي.',e6d:'توليد إطارات بتقنية RIFE v4 لتحويل أي فيديو إلى حركة ناعمة بـ 200 إطار بالثانية.',e1f1:'دعم دقة 4K / 6K',e1f2:'إزالة عيوب الضغط',e1f3:'إعادة بناء الحواف',e1f4:'معالجة بتقنية HDR',e2f1:'تقليل ضوضاء زمني',e2f2:'استعادة الإضاءة المنخفضة',e2f3:'إزالة تدرجات الألوان',e2f4:'خوارزمية تحافظ على التفاصيل',e3f1:'تصحيح Rolling Shutter',e3f2:'تحليل التدفق البصري',e3f3:'تثبيت بدون قص',e3f4:'دعم دقة 4K/6K',e4f1:'تتبع الكائنات المتحركة',e4f2:'إعادة بناء الخلفية',e4f3:'تناسق زمني',e4f4:'تحديد بنقرة واحدة',e5f1:'تحليل ذكي للمشهد',e5f2:'إعدادات مخصصة للمنصات',e5f3:'رسم خرائط HDR',e5f4:'معالجة 10-bit',e6f1:'تحويل 24 إلى 200 إطار',e6f2:'نموذج RIFE v4',e6f3:'بدون تأثيرات أشباح',e6f4:'معاينة حية'}
+};
+let cLang='en';
+function setLang(l){
+  cLang=l;const dict={...D.en,...(D[l]||{})};
+  const isRtl=l==='ar';document.documentElement.dir=isRtl?'rtl':'ltr';document.documentElement.lang=l;
+  // التبديل الحقيقي للخطوط بين العربي والإنجليزي
+  document.body.style.fontFamily = isRtl ? "'Tajawal', sans-serif" : "'Inter', sans-serif";
+  
+  document.querySelectorAll('[data-k]').forEach(el=>{const v=dict[el.getAttribute('data-k')];if(v)el.textContent=v});
+  document.querySelectorAll('[data-k-ph]').forEach(el=>{const v=dict[el.getAttribute('data-k-ph')];if(v)el.placeholder=v});
+}
+const sel=document.getElementById('langSel');
+Object.entries(LANGS).forEach(([code,name])=>{const o=document.createElement('option');o.value=code;o.textContent=name;if(code===cLang)o.selected=true;sel.appendChild(o)});
+
+// تفعيل اللغة العربية كافتراضي
+setLang('ar');
 </script>
 </body>
 </html>
